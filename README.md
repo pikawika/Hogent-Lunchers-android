@@ -43,4 +43,4 @@ Team GDPR staat voor “Guys Do Programming Right”, een fictief bedrijf dat gr
 
 ## GitHub Repository van de Lunchers website en backend
 De Lunchers website en backend hebben een gezamenlijke Repository:
-> [GitHub repository van de Android app](https://github.com/HoGent-Projecten3/projecten3-1819-backend-aalst-groep-1)
+> [GitHub repository van de website en backend](https://github.com/HoGent-Projecten3/projecten3-1819-backend-aalst-groep-1)
