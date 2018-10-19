@@ -10,7 +10,7 @@ import hogent.be.lunchers.utils.MyHolder
 class MyAdapter(private val place: IntArray, private val name: Array<String>, private val mContext: Context) : RecyclerView.Adapter<MyHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyHolder {
-        val v = LayoutInflater.from(p0.context).inflate(R.layout.main_page, p0, false)
+        val v = LayoutInflater.from(p0.context).inflate(R.layout.list_item_constr, p0, false)
         return MyHolder(v, mContext)
     }
 
