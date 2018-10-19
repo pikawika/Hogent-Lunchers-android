@@ -45,8 +45,7 @@ class MainActivity : AppCompatActivity() {
                 afbeeldingen = listOf(R.drawable.eten),
                 ingredienten = listOf(""),
                 beginDatum = Calendar.getInstance().time,
-                eindDatum = Calendar.getInstance().time,
-                tags = listOf(Tag(naam = "Vegan", kleur = "Groen"))
+                eindDatum = Calendar.getInstance().time
             ),
             Lunch(
                 lunchId = 1,
@@ -56,8 +55,7 @@ class MainActivity : AppCompatActivity() {
                 afbeeldingen = listOf(R.drawable.hamburger),
                 ingredienten = listOf(""),
                 beginDatum = Calendar.getInstance().time,
-                eindDatum = Calendar.getInstance().time,
-                tags = listOf(Tag(naam = "Vegan", kleur = "Groen"))
+                eindDatum = Calendar.getInstance().time
             ),
             Lunch(
                 lunchId = 2,
@@ -67,8 +65,7 @@ class MainActivity : AppCompatActivity() {
                 afbeeldingen = listOf(R.drawable.kippevleugels),
                 ingredienten = listOf(""),
                 beginDatum = Calendar.getInstance().time,
-                eindDatum = Calendar.getInstance().time,
-                tags = listOf(Tag(naam = "Vegan", kleur = "Groen"))
+                eindDatum = Calendar.getInstance().time
             ),
             Lunch(
                 lunchId = 3,
@@ -78,8 +75,7 @@ class MainActivity : AppCompatActivity() {
                 afbeeldingen = listOf(R.drawable.kleurstoffen),
                 ingredienten = listOf(""),
                 beginDatum = Calendar.getInstance().time,
-                eindDatum = Calendar.getInstance().time,
-                tags = listOf(Tag(naam = "Vegan", kleur = "Groen"))
+                eindDatum = Calendar.getInstance().time
             ),
             Lunch(
                 lunchId = 4,
@@ -89,8 +85,7 @@ class MainActivity : AppCompatActivity() {
                 afbeeldingen = listOf(R.drawable.wavanalles),
                 ingredienten = listOf(""),
                 beginDatum = Calendar.getInstance().time,
-                eindDatum = Calendar.getInstance().time,
-                tags = listOf(Tag(naam = "Vegan", kleur = "Groen"))
+                eindDatum = Calendar.getInstance().time
             )
         )
     }
