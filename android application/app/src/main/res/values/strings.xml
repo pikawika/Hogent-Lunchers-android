@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Lunchers</string>
     <string name="lunch_afbeelding_beschrijving">Een afbeelding van een lunch</string>
+    <string name="lunch_tekst_naam">Lekker Thais</string>
+    <string name="lunch_tekst_prijs">Prijs: € 29,99</string>
+    <string name="lunch_tekst_beschrijving">Geniet van een lekkere Thaise lunch onder de middag. Deze maaltijd bestaat
+        uit 4 kleine Thaise gerechten geserveerd met een kommetje kleefrijst.
+    </string>
 </resources>

@@ -26,13 +26,9 @@ class MainActivity : AppCompatActivity() {
         val recyclerview = recyclerview_main_lunches
 
         val lunches = intArrayOf(R.drawable.eten, R.drawable.hamburger, R.drawable.kippevleugels, R.drawable.kleurstoffen, R.drawable.wavanalles)
-
         val names = arrayOf("Eten", "Hamburger", "Kippevleugels", "Kleurstoffen", "Wavanalles")
 
-        val lManager = LinearLayoutManager(this, VERTICAL, false)
-
-        recyclerview.layoutManager = lManager
-
+        recyclerview.layoutManager = LinearLayoutManager(this, VERTICAL, false)
         recyclerview.adapter = MyAdapter(lunches, names, this)
     }
 
