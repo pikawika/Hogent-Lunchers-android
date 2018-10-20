@@ -1,3 +1,7 @@
 package hogent.be.lunchers.model
 
-data class Tag(val naam: String, val kleur: String)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Tag(val naam: String, val kleur: String) : Parcelable
