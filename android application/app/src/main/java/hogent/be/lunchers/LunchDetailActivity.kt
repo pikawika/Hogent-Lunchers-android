@@ -15,12 +15,11 @@ class LunchDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lunchdetail)
 
-        //We maken gebruik van een custom app bar
-        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar?.setCustomView(R.layout.abs_layout)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         val lunch: Lunch = (intent?.extras?.get("selectedLunch") as? Lunch)!!
+
+        //Dit zorgt ervoor dat je een back button hebt op de lunch detail pagina
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = lunch.naam
 
         prepareLunch(lunch)
     }
