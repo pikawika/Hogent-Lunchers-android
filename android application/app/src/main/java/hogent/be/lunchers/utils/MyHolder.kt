@@ -2,11 +2,13 @@ package hogent.be.lunchers.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import hogent.be.lunchers.LunchDetailActivity
 import hogent.be.lunchers.R
 import hogent.be.lunchers.model.Lunch
 
@@ -30,6 +32,12 @@ class MyHolder (itemView: View, private val mContext: Context) : RecyclerView.Vi
         tv_naam.text = lunch.naam
         tv_prijs.text = "€ ${lunch.prijs}"
         tv_beschrijving.text = lunch.beschrijving
+
+        itemView.setOnClickListener {
+            val intent = Intent(mContext, LunchDetailActivity::class.java)
+            intent.putExtra("selectedLunch", lunch)
+            mContext.startActivity(intent)
+        }
     }
 
 }
