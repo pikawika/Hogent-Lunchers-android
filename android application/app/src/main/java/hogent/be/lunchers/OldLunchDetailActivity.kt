@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import hogent.be.lunchers.models.Lunch
 import kotlinx.android.synthetic.main.activity_lunchdetail.*
 
-class LunchDetailActivity : AppCompatActivity() {
+class OldLunchDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

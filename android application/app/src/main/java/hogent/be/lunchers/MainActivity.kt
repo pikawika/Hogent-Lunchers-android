@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         //We maken gebruik van een custom app bar
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar?.setCustomView(R.layout.abs_layout)
+        supportActionBar?.setCustomView(R.layout.custom_app_bar)
 
         initRecyclerView()
     }

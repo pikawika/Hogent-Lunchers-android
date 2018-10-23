@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import hogent.be.lunchers.LunchDetailActivity
+import hogent.be.lunchers.OldLunchDetailActivity
 import hogent.be.lunchers.R
 import hogent.be.lunchers.models.Lunch
 
@@ -34,7 +34,7 @@ class MyHolder (itemView: View, private val mContext: Context) : RecyclerView.Vi
         tv_beschrijving.text = lunch.beschrijving
 
         itemView.setOnClickListener {
-            val intent = Intent(mContext, LunchDetailActivity::class.java)
+            val intent = Intent(mContext, OldLunchDetailActivity::class.java)
             intent.putExtra("selectedLunch", lunch)
             mContext.startActivity(intent)
         }
