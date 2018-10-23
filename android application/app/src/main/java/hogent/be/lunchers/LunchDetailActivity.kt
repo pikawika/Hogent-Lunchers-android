@@ -3,10 +3,9 @@ package hogent.be.lunchers
 import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.ActionBar
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import hogent.be.lunchers.model.Lunch
+import hogent.be.lunchers.models.Lunch
 import kotlinx.android.synthetic.main.activity_lunchdetail.*
 
 class LunchDetailActivity : AppCompatActivity() {

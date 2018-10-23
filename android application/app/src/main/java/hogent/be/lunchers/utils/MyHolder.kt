@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import hogent.be.lunchers.LunchDetailActivity
 import hogent.be.lunchers.R
-import hogent.be.lunchers.model.Lunch
+import hogent.be.lunchers.models.Lunch
 
 class MyHolder (itemView: View, private val mContext: Context) : RecyclerView.ViewHolder(itemView) {
 

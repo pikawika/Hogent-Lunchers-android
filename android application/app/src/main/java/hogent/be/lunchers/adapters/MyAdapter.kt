@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import hogent.be.lunchers.R
-import hogent.be.lunchers.model.Lunch
+import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.utils.MyHolder
 
 class MyAdapter(private val lunches: List<Lunch>, private val mContext: Context) : RecyclerView.Adapter<MyHolder>() {

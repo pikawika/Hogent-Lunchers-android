@@ -1,4 +1,4 @@
-package hogent.be.lunchers.model
+package hogent.be.lunchers.models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

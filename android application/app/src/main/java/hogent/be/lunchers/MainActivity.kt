@@ -6,8 +6,8 @@ import android.support.v7.app.ActionBar
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout.VERTICAL
 import hogent.be.lunchers.adapters.MyAdapter
-import hogent.be.lunchers.model.Lunch
-import hogent.be.lunchers.model.Tag
+import hogent.be.lunchers.models.Lunch
+import hogent.be.lunchers.models.Tag
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 

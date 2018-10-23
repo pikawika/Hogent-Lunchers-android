@@ -1,4 +1,4 @@
-package hogent.be.lunchers.model
+package hogent.be.lunchers.models
 
 import java.util.*
 
