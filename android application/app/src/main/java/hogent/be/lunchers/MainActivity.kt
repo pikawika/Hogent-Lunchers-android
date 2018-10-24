@@ -2,6 +2,7 @@ package hogent.be.lunchers
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.ActionBar
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout.VERTICAL
@@ -13,9 +14,27 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_map -> {
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_list -> {
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_profile -> {
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation.selectedItemId = R.id.navigation_list
 
         //We maken gebruik van een custom app bar
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM

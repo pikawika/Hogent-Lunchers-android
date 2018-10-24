@@ -9,7 +9,7 @@
     <string name="button_lunch_detail_tekst">Reserveren</string>
     <string name="textview_lunch_detail_restaurant_tekst">Restaurant: Yok Tha</string>
     <string name="title_activity_lunch_list">LunchListActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_map">Kaart</string>
+    <string name="title_list">Lijst</string>
+    <string name="title_profile">Profiel</string>
 </resources>

@@ -3,7 +3,6 @@ package hogent.be.lunchers
 import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.ActionBar
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import hogent.be.lunchers.model.Lunch
@@ -14,6 +13,8 @@ class LunchDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lunchdetail)
+
+        navigationTemp.selectedItemId = R.id.navigation_list
 
         val lunch: Lunch = (intent?.extras?.get("selectedLunch") as? Lunch)!!
 
