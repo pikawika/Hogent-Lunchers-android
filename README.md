@@ -35,7 +35,7 @@ Team GDPR staat voor “Guys Do Programming Right”, een fictief bedrijf dat gr
 
 ## Releases
 > - [Release Sprint 1 - Niet van toepassing](#)
-> - [Release Sprint 2 - coming soon](#)
+> - [Release Sprint 2](https://github.com/HoGent-Projecten3/projecten3-1819-android-aalst-groep-1/releases/tag/Sprint2)
 > - [Release Sprint 3 - coming soon](#)
 > - [Release Sprint 4 - coming soon](#)
 > - [Release Sprint 5 - coming soon](#)
