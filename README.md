@@ -12,7 +12,7 @@ Dit is de GitHub repository (deel Android App) voor het project Lunchers van Tea
 > - [GitHub Repository van de Lunchers website en backend](#github-repository-van-de-lunchers-website-en-backend)
 
 ## Wie is Team GDPR
-Team GDPR staat voor “Guys Do Programming Right”, een fictief bedrijf dat groepsnummer 1 representeert.
+Team GDPR staat voor “Guys Doing Programming Right”, een fictief bedrijf dat groepsnummer 1 representeert.
 
 > [Info over de groepsleden](#groepsleden)
 
