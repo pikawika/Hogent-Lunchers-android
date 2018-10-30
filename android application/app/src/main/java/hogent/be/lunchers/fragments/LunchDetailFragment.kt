@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import hogent.be.lunchers.R
+import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.models.Lunch
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.lunch_detail.view.*
 
 class LunchDetailFragment : Fragment() {

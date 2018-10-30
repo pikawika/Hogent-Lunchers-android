@@ -12,6 +12,7 @@ import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.adapters.LunchAdapter
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.models.Tag
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.lunch_list.view.*
 import java.util.*
 
@@ -21,8 +22,6 @@ class LunchListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.lunch_list, container, false)
-
-
 
         if (rootView.lunch_detail_container != null) {
             twoPane = true
