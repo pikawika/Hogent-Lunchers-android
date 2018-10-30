@@ -1,37 +1,36 @@
 package hogent.be.lunchers
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.ActionBar
-import android.support.v7.widget.LinearLayoutManager
-import android.widget.LinearLayout.VERTICAL
-import hogent.be.lunchers.adapters.MyAdapter
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
+import hogent.be.lunchers.adapters.SimpleItemRecyclerViewAdapter
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.models.Tag
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_lunch_list.*
+import kotlinx.android.synthetic.main.lunch_list.*
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class LunchListActivity : AppCompatActivity() {
+
+    private var twoPane: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_lunch_list)
 
-        //We maken gebruik van een custom app bar
-        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar?.setCustomView(R.layout.custom_app_bar)
+        setSupportActionBar(toolbar)
+        toolbar.title = title
 
-        initRecyclerView()
+        if (lunch_detail_container != null) {
+            twoPane = true
+        }
+
+        setupRecyclerView(lunch_list)
     }
 
-    //Het inladen van de gegevens in de RecyclerView
-    private fun initRecyclerView() {
-        val recyclerview = recyclerview_main_lunches
-
+    private fun setupRecyclerView(recyclerView: RecyclerView) {
         val lunches = createRecyclerViewDummyData()
-
-        recyclerview.layoutManager = LinearLayoutManager(this, VERTICAL, false)
-        recyclerview.adapter = MyAdapter(lunches, this)
+        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, lunches, twoPane)
     }
 
     //TIJDELIJK: deze methode maakt dummy data aan om de recyclerview te vullen
