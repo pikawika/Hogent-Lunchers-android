@@ -1,17 +1,14 @@
 package hogent.be.lunchers.fragments
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.adapters.LunchAdapter
-import hogent.be.lunchers.models.Hero
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.models.Tag
 import hogent.be.lunchers.network.NetworkApi
@@ -41,21 +38,19 @@ class LunchListFragment : Fragment() {
     }
 
     private fun retrieveAllLunches() {
-
         val apiService = NetworkApi.create()
-        val call = apiService.getHeroes()
-        Log.d("REQUEST", call.toString() + "")
-        call.enqueue(object : Callback<List<Hero>> {
-            override fun onResponse(call: Call<List<Hero>>, response: retrofit2.Response<List<Hero>>?) {
+        val call = apiService.getAllLunches()
+        call.enqueue(object : Callback<List<Lunch>> {
+            override fun onResponse(call: Call<List<Lunch>>, response: retrofit2.Response<List<Lunch>>?) {
                 if (response != null) {
-                    val list: List<Hero> = response.body()!!
-                    for (item: Hero in list.iterator()) {
-                        Log.d("JEEJ", "Het lukte :D ${item.name}")
+                    val list: List<Lunch> = response.body()!!
+                    for (item: Lunch in list.iterator()) {
+                        Log.d("JEEJ", "Het lukte :D ${item.naam}")
                     }
                 }
             }
-            override fun onFailure(call: Call<List<Hero>>, t: Throwable) {
-                Log.e("LOL", "het werkt ni " + t.toString())
+            override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
+                Log.e("JAMMER", "het werkt ni " + t.toString())
             }
         })
     }
