@@ -13,14 +13,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Log.d("LOL", "HIER ZIJN WE")
-
-        val fragment = LunchListFragment()
-
-        val fragmentManager = supportFragmentManager
-
-        fragmentManager.beginTransaction()
-            .add(R.id.fragment_container, fragment)
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, LunchListFragment())
             .commit()
     }
 
