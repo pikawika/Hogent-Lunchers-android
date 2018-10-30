@@ -20,8 +20,9 @@ class LunchListFragment : Fragment() {
     private var twoPane: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.d("Lol", "IK ZIT HIER")
         val rootView = inflater.inflate(R.layout.lunch_list, container, false)
+
+
 
         if (rootView.lunch_detail_container != null) {
             twoPane = true

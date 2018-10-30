@@ -1,9 +1,7 @@
 package hogent.be.lunchers.activities
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import hogent.be.lunchers.R
 import hogent.be.lunchers.fragments.LunchListFragment
 
