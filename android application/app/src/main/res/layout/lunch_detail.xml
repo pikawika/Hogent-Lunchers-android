@@ -6,7 +6,7 @@
         android:id="@+id/lunch_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".LunchDetailFragment">
+        tools:context=".fragments.LunchDetailFragment">
 
     <ImageView
             android:layout_width="match_parent"

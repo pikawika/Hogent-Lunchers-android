@@ -1,4 +1,4 @@
-package hogent.be.lunchers
+package hogent.be.lunchers.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import hogent.be.lunchers.R
 import hogent.be.lunchers.models.Lunch
 import kotlinx.android.synthetic.main.lunch_detail.view.*
 

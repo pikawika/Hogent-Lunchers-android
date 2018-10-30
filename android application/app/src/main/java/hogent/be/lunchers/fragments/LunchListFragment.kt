@@ -1,36 +1,37 @@
-package hogent.be.lunchers
+package hogent.be.lunchers.fragments
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
-import hogent.be.lunchers.adapters.SimpleItemRecyclerViewAdapter
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import hogent.be.lunchers.R
+import hogent.be.lunchers.activities.MainActivity
+import hogent.be.lunchers.adapters.LunchAdapter
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.models.Tag
-import kotlinx.android.synthetic.main.activity_lunch_list.*
-import kotlinx.android.synthetic.main.lunch_list.*
+import kotlinx.android.synthetic.main.lunch_list.view.*
 import java.util.*
 
-class LunchListActivity : AppCompatActivity() {
+class LunchListFragment : Fragment() {
 
     private var twoPane: Boolean = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lunch_list)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Log.d("Lol", "IK ZIT HIER")
+        val rootView = inflater.inflate(R.layout.lunch_list, container, false)
 
-        setSupportActionBar(toolbar)
-        toolbar.title = title
-
-        if (lunch_detail_container != null) {
+        if (rootView.lunch_detail_container != null) {
             twoPane = true
         }
 
-        setupRecyclerView(lunch_list)
-    }
-
-    private fun setupRecyclerView(recyclerView: RecyclerView) {
         val lunches = createRecyclerViewDummyData()
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, lunches, twoPane)
+
+        rootView.lunch_list.adapter = LunchAdapter(this.requireActivity() as MainActivity, lunches, twoPane)
+
+        return rootView
     }
 
     //TIJDELIJK: deze methode maakt dummy data aan om de recyclerview te vullen
