@@ -1,10 +1,8 @@
 package hogent.be.lunchers.fragments
 
-import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +11,10 @@ import android.widget.Toast
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.adapters.LunchAdapter
+import hogent.be.lunchers.models.Hero
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.models.Tag
-import hogent.be.lunchers.network.RestApi
-import kotlinx.android.synthetic.main.activity_main.*
+import hogent.be.lunchers.network.NetworkApi
 import kotlinx.android.synthetic.main.lunch_list.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,27 +42,22 @@ class LunchListFragment : Fragment() {
 
     private fun retrieveAllLunches() {
 
-        val apiService = RestApi.create()
-        val call = apiService.getLunches()
+        val apiService = NetworkApi.create()
+        val call = apiService.getHeroes()
         Log.d("REQUEST", call.toString() + "")
-        call.enqueue(object : Callback<List<Lunch>> {
-            override fun onResponse(call: Call<List<Lunch>>, response: retrofit2.Response<List<Lunch>>?) {
+        call.enqueue(object : Callback<List<Hero>> {
+            override fun onResponse(call: Call<List<Hero>>, response: retrofit2.Response<List<Hero>>?) {
                 if (response != null) {
-                    val list: List<Lunch> = response.body()!!
-                    var msg: String = ""
-                    for (item: Lunch in list.iterator()) {
-                        msg = msg + item.naam + "\n"
+                    val list: List<Hero> = response.body()!!
+                    for (item: Hero in list.iterator()) {
+                        Log.d("JEEJ", "Het lukte :D ${item.name}")
                     }
-                    Toast.makeText(context, "List of Lunches  \n  $msg", Toast.LENGTH_LONG).show()
                 }
-
             }
-
-            override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
-                Log.e(TAG, t.toString());
+            override fun onFailure(call: Call<List<Hero>>, t: Throwable) {
+                Log.e("LOL", "het werkt ni " + t.toString())
             }
         })
-
     }
 
     //TIJDELIJK: deze methode maakt dummy data aan om de recyclerview te vullen
