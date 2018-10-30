@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.models.Lunch
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.lunch_detail.view.*
 
 class LunchDetailFragment : Fragment() {
@@ -25,6 +24,9 @@ class LunchDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.lunch_detail, container, false)
+
+        (activity as MainActivity).supportActionBar?.title = lunch?.naam
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if (lunch != null) {
             Glide.with(this).load(lunch!!.afbeeldingen[0]).into(rootView.imageview_lunch_detail_afbeelding)
