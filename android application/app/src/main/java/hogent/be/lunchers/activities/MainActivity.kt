@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.action_map -> {
+                supportActionBar?.title = "Restaurants in de buurt"
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, MapsFragment())
                     .addToBackStack(null)
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.action_list -> {
+                supportActionBar?.title = getString(R.string.app_name)
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, LunchListFragment())
                     .addToBackStack(null)
@@ -63,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.action_profile -> {
-                //Navigatie naar profiel
+                supportActionBar?.title = "Profiel"
                 return@OnNavigationItemSelectedListener true
             }
         }
