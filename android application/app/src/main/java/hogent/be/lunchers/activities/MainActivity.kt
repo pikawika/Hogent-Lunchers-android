@@ -2,9 +2,11 @@ package hogent.be.lunchers.activities
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.ListFragment
 import android.support.v7.app.AppCompatActivity
 import hogent.be.lunchers.R
 import hogent.be.lunchers.fragments.LunchListFragment
+import hogent.be.lunchers.fragments.MapsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -45,12 +47,18 @@ class MainActivity : AppCompatActivity() {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.action_map -> {
-                //Navigatie naar kaart
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, MapsFragment())
+                    .addToBackStack(null)
+                    .commit()
                 return@OnNavigationItemSelectedListener true
             }
 
             R.id.action_list -> {
-                //Navigatie naar lijst
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, LunchListFragment())
+                    .addToBackStack(null)
+                    .commit()
                 return@OnNavigationItemSelectedListener true
             }
 

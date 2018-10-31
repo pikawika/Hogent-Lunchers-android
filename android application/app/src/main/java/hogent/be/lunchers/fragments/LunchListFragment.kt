@@ -28,7 +28,7 @@ class LunchListFragment : Fragment() {
             twoPane = true
         }
 
-        retrieveAllLunches()
+        //retrieveAllLunches()
 
         val lunches = createRecyclerViewDummyData()
 
