@@ -11,4 +11,5 @@
     <string name="title_map">Kaart</string>
     <string name="title_list">Lijst</string>
     <string name="title_profile">Profiel</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
