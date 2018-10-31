@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Tag(
-    val tagId: Int,
+data class Ingredient(
+    val ingredientId: Int,
     val naam: String
 ) : Parcelable
