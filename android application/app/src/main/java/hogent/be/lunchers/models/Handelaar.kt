@@ -1,3 +1,18 @@
 package hogent.be.lunchers.models
 
-data class Handelaar(val handelaarsId: Int, val bedrijfsnaam: String, val emailadres: String, val telefoonnummer: String, val adres: String, val latitude: Double, val longitude: Double, val website: String, val lunches: List<Lunch>, val promotieRange: Int)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Handelaar(
+    val naam: String,
+    val locatie: Locatie,
+    val website: String,
+    val lunches: List<Lunch>,
+    val promotieRange: Int,
+    val gebruikerId: Int,
+    val telefoonnummer: String,
+    val email: String,
+    val voornaam: String,
+    val achternaam: String
+) : Parcelable

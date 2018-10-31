@@ -20,6 +20,8 @@ import java.util.*
 class LunchListFragment : Fragment() {
 
     private var twoPane: Boolean = false
+    private lateinit var lunches: MutableList<Lunch>
+    private lateinit var lunchAdapter: LunchAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.lunch_list, container, false)
@@ -28,92 +30,41 @@ class LunchListFragment : Fragment() {
             twoPane = true
         }
 
-        //retrieveAllLunches()
+        lunches = mutableListOf()
 
-        val lunches = createRecyclerViewDummyData()
+        lunchAdapter = LunchAdapter(this.requireActivity() as MainActivity, lunches, twoPane)
 
-        rootView.lunch_list.adapter = LunchAdapter(this.requireActivity() as MainActivity, lunches, twoPane)
+        rootView.lunch_list.adapter = lunchAdapter
 
         return rootView
     }
 
-    private fun retrieveAllLunches() {
-        val apiService = NetworkApi.create()
-        val call = apiService.getAllLunches()
-        call.enqueue(object : Callback<List<Lunch>> {
-            override fun onResponse(call: Call<List<Lunch>>, response: retrofit2.Response<List<Lunch>>?) {
-                if (response != null) {
-                    val list: List<Lunch> = response.body()!!
-                    for (item: Lunch in list.iterator()) {
-                        Log.d("JEEJ", "Het lukte :D ${item.naam}")
-                    }
-                }
-            }
-            override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
-                Log.e("JAMMER", "het werkt ni " + t.toString())
-            }
-        })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        retrieveAllLunches()
     }
 
-    //TIJDELIJK: deze methode maakt dummy data aan om de recyclerview te vullen
-    private fun createRecyclerViewDummyData(): List<Lunch> {
-        return listOf(
-            Lunch(
-                lunchId = 0,
-                naam = "Friet met stoverij",
-                prijs = 12.95,
-                beschrijving = "Een traditionele Belgische maaltijd, met liefde verzorgd en wordt geserveerd met een heerlijk vers slaatje.",
-                afbeeldingen = listOf(R.drawable.eten),
-                ingredienten = listOf(""),
-                beginDatum = Calendar.getInstance().time,
-                eindDatum = Calendar.getInstance().time,
-                tags = listOf(Tag(naam = "Vegan", kleur = "Groen"))
-            ),
-            Lunch(
-                lunchId = 1,
-                naam = "Krabburger",
-                prijs = 13.99,
-                beschrijving = "De naam kennen jullie wel, maar hebben jullie er ooit al echt eens eentje gegeten? Geniet van een lekkere hamburger met krab tijdens je welverdiende lunchpauze!",
-                afbeeldingen = listOf(R.drawable.hamburger),
-                ingredienten = listOf(""),
-                beginDatum = Calendar.getInstance().time,
-                eindDatum = Calendar.getInstance().time,
-                tags = listOf(Tag(naam = "Vegan", kleur = "Groen"))
-            ),
-            Lunch(
-                lunchId = 2,
-                naam = "Chicken wings",
-                prijs = 9.98,
-                beschrijving = "Sommige mensen zeggen dat kippenvleugeltjes geen echte maaltijd zijn. Wij beweren iets anders. Enkel deze week all-you-can-eat kippenvleugels voor een prijsje dat net zo zacht is als onze kip!",
-                afbeeldingen = listOf(R.drawable.kippevleugels),
-                ingredienten = listOf(""),
-                beginDatum = Calendar.getInstance().time,
-                eindDatum = Calendar.getInstance().time,
-                tags = listOf(Tag(naam = "Vegan", kleur = "Groen"))
-            ),
-            Lunch(
-                lunchId = 3,
-                naam = "Kleurrijke lunch",
-                prijs = 14.99,
-                beschrijving = "Kan jouw werkdag wel een boost aan positiviteit gebruiken? Geniete van een heerlijke lunch met eten dat net zo goed smaakt als dat het kleurrijk is.",
-                afbeeldingen = listOf(R.drawable.kleurstoffen),
-                ingredienten = listOf(""),
-                beginDatum = Calendar.getInstance().time,
-                eindDatum = Calendar.getInstance().time,
-                tags = listOf(Tag(naam = "Vegan", kleur = "Groen"))
-            ),
-            Lunch(
-                lunchId = 4,
-                naam = getString(R.string.lunch_tekst_naam),
-                prijs = 16.95,
-                beschrijving = getString(R.string.lunch_tekst_beschrijving),
-                afbeeldingen = listOf(R.drawable.wavanalles),
-                ingredienten = listOf(""),
-                beginDatum = Calendar.getInstance().time,
-                eindDatum = Calendar.getInstance().time,
-                tags = listOf(Tag(naam = "Vegan", kleur = "Groen"))
-            )
-        )
+    private fun retrieveAllLunches() {
+        try {
+            val apiService = NetworkApi.create()
+            val call = apiService.getAllLunches()
+            call.enqueue(object : Callback<List<Lunch>> {
+                override fun onResponse(call: Call<List<Lunch>>, response: retrofit2.Response<List<Lunch>>?) {
+                    if (response != null) {
+                        val list: List<Lunch> = response.body()!!
+                        lunches.clear()
+                        lunches.addAll(list)
+                        lunchAdapter.notifyDataSetChanged()
+                    }
+                }
+                override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
+                    Log.e("Error", "Er is iets mis gegaan tijdens het ophalen van de gegevens: " + t.toString())
+                }
+            })
+        } catch (e: KotlinNullPointerException) {
+            Log.e("Error", e.toString())
+        }
     }
 
 }
