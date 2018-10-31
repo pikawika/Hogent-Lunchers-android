@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
+import hogent.be.lunchers.adapters.LunchAdapter.Companion.BASE_URL
 import hogent.be.lunchers.models.Lunch
 import kotlinx.android.synthetic.main.lunch_detail.view.*
 
@@ -29,7 +30,7 @@ class LunchDetailFragment : Fragment() {
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if (lunch != null) {
-            Glide.with(this).load(lunch!!.afbeeldingen[0]).into(rootView.imageview_lunch_detail_afbeelding)
+            Glide.with(this).load(BASE_URL + lunch!!.afbeeldingen[0].pad).into(rootView.imageview_lunch_detail_afbeelding)
             rootView.textview_lunch_detail_naam.text = lunch!!.naam
             rootView.textview_lunch_detail_prijs.text = String.format("€ %.2f", lunch!!.prijs)
             rootView.textview_lunch_detail_beschrijving.text = lunch!!.beschrijving
@@ -44,5 +45,6 @@ class LunchDetailFragment : Fragment() {
 
     companion object {
         const val ARG_ITEM_ID = "lunchItem"
+        const val BASE_URL: String = "https://lunchers.azurewebsites.net/"
     }
 }

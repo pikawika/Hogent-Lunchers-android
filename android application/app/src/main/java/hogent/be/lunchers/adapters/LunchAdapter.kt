@@ -50,7 +50,7 @@ class LunchAdapter(private val parentActivity: MainActivity, private val values:
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        Glide.with(parentActivity).load(item.afbeeldingen[0]).into(holder.afbeeldingView)
+        Glide.with(parentActivity).load(BASE_URL + item.afbeeldingen[0].pad).into(holder.afbeeldingView)
         holder.naamView.text = item.naam
         holder.prijsView.text = String.format("€ %.2f", item.prijs)
         holder.beschrijvingView.text = item.beschrijving
@@ -68,5 +68,9 @@ class LunchAdapter(private val parentActivity: MainActivity, private val values:
         val naamView: TextView = view.textview_list_item_naam
         val prijsView: TextView = view.textview_list_item_prijs
         val beschrijvingView: TextView = view.textview_list_item_beschrijving
+    }
+
+    companion object {
+        const val BASE_URL: String = "https://lunchers.azurewebsites.net/"
     }
 }
