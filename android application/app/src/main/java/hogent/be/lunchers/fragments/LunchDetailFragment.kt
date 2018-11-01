@@ -27,7 +27,6 @@ class LunchDetailFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.lunch_detail, container, false)
 
         (activity as MainActivity).supportActionBar?.title = lunch?.naam
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if (lunch != null) {
             Glide.with(this).load(BASE_URL + lunch!!.afbeeldingen[0].pad).into(rootView.imageview_lunch_detail_afbeelding)
@@ -43,8 +42,20 @@ class LunchDetailFragment : Fragment() {
         return rootView
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    }
+
     companion object {
         const val ARG_ITEM_ID = "lunchItem"
-        const val BASE_URL: String = "https://lunchers.azurewebsites.net/"
+        const val BASE_URL: String = "http://lunchers.ml/"
     }
 }

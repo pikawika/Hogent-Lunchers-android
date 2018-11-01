@@ -9,11 +9,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 interface NetworkApi {
 
-    @GET("lunch")
+    @GET("lunch/getall")
     fun getAllLunches(): Call<List<Lunch>>
 
     companion object Factory {
-        private const val BASE_URL = "https://lunchers.azurewebsites.net/api/"
+        private const val BASE_URL = "http://lunchers.ml/api/"
 
         private val gson = GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")

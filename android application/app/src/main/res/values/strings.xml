@@ -12,4 +12,5 @@
     <string name="title_list">Lijst</string>
     <string name="title_profile">Profiel</string>
     <string name="title_activity_maps">Map</string>
+    <string name="network_error">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw te proberen.</string>
 </resources>

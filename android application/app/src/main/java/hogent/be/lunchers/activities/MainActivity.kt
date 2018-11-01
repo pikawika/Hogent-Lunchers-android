@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.title = "Restaurants in de buurt"
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, MapsFragment())
-                    .addToBackStack(null)
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
@@ -59,7 +58,6 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.title = getString(R.string.app_name)
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, LunchListFragment())
-                    .addToBackStack(null)
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }

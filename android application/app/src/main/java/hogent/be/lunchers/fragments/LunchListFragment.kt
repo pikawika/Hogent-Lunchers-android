@@ -10,12 +10,11 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.adapters.LunchAdapter
 import hogent.be.lunchers.models.Lunch
-import hogent.be.lunchers.models.Tag
 import hogent.be.lunchers.network.NetworkApi
+import hogent.be.lunchers.utils.Utils
 import kotlinx.android.synthetic.main.lunch_list.view.*
 import retrofit2.Call
 import retrofit2.Callback
-import java.util.*
 
 class LunchListFragment : Fragment() {
 
@@ -46,25 +45,26 @@ class LunchListFragment : Fragment() {
     }
 
     private fun retrieveAllLunches() {
-        try {
-            val apiService = NetworkApi.create()
-            val call = apiService.getAllLunches()
-            call.enqueue(object : Callback<List<Lunch>> {
-                override fun onResponse(call: Call<List<Lunch>>, response: retrofit2.Response<List<Lunch>>?) {
-                    if (response != null) {
-                        val list: List<Lunch> = response.body()!!
+        val apiService = NetworkApi.create()
+        val call = apiService.getAllLunches()
+        call.enqueue(object : Callback<List<Lunch>> {
+            override fun onResponse(call: Call<List<Lunch>>, response: retrofit2.Response<List<Lunch>>?) {
+                if (response != null) {
+                    val list: List<Lunch>? = response.body()
+                    if (list != null) {
                         lunches.clear()
                         lunches.addAll(list)
                         lunchAdapter.notifyDataSetChanged()
+                    } else {
+                        Utils.makeToast(context!!, getString(R.string.network_error))
                     }
                 }
-                override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
-                    Log.e("Error", "Er is iets mis gegaan tijdens het ophalen van de gegevens: " + t.toString())
-                }
-            })
-        } catch (e: KotlinNullPointerException) {
-            Log.e("Error", e.toString())
-        }
-    }
+            }
 
+            override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
+                Utils.makeToast(context!!, getString(R.string.network_error))
+                Log.e("NOPE", "DAT IS ER NAAAAAST ${t.message}")
+            }
+        })
+    }
 }

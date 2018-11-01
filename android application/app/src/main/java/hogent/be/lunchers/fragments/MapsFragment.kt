@@ -3,8 +3,9 @@ package hogent.be.lunchers.fragments
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
+import android.support.v4.content.PermissionChecker.checkSelfPermission
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,14 +57,28 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     override fun onMarkerClick(marker: Marker?) = false
 
+    // Deze methode wordt opgeroepen nadat de app de gebruiker gevraagd heeft om de locatie permissie te geven
+    // Indien de gebruiker permissie tot zijn/haar locatie heeft gegeven, wordt de methode setUpMap uitgevoerd
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when (requestCode) {
+            LOCATION_PERMISSION_REQUEST_CODE -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    setUpMap()
+                }
+                return
+            }
+        }
+    }
+
     // Functie die de locatie van de gebruiker ophaalt en de camera naar deze locatie laat gaan
     private fun setUpMap() {
         // De gebruiker toestemming vragen voor zijn/haar locatie te gebruiken
         // Momenteel is het nog zo dat na het toestemming geven de app nog eens opnieuw opgestart moet worden
-        if (ActivityCompat.checkSelfPermission(this.requireContext(),
+        if (checkSelfPermission(this.requireContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this.requireActivity(),
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
             return
         }
 
