@@ -71,6 +71,6 @@ class LunchAdapter(private val parentActivity: MainActivity, private val values:
     }
 
     companion object {
-        const val BASE_URL: String = "http://lunchers.ml/"
+        const val BASE_URL: String = "https://lunchers.ml/"
     }
 }

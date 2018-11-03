@@ -13,7 +13,7 @@ interface NetworkApi {
     fun getAllLunches(): Call<List<Lunch>>
 
     companion object Factory {
-        private const val BASE_URL = "http://lunchers.ml/api/"
+        private const val BASE_URL = "https://lunchers.ml/api/"
 
         private val gson = GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
