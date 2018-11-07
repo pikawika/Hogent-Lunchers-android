@@ -17,7 +17,14 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import hogent.be.lunchers.R
+import hogent.be.lunchers.models.Lunch
+import hogent.be.lunchers.network.NetworkApi
+import hogent.be.lunchers.utils.Utils
+import kotlinx.android.synthetic.main.lunch_list.*
+import retrofit2.Call
+import retrofit2.Callback
 
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -41,14 +48,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         return rootView
     }
 
+    // Functie die wordt opgeroepen nadat de map geladen is
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-
-        // Een marker toevoegen met Aalst als locatie en de camera er naartoe laten gaan, puur voor te testen
-        // val aalst = LatLng(50.937885, 4.040956)
-        // map.addMarker(MarkerOptions().position(aalst).title("Welkom in Aalst!"))
-        // map.moveCamera(CameraUpdateFactory.newLatLngZoom(aalst, 12f))
-
         map.uiSettings.isZoomControlsEnabled = true
         map.setOnMarkerClickListener(this)
 
@@ -72,6 +74,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         }
     }
 
+    // Deze methode plaatst markers op de map via de meegegeven latitude en longitude
+    // Als je er op klikt verschijnt de naam en kan je ook via Google Maps navigatie starten
+    private fun placeMarkerOnMap(lat: Double, lng: Double, naam: String) {
+        map.addMarker(MarkerOptions().position(LatLng(lat, lng)).title(naam))
+    }
+
     // Functie die de locatie van de gebruiker ophaalt en de camera naar deze locatie laat gaan
     private fun setUpMap() {
         // De gebruiker toestemming vragen voor zijn/haar locatie te gebruiken
@@ -92,6 +100,34 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 //placesTest(location.latitude, location.longitude)
             }
         }
+
+        retrieveAllLunches()
+    }
+
+    // Deze methode haalt alle lunches op en plaatst van iedere lunch de handelaar op de kaart
+    private fun retrieveAllLunches() {
+        val apiService = NetworkApi.create()
+        val call = apiService.getAllLunches()
+        call.enqueue(object : Callback<List<Lunch>> {
+            override fun onResponse(call: Call<List<Lunch>>, response: retrofit2.Response<List<Lunch>>?) {
+                if (response != null) {
+                    val list: List<Lunch>? = response.body()
+                    if (list != null) {
+                        list.forEach {
+                            placeMarkerOnMap(it.handelaar.locatie.latitude, it.handelaar.locatie.longitude, it.handelaar.handelsNaam)
+                        }
+                    } else {
+                        Utils.makeToast(context!!, getString(R.string.network_error))
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
+                Utils.makeToast(context!!, getString(R.string.network_error))
+                swipe_refresh_layout.isRefreshing = false
+                Log.e("NOPE", "DAT IS ER NAAAAAST ${t.message}")
+            }
+        })
     }
 
     // Functie voor het testen van de Google Places API
