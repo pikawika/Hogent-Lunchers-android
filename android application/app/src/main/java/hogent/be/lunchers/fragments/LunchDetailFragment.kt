@@ -56,6 +56,6 @@ class LunchDetailFragment : Fragment() {
 
     companion object {
         const val ARG_ITEM_ID = "lunchItem"
-        const val BASE_URL: String = "https://lunchers.ml/"
+        const val BASE_URL: String = "https://www.lunchers.ml/"
     }
 }

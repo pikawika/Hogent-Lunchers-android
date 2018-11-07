@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Handelaar(
-    val naam: String,
+    val handelsNaam: String,
     val locatie: Locatie,
     val website: String,
     val lunches: List<Lunch>,
