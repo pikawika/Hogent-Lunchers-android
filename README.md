@@ -12,7 +12,7 @@ Dit is de GitHub repository (deel Android App) voor het project Lunchers van Tea
 > - [GitHub Repository van de Lunchers website en backend](#github-repository-van-de-lunchers-website-en-backend)
 
 ## Wie is Team GDPR
-Team GDPR staat voor “Guys Do Programming Right”, een fictief bedrijf dat groepsnummer 1 representeert.
+Team GDPR staat voor “Guys Doing Programming Right”, een fictief bedrijf dat groepsnummer 1 representeert.
 
 > [Info over de groepsleden](#groepsleden)
 
@@ -34,12 +34,12 @@ Team GDPR staat voor “Guys Do Programming Right”, een fictief bedrijf dat gr
 > - [Informatie over sprint 6 op Trello](https://trello.com/b/iEgLKsgm/sprint-6)
 
 ## Releases
-> - [Release Sprint 1 - coming soon]()
-> - [Release Sprint 2 - coming soon]()
-> - [Release Sprint 3 - coming soon]()
-> - [Release Sprint 4 - coming soon]()
-> - [Release Sprint 5 - coming soon]()
-> - [Release Sprint 6 - coming soon]()
+> - [Release Sprint 1 - Niet van toepassing](#)
+> - [Release Sprint 2](https://github.com/HoGent-Projecten3/projecten3-1819-android-aalst-groep-1/releases/tag/Sprint2)
+> - [Release Sprint 3 - coming soon](#)
+> - [Release Sprint 4 - coming soon](#)
+> - [Release Sprint 5 - coming soon](#)
+> - [Release Sprint 6 - coming soon](#)
 
 ## GitHub Repository van de Lunchers website en backend
 De Lunchers website en backend hebben een gezamenlijke Repository:
