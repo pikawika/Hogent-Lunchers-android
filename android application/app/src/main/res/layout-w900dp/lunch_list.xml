@@ -8,19 +8,23 @@
     android:baselineAligned="false"
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
-    android:showDividers="middle"
-    tools:context=".activities.LunchListActivity">
+    android:showDividers="middle">
 
-    <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/lunch_list"
-        android:name="hogent.be.lunchers.LunchListFragment"
-        android:layout_width="@dimen/item_width"
-        android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager"
-        tools:context="hogent.be.lunchers.activities.LunchListActivity"
-        tools:listitem="@layout/lunch_list_content"/>
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/lunch_list"
+                android:name="hogent.be.lunchers.LunchListFragment"
+                android:layout_width="@dimen/item_width"
+                android:layout_height="match_parent"
+                app:layoutManager="LinearLayoutManager"
+                tools:context="hogent.be.lunchers.activities.LunchListActivity"
+                tools:listitem="@layout/lunch_list_content"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <FrameLayout
         android:id="@+id/lunch_detail_container"

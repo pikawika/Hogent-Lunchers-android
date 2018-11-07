@@ -2,6 +2,7 @@ package hogent.be.lunchers.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +13,12 @@ import hogent.be.lunchers.adapters.LunchAdapter
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.network.NetworkApi
 import hogent.be.lunchers.utils.Utils
+import kotlinx.android.synthetic.main.lunch_list.*
 import kotlinx.android.synthetic.main.lunch_list.view.*
 import retrofit2.Call
 import retrofit2.Callback
 
-class LunchListFragment : Fragment() {
+class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private var twoPane: Boolean = false
     private lateinit var lunches: MutableList<Lunch>
@@ -35,6 +37,14 @@ class LunchListFragment : Fragment() {
 
         rootView.lunch_list.adapter = lunchAdapter
 
+        rootView.swipe_refresh_layout.setOnRefreshListener(this)
+
+        rootView.swipe_refresh_layout.post {
+            rootView.swipe_refresh_layout.isRefreshing = true
+
+            retrieveAllLunches()
+        }
+
         return rootView
     }
 
@@ -44,7 +54,13 @@ class LunchListFragment : Fragment() {
         retrieveAllLunches()
     }
 
+    override fun onRefresh() {
+        retrieveAllLunches()
+    }
+
     private fun retrieveAllLunches() {
+        swipe_refresh_layout.isRefreshing = true
+
         val apiService = NetworkApi.create()
         val call = apiService.getAllLunches()
         call.enqueue(object : Callback<List<Lunch>> {
@@ -58,11 +74,13 @@ class LunchListFragment : Fragment() {
                     } else {
                         Utils.makeToast(context!!, getString(R.string.network_error))
                     }
+                    swipe_refresh_layout.isRefreshing = false
                 }
             }
 
             override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
                 Utils.makeToast(context!!, getString(R.string.network_error))
+                swipe_refresh_layout.isRefreshing = false
                 Log.e("NOPE", "DAT IS ER NAAAAAST ${t.message}")
             }
         })
