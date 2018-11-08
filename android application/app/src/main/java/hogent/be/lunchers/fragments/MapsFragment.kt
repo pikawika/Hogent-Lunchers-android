@@ -124,7 +124,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
             override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
                 Utils.makeToast(context!!, getString(R.string.network_error))
-                swipe_refresh_layout.isRefreshing = false
                 Log.e("NOPE", "DAT IS ER NAAAAAST ${t.message}")
             }
         })

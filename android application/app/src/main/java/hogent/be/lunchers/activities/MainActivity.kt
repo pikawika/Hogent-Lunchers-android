@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.title = "Restaurants in de buurt"
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, MapsFragment())
-                    .commit()
+                    .commitAllowingStateLoss()
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.title = getString(R.string.app_name)
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, LunchListFragment())
-                    .commit()
+                    .commitAllowingStateLoss()
                 return@OnNavigationItemSelectedListener true
             }
 
