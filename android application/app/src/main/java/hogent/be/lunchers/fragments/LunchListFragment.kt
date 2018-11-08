@@ -39,12 +39,6 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         rootView.swipe_refresh_layout.setOnRefreshListener(this)
 
-        rootView.swipe_refresh_layout.post {
-            rootView.swipe_refresh_layout.isRefreshing = true
-
-            retrieveAllLunches()
-        }
-
         return rootView
     }
 
@@ -59,7 +53,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun retrieveAllLunches() {
-        swipe_refresh_layout.isRefreshing = true
+        swipe_refresh_layout?.isRefreshing = true
 
         val apiService = NetworkApi.create()
         val call = apiService.getAllLunches()
@@ -74,13 +68,13 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                     } else {
                         Utils.makeToast(context!!, getString(R.string.network_error))
                     }
-                    swipe_refresh_layout.isRefreshing = false
+                    swipe_refresh_layout?.isRefreshing = false
                 }
             }
 
             override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
                 Utils.makeToast(context!!, getString(R.string.network_error))
-                swipe_refresh_layout.isRefreshing = false
+                swipe_refresh_layout?.isRefreshing = false
                 Log.e("NOPE", "DAT IS ER NAAAAAST ${t.message}")
             }
         })
