@@ -61,6 +61,10 @@ class ReservationFragment : Fragment() {
                     .commit()
 
         }
+
+        rootView.annuleerButton.setOnClickListener{
+            fragmentManager!!.popBackStackImmediate()
+        }
         return rootView
     }
 
