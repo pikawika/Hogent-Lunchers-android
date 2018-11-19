@@ -49,6 +49,11 @@ class ThankYouFragment : Fragment() {
 
         rootView.bedanktMessageTextview.text = "Je reservatie voor ${lunchName} op ${reservationDate} om ${reservationTime} werd geplaatst"
 
+        rootView.backButton.setOnClickListener {
+            fragmentManager!!.popBackStack()
+            fragmentManager!!.popBackStack()
+            fragmentManager!!.popBackStackImmediate()
+        }
         return rootView
     }
 

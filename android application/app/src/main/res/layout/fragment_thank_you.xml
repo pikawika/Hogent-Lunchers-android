@@ -29,14 +29,14 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Je reservatie op xx/xx/xxxx om xx:xx werd geplaatst"
+        android:text="Je reservatie voor xxxxxx op xx/xx/xxxx om xx:xx werd geplaatst"
         android:textAlignment="center"
-        android:textSize="30dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bedanktTextview"
-        app:layout_constraintVertical_bias="0.147" />
+        app:layout_constraintVertical_bias="0.011" />
 
     <Button
         android:id="@+id/backButton"
@@ -44,28 +44,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
         android:text="Terug"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="#FFF"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bedanktMessageTextview" />
-
-    <TextView
-        android:id="@+id/lunchersLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="LUNCHERS LOGO"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30dp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/bedanktTextview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/bedanktMessageTextview"
+        app:layout_constraintVertical_bias="0.046" />
 
 
 </android.support.constraint.ConstraintLayout>

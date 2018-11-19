@@ -89,7 +89,7 @@ class ReservationFragment : Fragment() {
                     .replace(R.id.fragment_container, ThankYouFragment.newInstance(
                             lunchID!!,lunchName!!,
                             "$day/$month/$year",
-                            "$hh$mm"))
+                            "$hh:$mm"))
                     .addToBackStack(null)
                     .commit()
 

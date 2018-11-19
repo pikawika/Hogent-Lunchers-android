@@ -58,8 +58,8 @@
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:text="Reserveren"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="#FFF" />
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/annuleerButton"
