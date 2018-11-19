@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import hogent.be.lunchers.R
 import hogent.be.lunchers.fragments.LunchListFragment
 import hogent.be.lunchers.fragments.MapsFragment
+import hogent.be.lunchers.fragments.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -65,6 +66,9 @@ class MainActivity : AppCompatActivity() {
 
             R.id.action_profile -> {
                 supportActionBar?.title = "Profiel"
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, ProfileFragment())
+                        .commitAllowingStateLoss()
                 return@OnNavigationItemSelectedListener true
             }
         }
