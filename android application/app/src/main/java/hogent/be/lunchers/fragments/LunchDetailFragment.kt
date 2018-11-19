@@ -36,7 +36,10 @@ class LunchDetailFragment : Fragment() {
         }
 
         rootView.button_lunch_detail_reserveren.setOnClickListener {
-            Toast.makeText(this.context, "Reserveren is momenteel nog niet mogelijk.", Toast.LENGTH_SHORT).show()
+            fragmentManager!!.beginTransaction()
+                    .replace(R.id.fragment_container, ReservationFragment.newInstance(lunch!!.lunchId, lunch!!.naam))
+                    .addToBackStack(null)
+                    .commit()
         }
 
         return rootView
