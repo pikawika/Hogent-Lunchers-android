@@ -7,43 +7,40 @@
     tools:context=".fragments.ReservationFragment"
     >
 
+
     <TextView
-        android:id="@+id/nameofTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Hamburger Reserveren"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:textColor="#000" />
+        android:text="Kies een datum"
+        android:textSize="15dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"/>
 
-
-    <EditText
-        android:id="@+id/datumInput"
+    <Button
+        android:id="@+id/datePickerButton"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Welke dag wil je reserveren?"
         android:layout_marginBottom="30dp"
-        android:inputType="date" />
+        android:text="Datum kiezen"
+        android:background="@color/lightGrey"
+        />
 
-    <EditText
-        android:id="@+id/uurInput"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kies een tijd"
+        android:layout_marginBottom="10dp"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/timePickerButton"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Hoe laat wil je reserveren?"
         android:layout_marginBottom="30dp"
-        android:inputType="time" />
+        android:text="Tijd kiezen"
+        android:background="@color/lightGrey"/>
 
-    <EditText
-        android:id="@+id/aantalInput"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Aantal bestellingen"
-        android:layout_marginBottom="30dp"
-        android:inputType="number" />
 
     <EditText
         android:id="@+id/opmerkingenInput"
@@ -70,6 +67,8 @@
         android:layout_height="wrap_content"
         android:text="Annuleren"
         android:background="@color/lightGrey" />
+
+
 
 
 </LinearLayout>

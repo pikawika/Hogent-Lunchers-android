@@ -1,5 +1,7 @@
 package hogent.be.lunchers.fragments
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -11,6 +13,7 @@ import hogent.be.lunchers.R
 import kotlinx.android.synthetic.main.fragment_reservation.*
 import kotlinx.android.synthetic.main.fragment_reservation.view.*
 import kotlinx.android.synthetic.main.lunch_detail.view.*
+import java.util.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -47,16 +50,46 @@ class ReservationFragment : Fragment() {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_reservation, container, false)
 
-        rootView.nameofTextview.text = lunchName + " Reserveren"
-        rootView.reserveren_button.setOnClickListener{
+        val c = Calendar.getInstance()
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        var month = c.get(Calendar.MONTH)
+        val year = c.get(Calendar.YEAR)
 
-            //checken op valid input
+        val hh = c.get(Calendar.HOUR_OF_DAY)
+        val mm = c.get(Calendar.MINUTE)
+
+        rootView.datePickerButton.setOnClickListener{
+
+
+            val dpd = DatePickerDialog(activity,android.R.style.Theme_Holo_Light_Dialog, DatePickerDialog.OnDateSetListener{
+                datePicker, _year, _month, _day ->
+                var _right_month = _month+1
+                rootView.datePickerButton.text = "$_day/$_right_month/$_year"
+            },year,month,day)
+
+            //datepicker tonen
+            dpd.show()
+        }
+
+        rootView.timePickerButton.setOnClickListener{
+            val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker, hour, min ->
+                c.set(Calendar.HOUR_OF_DAY, hour)
+                c.set(Calendar.MINUTE, min)
+
+                rootView.timePickerButton.text = "$hour:$min"
+            }
+            TimePickerDialog(activity,timeSetListener, hh, mm, true).show()
+        }
+
+
+        rootView.reserveren_button.setOnClickListener{
+            //check valid input
             //popup maken met "bent u zeker dat u wil reserveren, als u reserveerd gaat u akkoord met onze algemene voorwaarden" enz
             fragmentManager!!.beginTransaction()
                     .replace(R.id.fragment_container, ThankYouFragment.newInstance(
                             lunchID!!,lunchName!!,
-                            rootView.datumInput.text.toString(),
-                            rootView.uurInput.text.toString()))
+                            "$day/$month/$year",
+                            "$hh$mm"))
                     .addToBackStack(null)
                     .commit()
 
