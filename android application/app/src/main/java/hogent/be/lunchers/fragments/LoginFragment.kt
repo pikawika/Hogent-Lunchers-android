@@ -36,11 +36,20 @@ class LoginFragment : Fragment() {
         fragment.button_login_login.setOnClickListener {
             login()
         }
+
+        fragment.button_login_registreren.setOnClickListener {
+            registreer()
+        }
+    }
+
+    private fun registreer() {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, RegistreerFragment())
+            .commit()
     }
 
     private fun login() {
-        swipe_refresh_layout?.isRefreshing = true
-
         val apiService = NetworkApi.create()
         val call = apiService.login(LoginRequest(gebruikersnaam = text_login_gebruikersnaam.text.toString(), wachtwoord = text_login_wachtwoord.text.toString()))
         call.enqueue(object : Callback<TokenResponse> {
@@ -52,7 +61,6 @@ class LoginFragment : Fragment() {
                         requireActivity().supportFragmentManager
                             .beginTransaction()
                             .replace(R.id.fragment_container, LunchListFragment())
-                            .addToBackStack(null)
                             .commit()
                     } else {
                         Utils.makeToast(context!!, "Aanmelden mislukt.")

@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import com.google.gson.GsonBuilder
 import hogent.be.lunchers.networkRequests.LoginRequest
+import hogent.be.lunchers.networkRequests.RegistreerRequest
 import hogent.be.lunchers.networkRequests.WijzigWachtwoordRequest
 import hogent.be.lunchers.networkResponses.TokenResponse
 import okhttp3.ResponseBody
@@ -18,8 +19,8 @@ interface NetworkApi {
     @POST("gebruiker/login")
     fun login(@Body loginRequest: LoginRequest): Call<TokenResponse>
 
-    @POST("gebruiker/login")
-    fun wijzigWachtwoord(@Header("Authorization") authToken: String, @Body wijzigWachtwoordRequest: WijzigWachtwoordRequest): Call<ResponseBody>
+    @POST("gebruiker/registreer")
+    fun registreer(@Body registreerRequest: RegistreerRequest): Call<TokenResponse>
 
     companion object Factory {
         private const val BASE_URL = "https://www.lunchers.ml/api/"

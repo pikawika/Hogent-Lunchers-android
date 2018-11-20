@@ -71,8 +71,24 @@
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toBottomOf="@+id/text_login_wachtwoord"
+
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+    />
+
+    <TextView
+            android:id="@+id/button_login_registreren"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/button_nog_geen_account"
+            android:textAlignment="center"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_login_login"
 
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
