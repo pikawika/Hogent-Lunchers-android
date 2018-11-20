@@ -7,14 +7,14 @@
 
 
     <android.support.constraint.Guideline
-            android:id="@+id/guideline_login_40percent_vertical"
+            android:id="@+id/guideline_login_50percent_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.5" />
 
     <ImageView
-            android:id="@+id/imageview_logo"
+            android:id="@+id/imageview_login_logo"
             android:layout_width="match_parent"
             android:layout_height="0dp"
 
@@ -25,7 +25,7 @@
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/guideline_login_40percent_vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/guideline_login_50percent_horizontal"
 
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
@@ -39,12 +39,12 @@
             android:hint="@string/account_placeholder_gebruikersnaam"
             android:inputType="text"
 
-            app:layout_constraintTop_toBottomOf="@+id/guideline_login_40percent_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/guideline_login_50percent_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
 
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"/>
 
     <EditText
             android:id="@+id/text_login_wachtwoord"
@@ -58,9 +58,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
 
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"/>
 
+    <Button
+            android:id="@+id/button_login_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/button_login"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_login_wachtwoord"
+
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+    />
 
 </android.support.constraint.ConstraintLayout>

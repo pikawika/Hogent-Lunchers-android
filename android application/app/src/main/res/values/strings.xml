@@ -14,6 +14,13 @@
     <string name="title_activity_maps">Map</string>
     <string name="network_error">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw te proberen.</string>
 
+    <!-- account string -->
     <string name="account_placeholder_gebruikersnaam">Gebruikersnaam</string>
+    <string name="account_placeholder_telefoon">Telefoonnummer</string>
     <string name="account_placeholder_wachtwoord">Wachtwoord</string>
+    <string name="account_placeholder_bevestigwachtwoord">Bevestig wachtwoord</string>
+    <string name="account_placeholder_voornaam">voornaam</string>
+    <string name="account_placeholder_achternaam">achternaam</string>
+    <string name="button_login">Aanmelden</string>
+    <string name="button_registreer">Registreer</string>
 </resources>
