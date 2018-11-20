@@ -20,7 +20,8 @@
 
             app:layout_constraintDimensionRatio="H,16:11"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/logo"
+            app:srcCompat="@drawable/ic_logo"
+            android:tint="@color/colorPrimary"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
