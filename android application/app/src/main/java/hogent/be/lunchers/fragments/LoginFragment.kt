@@ -11,6 +11,7 @@ import hogent.be.lunchers.network.NetworkApi
 import hogent.be.lunchers.networkRequests.LoginRequest
 import hogent.be.lunchers.utils.PreferenceUtil
 import hogent.be.lunchers.utils.Utils
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.android.synthetic.main.lunch_list.*
@@ -27,7 +28,6 @@ class LoginFragment : Fragment() {
         setListeners(rootView)
 
         sharedPreferences = PreferenceUtil(context!!)
-
 
         return rootView
     }

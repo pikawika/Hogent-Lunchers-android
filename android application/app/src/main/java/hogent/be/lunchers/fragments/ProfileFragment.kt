@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
+import hogent.be.lunchers.utils.PreferenceUtil
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 
 class ProfileFragment : Fragment() {
@@ -18,7 +20,16 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        rootView.buttonLogout.setOnClickListener {
+            PreferenceUtil(activity!!).deleteToken()
+            fragmentManager!!.beginTransaction()
+                    .replace(R.id.fragment_container, LoginFragment())
+                    .commit()
+        }
+
+        return rootView
     }
 
 

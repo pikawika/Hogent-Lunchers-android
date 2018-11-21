@@ -50,7 +50,14 @@
         android:background="@color/lightGrey"
         android:layout_marginBottom="20dp"/>
 
-
+    <Button
+            android:id="@+id/buttonLogout"
+            android:layout_width="300dp"
+            android:textColor="#000"
+            android:layout_height="wrap_content"
+            android:text="Afmelden"
+            android:background="@color/lightGrey"
+            android:layout_marginBottom="20dp"/>
 
 
 </LinearLayout>
