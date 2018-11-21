@@ -6,11 +6,20 @@
 
     You can also add your credentials to an existing key, using these values:
 
+    DEBUG
     Package name:
-    29:1A:43:FA:C0:9E:7C:B0:25:61:80:54:88:15:F9:D1:DA:EF:AC:07
+    hogent.be.lunchers
 
     SHA-1 certificate fingerprint:
-    29:1A:43:FA:C0:9E:7C:B0:25:61:80:54:88:15:F9:D1:DA:EF:AC:07
+    1E:C6:1C:D6:00:6C:A3:36:8D:04:DC:05:D6:16:86:0E:61:2D:B3:8D
+
+
+    ONLINE
+    Package name:
+    hogent.be.lunchers
+
+    SHA-1 certificate fingerprint:
+    1E:C6:1C:D6:00:6C:A3:36:8D:04:DC:05:D6:16:86:0E:61:2D:B3:8D
 
     Alternatively, follow the directions here:
     https://developers.google.com/maps/documentation/android/start#get-key
@@ -18,6 +27,11 @@
     Once you have your key (it starts with "AIza"), replace the "google_maps_key"
     string in this file.
     -->
-    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">AIzaSyB1TpeKL_QSnjszKp67PmWVJexKUjhGrhg</string>
+
+    <!-- KEY VAN LENNERT GEBRUIKEN!!!!!! -->
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">AIzaSyA0bXJDbCG1j10SUxtaidcOSxjsb4ZgFzQ</string>
+
+    <!--
     <string name="google_places_key" translatable="false" templateMergeStrategy="preserve">AIzaSyB1TpeKL_QSnjszKp67PmWVJexKUjhGrhg</string>
+    -->
 </resources>
