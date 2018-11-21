@@ -13,7 +13,7 @@ import retrofit2.http.*
 
 interface NetworkApi {
 
-    @GET("lunch/getall")
+    @GET("lunch")
     fun getAllLunches(): Call<List<Lunch>>
 
     @POST("gebruiker/login")

@@ -33,6 +33,11 @@ class LunchDetailFragment : Fragment() {
             rootView.textview_lunch_detail_naam.text = lunch!!.naam
             rootView.textview_lunch_detail_prijs.text = String.format("€ %.2f", lunch!!.prijs)
             rootView.textview_lunch_detail_beschrijving.text = lunch!!.beschrijving
+            rootView.textview_lunch_detail_restaurant.text = lunch!!.handelaar.handelsNaam
+
+            val locatie = lunch!!.handelaar.locatie
+
+            rootView.textview_lunch_location_restaurant.text = "${locatie.straat} ${locatie.huisnummer}, ${locatie.gemeente}"
         }
 
         rootView.button_lunch_detail_reserveren.setOnClickListener {
