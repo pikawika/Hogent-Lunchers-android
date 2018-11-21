@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_registreer_50percent_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_registreer_50percent_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+            android:id="@+id/imageview_registreer_logo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            app:layout_constraintDimensionRatio="H,16:11"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_logo"
+            android:tint="@color/colorPrimary"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/guideline_registreer_50percent_horizontal"
+
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"/>
+
+    <EditText
+            android:id="@+id/text_registreer_voornaam"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/account_placeholder_voornaam"
+            android:inputType="text"
+
+            app:layout_constraintTop_toBottomOf="@+id/guideline_registreer_50percent_horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_registreer_50percent_vertical"
+
+
+            android:layout_marginEnd="7dp"
+            android:layout_marginStart="14dp"/>
+
+    <EditText
+            android:id="@+id/text_registreer_achternaam"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/account_placeholder_achternaam"
+            android:inputType="text"
+
+            app:layout_constraintTop_toBottomOf="@+id/guideline_registreer_50percent_horizontal"
+            app:layout_constraintStart_toStartOf="@+id/guideline_registreer_50percent_vertical"
+            app:layout_constraintEnd_toEndOf="parent
+"
+
+
+            android:layout_marginEnd="14dp"
+            android:layout_marginStart="7dp"/>
+
+    <EditText
+            android:id="@+id/text_registreer_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/account_placeholder_email"
+            android:inputType="text"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_registreer_achternaam"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:layout_marginEnd="14dp"
+            android:layout_marginStart="14dp"/>
+
+    <EditText
+            android:id="@+id/text_registreer_gebruikersnaam"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/account_placeholder_gebruikersnaam"
+            android:inputType="text"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_registreer_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_registreer_50percent_vertical"
+
+
+            android:layout_marginEnd="7dp"
+            android:layout_marginStart="14dp"/>
+
+    <EditText
+            android:id="@+id/text_registreer_telefoon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/account_placeholder_telefoon"
+            android:inputType="text"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_registreer_email"
+            app:layout_constraintStart_toStartOf="@+id/guideline_registreer_50percent_vertical"
+            app:layout_constraintEnd_toEndOf="parent
+"
+
+
+            android:layout_marginEnd="14dp"
+            android:layout_marginStart="7dp"/>
+
+    <EditText
+            android:id="@+id/text_registreer_wachtwoord"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/account_placeholder_wachtwoord"
+            android:inputType="textPassword"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_registreer_gebruikersnaam"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_registreer_50percent_vertical"
+
+
+            android:layout_marginEnd="7dp"
+            android:layout_marginStart="14dp"/>
+
+    <EditText
+            android:id="@+id/text_registreer_bevestigwachtwoord"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/account_placeholder_bevestigwachtwoord"
+            android:inputType="textPassword"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_registreer_telefoon"
+            app:layout_constraintStart_toStartOf="@+id/guideline_registreer_50percent_vertical"
+            app:layout_constraintEnd_toEndOf="parent
+"
+
+
+            android:layout_marginEnd="14dp"
+            android:layout_marginStart="7dp"/>
+
+    <Button
+            android:id="@+id/button_registreer_registreren"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/button_registreer"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_registreer_wachtwoord"
+
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+    />
+
+    <TextView
+            android:id="@+id/button_registreer_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/button_reeds_eeen_account"
+            android:textAlignment="center"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_registreer_registreren"
+
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+    />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_login_50percent_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+            android:id="@+id/imageview_login_logo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            app:layout_constraintDimensionRatio="H,16:11"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_logo"
+            android:tint="@color/colorPrimary"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/guideline_login_50percent_horizontal"
+
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"/>
+
+    <EditText
+            android:id="@+id/text_login_gebruikersnaam"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/account_placeholder_gebruikersnaam"
+            android:inputType="text"
+
+            app:layout_constraintTop_toBottomOf="@+id/guideline_login_50percent_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"/>
+
+    <EditText
+            android:id="@+id/text_login_wachtwoord"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/account_placeholder_wachtwoord"
+            android:inputType="textPassword"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_login_gebruikersnaam"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"/>
+
+    <Button
+            android:id="@+id/button_login_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/button_login"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_login_wachtwoord"
+
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+    />
+
+    <TextView
+            android:id="@+id/button_login_registreren"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/button_nog_geen_account"
+            android:textAlignment="center"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_login_login"
+
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+    />
+
+</android.support.constraint.ConstraintLayout>
