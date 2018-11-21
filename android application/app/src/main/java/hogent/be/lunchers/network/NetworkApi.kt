@@ -12,6 +12,8 @@ interface NetworkApi {
     @GET("lunch/getall")
     fun getAllLunches(): Call<List<Lunch>>
 
+    
+
     companion object Factory {
         private const val BASE_URL = "https://www.lunchers.ml/api/"
 

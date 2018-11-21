@@ -22,9 +22,16 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.network.NetworkApi
 import hogent.be.lunchers.utils.Utils
-import kotlinx.android.synthetic.main.lunch_list.*
 import retrofit2.Call
 import retrofit2.Callback
+import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import java.io.IOException
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
+
 
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -76,8 +83,23 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     // Deze methode plaatst markers op de map via de meegegeven latitude en longitude
     // Als je er op klikt verschijnt de naam en kan je ook via Google Maps navigatie starten
-    private fun placeMarkerOnMap(lat: Double, lng: Double, naam: String) {
-        map.addMarker(MarkerOptions().position(LatLng(lat, lng)).title(naam))
+    private fun placeMarkerOnMap(lat: Double, lng: Double, naam: String, beschrijving:String, imgUrl:String) {
+
+        map.addMarker(MarkerOptions().position(LatLng(lat, lng))
+                .title(naam)
+                .snippet(beschrijving))
+    }
+
+    private fun getBitmapFromURL(src: String): Bitmap? {
+        var bmp:Bitmap? = null
+        try {
+            val input:InputStream = java.net.URL(src).openStream()
+            bmp = BitmapFactory.decodeStream(input)
+        } catch (e:Exception) {
+            Log.e("Error", e.message)
+            e.printStackTrace()
+        }
+        return bmp
     }
 
     // Functie die de locatie van de gebruiker ophaalt en de camera naar deze locatie laat gaan
@@ -114,7 +136,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                     val list: List<Lunch>? = response.body()
                     if (list != null) {
                         list.forEach {
-                            placeMarkerOnMap(it.handelaar.locatie.latitude, it.handelaar.locatie.longitude, it.handelaar.handelsNaam)
+                            placeMarkerOnMap(it.handelaar.locatie.latitude, it.handelaar.locatie.longitude, it.handelaar.handelsNaam, it.beschrijving, it.afbeeldingen[0].pad)
                         }
                     } else {
                         Utils.makeToast(context!!, getString(R.string.network_error))
@@ -128,6 +150,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             }
         })
     }
+
+
+
 
     // Functie voor het testen van de Google Places API
     // Hier wordt Volley gebruikt voor een netwerk request, deze library gebruiken we niet meer
