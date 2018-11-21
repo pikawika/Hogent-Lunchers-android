@@ -8,16 +8,21 @@
         android:layout_height="match_parent"
         tools:context=".fragments.LunchDetailFragment">
 
+
     <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="225dp"
-            app:srcCompat="@drawable/wavanalles"
-            android:scaleType="centerCrop"
             android:id="@+id/imageview_lunch_detail_afbeelding"
             android:contentDescription="@string/lunch_afbeelding_beschrijving"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            app:layout_constraintDimensionRatio="H,16:9"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/wavanalles"
+
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
     <TextView
             android:text="@string/lunch_tekst_naam"
             android:textSize="24sp"
