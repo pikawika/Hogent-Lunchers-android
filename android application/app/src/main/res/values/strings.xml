@@ -7,10 +7,23 @@
         uit 4 kleine Thaise gerechten geserveerd met een kommetje kleefrijst.
     </string>
     <string name="button_lunch_detail_tekst">Reserveren</string>
-    <string name="textview_lunch_detail_restaurant_tekst">Restaurant: Yok Tha</string>
+    <string name="textview_lunch_detail_restaurant_tekst">Yok Tha</string>
     <string name="title_map">Kaart</string>
     <string name="title_list">Lijst</string>
     <string name="title_profile">Profiel</string>
     <string name="title_activity_maps">Map</string>
     <string name="network_error">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw te proberen.</string>
+
+    <!-- account string -->
+    <string name="account_placeholder_gebruikersnaam">Gebruikersnaam</string>
+    <string name="account_placeholder_telefoon">Telefoonnummer</string>
+    <string name="account_placeholder_wachtwoord">Wachtwoord</string>
+    <string name="account_placeholder_email">e-mailadres</string>
+    <string name="account_placeholder_bevestigwachtwoord">Bevestig wachtwoord</string>
+    <string name="account_placeholder_voornaam">voornaam</string>
+    <string name="account_placeholder_achternaam">achternaam</string>
+    <string name="button_login">Aanmelden</string>
+    <string name="button_registreer">Registreer</string>
+    <string name="button_nog_geen_account">Nog geen account? Registreer gratis!</string>
+<string name="button_reeds_eeen_account">Reeds een account? Meld aan!</string>
 </resources>

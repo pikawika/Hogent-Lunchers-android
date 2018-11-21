@@ -3,7 +3,6 @@ package hogent.be.lunchers.fragments
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,7 +74,6 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
                 Utils.makeToast(context!!, getString(R.string.network_error))
                 swipe_refresh_layout?.isRefreshing = false
-                Log.e("NOPE", "DAT IS ER NAAAAAST ${t.message}")
             }
         })
     }
