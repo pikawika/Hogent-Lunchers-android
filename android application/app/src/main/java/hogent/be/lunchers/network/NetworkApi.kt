@@ -1,16 +1,26 @@
 package hogent.be.lunchers.network
-
 import hogent.be.lunchers.models.Lunch
 import retrofit2.Call
 import retrofit2.Retrofit
-import retrofit2.http.GET
 import com.google.gson.GsonBuilder
+import hogent.be.lunchers.networkRequests.LoginRequest
+import hogent.be.lunchers.networkRequests.RegistreerRequest
+import hogent.be.lunchers.networkRequests.WijzigWachtwoordRequest
+import hogent.be.lunchers.networkResponses.TokenResponse
+import okhttp3.ResponseBody
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.*
 
 interface NetworkApi {
 
-    @GET("lunch/getall")
+    @GET("lunch")
     fun getAllLunches(): Call<List<Lunch>>
+
+    @POST("gebruiker/login")
+    fun login(@Body loginRequest: LoginRequest): Call<TokenResponse>
+
+    @POST("gebruiker/registreer")
+    fun registreer(@Body registreerRequest: RegistreerRequest): Call<TokenResponse>
 
     companion object Factory {
         private const val BASE_URL = "https://www.lunchers.ml/api/"
