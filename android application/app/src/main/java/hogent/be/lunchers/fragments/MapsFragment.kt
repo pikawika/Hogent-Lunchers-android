@@ -46,7 +46,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
         // Een fragment voor de Google map
         val mapFragment = (childFragmentManager.findFragmentById(R.id.google_map)) as SupportMapFragment
-        fragmentManager?.beginTransaction()?.replace(R.id.google_map, mapFragment)?.commit()
         mapFragment.getMapAsync(this)
 
         // Een variabele voor het gebruiken van de locatie van de gebruiker
@@ -119,7 +118,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13f))
-                //placesTest(location.latitude, location.longitude)
             }
         }
 
@@ -146,46 +144,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
             override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
                 Utils.makeToast(context!!, getString(R.string.network_error))
-                Log.e("NOPE", "DAT IS ER NAAAAAST ${t.message}")
             }
         })
     }
-
-
-
-
-    // Functie voor het testen van de Google Places API
-    // Hier wordt Volley gebruikt voor een netwerk request, deze library gebruiken we niet meer
-    //private fun placesTest(lat: Double, long: Double) {
-        // Instantiate the cache
-        //val cache = DiskBasedCache(cacheDir, 1024 * 1024) // 1MB cap
-
-        // Set up the network to use HttpURLConnection as the HTTP client.
-        //val network = BasicNetwork(HurlStack())
-
-        // Instantiate the RequestQueue with the cache and network. Start the queue.
-        //val requestQueue = RequestQueue(cache, network).apply {
-        //    start()
-        //}
-
-        //Elke API key kan slechts 1 keer gebruikt worden, we moeten er dus eentje aanmaken voor de Google map
-        //en ook voor de Places API, maar we hebben voorlopig nog geen tweede key aangemaakt
-        //val url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${getString(R.string.google_maps_key)}&location=$lat, $long&radius=100&type=restaurant&fields=photos,formatted_address,name,rating,opening_hours,geometry"
-
-        // Get request
-        //val jsonObjectRequest = JsonObjectRequest(
-        //    Request.Method.GET, url, null,
-        //    Response.Listener { response ->
-        //       Toast.makeText(this, "Response: %s".format(response.toString()), Toast.LENGTH_SHORT).show()
-        //    },
-        //    Response.ErrorListener { error ->
-        //        Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show()
-        //    }
-        //)
-
-        // Add the request to the RequestQueue.
-        //requestQueue.add(jsonObjectRequest)
-    //}
 
     // Een companion object kan je zien als een statische variabele
     // In dit geval is het de request code die we proberen terug te krijgen
