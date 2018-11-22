@@ -3,6 +3,11 @@
 
 Dit is de GitHub repository (deel Android App) voor het project Lunchers van Team GDPR. U kan hier steeds alle broncode raadplegen en clonen. Voor elke sprint is ook een release voorzien.
 
+> [Download de app](https://www.lunchersapp.ml)
+
+<sub>Deze server bevind zich bij [Brent](#groepsleden) thuis en kan dus soms uitstaan voor stroombesparing, aarzel niet om contact op te nemen met [Brent](#groepsleden) bij problemen. De downloadlink is momenteel gehost bij [Lennert](#groepsleden), indien de link niet werkt aarzel dan niet contact op te nemen met [Lennert](#groepsleden)</sub>
+
+
 ## Inhoudsopgave
 
 > - [Wie is Team GDPR](#wie-is-team-gdpr)
@@ -37,7 +42,7 @@ Team GDPR staat voor “Guys Doing Programming Right”, een fictief bedrijf dat
 > - [Release Sprint 1 - Niet van toepassing](#)
 > - [Release Sprint 2](https://github.com/HoGent-Projecten3/projecten3-1819-android-aalst-groep-1/releases/tag/Sprint2)
 > - [Release Sprint 3](https://github.com/HoGent-Projecten3/projecten3-1819-android-aalst-groep-1/releases/tag/Sprint3)
-> - [Release Sprint 4 - coming soon](#)
+> - [Release Sprint 4 - coming soon](https://github.com/HoGent-Projecten3/projecten3-1819-android-aalst-groep-1/releases/tag/Sprint4)
 > - [Release Sprint 5 - coming soon](#)
 > - [Release Sprint 6 - coming soon](#)
 
