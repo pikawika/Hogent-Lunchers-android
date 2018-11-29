@@ -1,5 +1,6 @@
 package hogent.be.lunchers.adapters
 
+import android.arch.lifecycle.MutableLiveData
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -14,7 +15,11 @@ import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.models.Lunch
 import kotlinx.android.synthetic.main.lunch_list_content.view.*
 
-class LunchAdapter(private val parentActivity: MainActivity, private val values: List<Lunch>, private val twoPane: Boolean) :
+class LunchAdapter(
+    private val parentActivity: MainActivity,
+    private val lunches: MutableLiveData<List<Lunch>>,
+    private val twoPane: Boolean
+) :
     RecyclerView.Adapter<LunchAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
@@ -49,7 +54,7 @@ class LunchAdapter(private val parentActivity: MainActivity, private val values:
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
+        val item = lunches.value!![position]
         Glide.with(parentActivity).load(BASE_URL + item.afbeeldingen[0].pad).into(holder.afbeeldingView)
         holder.naamView.text = item.naam
         holder.prijsView.text = String.format("€ %.2f", item.prijs)
@@ -61,7 +66,7 @@ class LunchAdapter(private val parentActivity: MainActivity, private val values:
         }
     }
 
-    override fun getItemCount() = values.size
+    override fun getItemCount() = lunches.value!!.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val afbeeldingView: ImageView = view.imageview_list_item_afbeelding

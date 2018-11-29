@@ -24,6 +24,9 @@ class MainActivity : AppCompatActivity() {
 
         sharedPreferences = PreferenceUtil(this)
 
+        //context instellen voor globaal gebruik
+        instance = this
+
         initApp()
     }
 

@@ -6,13 +6,8 @@ import android.support.annotation.RequiresApi
 import android.util.Base64.DEFAULT
 import android.util.Base64.decode
 import android.util.Log
-import com.google.gson.Gson
-import hogent.be.lunchers.models.Gebruiker
 import java.io.UnsupportedEncodingException
 import java.nio.charset.Charset
-import java.util.*
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 
 
 class PreferenceUtil(context: Context) {
@@ -46,13 +41,10 @@ class PreferenceUtil(context: Context) {
         var text1: String? = null
         try {
             text1 = String(data1, Charset.defaultCharset())
-            val parser = JsonParser()
             Log.e("TOKEN as JSON STRING",text1)
         } catch (e: UnsupportedEncodingException) {
             e.printStackTrace()
         }
-
-
     }
 
 }

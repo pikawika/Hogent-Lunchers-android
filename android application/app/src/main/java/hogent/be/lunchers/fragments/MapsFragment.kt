@@ -20,17 +20,12 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import hogent.be.lunchers.R
 import hogent.be.lunchers.models.Lunch
-import hogent.be.lunchers.network.NetworkApi
 import hogent.be.lunchers.utils.Utils
 import retrofit2.Call
 import retrofit2.Callback
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import java.io.IOException
 import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -128,7 +123,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     // Deze methode haalt alle lunches op en plaatst van iedere lunch de handelaar op de kaart
     private fun retrieveAllLunches() {
-        val apiService = NetworkApi.create()
+        /*val apiService = NetworkApi.create()
         val call = apiService.getAllLunches()
         call.enqueue(object : Callback<List<Lunch>> {
             override fun onResponse(call: Call<List<Lunch>>, response: retrofit2.Response<List<Lunch>>?) {
@@ -148,7 +143,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 Utils.makeToast(context!!, getString(R.string.network_error))
                 Log.e("NOPE", "DAT IS ER NAAAAAST ${t.message}")
             }
-        })
+        })*/
     }
 
 

@@ -6,14 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
-import hogent.be.lunchers.network.NetworkApi
-import hogent.be.lunchers.networkRequests.LoginRequest
-import hogent.be.lunchers.networkRequests.RegistreerLoginRequest
-import hogent.be.lunchers.networkRequests.RegistreerRequest
-import hogent.be.lunchers.networkResponses.TokenResponse
 import hogent.be.lunchers.utils.PreferenceUtil
 import hogent.be.lunchers.utils.Utils
-import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_registreer.*
 import kotlinx.android.synthetic.main.fragment_registreer.view.*
 import kotlinx.android.synthetic.main.lunch_list.*
@@ -46,7 +40,7 @@ class RegistreerFragment : Fragment() {
     }
 
     private fun registreer() {
-        val apiService = NetworkApi.create()
+        /*val apiService = NetworkApi.create()
 
         //er is een veld leeg
         if (text_registreer_telefoon.text.toString() == ""  ||
@@ -96,7 +90,7 @@ class RegistreerFragment : Fragment() {
                     swipe_refresh_layout?.isRefreshing = false
                 }
             })
-        }
+        }*/
     }
 
     private fun login() {
