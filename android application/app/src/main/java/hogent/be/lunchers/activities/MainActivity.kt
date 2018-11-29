@@ -1,5 +1,6 @@
 package hogent.be.lunchers.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.ListFragment
@@ -87,6 +88,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
         false
+    }
+
+    companion object {
+        //voor globaal gebruik van context
+        //handig om toasts van eender waar te doen en gebruik in andere utils
+        private var instance: MainActivity? = null
+
+        /**
+         * returnt de [Context] van de app zijn MainActivity
+         */
+        fun getContext(): Context {
+            return instance!!.applicationContext
+        }
     }
 
 }
