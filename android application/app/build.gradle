@@ -10,6 +10,9 @@ android {
     signingConfigs {
     }
     compileSdkVersion 28
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "hogent.be.lunchers"
         minSdkVersion 19
@@ -37,7 +40,7 @@ android {
 dependencies {
     //default
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 
     //dex fix
     implementation 'com.android.support:multidex:1.0.3'

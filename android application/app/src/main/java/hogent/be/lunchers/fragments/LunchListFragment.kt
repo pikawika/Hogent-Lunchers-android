@@ -61,6 +61,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun retrieveAllLunches() {
-
+        // TODO: implementeren herladen
+        swipe_refresh_layout?.isRefreshing = false
     }
 }

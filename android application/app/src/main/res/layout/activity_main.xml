@@ -1,39 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
 
-    <android.support.v7.widget.Toolbar
-             android:id="@+id/toolbar"
-             android:layout_width="0dp"
-             android:layout_height="?attr/actionBarSize"
-             android:background="?attr/colorPrimary"
-             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-             app:titleTextColor="@android:color/white"
-             app:theme="@style/ToolbarTheme"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
+        <variable
+                name="accountViewModel"
+                type="hogent.be.lunchers.viewmodels.AccountViewModel"/>
+    </data>
 
-    <FrameLayout
-            android:id="@+id/fragment_container"
+    <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"/>
+            android:layout_height="match_parent">
 
-    <android.support.design.widget.BottomNavigationView
-            android:id="@+id/bottom_navigation_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/menu_main" />
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:titleTextColor="@android:color/white"
+                app:theme="@style/ToolbarTheme"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-</android.support.constraint.ConstraintLayout>
+        <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"/>
+
+        <android.support.design.widget.BottomNavigationView
+                android:id="@+id/bottom_navigation_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="@{accountViewModel.aangemeld? View.VISIBLE : View.GONE}"
+                app:menu="@menu/menu_main"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

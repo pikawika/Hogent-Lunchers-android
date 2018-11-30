@@ -33,7 +33,7 @@ class AccountViewModel : InjectedViewModel() {
     /**
      * Bool of je al dan niet aangemeld bent
      */
-    private var aangemeld = MutableLiveData<Boolean>()
+    val aangemeld: MutableLiveData<Boolean> = MutableLiveData()
 
     /**
      * een instantie van de lunchersApi om data van de server op te halen

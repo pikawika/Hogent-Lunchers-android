@@ -15,8 +15,6 @@ import kotlinx.android.synthetic.main.fragment_reservation.view.*
 import kotlinx.android.synthetic.main.lunch_detail.view.*
 import java.util.*
 
-
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val LUNCH_ID = "the id for placing the reservation"
 private const val LUNCH_NAME = "the name for the string that is shown on screen"
@@ -31,7 +29,7 @@ private const val LUNCH_NAME = "the name for the string that is shown on screen"
  *
  */
 class ReservationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var lunchID: Int? = null
     private var lunchName: String? = null
 

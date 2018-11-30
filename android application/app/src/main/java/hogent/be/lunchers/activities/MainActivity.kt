@@ -1,20 +1,34 @@
 package hogent.be.lunchers.activities
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import hogent.be.lunchers.R
+import hogent.be.lunchers.databinding.ActivityMainBinding
 import hogent.be.lunchers.fragments.LoginFragment
 import hogent.be.lunchers.fragments.LunchListFragment
 import hogent.be.lunchers.fragments.MapsFragment
 import hogent.be.lunchers.utils.PreferenceUtil
 import hogent.be.lunchers.fragments.ProfileFragment
+import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var sharedPreferences : PreferenceUtil
+
+    /**
+     * De [AccountViewModel] dat we gebruiken voord de data voor databinding
+     */
+    private lateinit var accountViewModel: AccountViewModel
+
+    /**
+     * De [ActivityMainBinding] dat we gebruiken voor de effeciteve databinding
+     */
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +36,12 @@ class MainActivity : AppCompatActivity() {
         //context instellen voor globaal gebruik
         instance = this
 
-        setContentView(R.layout.activity_main)
+        //main activity binden
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        accountViewModel = ViewModelProviders.of(this).get(AccountViewModel::class.java)
+        binding.accountViewModel = accountViewModel
+        binding.setLifecycleOwner(this)
 
         sharedPreferences = PreferenceUtil()
 
