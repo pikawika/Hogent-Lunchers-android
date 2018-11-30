@@ -53,7 +53,7 @@ class LunchViewModel : InjectedViewModel() {
      */
     private fun onRetrieveError(error: Throwable) {
         //voorlopig harde crash, niet goed want throwt dus bij gewoon geen internet etc
-        MessageUtil.showToast(error.message.toString())
+        MessageUtil.showToast("Er is iets foutgegaan met het ophalen van de data")
     }
 
     /**

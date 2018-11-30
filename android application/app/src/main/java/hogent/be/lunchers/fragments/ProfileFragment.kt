@@ -23,7 +23,7 @@ class ProfileFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_profile, container, false)
 
         rootView.buttonLogout.setOnClickListener {
-            PreferenceUtil(activity!!).deleteToken()
+            PreferenceUtil().deleteToken()
             fragmentManager!!.beginTransaction()
                     .replace(R.id.fragment_container, LoginFragment())
                     .commit()

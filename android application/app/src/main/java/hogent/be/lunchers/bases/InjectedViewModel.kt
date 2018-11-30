@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel
 import hogent.be.lunchers.injection.components.DaggerNetworkComponent
 import hogent.be.lunchers.injection.components.NetworkComponent
 import hogent.be.lunchers.injection.modules.NetworkModule
+import hogent.be.lunchers.viewmodels.AccountViewModel
 import hogent.be.lunchers.viewmodels.LunchViewModel
 
 /**
@@ -42,6 +43,7 @@ abstract class InjectedViewModel : ViewModel() {
     private fun inject() {
         when (this) {
             is LunchViewModel -> injector.inject(this)
+            is AccountViewModel -> injector.inject(this)
         }
     }
 

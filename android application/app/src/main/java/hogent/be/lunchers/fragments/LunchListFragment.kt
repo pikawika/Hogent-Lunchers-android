@@ -11,13 +11,9 @@ import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.adapters.LunchAdapter
-import hogent.be.lunchers.models.Lunch
-import hogent.be.lunchers.utils.Utils
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.lunch_list.*
 import kotlinx.android.synthetic.main.lunch_list.view.*
-import retrofit2.Call
-import retrofit2.Callback
 
 class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
@@ -71,29 +67,6 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun retrieveAllLunches() {
-        /*swipe_refresh_layout?.isRefreshing = true
-
-        val apiService = NetworkApi.create()
-        val call = apiService.getAllLunches()
-        call.enqueue(object : Callback<List<Lunch>> {
-            override fun onResponse(call: Call<List<Lunch>>, response: retrofit2.Response<List<Lunch>>?) {
-                if (response != null) {
-                    val list: List<Lunch>? = response.body()
-                    if (list != null) {
-                        lunches.clear()
-                        lunches.addAll(list)
-                        lunchAdapter.notifyDataSetChanged()
-                    } else {
-                        Utils.makeToast(context!!, getString(R.string.network_error))
-                    }
-                    swipe_refresh_layout?.isRefreshing = false
-                }
-            }
-
-            override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
-                Utils.makeToast(context!!, getString(R.string.network_error))
-                swipe_refresh_layout?.isRefreshing = false
-            }
-        })*/
+        swipe_refresh_layout?.isRefreshing = true
     }
 }

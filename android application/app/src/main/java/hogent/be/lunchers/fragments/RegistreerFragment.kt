@@ -7,12 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.utils.PreferenceUtil
-import hogent.be.lunchers.utils.Utils
-import kotlinx.android.synthetic.main.fragment_registreer.*
 import kotlinx.android.synthetic.main.fragment_registreer.view.*
-import kotlinx.android.synthetic.main.lunch_list.*
-import retrofit2.Call
-import retrofit2.Callback
 
 class RegistreerFragment : Fragment() {
 
@@ -23,7 +18,7 @@ class RegistreerFragment : Fragment() {
 
         setListeners(rootView)
 
-        sharedPreferences = PreferenceUtil(context!!)
+        sharedPreferences = PreferenceUtil()
 
 
         return rootView

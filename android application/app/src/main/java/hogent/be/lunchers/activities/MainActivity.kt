@@ -3,14 +3,12 @@ package hogent.be.lunchers.activities
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.ListFragment
 import android.support.v7.app.AppCompatActivity
 import hogent.be.lunchers.R
 import hogent.be.lunchers.fragments.LoginFragment
 import hogent.be.lunchers.fragments.LunchListFragment
 import hogent.be.lunchers.fragments.MapsFragment
 import hogent.be.lunchers.utils.PreferenceUtil
-import hogent.be.lunchers.utils.Utils
 import hogent.be.lunchers.fragments.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,12 +18,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        sharedPreferences = PreferenceUtil(this)
 
         //context instellen voor globaal gebruik
         instance = this
+
+        setContentView(R.layout.activity_main)
+
+        sharedPreferences = PreferenceUtil()
 
         initApp()
     }

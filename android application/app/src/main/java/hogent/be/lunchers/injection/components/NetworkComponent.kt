@@ -3,6 +3,7 @@ package hogent.be.lunchers.injection.components
 import hogent.be.lunchers.injection.modules.NetworkModule
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import dagger.Component
+import hogent.be.lunchers.viewmodels.AccountViewModel
 import javax.inject.Singleton
 
 /**
@@ -23,6 +24,8 @@ interface NetworkComponent {
      * @param lunchViewModel De [LunchViewModel] dat je wilt voorzien van dependency injection. Verplicht van type [LunchViewModel].
      */
     fun inject(lunchViewModel: LunchViewModel)
+
+    fun inject(accountViewModel: AccountViewModel)
 
     //soortgelijke functies aanmaken voor alle andere injecties van models
 }

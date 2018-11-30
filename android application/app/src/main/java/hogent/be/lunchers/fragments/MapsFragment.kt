@@ -22,12 +22,8 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import hogent.be.lunchers.R
 import hogent.be.lunchers.models.Lunch
-import hogent.be.lunchers.utils.Utils
-import retrofit2.Call
-import retrofit2.Callback
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
-import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import java.io.InputStream
 
