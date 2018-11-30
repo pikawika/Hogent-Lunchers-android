@@ -33,7 +33,7 @@ class AccountViewModel : InjectedViewModel() {
     /**
      * Bool of je al dan niet aangemeld bent
      */
-    val aangemeld: MutableLiveData<Boolean> = MutableLiveData()
+    private var aangemeld = MutableLiveData<Boolean>()
 
     /**
      * een instantie van de lunchersApi om data van de server op te halen
@@ -174,6 +174,13 @@ class AccountViewModel : InjectedViewModel() {
     fun afmelden() {
         PreferenceUtil().deleteToken()
         aangemeld.value = PreferenceUtil().getToken() != ""
+    }
+
+    /**
+     * returnt boolean of user al dan niet aangemeld is
+     */
+    fun getIsAangmeld() : MutableLiveData<Boolean> {
+        return aangemeld
     }
 
 }
