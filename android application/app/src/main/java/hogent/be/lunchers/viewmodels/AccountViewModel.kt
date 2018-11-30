@@ -2,9 +2,12 @@ package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
 import hogent.be.lunchers.bases.InjectedViewModel
+import hogent.be.lunchers.constants.ROL_KLANT
 import hogent.be.lunchers.networks.responses.TokenResponse
 import hogent.be.lunchers.networks.LunchersApi
 import hogent.be.lunchers.networks.requests.LoginRequest
+import hogent.be.lunchers.networks.requests.RegistreerGebruikerRequest
+import hogent.be.lunchers.networks.requests.RegistreerLoginRequest
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.utils.PreferenceUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -49,7 +52,6 @@ class AccountViewModel : InjectedViewModel() {
     private lateinit var registreerSubscription: Disposable
 
 
-
     init {
         token.value = PreferenceUtil().getToken()
         gebruikersnaam.value = PreferenceUtil().getGebruikersnaam()
@@ -84,11 +86,22 @@ class AccountViewModel : InjectedViewModel() {
     }
 
     /**
-     * Functie voor het behandelen van het succesvol ophalen van de meetings
+     * Functie voor het behandelen van het succesvol aanmelden
      *
-     * Zal de lijst van meetings gelijkstellen met het results
+     * zal token instellen en opslaan, en aangemeld in de VM op true zetten
      */
     private fun onRetrieveLoginSuccess(result: TokenResponse) {
+        token.value = result.token
+        PreferenceUtil().setToken(result.token)
+        aangemeld.value = true
+    }
+
+    /**
+     * Functie voor het behandelen van het succesvol registreren
+     *
+     * zal token instellen en opslaan, en aangemeld in de VM op true zetten
+     */
+    private fun onRetrieveRegistreerSuccess(result: TokenResponse) {
         token.value = result.token
         PreferenceUtil().setToken(result.token)
         aangemeld.value = true
@@ -104,9 +117,9 @@ class AccountViewModel : InjectedViewModel() {
     }
 
     /**
-     * returnt de lijst van alle lunches als MutableLiveData
+     * Logt de gerbuiker in en returnt of al dan niet gelukt
      */
-    fun login(gebruikersnaam : String, wachtwoord : String): Boolean {
+    fun login(gebruikersnaam: String, wachtwoord: String): Boolean {
         loginSubscription = lunchersApi.login(LoginRequest(gebruikersnaam, wachtwoord))
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
@@ -116,6 +129,33 @@ class AccountViewModel : InjectedViewModel() {
             .doOnTerminate { onRetrieveFinish() }
             .subscribe(
                 { result -> onRetrieveLoginSuccess(result) },
+                { error -> onRetrieveError(error) }
+            )
+        return aangemeld.value!!
+    }
+
+    /**
+     * registreert de gebruiker en returnt of al dan niet gelukt
+     */
+    fun registreerKlant(
+        telefoonnummer: String,
+        voornaam: String,
+        achternaam: String,
+        email: String,
+        gebruikersnaam: String,
+        wachtwoord: String
+    ): Boolean {
+        val registreerLoginRequest = RegistreerLoginRequest(gebruikersnaam, wachtwoord, ROL_KLANT)
+        val registreerGebruikerRequest = RegistreerGebruikerRequest(telefoonnummer, voornaam, achternaam, email, registreerLoginRequest)
+        registreerSubscription = lunchersApi.registreer(registreerGebruikerRequest)
+            //we tell it to fetch the data on background by
+            .subscribeOn(Schedulers.io())
+            //we like the fetched data to be displayed on the MainTread (UI)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveStart() }
+            .doOnTerminate { onRetrieveFinish() }
+            .subscribe(
+                { result -> onRetrieveRegistreerSuccess(result) },
                 { error -> onRetrieveError(error) }
             )
         return aangemeld.value!!

@@ -56,17 +56,11 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        retrieveAllLunches()
-    }
-
     override fun onRefresh() {
         retrieveAllLunches()
     }
 
     private fun retrieveAllLunches() {
-        swipe_refresh_layout?.isRefreshing = true
+
     }
 }
