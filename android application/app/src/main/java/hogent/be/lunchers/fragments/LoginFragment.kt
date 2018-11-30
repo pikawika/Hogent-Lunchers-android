@@ -1,8 +1,10 @@
 package hogent.be.lunchers.fragments
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +30,20 @@ class LoginFragment : Fragment() {
 
         //viewmodel vullen
         accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
+
+        //aangemeld en parentactivity bijhouden
+        val aangemeld = accountViewModel.aangemeld
+        val parentActivity = (activity as AppCompatActivity)
+
+        //indien aangemeld naar lijst gaan
+        aangemeld.observe(this, Observer {
+            if (aangemeld.value!!) {
+                parentActivity.supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, LunchListFragment())
+                    .commit()
+            }
+        })
 
         return rootView
     }
