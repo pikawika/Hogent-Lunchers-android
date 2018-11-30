@@ -112,8 +112,15 @@ class AccountViewModel : InjectedViewModel() {
      */
     override fun onCleared() {
         super.onCleared()
-        loginSubscription.dispose()
-        registreerSubscription.dispose()
+        if (::loginSubscription.isInitialized) {
+            loginSubscription.dispose()
+        }
+
+        if (::registreerSubscription.isInitialized) {
+            registreerSubscription.dispose()
+        }
+
+
     }
 
     /**
