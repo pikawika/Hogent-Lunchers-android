@@ -2,6 +2,7 @@ package hogent.be.lunchers.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -10,9 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
-import hogent.be.lunchers.utils.PreferenceUtil
+import hogent.be.lunchers.databinding.FragmentProfileBinding
 import hogent.be.lunchers.viewmodels.AccountViewModel
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 
@@ -24,18 +24,22 @@ class ProfileFragment : Fragment() {
     //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var accountViewModel : AccountViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    /**
+     * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
+     */
+    private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_profile, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
         //viewmodel vullen
-        accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
+        accountViewModel = ViewModelProviders.of(activity!!).get(AccountViewModel::class.java)
+
+        val rootView = binding.root
+        binding.accountViewModel = accountViewModel
+        binding.setLifecycleOwner(activity)
 
         //aangemeld en parentactivity bijhouden
         val aangemeld = accountViewModel.getIsAangmeld()

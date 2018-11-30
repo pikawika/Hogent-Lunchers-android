@@ -40,7 +40,10 @@ buildscript {
             'rxandroid'     : "2.1.0",
 
             //google maps
-            'gmaps'         : "16.0.0"
+            'gmaps'         : "16.0.0",
+
+            //databinding
+            'databinding'    : "3.1.4"
     ]
     repositories {
         google()

@@ -126,7 +126,7 @@ class AccountViewModel : InjectedViewModel() {
     /**
      * Logt de gerbuiker in en returnt of al dan niet gelukt
      */
-    fun login(gebruikersnaam: String, wachtwoord: String): Boolean {
+    fun login(gebruikersnaam: String, wachtwoord: String) {
         loginSubscription = lunchersApi.login(LoginRequest(gebruikersnaam, wachtwoord))
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
@@ -138,7 +138,8 @@ class AccountViewModel : InjectedViewModel() {
                 { result -> onRetrieveLoginSuccess(result) },
                 { error -> onRetrieveError(error) }
             )
-        return aangemeld.value!!
+        this.gebruikersnaam.value = gebruikersnaam
+        PreferenceUtil().setGebruikersnaam(gebruikersnaam)
     }
 
     /**
@@ -151,7 +152,7 @@ class AccountViewModel : InjectedViewModel() {
         email: String,
         gebruikersnaam: String,
         wachtwoord: String
-    ): Boolean {
+    ) {
         val registreerLoginRequest = RegistreerLoginRequest(gebruikersnaam, wachtwoord, ROL_KLANT)
         val registreerGebruikerRequest = RegistreerGebruikerRequest(telefoonnummer, voornaam, achternaam, email, registreerLoginRequest)
         registreerSubscription = lunchersApi.registreer(registreerGebruikerRequest)
@@ -165,14 +166,15 @@ class AccountViewModel : InjectedViewModel() {
                 { result -> onRetrieveRegistreerSuccess(result) },
                 { error -> onRetrieveError(error) }
             )
-        return aangemeld.value!!
+        this.gebruikersnaam.value = gebruikersnaam
+        PreferenceUtil().setGebruikersnaam(gebruikersnaam)
     }
 
     /**
      * meld af door token te verwijderen en aangemeld vm te veranderen
      */
     fun afmelden() {
-        PreferenceUtil().deleteToken()
+        PreferenceUtil().deletePreferences()
         aangemeld.value = PreferenceUtil().getToken() != ""
     }
 
@@ -181,6 +183,13 @@ class AccountViewModel : InjectedViewModel() {
      */
     fun getIsAangmeld() : MutableLiveData<Boolean> {
         return aangemeld
+    }
+
+    /**
+     * returnt boolean of user al dan niet aangemeld is
+     */
+    fun getGebruikersnaam() : MutableLiveData<String> {
+        return gebruikersnaam
     }
 
 }

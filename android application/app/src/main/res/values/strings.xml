@@ -25,5 +25,6 @@
     <string name="button_login">Aanmelden</string>
     <string name="button_registreer">Registreer</string>
     <string name="button_nog_geen_account">Nog geen account? Registreer gratis!</string>
+    <string name="text_hallo">Hallo</string>
 <string name="button_reeds_eeen_account">Reeds een account? Meld aan!</string>
 </resources>

@@ -37,14 +37,13 @@ class PreferenceUtil() {
         sharedPreferences.edit().putString(PREFERENCE_GEBRUIKERSNAAM, gebruikersnaam).apply()
     }
 
-
-    fun deleteToken() {
+    fun deletePreferences() {
         sharedPreferences.edit().putString(PREFERENCE_TOKEN, "").apply()
+        sharedPreferences.edit().putString(PREFERENCE_GEBRUIKERSNAAM, "").apply()
     }
 
-    private fun checkToken(token:String){
 
-    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getTokenId(token:String){

@@ -12,6 +12,7 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.adapters.LunchAdapter
 import hogent.be.lunchers.viewmodels.LunchViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.lunch_list.*
 import kotlinx.android.synthetic.main.lunch_list.view.*
 
