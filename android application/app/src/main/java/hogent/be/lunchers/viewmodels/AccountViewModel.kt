@@ -161,4 +161,12 @@ class AccountViewModel : InjectedViewModel() {
         return aangemeld.value!!
     }
 
+    /**
+     * meld af door token te verwijderen en aangemeld vm te veranderen
+     */
+    fun afmelden() {
+        PreferenceUtil().deleteToken()
+        aangemeld.value = PreferenceUtil().getToken() != ""
+    }
+
 }
