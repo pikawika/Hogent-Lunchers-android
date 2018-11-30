@@ -9,9 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
-import hogent.be.lunchers.utils.PreferenceUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
-import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
@@ -48,7 +46,7 @@ class LoginFragment : Fragment() {
         return rootView
     }
 
-    fun setListeners(fragment: View) {
+    private fun setListeners(fragment: View) {
         fragment.button_login_login.setOnClickListener {
             login()
         }

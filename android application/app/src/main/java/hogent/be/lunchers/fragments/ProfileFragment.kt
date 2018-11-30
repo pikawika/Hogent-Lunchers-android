@@ -43,14 +43,13 @@ class ProfileFragment : Fragment() {
 
         //aangemeld en parentactivity bijhouden
         val aangemeld = accountViewModel.getIsAangmeld()
-        val parentActivity = (activity as AppCompatActivity)
 
         //indien aangemeld naar lijst gaan
         aangemeld.observe(this, Observer {
             if (!aangemeld.value!!) {
-                parentActivity.supportFragmentManager.popBackStackImmediate(0, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                activity!!.supportFragmentManager.popBackStackImmediate(0, FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
-                parentActivity.supportFragmentManager
+                activity!!.supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container, LoginFragment())
                     .commit()
@@ -68,8 +67,16 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setListeners(rootView: View) {
+        //afmeldknop
         rootView.buttonLogout.setOnClickListener {
             afmelden()
+        }
+        //ww wijzigen knop
+        rootView.buttonChangePassword.setOnClickListener {
+            activity!!.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, ChangePasswordFragment())
+                .commit()
         }
     }
 }

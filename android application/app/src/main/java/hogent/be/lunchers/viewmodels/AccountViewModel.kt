@@ -8,6 +8,7 @@ import hogent.be.lunchers.networks.LunchersApi
 import hogent.be.lunchers.networks.requests.LoginRequest
 import hogent.be.lunchers.networks.requests.RegistreerGebruikerRequest
 import hogent.be.lunchers.networks.requests.RegistreerLoginRequest
+import hogent.be.lunchers.networks.requests.WijzigWachtwoordRequest
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.utils.PreferenceUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -50,6 +51,11 @@ class AccountViewModel : InjectedViewModel() {
      * De subscription voor het login verzoek
      */
     private lateinit var registreerSubscription: Disposable
+
+    /**
+     * De subscription voor het wijzig wachtwoord
+     */
+    private lateinit var wijzigWachtwoordSubscription: Disposable
 
 
     init {
@@ -108,6 +114,14 @@ class AccountViewModel : InjectedViewModel() {
     }
 
     /**
+     * Functie voor het behandelen van het succesvol wijzigen van een ww
+     */
+    private fun onRetrieveWijzigWachtwoordSuccess() {
+        // TODO: nog voorzien dat je weet vanuit view dat ww gewijzgd is?
+        MessageUtil.showToast("Wachtwoord gewijzigd!")
+    }
+
+    /**
      * Disposed alle subscriptions wanneer de [LunchViewModel] niet meer gebruikt wordt.
      */
     override fun onCleared() {
@@ -119,8 +133,6 @@ class AccountViewModel : InjectedViewModel() {
         if (::registreerSubscription.isInitialized) {
             registreerSubscription.dispose()
         }
-
-
     }
 
     /**
@@ -140,6 +152,23 @@ class AccountViewModel : InjectedViewModel() {
             )
         this.gebruikersnaam.value = gebruikersnaam
         PreferenceUtil().setGebruikersnaam(gebruikersnaam)
+    }
+
+    /**
+     * Veranderd het wachtwoord van de gebruiker
+     */
+    fun changePassword(wachtwoord: String) {
+        wijzigWachtwoordSubscription = lunchersApi.changePassword(token.value!!, WijzigWachtwoordRequest(wachtwoord))
+            //we tell it to fetch the data on background by
+            .subscribeOn(Schedulers.io())
+            //we like the fetched data to be displayed on the MainTread (UI)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveStart() }
+            .doOnTerminate { onRetrieveFinish() }
+            .subscribe(
+                { result -> onRetrieveWijzigWachtwoordSuccess() },
+                { error -> onRetrieveError(error) }
+            )
     }
 
     /**
