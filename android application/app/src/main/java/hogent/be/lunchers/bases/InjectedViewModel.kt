@@ -6,6 +6,7 @@ import hogent.be.lunchers.injection.components.NetworkComponent
 import hogent.be.lunchers.injection.modules.NetworkModule
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import hogent.be.lunchers.viewmodels.LunchViewModel
+import hogent.be.lunchers.viewmodels.ReservationViewModel
 
 /**
  * Een implementeerbare basis [ViewModel] klasse voor viewmodels die injectie nodig hebben via dagger.
@@ -44,6 +45,7 @@ abstract class InjectedViewModel : ViewModel() {
         when (this) {
             is LunchViewModel -> injector.inject(this)
             is AccountViewModel -> injector.inject(this)
+            is ReservationViewModel -> injector.inject(this)
         }
     }
 
