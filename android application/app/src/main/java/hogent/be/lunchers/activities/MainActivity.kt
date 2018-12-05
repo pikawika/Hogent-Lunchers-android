@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        supportFragmentManager.popBackStack()
+        //supportFragmentManager.popBackStack()
         when (item.itemId) {
             R.id.action_map -> {
                 supportActionBar?.title = "Restaurants in de buurt"
