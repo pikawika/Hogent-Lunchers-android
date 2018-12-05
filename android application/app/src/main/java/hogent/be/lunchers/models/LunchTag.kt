@@ -5,8 +5,8 @@ import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Tag(
+data class LunchTag(
+    val lunchId: Int,
     val tagId: Int,
-    val naam: String,
-    val kleur: String
+    val tag: Tag
 ) : Parcelable

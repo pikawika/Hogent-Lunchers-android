@@ -15,6 +15,11 @@ import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.lunch_list.*
 import kotlinx.android.synthetic.main.lunch_list.view.*
+import android.databinding.adapters.TextViewBindingAdapter.setText
+import android.text.Editable
+import android.text.TextWatcher
+
+
 
 class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
@@ -48,6 +53,19 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         //indien de meetinglijst veranderd moet de adapter opnieuw zijn cards genereren met nieuwe data
         lunches.observe(this, Observer {
             lunchAdapter.notifyDataSetChanged()
+        })
+
+        rootView.searchBar.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                lunchViewModel.resetLunches()
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                lunchViewModel.search(s.toString())
+            }
         })
 
         rootView.lunch_list.adapter = lunchAdapter

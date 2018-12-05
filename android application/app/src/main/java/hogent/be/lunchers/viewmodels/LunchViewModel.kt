@@ -1,10 +1,12 @@
 package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import hogent.be.lunchers.bases.InjectedViewModel
+import hogent.be.lunchers.models.*
 import hogent.be.lunchers.networks.LunchersApi
-import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.utils.MessageUtil
+import hogent.be.lunchers.utils.SearchUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -18,6 +20,7 @@ class LunchViewModel : InjectedViewModel() {
      * De lijst van alle lunches zoals die van de server gehaald is
      */
     private val lunchList = MutableLiveData<List<Lunch>>()
+    private var allLunches = listOf<Lunch>()
 
     /**
      * een instantie van de lunchersApi om data van de server op te halen
@@ -82,6 +85,7 @@ class LunchViewModel : InjectedViewModel() {
      * Zal de lijst van meetings gelijkstellen met het results
      */
     private fun onRetrieveAllLunchesSuccess(result: List<Lunch>) {
+        allLunches = result;
         lunchList.value = result
     }
 
@@ -98,6 +102,20 @@ class LunchViewModel : InjectedViewModel() {
      */
     fun getLunches(): MutableLiveData<List<Lunch>> {
         return lunchList
+    }
+
+    /**
+     * Resets de gefilterde lunchlist terug naar alle lunches
+     */
+    fun resetLunches(){
+        lunchList.value = allLunches
+    }
+
+    /**
+     * zoekt met searchstring op naam, beschrijvng, ingredienten en tags
+     */
+    fun search(searchString:String){
+        lunchList.value = SearchUtil().searchLunch(searchString, allLunches)
     }
 
 }

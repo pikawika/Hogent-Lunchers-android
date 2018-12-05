@@ -1,6 +1,7 @@
 package hogent.be.lunchers.models
 
 import android.os.Parcelable
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -9,11 +10,11 @@ data class Lunch(
     val lunchId: Int,
     val naam: String,
     val prijs: Double,
-    val ingredienten: List<Ingredient>,
+    val lunchIngredienten: List<LunchIngredient>,
     val beschrijving: String,
     val afbeeldingen: List<Afbeelding>,
     val beginDatum: Date,
     val eindDatum: Date,
-    val tags: List<Tag>,
+    val lunchTags: List<LunchTag>,
     val handelaar: Handelaar
 ) : Parcelable
