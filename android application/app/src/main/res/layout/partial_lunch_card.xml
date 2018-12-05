@@ -78,8 +78,8 @@
                     android:layout_height="wrap_content"
 
                     android:drawableLeft="@drawable/ic_euro_symbol_red_24dp"
-                    android:text="@{String.valueOf(lunchViewModel.getSelectedLunch().prijs)}"
-                    android:textSize="12sp"
+                    android:text="@{lunchViewModel.getSelectedLunch().prijs}"
+                    android:textSize="14sp"
 
                     app:layout_constraintStart_toStartOf="@+id/guideline_partial_lunch_card_40percent_vertical"
                     app:layout_constraintStart_toEndOf="@+id/image_partial_lunch_card"
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
 
                     android:text="@{lunchViewModel.getSelectedLunch().handelaar.handelsNaam}"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:drawableLeft="@drawable/ic_restaurant_black_24dp"
 
                     app:layout_constraintStart_toStartOf="@+id/guideline_partial_lunch_card_40percent_vertical"
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
 
                     android:text="@{lunchViewModel.getSelectedLunch().handelaar.locatie.straat + ` ` + lunchViewModel.getSelectedLunch().handelaar.locatie.huisnummer + `, ` + lunchViewModel.getSelectedLunch().handelaar.locatie.postcode +` `+ lunchViewModel.getSelectedLunch().handelaar.locatie.gemeente}"
-                    android:textSize="10sp"
+                    android:textSize="14sp"
                     android:drawableLeft="@drawable/ic_location_red_24dp"
 
                     app:layout_constraintStart_toStartOf="@+id/guideline_partial_lunch_card_40percent_vertical"
