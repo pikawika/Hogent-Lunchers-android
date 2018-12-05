@@ -41,7 +41,7 @@ class ProfileFragment : Fragment() {
         binding.accountViewModel = accountViewModel
         binding.setLifecycleOwner(activity)
 
-        //aangemeld en parentactivity bijhouden
+        //aangemeld bijhouden
         val aangemeld = accountViewModel.getIsAangmeld()
 
         //indien aangemeld naar lijst gaan
@@ -76,6 +76,7 @@ class ProfileFragment : Fragment() {
             activity!!.supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container, ChangePasswordFragment())
+                .addToBackStack(null)
                 .commit()
         }
     }

@@ -9,6 +9,7 @@ import hogent.be.lunchers.networks.requests.LoginRequest
 import hogent.be.lunchers.networks.requests.RegistreerGebruikerRequest
 import hogent.be.lunchers.networks.requests.RegistreerLoginRequest
 import hogent.be.lunchers.networks.requests.WijzigWachtwoordRequest
+import hogent.be.lunchers.networks.responses.BerichtResponse
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.utils.PreferenceUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -116,9 +117,8 @@ class AccountViewModel : InjectedViewModel() {
     /**
      * Functie voor het behandelen van het succesvol wijzigen van een ww
      */
-    private fun onRetrieveWijzigWachtwoordSuccess() {
-        // TODO: nog voorzien dat je weet vanuit view dat ww gewijzgd is?
-        MessageUtil.showToast("Wachtwoord gewijzigd!")
+    private fun onRetrieveWijzigWachtwoordSuccess(result : BerichtResponse) {
+        MessageUtil.showToast(result.bericht)
     }
 
     /**
@@ -158,7 +158,7 @@ class AccountViewModel : InjectedViewModel() {
      * Veranderd het wachtwoord van de gebruiker
      */
     fun changePassword(wachtwoord: String) {
-        wijzigWachtwoordSubscription = lunchersApi.changePassword(token.value!!, WijzigWachtwoordRequest(wachtwoord))
+        wijzigWachtwoordSubscription = lunchersApi.changePassword(WijzigWachtwoordRequest(wachtwoord))
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
             //we like the fetched data to be displayed on the MainTread (UI)
@@ -166,7 +166,7 @@ class AccountViewModel : InjectedViewModel() {
             .doOnSubscribe { onRetrieveStart() }
             .doOnTerminate { onRetrieveFinish() }
             .subscribe(
-                { result -> onRetrieveWijzigWachtwoordSuccess() },
+                { result -> onRetrieveWijzigWachtwoordSuccess(result) },
                 { error -> onRetrieveError(error) }
             )
     }
