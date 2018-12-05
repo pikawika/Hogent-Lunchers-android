@@ -1,5 +1,7 @@
 package hogent.be.lunchers.fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -20,20 +22,19 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import hogent.be.lunchers.R
 import hogent.be.lunchers.models.Lunch
-import hogent.be.lunchers.network.NetworkApi
-import hogent.be.lunchers.utils.Utils
-import retrofit2.Call
-import retrofit2.Callback
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import java.io.IOException
+import hogent.be.lunchers.viewmodels.LunchViewModel
 import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+
+    /**
+     * [MeetingViewModel] met de data van alle meetings
+     */
+    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
+    private lateinit var lunchViewModel: LunchViewModel
 
     // Lateinit variabelen zijn standaard null, normaal mag dit niet mag in Kotlin
     // Er wordt echter vanuit gegaan dat ze in OnStart of OnResume of ... geinitialiseerd worden
@@ -46,8 +47,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
         // Een fragment voor de Google map
         val mapFragment = (childFragmentManager.findFragmentById(R.id.google_map)) as SupportMapFragment
-        fragmentManager?.beginTransaction()?.replace(R.id.google_map, mapFragment)?.commit()
         mapFragment.getMapAsync(this)
+
+        //viewmodel vullen
+        lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
 
         // Een variabele voor het gebruiken van de locatie van de gebruiker
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity())
@@ -83,19 +86,21 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     // Deze methode plaatst markers op de map via de meegegeven latitude en longitude
     // Als je er op klikt verschijnt de naam en kan je ook via Google Maps navigatie starten
-    private fun placeMarkerOnMap(lat: Double, lng: Double, naam: String, beschrijving:String, imgUrl:String) {
+    private fun placeMarkerOnMap(lat: Double, lng: Double, naam: String, beschrijving: String, imgUrl: String) {
 
-        map.addMarker(MarkerOptions().position(LatLng(lat, lng))
+        map.addMarker(
+            MarkerOptions().position(LatLng(lat, lng))
                 .title(naam)
-                .snippet(beschrijving))
+                .snippet(beschrijving)
+        )
     }
 
     private fun getBitmapFromURL(src: String): Bitmap? {
-        var bmp:Bitmap? = null
+        var bmp: Bitmap? = null
         try {
-            val input:InputStream = java.net.URL(src).openStream()
+            val input: InputStream = java.net.URL(src).openStream()
             bmp = BitmapFactory.decodeStream(input)
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             Log.e("Error", e.message)
             e.printStackTrace()
         }
@@ -106,9 +111,15 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     private fun setUpMap() {
         // De gebruiker toestemming vragen voor zijn/haar locatie te gebruiken
         // Momenteel is het nog zo dat na het toestemming geven de app nog eens opnieuw opgestart moet worden
-        if (checkSelfPermission(this.requireContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        if (checkSelfPermission(
+                this.requireContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
             return
         }
 
@@ -119,7 +130,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13f))
-                //placesTest(location.latitude, location.longitude)
             }
         }
 
@@ -128,65 +138,28 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     // Deze methode haalt alle lunches op en plaatst van iedere lunch de handelaar op de kaart
     private fun retrieveAllLunches() {
-        val apiService = NetworkApi.create()
-        val call = apiService.getAllLunches()
-        call.enqueue(object : Callback<List<Lunch>> {
-            override fun onResponse(call: Call<List<Lunch>>, response: retrofit2.Response<List<Lunch>>?) {
-                if (response != null) {
-                    val list: List<Lunch>? = response.body()
-                    if (list != null) {
-                        list.forEach {
-                            placeMarkerOnMap(it.handelaar.locatie.latitude, it.handelaar.locatie.longitude, it.handelaar.handelsNaam, it.beschrijving, it.afbeeldingen[0].pad)
-                        }
-                    } else {
-                        Utils.makeToast(context!!, getString(R.string.network_error))
-                    }
-                }
-            }
+        val list = lunchViewModel.getLunches()
 
-            override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
-                Utils.makeToast(context!!, getString(R.string.network_error))
-                Log.e("NOPE", "DAT IS ER NAAAAAST ${t.message}")
-            }
+
+        list.observe(this, Observer {
+            putMarkersOnMap(list.value!!)
         })
     }
 
-
-
-
-    // Functie voor het testen van de Google Places API
-    // Hier wordt Volley gebruikt voor een netwerk request, deze library gebruiken we niet meer
-    //private fun placesTest(lat: Double, long: Double) {
-        // Instantiate the cache
-        //val cache = DiskBasedCache(cacheDir, 1024 * 1024) // 1MB cap
-
-        // Set up the network to use HttpURLConnection as the HTTP client.
-        //val network = BasicNetwork(HurlStack())
-
-        // Instantiate the RequestQueue with the cache and network. Start the queue.
-        //val requestQueue = RequestQueue(cache, network).apply {
-        //    start()
-        //}
-
-        //Elke API key kan slechts 1 keer gebruikt worden, we moeten er dus eentje aanmaken voor de Google map
-        //en ook voor de Places API, maar we hebben voorlopig nog geen tweede key aangemaakt
-        //val url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${getString(R.string.google_maps_key)}&location=$lat, $long&radius=100&type=restaurant&fields=photos,formatted_address,name,rating,opening_hours,geometry"
-
-        // Get request
-        //val jsonObjectRequest = JsonObjectRequest(
-        //    Request.Method.GET, url, null,
-        //    Response.Listener { response ->
-        //       Toast.makeText(this, "Response: %s".format(response.toString()), Toast.LENGTH_SHORT).show()
-        //    },
-        //    Response.ErrorListener { error ->
-        //        Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show()
-        //    }
-        //)
-
-        // Add the request to the RequestQueue.
-        //requestQueue.add(jsonObjectRequest)
-    //}
-
+    private fun putMarkersOnMap(lunches: List<Lunch>) {
+        if (lunches != null) {
+            lunches.forEach {
+                placeMarkerOnMap(
+                    it.handelaar.locatie.latitude,
+                    it.handelaar.locatie.longitude,
+                    it.handelaar.handelsNaam,
+                    it.beschrijving,
+                    it.afbeeldingen[0].pad
+                )
+            }
+        }
+    }
+    
     // Een companion object kan je zien als een statische variabele
     // In dit geval is het de request code die we proberen terug te krijgen
     companion object {

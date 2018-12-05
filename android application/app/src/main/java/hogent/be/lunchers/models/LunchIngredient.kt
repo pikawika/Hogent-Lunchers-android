@@ -1,12 +1,11 @@
 package hogent.be.lunchers.models
 
 import android.os.Parcelable
-import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Tag(
-    val tagId: Int,
-    val naam: String,
-    val kleur: String
+data class LunchIngredient(
+    val ingredientId: Int,
+    val lunchId: Int,
+    val ingredient: Ingredient
 ) : Parcelable

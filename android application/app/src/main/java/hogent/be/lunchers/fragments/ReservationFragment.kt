@@ -1,7 +1,9 @@
 package hogent.be.lunchers.fragments
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -10,13 +12,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
+import hogent.be.lunchers.viewmodels.AccountViewModel
+import hogent.be.lunchers.viewmodels.ReservationViewModel
 import kotlinx.android.synthetic.main.fragment_reservation.*
 import kotlinx.android.synthetic.main.fragment_reservation.view.*
 import kotlinx.android.synthetic.main.lunch_detail.view.*
 import java.util.*
 
-
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val LUNCH_ID = "the id for placing the reservation"
 private const val LUNCH_NAME = "the name for the string that is shown on screen"
@@ -31,9 +33,10 @@ private const val LUNCH_NAME = "the name for the string that is shown on screen"
  *
  */
 class ReservationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var lunchID: Int? = null
     private var lunchName: String? = null
+    private lateinit var reservationViewModel : ReservationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +52,10 @@ class ReservationFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_reservation, container, false)
+        reservationViewModel = ViewModelProviders.of(activity!!).get(ReservationViewModel::class.java)
+
+
+        rootView.reserveren_title.text = lunchName +" reserveren"
 
         val c = Calendar.getInstance()
         val day = c.get(Calendar.DAY_OF_MONTH)
@@ -83,15 +90,35 @@ class ReservationFragment : Fragment() {
 
 
         rootView.reserveren_button.setOnClickListener{
-            //check valid input
-            //popup maken met "bent u zeker dat u wil reserveren, als u reserveerd gaat u akkoord met onze algemene voorwaarden" enz
-            fragmentManager!!.beginTransaction()
-                    .replace(R.id.fragment_container, ThankYouFragment.newInstance(
+
+                val builder = AlertDialog.Builder(activity)
+                builder.setCancelable(true)
+                builder.setTitle("Bevestigen")
+                builder.setMessage("Bevestig dat je ${lunchName} wenst te reserveren.")
+                builder.setPositiveButton("Reserveren"
+                ) { dialog, which ->
+                    //check valid input
+
+                    reservationViewModel.reserveer(lunchID!!, rootView.aantalInput.text.toString().toInt())
+
+                    fragmentManager!!.beginTransaction()
+                        .replace(R.id.fragment_container, ThankYouFragment.newInstance(
                             lunchID!!,lunchName!!,
                             "$day/$month/$year",
                             "$hh:$mm"))
-                    .addToBackStack(null)
-                    .commit()
+                        .addToBackStack(null)
+                        .commit()
+                }
+                builder.setNegativeButton("Annuleren"
+                ) { dialog, which -> dialog.cancel() }
+
+                val dialog = builder.create()
+                dialog.show()
+
+
+
+
+
 
         }
 

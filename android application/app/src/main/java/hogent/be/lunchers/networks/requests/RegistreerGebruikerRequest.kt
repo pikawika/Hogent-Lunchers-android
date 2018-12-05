@@ -1,6 +1,6 @@
-package hogent.be.lunchers.networkRequests
+package hogent.be.lunchers.networks.requests
 
-data class RegistreerRequest(
+data class RegistreerGebruikerRequest(
     val telefoonnummer: String,
     val voornaam: String,
     val achternaam: String,

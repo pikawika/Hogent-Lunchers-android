@@ -1,36 +1,48 @@
 package hogent.be.lunchers.fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
-import hogent.be.lunchers.network.NetworkApi
-import hogent.be.lunchers.networkRequests.LoginRequest
-import hogent.be.lunchers.networkRequests.RegistreerLoginRequest
-import hogent.be.lunchers.networkRequests.RegistreerRequest
-import hogent.be.lunchers.networkResponses.TokenResponse
-import hogent.be.lunchers.utils.PreferenceUtil
-import hogent.be.lunchers.utils.Utils
-import kotlinx.android.synthetic.main.fragment_login.*
+import hogent.be.lunchers.utils.MessageUtil
+import hogent.be.lunchers.viewmodels.AccountViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_registreer.*
 import kotlinx.android.synthetic.main.fragment_registreer.view.*
-import kotlinx.android.synthetic.main.lunch_list.*
-import retrofit2.Call
-import retrofit2.Callback
 
 class RegistreerFragment : Fragment() {
 
-    lateinit var sharedPreferences : PreferenceUtil
+    /**
+     * [AccountViewModel] met de data over account
+     */
+    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
+    private lateinit var accountViewModel : AccountViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_registreer, container, false)
 
         setListeners(rootView)
 
-        sharedPreferences = PreferenceUtil(context!!)
+        //viewmodel vullen
+        accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
 
+        //aangemeld en parentactivity bijhouden
+        val aangemeld = accountViewModel.getIsAangmeld()
+        val parentActivity = (activity as AppCompatActivity)
+
+        //indien aangemeld naar lijst gaan
+        aangemeld.observe(this, Observer {
+            if (aangemeld.value == true) {
+                //simuleert een button click op lijst om er voor te zorgen dat juiste
+                //item actief is + zet fragment etc automatisch juist
+                parentActivity.bottom_navigation_view.selectedItemId = R.id.action_list
+            }
+        })
 
         return rootView
     }
@@ -46,8 +58,6 @@ class RegistreerFragment : Fragment() {
     }
 
     private fun registreer() {
-        val apiService = NetworkApi.create()
-
         //er is een veld leeg
         if (text_registreer_telefoon.text.toString() == ""  ||
             text_registreer_voornaam.text.toString() == ""  ||
@@ -56,46 +66,22 @@ class RegistreerFragment : Fragment() {
             text_registreer_gebruikersnaam.text.toString() == ""  ||
             text_registreer_wachtwoord.text.toString() == ""  ||
             text_registreer_bevestigwachtwoord.text.toString() == "" ) {
-            Utils.makeToast(context!!, "Gelieve alle velden in te vullen")
+            MessageUtil.showToast("Gelieve alle velden in te vullen")
         }
 
         //wws niet gelijk
         else if (text_registreer_wachtwoord.text.toString() != text_registreer_bevestigwachtwoord.text.toString()) {
-            Utils.makeToast(context!!, "Wachtwoorden komen niet overeen")
+            MessageUtil.showToast("Wachtwoorden komen niet overeen")
         }
 
-        //registreer
+        //registreerKlant
         else {
-            val registreerRequest = RegistreerRequest(
-                telefoonnummer = text_registreer_telefoon.text.toString(),
-                voornaam = text_registreer_voornaam.text.toString(),
-                achternaam = text_registreer_achternaam.text.toString(),
-                email = text_registreer_email.text.toString(),
-                login = RegistreerLoginRequest(gebruikersnaam = text_registreer_gebruikersnaam.text.toString(), wachtwoord = text_registreer_wachtwoord.text.toString(), rol = "klant")
-            )
-
-            val call = apiService.registreer(registreerRequest)
-            call.enqueue(object : Callback<TokenResponse> {
-                override fun onResponse(call: Call<TokenResponse>, response: retrofit2.Response<TokenResponse>?) {
-                    if (response != null) {
-                        val tokenResponse: TokenResponse? = response.body()
-                        if (tokenResponse != null) {
-                            sharedPreferences.setToken(tokenResponse.token)
-                            requireActivity().supportFragmentManager
-                                .beginTransaction()
-                                .replace(R.id.fragment_container, LunchListFragment())
-                                .commit()
-                        } else {
-                            Utils.makeToast(context!!, "Registreren mislukt.")
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
-                    Utils.makeToast(context!!, getString(R.string.network_error))
-                    swipe_refresh_layout?.isRefreshing = false
-                }
-            })
+            accountViewModel.registreerKlant(text_registreer_telefoon.text.toString(),
+                    text_registreer_voornaam.text.toString(),
+                    text_registreer_achternaam.text.toString(),
+                    text_registreer_email.text.toString(),
+                    text_registreer_gebruikersnaam.text.toString(),
+                    text_registreer_wachtwoord.text.toString())
         }
     }
 
