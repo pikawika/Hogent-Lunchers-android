@@ -35,6 +35,17 @@ class PartialLunchCardFragment : Fragment() {
         binding.lunchViewModel = lunchViewModel
         binding.setLifecycleOwner(activity)
 
+        setListeners(rootView)
+
         return rootView
+    }
+
+    private fun setListeners(rootView: View) {
+        rootView.setOnClickListener {
+            fragmentManager!!.beginTransaction()
+                .replace(R.id.fragment_container, LunchDetailFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 }

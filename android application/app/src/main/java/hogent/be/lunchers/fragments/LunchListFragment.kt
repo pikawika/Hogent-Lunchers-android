@@ -45,6 +45,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         //We doen niet direct .value maar behouden het als mutueablelivedata mits we hier op willen op observen
         val lunches = lunchViewModel.getFilteredLunches()
 
+
         //adapter aanmaken
         lunchAdapter = LunchAdapter(this.requireActivity() as MainActivity, lunches, twoPane)
 
@@ -75,6 +76,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onRefresh() {
         retrieveAllLunches()
+        lunchViewModel.setSelectedLunch(0)
     }
 
     private fun retrieveAllLunches() {

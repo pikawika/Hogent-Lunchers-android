@@ -43,14 +43,21 @@ class LunchDetailFragment : Fragment() {
 
         (activity as MainActivity).supportActionBar?.title = lunchViewModel.getSelectedLunch().value?.naam
 
+        initListeners(rootView)
+
+        return rootView
+    }
+
+    private fun initListeners(rootView: View){
+        //reserveren
         rootView.button_lunch_detail_reserveren.setOnClickListener {
             fragmentManager!!.beginTransaction()
-                    .replace(R.id.fragment_container, ReservationFragment())
-                    .addToBackStack(null)
-                    .commit()
+                .replace(R.id.fragment_container, ReservationFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
-
+        //bel
         rootView.button_lunch_detail_bellen.setOnClickListener{
             val builder = AlertDialog.Builder(activity)
             builder.setCancelable(true)
@@ -69,8 +76,13 @@ class LunchDetailFragment : Fragment() {
             dialog.show()
         }
 
-
-        return rootView
+        //locatie clicked
+        rootView.textview_lunch_location_restaurant.setOnClickListener{
+            fragmentManager!!.beginTransaction()
+                .replace(R.id.fragment_container, MapsFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     override fun onResume() {

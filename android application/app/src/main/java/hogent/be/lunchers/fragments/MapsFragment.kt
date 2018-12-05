@@ -56,7 +56,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
         //viewmodel vullen
         lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
-        lunchViewModel.resetFilteredLunches()
 
         val rootView = binding.root
         binding.lunchViewModel = lunchViewModel
@@ -148,15 +147,20 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
         map.isMyLocationEnabled = true
 
+        retrieveAllLunches()
+
         fusedLocationClient.lastLocation.addOnSuccessListener(this.requireActivity()) { location ->
-            if (location != null) {
+            if (location != null && lunchViewModel.getSelectedLunch()?.value == null) {
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13f))
             }
         }
 
-        retrieveAllLunches()
+        if (lunchViewModel.getSelectedLunch()?.value != null) {
+            val currentLatLng = LatLng(lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.latitude, lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.longitude)
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13f))
+        }
     }
 
     // Deze methode haalt alle lunches op en plaatst van iedere lunch de handelaar op de kaart
