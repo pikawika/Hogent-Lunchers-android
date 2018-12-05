@@ -88,6 +88,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     override fun onMarkerClick(clickedMarker: Marker?): Boolean {
         lunchViewModel.setSelectedLunch(clickedMarker!!.title.toInt())
+        clickedMarker.hideInfoWindow()
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(clickedMarker.position, 13f))
         return true
     }
 

@@ -1,70 +1,65 @@
 package hogent.be.lunchers.fragments
 
-import android.Manifest
 import android.app.AlertDialog
+import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
+import android.databinding.DataBindingUtil
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.bumptech.glide.Glide
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
-import hogent.be.lunchers.adapters.LunchAdapter.Companion.BASE_URL
-import hogent.be.lunchers.models.Lunch
+import hogent.be.lunchers.databinding.FragmentProfileBinding
+import hogent.be.lunchers.databinding.LunchDetailBinding
+import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.lunch_detail.view.*
-import android.content.DialogInterface
-import android.util.Log
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.support.v4.app.ActivityCompat
 
 
 class LunchDetailFragment : Fragment() {
 
-    private var lunch: Lunch? = null
+    /**
+     * [LunchViewModel] met de data over account
+     */
+    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
+    private lateinit var lunchViewModel: LunchViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        lunch = arguments?.getParcelable(ARG_ITEM_ID)
-    }
+    /**
+     * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
+     */
+    private lateinit var binding: LunchDetailBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.lunch_detail, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.lunch_detail, container, false)
 
-        (activity as MainActivity).supportActionBar?.title = lunch?.naam
+        //viewmodel vullen
+        lunchViewModel = ViewModelProviders.of(activity!!).get(LunchViewModel::class.java)
 
-        if (lunch != null) {
-            Glide.with(this).load(BASE_URL + lunch!!.afbeeldingen[0].pad).into(rootView.imageview_lunch_detail_afbeelding)
-            rootView.textview_lunch_detail_naam.text = lunch!!.naam
-            rootView.textview_lunch_detail_prijs.text = String.format("€ %.2f", lunch!!.prijs)
-            rootView.textview_lunch_detail_beschrijving.text = lunch!!.beschrijving
-            rootView.textview_lunch_detail_restaurant.text = lunch!!.handelaar.handelsNaam
+        val rootView = binding.root
+        binding.lunchViewModel = lunchViewModel
+        binding.setLifecycleOwner(activity)
 
-            val locatie = lunch!!.handelaar.locatie
-
-            rootView.textview_lunch_location_restaurant.text = "${locatie.straat} ${locatie.huisnummer}, ${locatie.gemeente}"
-        }
+        (activity as MainActivity).supportActionBar?.title = lunchViewModel.getSelectedLunch().value?.naam
 
         rootView.button_lunch_detail_reserveren.setOnClickListener {
             fragmentManager!!.beginTransaction()
-                    .replace(R.id.fragment_container, ReservationFragment.newInstance(lunch!!.lunchId, lunch!!.naam))
+                    .replace(R.id.fragment_container, ReservationFragment())
                     .addToBackStack(null)
                     .commit()
         }
 
+
         rootView.button_lunch_detail_bellen.setOnClickListener{
             val builder = AlertDialog.Builder(activity)
             builder.setCancelable(true)
-            builder.setTitle("Bellen naar " + lunch?.handelaar?.handelsNaam)
-            builder.setMessage("Wil je nu bellen naar " + lunch?.handelaar?.telefoonnummer + "?")
+            builder.setTitle("Bellen naar " + lunchViewModel.getSelectedLunch().value?.handelaar?.handelsNaam)
+            builder.setMessage("Wil je nu bellen naar " + lunchViewModel.getSelectedLunch().value?.handelaar?.telefoonnummer + "?")
             builder.setPositiveButton("Nu bellen"
             ) { dialog, which ->
                 val phoneIntent = Intent(Intent.ACTION_DIAL)
-                phoneIntent.data = Uri.parse("tel:"+lunch?.handelaar?.telefoonnummer)
+                phoneIntent.data = Uri.parse("tel:"+lunchViewModel.getSelectedLunch().value?.handelaar?.telefoonnummer)
                 startActivity(phoneIntent)
             }
             builder.setNegativeButton("Annuleren"
@@ -88,10 +83,5 @@ class LunchDetailFragment : Fragment() {
         super.onPause()
 
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-    }
-
-    companion object {
-        const val ARG_ITEM_ID = "lunchItem"
-        const val BASE_URL: String = "https://www.lunchers.ml/"
     }
 }
