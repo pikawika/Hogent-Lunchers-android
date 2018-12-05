@@ -15,10 +15,20 @@ import javax.inject.Inject
  * Een [InjectedViewModel] klasse die alle lunches bevat.
  */
 class LunchViewModel : InjectedViewModel() {
+
+    /**
+     * De lijst van alle lunches die voldoen aan de zoekfilter
+     */
+    private val filteredLunches = MutableLiveData<List<Lunch>>()
+
+    /**
+     * De geselecteerde lunch
+     */
+    private val selectedLunch = MutableLiveData<Lunch>()
+
     /**
      * De lijst van alle lunches zoals die van de server gehaald is
      */
-    private val filteredLunches = MutableLiveData<List<Lunch>>()
     private var allLunches = listOf<Lunch>()
 
     /**
@@ -101,6 +111,20 @@ class LunchViewModel : InjectedViewModel() {
      */
     fun getFilteredLunches(): MutableLiveData<List<Lunch>> {
         return filteredLunches
+    }
+
+    /**
+     * returnt de lijst van alle lunches als MutableLiveData
+     */
+    fun getSelectedLunch(): MutableLiveData<Lunch> {
+        return selectedLunch
+    }
+
+    /**
+     * returnt de lijst van alle lunches als MutableLiveData
+     */
+    fun setSelectedLunch(lunchId: Int) {
+        selectedLunch.value = allLunches.firstOrNull { it.lunchId == lunchId }
     }
 
     /**

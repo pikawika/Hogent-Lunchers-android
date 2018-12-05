@@ -3,6 +3,7 @@ package hogent.be.lunchers.fragments
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.pm.PackageManager
+import android.databinding.DataBindingUtil
 import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -24,6 +25,9 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.models.Lunch
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
+import hogent.be.lunchers.databinding.FragmentGoogleMapsBinding
+import hogent.be.lunchers.databinding.FragmentProfileBinding
+import hogent.be.lunchers.databinding.PartialLunchCardBinding
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import java.io.InputStream
 
@@ -31,10 +35,15 @@ import java.io.InputStream
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     /**
-     * [MeetingViewModel] met de data van alle meetings
+     * [LunchViewModel] met de data over account
      */
     //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var lunchViewModel: LunchViewModel
+
+    /**
+     * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
+     */
+    private lateinit var binding: FragmentGoogleMapsBinding
 
     // Lateinit variabelen zijn standaard null, normaal mag dit niet mag in Kotlin
     // Er wordt echter vanuit gegaan dat ze in OnStart of OnResume of ... geinitialiseerd worden
@@ -43,17 +52,27 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     private lateinit var lastLocation: Location
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_google_maps, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_google_maps, container, false)
+
+        //viewmodel vullen
+        lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
+        lunchViewModel.resetFilteredLunches()
+
+        val rootView = binding.root
+        binding.lunchViewModel = lunchViewModel
+        binding.setLifecycleOwner(activity)
 
         // Een fragment voor de Google map
         val mapFragment = (childFragmentManager.findFragmentById(R.id.google_map)) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        //viewmodel vullen
-        lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
-        lunchViewModel.resetFilteredLunches()
         // Een variabele voor het gebruiken van de locatie van de gebruiker
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity())
+
+        activity!!.supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.google_map_selectedlunch, PartialLunchCardFragment())
+            .commit()
 
         return rootView
     }
@@ -67,7 +86,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         setUpMap()
     }
 
-    override fun onMarkerClick(marker: Marker?) = false
+    override fun onMarkerClick(clickedMarker: Marker?): Boolean {
+        lunchViewModel.setSelectedLunch(clickedMarker!!.title.toInt())
+        return true
+    }
 
     // Deze methode wordt opgeroepen nadat de app de gebruiker gevraagd heeft om de locatie permissie te geven
     // Indien de gebruiker permissie tot zijn/haar locatie heeft gegeven, wordt de methode setUpMap uitgevoerd
@@ -86,12 +108,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     // Deze methode plaatst markers op de map via de meegegeven latitude en longitude
     // Als je er op klikt verschijnt de naam en kan je ook via Google Maps navigatie starten
-    private fun placeMarkerOnMap(lat: Double, lng: Double, naam: String, beschrijving: String, imgUrl: String) {
+    private fun placeMarkerOnMap(lat: Double, lng: Double, id: String) {
 
         map.addMarker(
             MarkerOptions().position(LatLng(lat, lng))
-                .title(naam)
-                .snippet(beschrijving)
+                .title(id)
         )
     }
 
@@ -152,9 +173,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 placeMarkerOnMap(
                     it.handelaar.locatie.latitude,
                     it.handelaar.locatie.longitude,
-                    it.handelaar.handelsNaam,
-                    it.beschrijving,
-                    it.afbeeldingen[0].pad
+                    it.lunchId.toString()
                 )
             }
         }
