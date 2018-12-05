@@ -69,7 +69,7 @@ class AccountViewModel : InjectedViewModel() {
      * Functie voor het behandelen van het mislukken van het ophalen van data van de server
      */
     private fun onRetrieveError(error: Throwable) {
-        MessageUtil.showToast(error.message.toString())
+        MessageUtil.showToast("De gevraagde actie is mislukt. " + error.message.toString())
     }
 
     /**

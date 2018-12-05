@@ -25,6 +25,11 @@ interface NetworkComponent {
      */
     fun inject(lunchViewModel: LunchViewModel)
 
+    /**
+     * Doet dependency injection op de meegegeven AccountViewModel
+     *
+     * @param accountViewModel De [AccountViewModel] dat je wilt voorzien van dependency injection. Verplicht van type [AccountViewModel].
+     */
     fun inject(accountViewModel: AccountViewModel)
 
     //soortgelijke functies aanmaken voor alle andere injecties van models

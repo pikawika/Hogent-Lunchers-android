@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.databinding.FragmentProfileBinding
 import hogent.be.lunchers.viewmodels.AccountViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 
@@ -22,15 +23,17 @@ class ProfileFragment : Fragment() {
      * [AccountViewModel] met de data over account
      */
     //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
-    private lateinit var accountViewModel : AccountViewModel
+    private lateinit var accountViewModel: AccountViewModel
 
     /**
      * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
      */
     private lateinit var binding: FragmentProfileBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
@@ -63,7 +66,8 @@ class ProfileFragment : Fragment() {
 
 
     private fun afmelden() {
-       accountViewModel.afmelden()
+
+        accountViewModel.afmelden()
     }
 
     private fun setListeners(rootView: View) {
