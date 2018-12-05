@@ -3,6 +3,7 @@ package hogent.be.lunchers.networks
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.networks.requests.LoginRequest
 import hogent.be.lunchers.networks.requests.RegistreerGebruikerRequest
+import hogent.be.lunchers.networks.requests.ReservatieRequest
 import hogent.be.lunchers.networks.requests.WijzigWachtwoordRequest
 import hogent.be.lunchers.networks.responses.BerichtResponse
 import hogent.be.lunchers.networks.responses.TokenResponse
@@ -47,7 +48,6 @@ interface LunchersApi {
      */
     @POST("api/gebruiker//wijzigWachtwoord")
     fun changePassword(@Body wijzigWachtwoordRequest: WijzigWachtwoordRequest) : Observable<BerichtResponse>
-
 
 
 }

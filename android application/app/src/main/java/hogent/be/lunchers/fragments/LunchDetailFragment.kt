@@ -1,5 +1,7 @@
 package hogent.be.lunchers.fragments
 
+import android.Manifest
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +14,13 @@ import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.adapters.LunchAdapter.Companion.BASE_URL
 import hogent.be.lunchers.models.Lunch
 import kotlinx.android.synthetic.main.lunch_detail.view.*
+import android.content.DialogInterface
+import android.util.Log
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.support.v4.app.ActivityCompat
+
 
 class LunchDetailFragment : Fragment() {
 
@@ -46,6 +55,25 @@ class LunchDetailFragment : Fragment() {
                     .addToBackStack(null)
                     .commit()
         }
+
+        rootView.button_lunch_detail_bellen.setOnClickListener{
+            val builder = AlertDialog.Builder(activity)
+            builder.setCancelable(true)
+            builder.setTitle("Bellen naar " + lunch?.handelaar?.handelsNaam)
+            builder.setMessage("Wil je nu bellen naar " + lunch?.handelaar?.telefoonnummer + "?")
+            builder.setPositiveButton("Nu bellen"
+            ) { dialog, which ->
+                val phoneIntent = Intent(Intent.ACTION_DIAL)
+                phoneIntent.data = Uri.parse("tel:"+lunch?.handelaar?.telefoonnummer)
+                startActivity(phoneIntent)
+            }
+            builder.setNegativeButton("Annuleren"
+            ) { dialog, which -> dialog.cancel() }
+
+            val dialog = builder.create()
+            dialog.show()
+        }
+
 
         return rootView
     }

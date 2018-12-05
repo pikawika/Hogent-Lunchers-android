@@ -6,7 +6,8 @@
     <string name="lunch_tekst_beschrijving">Geniet van een lekkere Thaise lunch onder de middag. Deze maaltijd bestaat
         uit 4 kleine Thaise gerechten geserveerd met een kommetje kleefrijst.
     </string>
-    <string name="button_lunch_detail_tekst">Reserveren</string>
+    <string name="button_lunch_detail_tekst">Reserveren via app</string>
+    <string name="button_lunch_detail_tekst_bellen">Bellen</string>
     <string name="textview_lunch_detail_restaurant_tekst">Yok Tha</string>
     <string name="title_map">Kaart</string>
     <string name="title_list">Lijst</string>
