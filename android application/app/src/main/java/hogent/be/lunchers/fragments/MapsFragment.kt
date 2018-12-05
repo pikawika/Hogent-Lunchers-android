@@ -1,5 +1,7 @@
 package hogent.be.lunchers.fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -20,20 +22,19 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import hogent.be.lunchers.R
 import hogent.be.lunchers.models.Lunch
-import hogent.be.lunchers.network.NetworkApi
-import hogent.be.lunchers.utils.Utils
-import retrofit2.Call
-import retrofit2.Callback
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import java.io.IOException
+import hogent.be.lunchers.viewmodels.LunchViewModel
 import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+
+    /**
+     * [MeetingViewModel] met de data van alle meetings
+     */
+    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
+    private lateinit var lunchViewModel : LunchViewModel
 
     // Lateinit variabelen zijn standaard null, normaal mag dit niet mag in Kotlin
     // Er wordt echter vanuit gegaan dat ze in OnStart of OnResume of ... geinitialiseerd worden
@@ -47,6 +48,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         // Een fragment voor de Google map
         val mapFragment = (childFragmentManager.findFragmentById(R.id.google_map)) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        //viewmodel vullen
+        lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
 
         // Een variabele voor het gebruiken van de locatie van de gebruiker
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity())
@@ -126,27 +130,35 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     // Deze methode haalt alle lunches op en plaatst van iedere lunch de handelaar op de kaart
     private fun retrieveAllLunches() {
-        val apiService = NetworkApi.create()
-        val call = apiService.getAllLunches()
-        call.enqueue(object : Callback<List<Lunch>> {
-            override fun onResponse(call: Call<List<Lunch>>, response: retrofit2.Response<List<Lunch>>?) {
-                if (response != null) {
-                    val list: List<Lunch>? = response.body()
-                    if (list != null) {
-                        list.forEach {
-                            placeMarkerOnMap(it.handelaar.locatie.latitude, it.handelaar.locatie.longitude, it.handelaar.handelsNaam, it.beschrijving, it.afbeeldingen[0].pad)
-                        }
-                    } else {
-                        Utils.makeToast(context!!, getString(R.string.network_error))
-                    }
-                }
+        val list = lunchViewModel.getLunches()
+
+
+        list.observe(this, Observer {
+            putMarkersOnMap(list.value!!)
+        })
+    }
+
+    private fun putMarkersOnMap(lunches : List<Lunch>) {
+        if (lunches != null) {
+            lunches.forEach {
+                placeMarkerOnMap(
+                    it.handelaar.locatie.latitude,
+                    it.handelaar.locatie.longitude,
+                    it.handelaar.handelsNaam,
+                    it.beschrijving,
+                    it.afbeeldingen[0].pad
+                )
             }
+        }
+    }
+
 
             override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
                 Utils.makeToast(context!!, getString(R.string.network_error))
             }
         })
     }
+
 
     // Een companion object kan je zien als een statische variabele
     // In dit geval is het de request code die we proberen terug te krijgen

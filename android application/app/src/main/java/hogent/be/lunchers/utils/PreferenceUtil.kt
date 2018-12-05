@@ -6,22 +6,20 @@ import android.support.annotation.RequiresApi
 import android.util.Base64.DEFAULT
 import android.util.Base64.decode
 import android.util.Log
-import com.google.gson.Gson
-import hogent.be.lunchers.models.Gebruiker
+import hogent.be.lunchers.activities.MainActivity
 import java.io.UnsupportedEncodingException
 import java.nio.charset.Charset
-import java.util.*
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 
 
-class PreferenceUtil(context: Context) {
+class PreferenceUtil() {
 
     val PREFERENCES_NAME = "lunchersPreferences"
     val PREFERENCE_TOKEN = "lunchersToken"
+    val PREFERENCE_GEBRUIKERSNAAM = "lunchersGebruikersnaam"
+    private val CONTEXT = MainActivity.getContext()
 
 
-    var sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
+    private val sharedPreferences = CONTEXT.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
 
     fun getToken() : String {
         return sharedPreferences.getString(PREFERENCE_TOKEN, "")
@@ -31,14 +29,21 @@ class PreferenceUtil(context: Context) {
         sharedPreferences.edit().putString(PREFERENCE_TOKEN, token).apply()
     }
 
+    fun getGebruikersnaam() : String {
+        return sharedPreferences.getString(PREFERENCE_GEBRUIKERSNAAM, "")
+    }
 
-    fun deleteToken() {
+    fun setGebruikersnaam(gebruikersnaam : String) {
+        sharedPreferences.edit().putString(PREFERENCE_GEBRUIKERSNAAM, gebruikersnaam).apply()
+    }
+
+    fun deletePreferences() {
         sharedPreferences.edit().putString(PREFERENCE_TOKEN, "").apply()
+        sharedPreferences.edit().putString(PREFERENCE_GEBRUIKERSNAAM, "").apply()
     }
 
-    private fun checkToken(token:String){
 
-    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getTokenId(token:String){
@@ -46,13 +51,10 @@ class PreferenceUtil(context: Context) {
         var text1: String? = null
         try {
             text1 = String(data1, Charset.defaultCharset())
-            val parser = JsonParser()
             Log.e("TOKEN as JSON STRING",text1)
         } catch (e: UnsupportedEncodingException) {
             e.printStackTrace()
         }
-
-
     }
 
 }

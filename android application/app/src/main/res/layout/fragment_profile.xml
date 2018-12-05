@@ -1,63 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    android:gravity="center"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.ProfileFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+                name="accountViewModel"
+                type="hogent.be.lunchers.viewmodels.AccountViewModel"/>
+    </data>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/usernameTextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Jodi De Loof"
-        android:textSize="30dp"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_hallo"
+                android:textSize="30dp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
         />
 
-    <TextView
-        android:id="@+id/telephoneTextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+32 498 74 03 93"/>
+        <TextView
+                android:id="@+id/usernameTextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{accountViewModel.getGebruikersnaam()}"
+                android:textSize="30dp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_marginBottom="40dp"
+        />
 
-    <TextView
-        android:id="@+id/emailTextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="jodi@jodideloof.be"
-        android:layout_marginBottom="20dp"/>
+        <Button
+                android:id="@+id/buttonChangePassword"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="Wachtwoord wijzigen"
+                android:background="@color/lightGrey"
+                android:layout_marginBottom="20dp"/>
 
-    <Button
-        android:id="@+id/buttonChangePassword"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:text="Wachtwoord wijzigen"
-        android:background="@color/lightGrey"
-        android:layout_marginBottom="20dp"/>
+        <Button
+                android:id="@+id/buttonReservations"
+                android:layout_width="300dp"
+                android:textColor="#000"
+                android:layout_height="wrap_content"
+                android:text="Mijn Reservaties"
+                android:background="@color/lightGrey"
+                android:layout_marginBottom="20dp"/>
 
-    <Button
-        android:id="@+id/buttonReservations"
-        android:layout_width="300dp"
-        android:textColor="#000"
-        android:layout_height="wrap_content"
-        android:text="Mijn Reservaties"
-        android:background="@color/lightGrey"
-        android:layout_marginBottom="20dp"/>
+        <Button
+                android:id="@+id/buttonLogout"
+                android:layout_width="300dp"
+                android:textColor="#000"
+                android:layout_height="wrap_content"
+                android:text="Afmelden"
+                android:background="@color/lightGrey"
+                android:layout_marginBottom="20dp"/>
+    </LinearLayout>
 
-    <Button
-            android:id="@+id/buttonLogout"
-            android:layout_width="300dp"
-            android:textColor="#000"
-            android:layout_height="wrap_content"
-            android:text="Afmelden"
-            android:background="@color/lightGrey"
-            android:layout_marginBottom="20dp"/>
-
-
-</LinearLayout>
+</layout>

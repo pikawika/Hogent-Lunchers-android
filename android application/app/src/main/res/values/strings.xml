@@ -12,7 +12,9 @@
     <string name="title_list">Lijst</string>
     <string name="title_profile">Profiel</string>
     <string name="title_activity_maps">Map</string>
-    <string name="network_error">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw te proberen.</string>
+    <string name="network_error">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw
+        te proberen.
+    </string>
 
     <!-- account string -->
     <string name="account_placeholder_gebruikersnaam">Gebruikersnaam</string>
@@ -25,5 +27,14 @@
     <string name="button_login">Aanmelden</string>
     <string name="button_registreer">Registreer</string>
     <string name="button_nog_geen_account">Nog geen account? Registreer gratis!</string>
-<string name="button_reeds_eeen_account">Reeds een account? Meld aan!</string>
+    <string name="text_hallo">Hallo</string>
+    <string name="button_reeds_eeen_account">Reeds een account? Meld aan!</string>
+
+    <!-- wijzig ww -->
+    <string name="changepw_title">Wachtwoord Wijzigen</string>
+    <string name="changepw_oldpw">Oud wachtwoord</string>
+    <string name="changepw_newpw">Nieuw wachtwoord</string>
+    <string name="changepw_newpwconfirm">Bevestig nieuw wachtwoord</string>
+    <string name="changepw_confirmbutton">Wijzig wachtwoord</string>
+
 </resources>

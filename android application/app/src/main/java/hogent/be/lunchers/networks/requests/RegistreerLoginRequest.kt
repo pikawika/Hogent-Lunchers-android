@@ -1,4 +1,4 @@
-package hogent.be.lunchers.networkRequests
+package hogent.be.lunchers.networks.requests
 
 data class RegistreerLoginRequest(
     val gebruikersnaam: String,
