@@ -68,7 +68,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         // Een variabele voor het gebruiken van de locatie van de gebruiker
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity())
 
-        activity!!.supportFragmentManager
+        childFragmentManager
             .beginTransaction()
             .replace(R.id.google_map_selectedlunch, PartialLunchCardFragment())
             .commit()

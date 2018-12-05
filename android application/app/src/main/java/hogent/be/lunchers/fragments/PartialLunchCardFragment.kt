@@ -42,7 +42,7 @@ class PartialLunchCardFragment : Fragment() {
 
     private fun setListeners(rootView: View) {
         rootView.setOnClickListener {
-            fragmentManager!!.beginTransaction()
+            activity!!.supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, LunchDetailFragment())
                 .addToBackStack(null)
                 .commit()
