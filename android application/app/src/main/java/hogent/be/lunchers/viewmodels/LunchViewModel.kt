@@ -1,7 +1,6 @@
 package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
-import android.util.Log
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.models.*
 import hogent.be.lunchers.networks.LunchersApi
@@ -19,7 +18,7 @@ class LunchViewModel : InjectedViewModel() {
     /**
      * De lijst van alle lunches zoals die van de server gehaald is
      */
-    private val lunchList = MutableLiveData<List<Lunch>>()
+    private val filteredLunches = MutableLiveData<List<Lunch>>()
     private var allLunches = listOf<Lunch>()
 
     /**
@@ -35,7 +34,7 @@ class LunchViewModel : InjectedViewModel() {
 
     init {
         //initieel vullen met een lege lijst zodat dit niet nul os
-        lunchList.value = emptyList()
+        filteredLunches.value = emptyList()
         getAllLunchesSubscription = lunchersApi.getAllLunches()
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
@@ -85,8 +84,8 @@ class LunchViewModel : InjectedViewModel() {
      * Zal de lijst van meetings gelijkstellen met het results
      */
     private fun onRetrieveAllLunchesSuccess(result: List<Lunch>) {
-        allLunches = result;
-        lunchList.value = result
+        allLunches = result
+        filteredLunches.value = result
     }
 
     /**
@@ -100,15 +99,15 @@ class LunchViewModel : InjectedViewModel() {
     /**
      * returnt de lijst van alle lunches als MutableLiveData
      */
-    fun getLunches(): MutableLiveData<List<Lunch>> {
-        return lunchList
+    fun getFilteredLunches(): MutableLiveData<List<Lunch>> {
+        return filteredLunches
     }
 
     /**
      * Resets de gefilterde lunchlist terug naar alle lunches
      */
-    fun resetLunches(){
-        lunchList.value = allLunches
+    fun resetFilteredLunches(){
+        filteredLunches.value = allLunches
     }
 
     /**
@@ -132,7 +131,7 @@ class LunchViewModel : InjectedViewModel() {
      * zoekt met searchstring op naam, beschrijvng, ingredienten en tags
      */
     fun search(searchString:String){
-        lunchList.value = SearchUtil().searchLunch(searchString, allLunches)
+        filteredLunches.value = SearchUtil().searchLunch(searchString, allLunches)
     }
 
 }

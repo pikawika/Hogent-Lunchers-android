@@ -51,7 +51,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
         //viewmodel vullen
         lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
-
+        lunchViewModel.resetFilteredLunches()
         // Een variabele voor het gebruiken van de locatie van de gebruiker
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity())
 
@@ -138,7 +138,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     // Deze methode haalt alle lunches op en plaatst van iedere lunch de handelaar op de kaart
     private fun retrieveAllLunches() {
-        val list = lunchViewModel.getLunches()
+        val list = lunchViewModel.getFilteredLunches()
 
 
         list.observe(this, Observer {

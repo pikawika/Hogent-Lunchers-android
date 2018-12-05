@@ -12,10 +12,8 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.adapters.LunchAdapter
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.lunch_list.*
 import kotlinx.android.synthetic.main.lunch_list.view.*
-import android.databinding.adapters.TextViewBindingAdapter.setText
 import android.text.Editable
 import android.text.TextWatcher
 
@@ -45,7 +43,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         //lijst vullen met lunches uit viewmodel.
         //We doen niet direct .value maar behouden het als mutueablelivedata mits we hier op willen op observen
-        val lunches = lunchViewModel.getLunches()
+        val lunches = lunchViewModel.getFilteredLunches()
 
         //adapter aanmaken
         lunchAdapter = LunchAdapter(this.requireActivity() as MainActivity, lunches, twoPane)
@@ -60,7 +58,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             override fun afterTextChanged(s: Editable) {}
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                lunchViewModel.resetLunches()
+                lunchViewModel.resetFilteredLunches()
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -80,7 +78,6 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun retrieveAllLunches() {
-        // TODO: implementeren herladen
         lunchViewModel.refreshLunches()
         swipe_refresh_layout?.isRefreshing = false
     }
