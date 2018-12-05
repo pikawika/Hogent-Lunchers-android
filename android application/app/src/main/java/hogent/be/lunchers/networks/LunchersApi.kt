@@ -5,6 +5,7 @@ import hogent.be.lunchers.networks.requests.LoginRequest
 import hogent.be.lunchers.networks.requests.RegistreerGebruikerRequest
 import hogent.be.lunchers.networks.requests.ReservatieRequest
 import hogent.be.lunchers.networks.requests.WijzigWachtwoordRequest
+import hogent.be.lunchers.networks.responses.BerichtResponse
 import hogent.be.lunchers.networks.responses.TokenResponse
 import io.reactivex.Observable
 import retrofit2.http.Body
@@ -46,7 +47,7 @@ interface LunchersApi {
      * zijn wachtwoord wilt wijzigen
      */
     @POST("api/gebruiker//wijzigWachtwoord")
-    fun changePassword(@Header("Authorization") token: String, @Body wijzigWachtwoordRequest: WijzigWachtwoordRequest) : Observable<String>
+    fun changePassword(@Body wijzigWachtwoordRequest: WijzigWachtwoordRequest) : Observable<BerichtResponse>
 
 
 }

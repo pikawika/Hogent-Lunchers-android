@@ -15,6 +15,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 import com.squareup.moshi.Moshi
 import hogent.be.lunchers.extensions.DateParser
+import hogent.be.lunchers.utils.PreferenceUtil
+import okhttp3.Interceptor
 import java.util.*
 
 
@@ -73,10 +75,22 @@ object NetworkModule {
             this.level = HttpLoggingInterceptor.Level.BODY
         }
 
+        val authInterceptor : Interceptor = Interceptor { chain ->
+            val accessToken = PreferenceUtil().getToken()
+
+            chain.proceed(
+                chain.request().newBuilder()
+                    .addHeader("Authorization", "Bearer $accessToken")
+                    .build()
+            )
+        }
+
         return OkHttpClient.Builder().apply {
             addInterceptor(interceptor)
+            addInterceptor(authInterceptor)
         }.build()
     }
+
 
 
 

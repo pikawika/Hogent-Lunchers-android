@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
+import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_change_passord.*
@@ -31,6 +32,18 @@ class ChangePasswordFragment : Fragment() {
         setListeners(rootView)
 
         return rootView
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     private fun setListeners(fragment: View) {

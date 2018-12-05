@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_registreer.*
 import kotlinx.android.synthetic.main.fragment_registreer.view.*
 
@@ -36,11 +37,10 @@ class RegistreerFragment : Fragment() {
 
         //indien aangemeld naar lijst gaan
         aangemeld.observe(this, Observer {
-            if (aangemeld.value!!) {
-                parentActivity.supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, LunchListFragment())
-                    .commit()
+            if (aangemeld.value == true) {
+                //simuleert een button click op lijst om er voor te zorgen dat juiste
+                //item actief is + zet fragment etc automatisch juist
+                parentActivity.bottom_navigation_view.selectedItemId = R.id.action_list
             }
         })
 
