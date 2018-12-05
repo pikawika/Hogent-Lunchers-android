@@ -112,6 +112,23 @@ class LunchViewModel : InjectedViewModel() {
     }
 
     /**
+    * Lunches opnieuw ophalen om te refreshen
+    */
+    fun refreshLunches(){
+        getAllLunchesSubscription = lunchersApi.getAllLunches()
+            //we tell it to fetch the data on background by
+            .subscribeOn(Schedulers.io())
+            //we like the fetched data to be displayed on the MainTread (UI)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveStart() }
+            .doOnTerminate { onRetrieveFinish() }
+            .subscribe(
+                { result -> onRetrieveAllLunchesSuccess(result) },
+                { error -> onRetrieveError(error) }
+            )
+    }
+
+    /**
      * zoekt met searchstring op naam, beschrijvng, ingredienten en tags
      */
     fun search(searchString:String){
