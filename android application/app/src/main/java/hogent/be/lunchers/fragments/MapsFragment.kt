@@ -34,7 +34,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
      * [MeetingViewModel] met de data van alle meetings
      */
     //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
-    private lateinit var lunchViewModel : LunchViewModel
+    private lateinit var lunchViewModel: LunchViewModel
 
     // Lateinit variabelen zijn standaard null, normaal mag dit niet mag in Kotlin
     // Er wordt echter vanuit gegaan dat ze in OnStart of OnResume of ... geinitialiseerd worden
@@ -86,19 +86,21 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     // Deze methode plaatst markers op de map via de meegegeven latitude en longitude
     // Als je er op klikt verschijnt de naam en kan je ook via Google Maps navigatie starten
-    private fun placeMarkerOnMap(lat: Double, lng: Double, naam: String, beschrijving:String, imgUrl:String) {
+    private fun placeMarkerOnMap(lat: Double, lng: Double, naam: String, beschrijving: String, imgUrl: String) {
 
-        map.addMarker(MarkerOptions().position(LatLng(lat, lng))
+        map.addMarker(
+            MarkerOptions().position(LatLng(lat, lng))
                 .title(naam)
-                .snippet(beschrijving))
+                .snippet(beschrijving)
+        )
     }
 
     private fun getBitmapFromURL(src: String): Bitmap? {
-        var bmp:Bitmap? = null
+        var bmp: Bitmap? = null
         try {
-            val input:InputStream = java.net.URL(src).openStream()
+            val input: InputStream = java.net.URL(src).openStream()
             bmp = BitmapFactory.decodeStream(input)
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             Log.e("Error", e.message)
             e.printStackTrace()
         }
@@ -109,9 +111,15 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     private fun setUpMap() {
         // De gebruiker toestemming vragen voor zijn/haar locatie te gebruiken
         // Momenteel is het nog zo dat na het toestemming geven de app nog eens opnieuw opgestart moet worden
-        if (checkSelfPermission(this.requireContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        if (checkSelfPermission(
+                this.requireContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
             return
         }
 
@@ -138,7 +146,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         })
     }
 
-    private fun putMarkersOnMap(lunches : List<Lunch>) {
+    private fun putMarkersOnMap(lunches: List<Lunch>) {
         if (lunches != null) {
             lunches.forEach {
                 placeMarkerOnMap(
@@ -151,15 +159,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             }
         }
     }
-
-
-            override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
-                Utils.makeToast(context!!, getString(R.string.network_error))
-            }
-        })
-    }
-
-
+    
     // Een companion object kan je zien als een statische variabele
     // In dit geval is het de request code die we proberen terug te krijgen
     companion object {
