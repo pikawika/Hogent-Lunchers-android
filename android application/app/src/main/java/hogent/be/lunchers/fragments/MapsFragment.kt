@@ -47,7 +47,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
         // Een fragment voor de Google map
         val mapFragment = (childFragmentManager.findFragmentById(R.id.google_map)) as SupportMapFragment
-        fragmentManager?.beginTransaction()?.replace(R.id.google_map, mapFragment)?.commit()
         mapFragment.getMapAsync(this)
 
         //viewmodel vullen
@@ -123,7 +122,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13f))
-                //placesTest(location.latitude, location.longitude)
             }
         }
 
@@ -133,6 +131,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     // Deze methode haalt alle lunches op en plaatst van iedere lunch de handelaar op de kaart
     private fun retrieveAllLunches() {
         val list = lunchViewModel.getLunches()
+
 
         list.observe(this, Observer {
             putMarkersOnMap(list.value!!)
@@ -152,6 +151,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             }
         }
     }
+
+
+            override fun onFailure(call: Call<List<Lunch>>, t: Throwable) {
+                Utils.makeToast(context!!, getString(R.string.network_error))
+            }
+        })
+    }
+
 
     // Een companion object kan je zien als een statische variabele
     // In dit geval is het de request code die we proberen terug te krijgen
