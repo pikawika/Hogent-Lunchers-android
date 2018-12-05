@@ -132,6 +132,7 @@ class LunchViewModel : InjectedViewModel() {
      */
     fun resetFilteredLunches(){
         filteredLunches.value = allLunches
+        selectedLunch.value = null
     }
 
     /**
