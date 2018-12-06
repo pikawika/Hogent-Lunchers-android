@@ -6,7 +6,6 @@
     <string name="lunch_tekst_beschrijving">Geniet van een lekkere Thaise lunch onder de middag. Deze maaltijd bestaat
         uit 4 kleine Thaise gerechten geserveerd met een kommetje kleefrijst.
     </string>
-    <string name="button_lunch_detail_tekst">Reserveren via app</string>
     <string name="textview_lunch_locatie">Arbeidstraat 14, 9300 Aalst</string>
     <string name="button_lunch_detail_tekst_bellen">Bellen</string>
     <string name="textview_lunch_detail_restaurant_tekst">Yok Tha</string>
@@ -17,6 +16,9 @@
     <string name="network_error">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw
         te proberen.
     </string>
+
+    <!-- lunch_detail-->
+    <string name="button_lunch_detail_tekst">Reserveer een lunch</string>
 
     <!-- account string -->
     <string name="account_placeholder_gebruikersnaam">Gebruikersnaam</string>
@@ -41,5 +43,15 @@
 
     <!-- wijzig ww -->
     <string name="reservatie_titel">Reservatie van</string>
+
+    <!-- search hint -->
+    <string name="lunch_list_fragment_search_hint">Zoeken</string>
+
+    <!-- thank-you screen -->
+    <string name="thank_you_fragment_thank_you_message">Bedankt!</string>
+    <string name="thank_you_fragment_bevestiging_reservatie">Je reservatie is geplaatst! De handelaar laat jou weten van
+        zodra je reservatie bevestigd is.
+    </string>
+    <string name="thank_you_fragment_back_button">Terug</string>
 
 </resources>

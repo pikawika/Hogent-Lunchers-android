@@ -18,7 +18,7 @@
         android:layout_marginBottom="8dp"
         android:background="@color/lightGrey"
         android:ems="10"
-        android:hint="Zoeken"
+        android:hint="@string/lunch_list_fragment_search_hint"
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/swipe_refresh_layout"
