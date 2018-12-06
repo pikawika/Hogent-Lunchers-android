@@ -57,6 +57,7 @@ class ReservationFragment : Fragment() {
         lunchViewModel = ViewModelProviders.of(activity!!).get(LunchViewModel::class.java)
         reservationViewModel = ViewModelProviders.of(activity!!).get(ReservationViewModel::class.java)
 
+        reservationViewModel.clear()
         reservationViewModel.setSelectedLunch(lunchViewModel.getSelectedLunch().value!!)
 
         val gereserveerd = reservationViewModel.getGereserveerd()

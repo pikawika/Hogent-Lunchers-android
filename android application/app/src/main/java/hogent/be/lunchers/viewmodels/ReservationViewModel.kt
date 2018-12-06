@@ -16,6 +16,7 @@ import io.reactivex.schedulers.Schedulers
 import java.text.DecimalFormat
 import java.util.Date
 import javax.inject.Inject
+import kotlin.math.min
 
 /**
  * Een [InjectedViewModel] klasse die de reservaties behandeld.
@@ -150,6 +151,16 @@ class ReservationViewModel : InjectedViewModel() {
 
     fun getGereserveerd() : MutableLiveData<Boolean> {
         return gereserveerd
+    }
+
+    fun clear() {
+        year = -1
+        day = -1
+        month = -1
+        hour = -1
+        minute = -1
+        amount = -1
+        gereserveerd.value = false
     }
 
 }
