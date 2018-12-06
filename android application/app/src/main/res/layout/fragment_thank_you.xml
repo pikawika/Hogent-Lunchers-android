@@ -29,7 +29,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Je reservatie voor xxxxxx op xx/xx/xxxx om xx:xx werd geplaatst"
+        android:text="Je reservatie is geplaatst! De handelaar laat jou weten van zodra je reservatie bevestigd is."
         android:textAlignment="center"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

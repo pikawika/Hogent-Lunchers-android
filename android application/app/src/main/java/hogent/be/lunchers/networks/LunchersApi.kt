@@ -49,5 +49,13 @@ interface LunchersApi {
     @POST("api/gebruiker//wijzigWachtwoord")
     fun changePassword(@Body wijzigWachtwoordRequest: WijzigWachtwoordRequest) : Observable<BerichtResponse>
 
+    /**
+     * Reserveert een lunch
+     *
+     * @param reservatieRequest een [ReservatieRequest] object met de nodige gegevens voor reservatie
+     */
+    @POST("api/reservatie")
+    fun reserveer(@Body reservatieRequest: ReservatieRequest) : Observable<BerichtResponse>
+
 
 }

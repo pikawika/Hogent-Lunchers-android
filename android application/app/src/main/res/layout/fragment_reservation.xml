@@ -1,90 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical" android:gravity="center" xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.ReservationFragment"
-              android:layout_margin="20dp"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+                name="reservationViewModel"
+                type="hogent.be.lunchers.viewmodels.ReservationViewModel"/>
+    </data>
+
+    <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".fragments.ReservationFragment"
+            android:layout_margin="20dp"
     >
 
 
-    <TextView
-            android:id="@+id/reserveren_title"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="Reserveren voor 'Bedrijf'"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kies een datum"
-        android:textSize="15dp"
-        android:layout_marginBottom="10dp"
-        android:textStyle="bold"/>
+        <TextView
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/reservatie_titel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="@{reservationViewModel.getSelectedLunch().naam}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kies een datum"
+                android:textSize="15dp"
+                android:layout_marginBottom="10dp"
+                android:textStyle="bold"/>
 
-    <Button
-        android:id="@+id/datePickerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="Datum kiezen"
-        android:textColor="#000"
-        android:background="@color/lightGrey"
+        <Button
+                android:id="@+id/reserveren_datePicker_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="Datum kiezen"
+                android:textColor="#000"
+                android:background="@color/lightGrey"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kies een tijd"
-        android:layout_marginBottom="10dp"
-        android:textSize="15dp"
-        android:textStyle="bold"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kies een tijd"
+                android:layout_marginBottom="10dp"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
 
-    <Button
-        android:id="@+id/timePickerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="Tijd kiezen"
-        android:textColor="#000"
-        android:background="@color/lightGrey"/>
-
-
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:hint="Aantal"
-            android:id="@+id/aantalInput"/>
-    <EditText
-            android:id="@+id/opmerkingenInput"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginBottom="30dp"
-            android:ems="10"
-            android:hint="Opmerkingen"
-            android:inputType="textMultiLine"/>
-
-    <Button
-        android:id="@+id/reserveren_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reserveren"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white" />
-
-    <Button
-        android:id="@+id/annuleerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Annuleren"
-        android:background="@color/lightGrey"
-        android:textColor="#000"/>
+        <Button
+                android:id="@+id/reserveren_timePicker_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="Tijd kiezen"
+                android:textColor="#000"
+                android:background="@color/lightGrey"/>
 
 
-</LinearLayout>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:hint="Aantal"
+                android:id="@+id/reserveren_aantal_text"/>
+
+        <Button
+                android:id="@+id/reserveren_submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reserveren"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/white"/>
+
+        <Button
+                android:id="@+id/reserveren_cancel_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Annuleren"
+                android:background="@color/lightGrey"
+                android:textColor="#000"/>
+
+
+    </LinearLayout>
+</layout>
