@@ -39,4 +39,7 @@
     <string name="changepw_newpwconfirm">Bevestig nieuw wachtwoord</string>
     <string name="changepw_confirmbutton">Wijzig wachtwoord</string>
 
+    <!-- wijzig ww -->
+    <string name="reservatie_titel">Reservatie van</string>
+
 </resources>

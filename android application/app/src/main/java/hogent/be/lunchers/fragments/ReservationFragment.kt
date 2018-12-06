@@ -4,25 +4,24 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
-import android.net.Uri
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
-import hogent.be.lunchers.viewmodels.AccountViewModel
+import hogent.be.lunchers.databinding.FragmentProfileBinding
+import hogent.be.lunchers.databinding.FragmentReservationBinding
+import hogent.be.lunchers.utils.MessageUtil
+import hogent.be.lunchers.viewmodels.LunchViewModel
 import hogent.be.lunchers.viewmodels.ReservationViewModel
 import kotlinx.android.synthetic.main.fragment_reservation.*
 import kotlinx.android.synthetic.main.fragment_reservation.view.*
-import kotlinx.android.synthetic.main.lunch_detail.view.*
-import java.util.*
+import android.arch.lifecycle.Observer
+import java.util.Calendar
 
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val LUNCH_ID = "the id for placing the reservation"
-private const val LUNCH_NAME = "the name for the string that is shown on screen"
-
+@Suppress("DEPRECATION")
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
@@ -34,109 +33,120 @@ private const val LUNCH_NAME = "the name for the string that is shown on screen"
  */
 class ReservationFragment : Fragment() {
 
-    private var lunchID: Int? = null
-    private var lunchName: String? = null
-    private lateinit var reservationViewModel : ReservationViewModel
+    private lateinit var reservationViewModel: ReservationViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            lunchID = it.getInt(LUNCH_ID)
-            lunchName = it.getString(LUNCH_NAME)
-        }
+    /**
+     * [LunchViewModel] met de data over account
+     */
+    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
+    private lateinit var lunchViewModel: LunchViewModel
 
+    /**
+     * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
+     */
+    private lateinit var binding: FragmentReservationBinding
 
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_reservation, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_reservation, container, false)
+
+        //viewmodel vullen
+        lunchViewModel = ViewModelProviders.of(activity!!).get(LunchViewModel::class.java)
         reservationViewModel = ViewModelProviders.of(activity!!).get(ReservationViewModel::class.java)
 
+        reservationViewModel.clear()
+        reservationViewModel.setSelectedLunch(lunchViewModel.getSelectedLunch().value!!)
 
-        rootView.reserveren_title.text = lunchName +" reserveren"
+        val gereserveerd = reservationViewModel.getGereserveerd()
 
-        val c = Calendar.getInstance()
-        val day = c.get(Calendar.DAY_OF_MONTH)
-        var month = c.get(Calendar.MONTH)
-        val year = c.get(Calendar.YEAR)
-
-        val hh = c.get(Calendar.HOUR_OF_DAY)
-        val mm = c.get(Calendar.MINUTE)
-
-        rootView.datePickerButton.setOnClickListener{
-
-
-            val dpd = DatePickerDialog(activity,android.R.style.Theme_Holo_Light_Dialog, DatePickerDialog.OnDateSetListener{
-                datePicker, _year, _month, _day ->
-                var _right_month = _month+1
-                rootView.datePickerButton.text = "$_day/$_right_month/$_year"
-            },year,month,day)
-
-            //datepicker tonen
-            dpd.show()
-        }
-
-        rootView.timePickerButton.setOnClickListener{
-            val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker, hour, min ->
-                c.set(Calendar.HOUR_OF_DAY, hour)
-                c.set(Calendar.MINUTE, min)
-
-                rootView.timePickerButton.text = "$hour:$min"
+        gereserveerd.observe(this, Observer {
+            if (gereserveerd.value == true) {
+                activity!!.supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, ThankYouFragment())
+                    .commit()
             }
-            TimePickerDialog(activity,timeSetListener, hh, mm, true).show()
-        }
+        })
 
+        val rootView = binding.root
+        binding.reservationViewModel = reservationViewModel
+        binding.setLifecycleOwner(activity)
 
-        rootView.reserveren_button.setOnClickListener{
+        initListeners(rootView)
 
-                val builder = AlertDialog.Builder(activity)
-                builder.setCancelable(true)
-                builder.setTitle("Bevestigen")
-                builder.setMessage("Bevestig dat je ${lunchName} wenst te reserveren.")
-                builder.setPositiveButton("Reserveren"
-                ) { dialog, which ->
-                    //check valid input
-
-                    reservationViewModel.reserveer(lunchID!!, rootView.aantalInput.text.toString().toInt())
-
-                    fragmentManager!!.beginTransaction()
-                        .replace(R.id.fragment_container, ThankYouFragment.newInstance(
-                            lunchID!!,lunchName!!,
-                            "$day/$month/$year",
-                            "$hh:$mm"))
-                        .addToBackStack(null)
-                        .commit()
-                }
-                builder.setNegativeButton("Annuleren"
-                ) { dialog, which -> dialog.cancel() }
-
-                val dialog = builder.create()
-                dialog.show()
-
-
-
-
-
-
-        }
-
-        rootView.annuleerButton.setOnClickListener{
-            fragmentManager!!.popBackStackImmediate()
-        }
         return rootView
     }
 
+    private fun initListeners(rootView: View) {
+        rootView.reserveren_submit_button.setOnClickListener {
+            reserveren()
+        }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(id: Int, name: String) =
-                ReservationFragment().apply {
-                    arguments = Bundle().apply {
-                        putInt(LUNCH_ID, id)
-                        putString(LUNCH_NAME, name)
-                    }
-                }
+        rootView.reserveren_cancel_button.setOnClickListener {
+            activity!!.supportFragmentManager.popBackStackImmediate()
+        }
+
+        rootView.reserveren_datePicker_button.setOnClickListener {
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+
+            val dpd =
+                DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    reservationViewModel.year = year
+                    reservationViewModel.month = monthOfYear + 1
+                    reservationViewModel.day = dayOfMonth
+                    rootView.reserveren_datePicker_button.text = "$day/$month/$year"
+                }, year, month, day)
+            dpd.show()
+        }
+
+        rootView.reserveren_timePicker_button.setOnClickListener {
+            val c = Calendar.getInstance()
+
+            val hh = c.get(Calendar.HOUR_OF_DAY)
+            val mm = c.get(Calendar.MINUTE)
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, min ->
+                reservationViewModel.hour = hour
+                reservationViewModel.minute = min
+
+                rootView.reserveren_timePicker_button.text = "$hour:$min"
+            }
+            TimePickerDialog(activity, timeSetListener, hh, mm, true).show()
+        }
+    }
+
+    private fun reserveren() {
+        if (reserveren_aantal_text.text.toString().toIntOrNull() != null)
+            reservationViewModel.amount = reserveren_aantal_text.text.toString().toInt()
+
+        if (reservationViewModel.valid()) {
+            val builder = AlertDialog.Builder(activity)
+            builder.setCancelable(true)
+            builder.setTitle("Bevestig reservatie")
+            builder.setMessage("Bevestig dat je ${reservationViewModel.amount} keer ${reservationViewModel.getSelectedLunch().value!!.naam} wenst te reserveren op ${reservationViewModel.day}/${reservationViewModel.month}/${reservationViewModel.year}.")
+            builder.setPositiveButton(
+                "Reserveren"
+            ) { dialog, which ->
+                //op ja geklikt
+                reservationViewModel.reserveer()
+
+            }
+            builder.setNegativeButton(
+                "Annuleren"
+            ) { dialog, which -> dialog.cancel() }
+
+            val dialog = builder.create()
+            dialog.show()
+        }
+        else{
+            MessageUtil.showToast("formulier niet volledig of incorrect ingevuld")
+        }
+
     }
 }
