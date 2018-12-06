@@ -8,6 +8,7 @@ import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.networks.requests.ReservatieRequest
 import hogent.be.lunchers.networks.requests.WijzigWachtwoordRequest
 import hogent.be.lunchers.networks.responses.BerichtResponse
+import hogent.be.lunchers.utils.DateUtil
 import hogent.be.lunchers.utils.MessageUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -36,6 +37,11 @@ class ReservationViewModel : InjectedViewModel() {
      * De geselecteerde lunch
      */
     private val lunch = MutableLiveData<Lunch>()
+
+    /**
+     * Specifieerd of de lunch al dan niet gereserveerd is
+     */
+    private val gereserveerd = MutableLiveData<Boolean>()
 
     /**
      * jaar
@@ -85,16 +91,15 @@ class ReservationViewModel : InjectedViewModel() {
         return year != -1 && month != -1 && day != -1 && hour != -1 && minute != -1 && amount > 0
     }
 
-    private fun makeDate() : String{
-
-        return year.toString() + "-" + DecimalFormat("00").format(month).toString() + "-" + DecimalFormat("00").format(day).toString() + "T" + DecimalFormat("00").format(hour).toString() + ":" + DecimalFormat("00").format(minute).toString() + ":00"
+    private fun makeJsonDate() : String{
+        return DateUtil().formatDateForJson(year,month,day,hour,minute)
     }
 
     /**
      * Veranderd het wachtwoord van de gebruiker
      */
     fun reserveer() {
-        registreerSubscription = lunchersApi.reserveer(ReservatieRequest(lunch.value!!.lunchId, amount, makeDate()))
+        registreerSubscription = lunchersApi.reserveer(ReservatieRequest(lunch.value!!.lunchId, amount, makeJsonDate()))
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
             //we like the fetched data to be displayed on the MainTread (UI)
@@ -140,7 +145,11 @@ class ReservationViewModel : InjectedViewModel() {
      * zal token instellen en opslaan, en aangemeld in de VM op true zetten
      */
     private fun onRetrieveReserveerSuccess(result: BerichtResponse) {
-        MessageUtil.showToast(result.bericht)
+        gereserveerd.value = true
+    }
+
+    fun getGereserveerd() : MutableLiveData<Boolean> {
+        return gereserveerd
     }
 
 }

@@ -7,12 +7,10 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
-import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.databinding.FragmentProfileBinding
 import hogent.be.lunchers.databinding.FragmentReservationBinding
 import hogent.be.lunchers.utils.MessageUtil
@@ -20,8 +18,8 @@ import hogent.be.lunchers.viewmodels.LunchViewModel
 import hogent.be.lunchers.viewmodels.ReservationViewModel
 import kotlinx.android.synthetic.main.fragment_reservation.*
 import kotlinx.android.synthetic.main.fragment_reservation.view.*
-import java.text.SimpleDateFormat
-import java.util.*
+import android.arch.lifecycle.Observer
+import java.util.Calendar
 
 @Suppress("DEPRECATION")
 /**
@@ -61,6 +59,17 @@ class ReservationFragment : Fragment() {
 
         reservationViewModel.setSelectedLunch(lunchViewModel.getSelectedLunch().value!!)
 
+        val gereserveerd = reservationViewModel.getGereserveerd()
+
+        gereserveerd.observe(this, Observer {
+            if (gereserveerd.value == true) {
+                activity!!.supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, ThankYouFragment())
+                    .commit()
+            }
+        })
+
         val rootView = binding.root
         binding.reservationViewModel = reservationViewModel
         binding.setLifecycleOwner(activity)
@@ -80,7 +89,6 @@ class ReservationFragment : Fragment() {
         }
 
         rootView.reserveren_datePicker_button.setOnClickListener {
-            var date = Date()
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
