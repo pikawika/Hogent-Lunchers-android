@@ -18,7 +18,7 @@
     </string>
 
     <!-- lunch_detail-->
-    <string name="button_lunch_detail_tekst">Reserveer een lunch</string>
+    <string name="button_lunch_detail_tekst">Reserveer deze lunch</string>
 
     <!-- account string -->
     <string name="account_placeholder_gebruikersnaam">Gebruikersnaam</string>
@@ -49,9 +49,7 @@
 
     <!-- thank-you screen -->
     <string name="thank_you_fragment_thank_you_message">Bedankt!</string>
-    <string name="thank_you_fragment_bevestiging_reservatie">Je reservatie is geplaatst! De handelaar laat jou weten van
-        zodra je reservatie bevestigd is.
-    </string>
+    <string name="thank_you_fragment_bevestiging_reservatie">Je reservatie is geplaatst! De handelaar laat jou weten van zodra je reservatie bevestigd is.</string>
     <string name="thank_you_fragment_back_button">Terug</string>
     <string name="description_order_list_content_image">Image of a lunch</string>
     <string name="example_reservation_lunch_merchant">Reservatie bij Qarfa</string>
@@ -60,11 +58,14 @@
     <string name="example_reservation_date">24/12/2018 om 12u30</string>
     <string name="example_reservation_status">Status: Goedgekeurd</string>
 
+
+    <!-- Order List Fragment -->
+    <string name="error_fetching_orders">Er is een fout opgetreden tijdens het ophalen van de reservaties.</string>
+  
     <!-- actionbar -->
     <string name="ab_filter_prijs_oplopend">Sorteren op prijs (oplopend)</string>
     <string name="ab_filter_prijs_aflopend">Sorteren op prijs (aflopend)</string>
     <string name="ab_filter_afstand">Sorteren op nabijheid</string>
     <string name="ab_filter_nieuwste">Sorteren op recentheid</string>
-
 
 </resources>
