@@ -1,7 +1,6 @@
 package hogent.be.lunchers.utils
 
-import android.util.Log
-import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
+import hogent.be.lunchers.enums.FilterEnum
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.models.LunchIngredient
 import hogent.be.lunchers.models.LunchTag

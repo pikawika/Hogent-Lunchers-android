@@ -5,22 +5,30 @@
     <item
             android:id="@+id/ab_filter_prijs_oplopend"
             android:title="@string/ab_filter_prijs_oplopend"
-            app:showAsAction="never"/>
+            app:showAsAction="never"
+            android:visible="false"
+    />
 
     <item
             android:id="@+id/ab_filter_prijs_aflopend"
             android:title="@string/ab_filter_prijs_aflopend"
-            app:showAsAction="never"/>
+            app:showAsAction="never"
+            android:visible="false"
+    />
 
     <item
             android:id="@+id/ab_filter_afstand"
             android:title="@string/ab_filter_afstand"
-            app:showAsAction="never"/>
+            app:showAsAction="never"
+            android:visible="false"
+    />
 
     <item
             android:id="@+id/ab_filter_nieuwste"
             android:title="@string/ab_filter_nieuwste"
-            app:showAsAction="never"/>
+            app:showAsAction="never"
+            android:visible="false"
+    />
 
 
 </menu>
