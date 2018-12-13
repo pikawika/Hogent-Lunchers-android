@@ -2,6 +2,7 @@ package hogent.be.lunchers.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -16,6 +17,8 @@ import kotlinx.android.synthetic.main.lunch_list.*
 import kotlinx.android.synthetic.main.lunch_list.view.*
 import android.text.Editable
 import android.text.TextWatcher
+import hogent.be.lunchers.utils.MessageUtil
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.partial_search_filter.view.*
 
 
@@ -69,6 +72,11 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         rootView.swipe_refresh_layout.setOnRefreshListener(this)
 
+        activity!!.toolbar.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
+        activity!!.toolbar.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
+        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = true
+        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = true
+
         return rootView
     }
 
@@ -81,4 +89,26 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         lunchViewModel.refreshLunches()
         swipe_refresh_layout?.isRefreshing = false
     }
+
+    //opties menu instellen
+    @Override
+    override fun onStart() {
+        activity!!.toolbar.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
+        activity!!.toolbar.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
+        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = true
+        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = true
+        super.onStart()
+    }
+
+    //opties menu verwijderen
+    @Override
+    override fun onPause() {
+        activity!!.toolbar.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = false
+        activity!!.toolbar.menu.findItem(R.id.ab_filter_afstand)?.isVisible = false
+        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = false
+        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = false
+        super.onPause()
+    }
+
+
 }

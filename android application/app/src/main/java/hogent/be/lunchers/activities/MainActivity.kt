@@ -171,19 +171,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    companion object {
-        //voor globaal gebruik van context
-        //handig om toasts van eender waar te doen en gebruik in andere utils
-        private var instance: MainActivity? = null
-
-        /**
-         * returnt de [Context] van de app zijn MainActivity
-         */
-        fun getContext(): Context {
-            return instance!!.applicationContext
-        }
-    }
-
     private fun lunchesFromLocation(){
         if (PermissionChecker.checkSelfPermission(
                 this,
@@ -203,4 +190,16 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
+    companion object {
+        //voor globaal gebruik van context
+        //handig om toasts van eender waar te doen en gebruik in andere utils
+        private var instance: MainActivity? = null
+
+        /**
+         * returnt de [Context] van de app zijn MainActivity
+         */
+        fun getContext(): Context {
+            return instance!!.applicationContext
+        }
+    }
 }
