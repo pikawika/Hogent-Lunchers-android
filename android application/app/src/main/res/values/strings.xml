@@ -68,4 +68,12 @@
     <string name="ab_filter_afstand">Sorteren op nabijheid</string>
     <string name="ab_filter_nieuwste">Sorteren op recentheid</string>
 
+    <!-- settings -->
+    <string name="text_settings_title">Instellingen</string>
+    <string name="text_settings_default_filter">Standaard filtermethode</string>
+    <string name="text_settings_default_boot">Startscherm instellen</string>
+    <string name="text_settings_blacklist">Zwarte lijst</string>
+    <string name="text_select_default_filter">Kies standaard filtermethode</string>
+    <string name="text_select_default_boot">Kies standaard startscherm</string>
+
 </resources>

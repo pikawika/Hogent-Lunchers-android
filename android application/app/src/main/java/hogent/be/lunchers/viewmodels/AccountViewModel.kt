@@ -1,6 +1,7 @@
 package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
+import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.constants.ROL_KLANT
 import hogent.be.lunchers.networks.responses.TokenResponse
@@ -219,6 +220,20 @@ class AccountViewModel : InjectedViewModel() {
      */
     fun getGebruikersnaam() : MutableLiveData<String> {
         return gebruikersnaam
+    }
+
+    /**
+     * returnt boolean of user al dan niet aangemeld is
+     */
+    fun get() : MutableLiveData<String> {
+        return gebruikersnaam
+    }
+
+    /**
+     * returnt boolean of user al dan niet aangemeld is
+     */
+    fun setDefaultFilterMethod(filterEnum: FilterEnum){
+        PreferenceUtil().setDefaultFilterMethod(filterEnum)
     }
 
 }
