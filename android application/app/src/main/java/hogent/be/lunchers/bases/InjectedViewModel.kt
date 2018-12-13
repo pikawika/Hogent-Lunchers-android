@@ -6,6 +6,7 @@ import hogent.be.lunchers.injection.components.NetworkComponent
 import hogent.be.lunchers.injection.modules.NetworkModule
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import hogent.be.lunchers.viewmodels.LunchViewModel
+import hogent.be.lunchers.viewmodels.OrderViewModel
 import hogent.be.lunchers.viewmodels.ReservationViewModel
 
 /**
@@ -46,6 +47,7 @@ abstract class InjectedViewModel : ViewModel() {
             is LunchViewModel -> injector.inject(this)
             is AccountViewModel -> injector.inject(this)
             is ReservationViewModel -> injector.inject(this)
+            is OrderViewModel -> injector.inject(this)
         }
     }
 
