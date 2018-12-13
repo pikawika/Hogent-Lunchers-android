@@ -1,8 +1,7 @@
 package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
+import hogent.be.lunchers.enums.FilterEnum
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.models.*
 import hogent.be.lunchers.networks.LunchersApi

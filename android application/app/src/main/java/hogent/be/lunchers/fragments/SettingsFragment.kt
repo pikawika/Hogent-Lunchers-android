@@ -7,10 +7,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
+import hogent.be.lunchers.enums.FilterEnum
+import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
-import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_settings.view.*
 
@@ -45,18 +45,16 @@ class SettingsFragment : Fragment() {
     private fun setListeners(rootView: View) {
         //default filter methode
         rootView.btn_settings_default_filter.setOnClickListener {
-            val pages = arrayOf(getString(R.string.ab_filter_prijs_oplopend), getString(R.string.ab_filter_prijs_aflopend), getString(R.string.ab_filter_afstand), getString(R.string.ab_filter_nieuwste))
+            val filters = arrayOf(getString(R.string.ab_filter_prijs_oplopend), getString(R.string.ab_filter_prijs_aflopend), getString(R.string.ab_filter_afstand), getString(R.string.ab_filter_nieuwste))
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle(getString(R.string.text_select_default_boot))
-            builder.setItems(pages) { dialog, which ->
-                if (pages[which] == getString(R.string.ab_filter_prijs_oplopend))
-                    accountViewModel.setDefaultFilterMethod(FilterEnum.PRICELOWEST)
-                if (pages[which] == getString(R.string.ab_filter_prijs_aflopend))
-                    accountViewModel.setDefaultFilterMethod(FilterEnum.PRICEHIGHEST)
-                if (pages[which] == getString(R.string.ab_filter_afstand))
-                    accountViewModel.setDefaultFilterMethod(FilterEnum.DISTANCE)
-                if (pages[which] == getString(R.string.ab_filter_nieuwste))
-                    accountViewModel.setDefaultFilterMethod(FilterEnum.RECENT)
+            builder.setItems(filters) { dialog, which ->
+                when (filters[which]) {
+                    getString(R.string.ab_filter_prijs_oplopend) -> accountViewModel.setDefaultFilterMethod(FilterEnum.PRICELOWEST)
+                    getString(R.string.ab_filter_prijs_aflopend) -> accountViewModel.setDefaultFilterMethod(FilterEnum.PRICEHIGHEST)
+                    getString(R.string.ab_filter_afstand) -> accountViewModel.setDefaultFilterMethod(FilterEnum.DISTANCE)
+                    getString(R.string.ab_filter_nieuwste) -> accountViewModel.setDefaultFilterMethod(FilterEnum.RECENT)
+                }
 
             }
             builder.show()
@@ -64,11 +62,16 @@ class SettingsFragment : Fragment() {
 
         //default boot page
         rootView.btn_settings_default_tab.setOnClickListener {
-            val pages = arrayOf(getString(R.string.title_map), getString(R.string.title_list), getString(R.string.title_profile))
+            val pages = arrayOf(getString(R.string.title_map), getString(R.string.title_list), getString(R.string.title_profile), getString(R.string.title_orders))
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle(getString(R.string.text_select_default_boot))
             builder.setItems(pages) { dialog, which ->
-                MessageUtil.showToast(pages[which])
+                when (pages[which]) {
+                    getString(R.string.title_map) -> accountViewModel.setDefaultBootPage(PageEnum.MAP)
+                    getString(R.string.title_list) -> accountViewModel.setDefaultBootPage(PageEnum.LUNCHLIST)
+                    getString(R.string.title_profile) -> accountViewModel.setDefaultBootPage(PageEnum.PROFILE)
+                    getString(R.string.title_orders) -> accountViewModel.setDefaultBootPage(PageEnum.ORDERSLIST)
+                }
             }
             builder.show()
         }

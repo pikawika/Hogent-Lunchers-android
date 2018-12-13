@@ -6,7 +6,8 @@ import android.support.annotation.RequiresApi
 import android.util.Base64.DEFAULT
 import android.util.Base64.decode
 import android.util.Log
-import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
+import hogent.be.lunchers.enums.FilterEnum
+import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.activities.MainActivity
 import java.io.UnsupportedEncodingException
 import java.nio.charset.Charset
@@ -52,6 +53,14 @@ class PreferenceUtil() {
 
     fun setDefaultFilterMethod(filterEnum: FilterEnum) {
         sharedPreferences.edit().putInt(PREFERENCE_DEFAULTFILTERMETHOD, filterEnum.filterManier).apply()
+    }
+
+    fun getDefaultBootPage() : PageEnum {
+        return PageEnum.values()[sharedPreferences.getInt(PREFERENCE_DEFAULTBOOTPAGE, 1)]
+    }
+
+    fun setDefaultBootPage(pageEnum: PageEnum) {
+        sharedPreferences.edit().putInt(PREFERENCE_DEFAULTBOOTPAGE, pageEnum.page).apply()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
