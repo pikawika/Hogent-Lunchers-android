@@ -47,7 +47,7 @@ class SettingsFragment : Fragment() {
         rootView.btn_settings_default_filter.setOnClickListener {
             val filters = arrayOf(getString(R.string.ab_filter_prijs_oplopend), getString(R.string.ab_filter_prijs_aflopend), getString(R.string.ab_filter_afstand), getString(R.string.ab_filter_nieuwste))
             val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle(getString(R.string.text_select_default_boot))
+            builder.setTitle(getString(R.string.text_select_default_filter))
             builder.setItems(filters) { dialog, which ->
                 when (filters[which]) {
                     getString(R.string.ab_filter_prijs_oplopend) -> accountViewModel.setDefaultFilterMethod(FilterEnum.PRICELOWEST)
