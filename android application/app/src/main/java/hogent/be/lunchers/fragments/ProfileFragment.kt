@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
+import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.databinding.FragmentProfileBinding
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -64,6 +65,12 @@ class ProfileFragment : Fragment() {
         return rootView
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        (activity as MainActivity).supportActionBar?.title = "Profiel"
+    }
+
 
     private fun afmelden() {
 
@@ -80,6 +87,13 @@ class ProfileFragment : Fragment() {
             activity!!.supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container, ChangePasswordFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+        rootView.buttonReservations.setOnClickListener {
+            activity!!.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, OrderListFragment())
                 .addToBackStack(null)
                 .commit()
         }

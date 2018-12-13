@@ -6,41 +6,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" android:focusable="true" android:focusableInTouchMode="true"
-
-    >
-
-
-    <EditText
-        android:id="@+id/searchBar"
-        android:layout_width="366dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/lightGrey"
-        android:ems="10"
-        android:hint="Zoeken"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/swipe_refresh_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+>
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
-        android:layout_width="match_parent"
-        android:layout_height="501dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.0">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/lunch_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/lunch_list_content" />
+                android:id="@+id/lunch_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/lunch_list_content"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <include
+            android:id="@+id/lunch_list_searchandfilter"
+            layout="@layout/partial_search_filter"
+            app:layout_constraintTop_toTopOf="parent"
+    />
 
 </android.support.constraint.ConstraintLayout>

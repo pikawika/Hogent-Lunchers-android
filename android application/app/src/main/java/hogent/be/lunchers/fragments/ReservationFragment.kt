@@ -67,6 +67,7 @@ class ReservationFragment : Fragment() {
                 activity!!.supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container, ThankYouFragment())
+                    .addToBackStack(null)
                     .commit()
             }
         })

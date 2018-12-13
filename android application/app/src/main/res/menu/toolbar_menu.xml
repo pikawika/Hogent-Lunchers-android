@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/ab_filter_prijs_oplopend"
+            android:title="@string/ab_filter_prijs_oplopend"
+            app:showAsAction="never"/>
+
+    <item
+            android:id="@+id/ab_filter_prijs_aflopend"
+            android:title="@string/ab_filter_prijs_aflopend"
+            app:showAsAction="never"/>
+
+    <item
+            android:id="@+id/ab_filter_afstand"
+            android:title="@string/ab_filter_afstand"
+            app:showAsAction="never"/>
+
+    <item
+            android:id="@+id/ab_filter_nieuwste"
+            android:title="@string/ab_filter_nieuwste"
+            app:showAsAction="never"/>
+
+
+</menu>
