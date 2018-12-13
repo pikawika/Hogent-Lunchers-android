@@ -1,6 +1,8 @@
 package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.models.*
 import hogent.be.lunchers.networks.LunchersApi
@@ -32,6 +34,11 @@ class LunchViewModel : InjectedViewModel() {
     private var allLunches = listOf<Lunch>()
 
     /**
+     * De geselecteerde filter methode
+     */
+    private var selectedFilter : FilterEnum = FilterEnum.RECENT
+
+    /**
      * een instantie van de lunchersApi om data van de server op te halen
      */
     @Inject
@@ -45,6 +52,7 @@ class LunchViewModel : InjectedViewModel() {
     init {
         //initieel vullen met een lege lijst zodat dit niet nul os
         filteredLunches.value = emptyList()
+        selectedFilter = FilterEnum.RECENT
         getAllLunchesSubscription = lunchersApi.getAllLunches()
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
@@ -96,6 +104,7 @@ class LunchViewModel : InjectedViewModel() {
     private fun onRetrieveAllLunchesSuccess(result: List<Lunch>) {
         allLunches = result
         filteredLunches.value = result
+        //filteredLunches.value = SearchUtil().filterLunch(selectedFilter, result)
     }
 
     /**
@@ -152,10 +161,35 @@ class LunchViewModel : InjectedViewModel() {
     }
 
     /**
+     * Lunches opnieuw ophalen om te refreshen
+     */
+    fun refreshLunchesFromLocation(latitude: Double, longitude: Double){
+        getAllLunchesSubscription = lunchersApi.getAllLunchesFromLocation(latitude, longitude)
+            //we tell it to fetch the data on background by
+            .subscribeOn(Schedulers.io())
+            //we like the fetched data to be displayed on the MainTread (UI)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveStart() }
+            .doOnTerminate { onRetrieveFinish() }
+            .subscribe(
+                { result -> onRetrieveAllLunchesSuccess(result) },
+                { error -> onRetrieveError(error) }
+            )
+    }
+
+    /**
      * zoekt met searchstring op naam, beschrijvng, ingredienten en tags
      */
     fun search(searchString:String){
         filteredLunches.value = SearchUtil().searchLunch(searchString, allLunches)
+    }
+
+    /**
+     * stelt de filtered type in en updat de lijst
+     */
+    fun setSelectedFilter(filterEnum: FilterEnum){
+        selectedFilter = filterEnum
+        filteredLunches.value = SearchUtil().filterLunch(selectedFilter, allLunches)
     }
 
 }

@@ -28,6 +28,7 @@ import android.graphics.Bitmap
 import hogent.be.lunchers.databinding.FragmentGoogleMapsBinding
 import hogent.be.lunchers.databinding.FragmentProfileBinding
 import hogent.be.lunchers.databinding.PartialLunchCardBinding
+import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import java.io.InputStream
 
@@ -142,6 +143,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
             )
+            MessageUtil.showToast("Geef locatietoestemming en probeer opnieuw")
             return
         }
 
