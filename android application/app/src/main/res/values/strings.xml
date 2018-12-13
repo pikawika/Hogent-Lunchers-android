@@ -53,6 +53,12 @@
         zodra je reservatie bevestigd is.
     </string>
     <string name="thank_you_fragment_back_button">Terug</string>
+    <string name="description_order_list_content_image">Image of a lunch</string>
+    <string name="example_reservation_lunch_merchant">Reservatie bij Qarfa</string>
+    <string name="example_reservation_lunch_name">Biefstuk met frietjes</string>
+    <string name="example_reservation_aantal">Aantal: 4</string>
+    <string name="example_reservation_date">24/12/2018 om 12u30</string>
+    <string name="example_reservation_status">Status: Goedgekeurd</string>
 
     <!-- actionbar -->
     <string name="ab_filter_prijs_oplopend">Sorteren op prijs (oplopend)</string>

@@ -1,6 +1,7 @@
 package hogent.be.lunchers.networks
 
 import hogent.be.lunchers.models.Lunch
+import hogent.be.lunchers.models.Reservatie
 import hogent.be.lunchers.networks.requests.LoginRequest
 import hogent.be.lunchers.networks.requests.RegistreerGebruikerRequest
 import hogent.be.lunchers.networks.requests.ReservatieRequest
@@ -22,11 +23,17 @@ interface LunchersApi {
     fun getAllLunches(): Observable<List<Lunch>>
 
     /**
+
      * Haal alle lunches op dichts bij locatie
      * https://lunchers.ml/api/lunch?latitude=1&longitude=1
      */
     @GET("api/lunch")
     fun getAllLunchesFromLocation(@Query("latitude") latitude: Double, @Query("longitude") longitude: Double): Observable<List<Lunch>>
+
+     * Haal alle reservaties op van de gebruiker
+     */
+    @GET("api/reservatie")
+    fun getAllOrders(): Observable<List<Reservatie>>
 
     /**
      * Login en return tokenresponse

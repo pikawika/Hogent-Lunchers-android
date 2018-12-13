@@ -4,6 +4,7 @@ import hogent.be.lunchers.injection.modules.NetworkModule
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import dagger.Component
 import hogent.be.lunchers.viewmodels.AccountViewModel
+import hogent.be.lunchers.viewmodels.OrderViewModel
 import hogent.be.lunchers.viewmodels.ReservationViewModel
 import javax.inject.Singleton
 
@@ -34,6 +35,8 @@ interface NetworkComponent {
     fun inject(accountViewModel: AccountViewModel)
 
     fun inject(reservationViewModel: ReservationViewModel)
+
+    fun inject(orderViewModel: OrderViewModel)
 
     //soortgelijke functies aanmaken voor alle andere injecties van models
 }
