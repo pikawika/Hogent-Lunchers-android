@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,13 @@ class OrderListFragment : Fragment() {
         rootView.rv_order_list_orders.adapter = adapter
 
         reservations.observe(this, Observer { adapter.notifyDataSetChanged() })
+
+        // De reservaties die in de Room database zitten worden alvast opgehaald,
+        // indien er via het internet geen reservaties werden opgehaald, zullen
+        // de reservaties uit de lokale databank ingeladen worden
+        orderViewModel.roomOrders.observe(activity!! as MainActivity, Observer {
+            if (reservations.value!!.isEmpty()) orderViewModel.setReservations(it!!)
+        })
 
         return rootView
     }

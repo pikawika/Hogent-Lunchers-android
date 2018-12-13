@@ -1,12 +1,14 @@
 package hogent.be.lunchers.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
+import android.arch.persistence.room.*
 import android.content.Context
 import hogent.be.lunchers.models.Reservatie
+import hogent.be.lunchers.utils.RoomConverters
 
 @Database(entities = [Reservatie::class], version = 1)
+// Type Converters worden gebruikt om complexe objecten op te kunnen slaan
+// in ons geval wordt dit gebruikt voor de datum en de lunch van de reservaties
+@TypeConverters(RoomConverters::class)
 abstract class OrderDatabase : RoomDatabase() {
 
     abstract fun orderDao() : OrderDao

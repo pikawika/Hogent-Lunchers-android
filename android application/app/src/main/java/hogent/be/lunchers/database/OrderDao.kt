@@ -10,7 +10,7 @@ import hogent.be.lunchers.models.Reservatie
 interface OrderDao {
 
     @Insert
-    fun insert(orders: List<Reservatie>)
+    fun insert(orders: Reservatie)
 
     @Query("SELECT * FROM order_table")
     fun getAllOrders(): LiveData<List<Reservatie>>

@@ -15,7 +15,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 import com.squareup.moshi.Moshi
+import hogent.be.lunchers.database.OrderDao
+import hogent.be.lunchers.database.OrderDatabase
 import hogent.be.lunchers.extensions.DateParser
+import hogent.be.lunchers.models.ReservatieRepository
 import hogent.be.lunchers.utils.PreferenceUtil
 import okhttp3.Interceptor
 import java.util.*
@@ -113,6 +116,24 @@ class NetworkModule(private val context: Context) {
     @Singleton
     internal fun provideCallAdapterFactory(): retrofit2.CallAdapter.Factory {
         return RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
+    }
+
+    @Provides
+    @Singleton
+    fun provideWordRepository(orderDao: OrderDao): ReservatieRepository {
+        return ReservatieRepository(orderDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWordDao(orderDatabase: OrderDatabase): OrderDao {
+        return orderDatabase.orderDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWordDatabase(context: Context): OrderDatabase {
+        return OrderDatabase.getInstance(context)
     }
 
     @Provides
