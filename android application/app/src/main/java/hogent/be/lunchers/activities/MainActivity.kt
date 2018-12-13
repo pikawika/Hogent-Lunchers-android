@@ -95,6 +95,17 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragment_container, LunchListFragment())
                 .commit()
         } else {
+            //locatie toegang vragen bij eerste keer openen app
+            if (PermissionChecker.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissions(
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    1
+                )
+            }
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, LoginFragment())
                 .commit()
