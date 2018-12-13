@@ -38,5 +38,4 @@ interface NetworkComponent {
 
     fun inject(orderViewModel: OrderViewModel)
 
-    //soortgelijke functies aanmaken voor alle andere injecties van models
 }

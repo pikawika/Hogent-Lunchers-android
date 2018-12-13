@@ -43,7 +43,10 @@ buildscript {
             'gmaps'         : "16.0.0",
 
             //databinding
-            'databinding'    : "3.1.4"
+            'databinding'    : "3.1.4",
+
+            //room voor lokale persistentie
+            'room'          : "1.1.1"
     ]
     repositories {
         google()
