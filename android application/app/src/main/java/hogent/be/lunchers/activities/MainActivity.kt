@@ -1,14 +1,18 @@
 package hogent.be.lunchers.activities
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.databinding.DataBindingUtil
+import android.location.Location
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
 import hogent.be.lunchers.R
 import hogent.be.lunchers.databinding.ActivityMainBinding
@@ -40,6 +44,11 @@ class MainActivity : AppCompatActivity() {
      */
     private lateinit var binding: ActivityMainBinding
 
+    /**
+     * Client voor het ophalen van de locatie van een user
+     */
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,6 +64,8 @@ class MainActivity : AppCompatActivity() {
         binding.setLifecycleOwner(this)
 
         sharedPreferences = PreferenceUtil()
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         initApp()
     }
@@ -144,7 +155,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.ab_filter_afstand -> {
-                lunchViewModel.setSelectedFilter(FilterEnum.DISTANCE)
+                lunchesFromLocation()
                 return super.onOptionsItemSelected(item)
             }
 
@@ -169,6 +180,14 @@ class MainActivity : AppCompatActivity() {
         fun getContext(): Context {
             return instance!!.applicationContext
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun lunchesFromLocation(){
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                lunchViewModel.refreshLunchesFromLocation(location?.latitude ?:0.00, location?.longitude ?:0.00)
+            }
     }
 
 }

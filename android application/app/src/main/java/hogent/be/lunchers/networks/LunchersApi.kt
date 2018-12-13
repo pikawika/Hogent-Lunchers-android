@@ -8,10 +8,7 @@ import hogent.be.lunchers.networks.requests.WijzigWachtwoordRequest
 import hogent.be.lunchers.networks.responses.BerichtResponse
 import hogent.be.lunchers.networks.responses.TokenResponse
 import io.reactivex.Observable
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * Een *interface* die de methoden voorziet om objecten van de *backend server* te halen.
@@ -23,6 +20,13 @@ interface LunchersApi {
      */
     @GET("api/lunch")
     fun getAllLunches(): Observable<List<Lunch>>
+
+    /**
+     * Haal alle lunches op dichts bij locatie
+     * https://lunchers.ml/api/lunch?latitude=1&longitude=1
+     */
+    @GET("api/lunch")
+    fun getAllLunchesFromLocation(@Query("latitude") latitude: Double, @Query("longitude") longitude: Double): Observable<List<Lunch>>
 
     /**
      * Login en return tokenresponse

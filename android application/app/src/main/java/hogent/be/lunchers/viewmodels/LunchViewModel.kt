@@ -1,6 +1,7 @@
 package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.models.*
@@ -51,6 +52,7 @@ class LunchViewModel : InjectedViewModel() {
     init {
         //initieel vullen met een lege lijst zodat dit niet nul os
         filteredLunches.value = emptyList()
+        selectedFilter = FilterEnum.RECENT
         getAllLunchesSubscription = lunchersApi.getAllLunches()
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
@@ -103,7 +105,6 @@ class LunchViewModel : InjectedViewModel() {
         allLunches = result
         filteredLunches.value = result
         //filteredLunches.value = SearchUtil().filterLunch(selectedFilter, result)
-
     }
 
     /**
@@ -147,6 +148,23 @@ class LunchViewModel : InjectedViewModel() {
     */
     fun refreshLunches(){
         getAllLunchesSubscription = lunchersApi.getAllLunches()
+            //we tell it to fetch the data on background by
+            .subscribeOn(Schedulers.io())
+            //we like the fetched data to be displayed on the MainTread (UI)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveStart() }
+            .doOnTerminate { onRetrieveFinish() }
+            .subscribe(
+                { result -> onRetrieveAllLunchesSuccess(result) },
+                { error -> onRetrieveError(error) }
+            )
+    }
+
+    /**
+     * Lunches opnieuw ophalen om te refreshen
+     */
+    fun refreshLunchesFromLocation(latitude: Double, longitude: Double){
+        getAllLunchesSubscription = lunchersApi.getAllLunchesFromLocation(latitude, longitude)
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
             //we like the fetched data to be displayed on the MainTread (UI)
