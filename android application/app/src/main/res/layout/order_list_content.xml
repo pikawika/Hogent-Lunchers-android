@@ -11,17 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_order_list_content_lunchafbeelding"
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_order_list_content_40percent_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4"/>
+
+        <ImageView
+            android:id="@+id/iv_order_list_content_lunchafbeelding"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:scaleType="centerCrop"
             android:contentDescription="@string/description_order_list_content_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_order_list_content_40percent_vertical"
+            app:layout_constraintDimensionRatio="H,1:1"
             tools:srcCompat="@tools:sample/avatars[12]"/>
 
         <TextView
@@ -30,10 +40,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                android:textSize="20sp"
+                android:layout_marginStart="16dp"
+                android:textSize="24sp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iv_order_list_content_lunchafbeelding"/>
+                app:layout_constraintStart_toEndOf="@+id/guideline_order_list_content_40percent_vertical"/>
 
         <TextView
                 android:id="@+id/tv_order_list_content_lunch_name"
@@ -41,39 +51,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
+                android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="@+id/tv_order_list_content_lunch_merchant"
-                app:layout_constraintStart_toEndOf="@+id/iv_order_list_content_lunchafbeelding"/>
+                app:layout_constraintStart_toEndOf="@+id/guideline_order_list_content_40percent_vertical"/>
 
         <TextView
                 android:id="@+id/tv_order_list_content_aantal"
                 android:text="@string/example_reservation_aantal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_order_list_content_lunch_name"
-                app:layout_constraintStart_toEndOf="@+id/iv_order_list_content_lunchafbeelding"/>
-
-        <TextView
-                android:id="@+id/tv_order_list_content_date"
-                android:text="@string/example_reservation_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintStart_toEndOf="@+id/iv_order_list_content_lunchafbeelding"
-                app:layout_constraintTop_toBottomOf="@+id/tv_order_list_content_aantal"/>
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_list_content_lunch_name"
+                app:layout_constraintStart_toEndOf="@+id/guideline_order_list_content_40percent_vertical"/>
 
         <TextView
                 android:id="@+id/tv_order_list_content_status"
                 android:text="@string/example_reservation_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintStart_toEndOf="@+id/iv_order_list_content_lunchafbeelding"
-                app:layout_constraintTop_toBottomOf="@+id/tv_order_list_content_date"/>
+                app:layout_constraintStart_toEndOf="@+id/guideline_order_list_content_40percent_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_list_content_aantal"/>
+
+        <TextView
+                android:id="@+id/tv_order_list_content_date"
+                android:text="@string/example_reservation_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/guideline_order_list_content_40percent_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_list_content_status"/>
 
     </android.support.constraint.ConstraintLayout>
 

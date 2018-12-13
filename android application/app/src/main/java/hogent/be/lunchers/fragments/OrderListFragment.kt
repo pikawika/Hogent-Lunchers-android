@@ -5,7 +5,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,10 +29,7 @@ class OrderListFragment : Fragment() {
 
         rootView.rv_order_list_orders.adapter = adapter
 
-        reservations.observe(this, Observer {
-            Log.d("LOL", "TIS AANGEPAST")
-            adapter.notifyDataSetChanged()
-        })
+        reservations.observe(this, Observer { adapter.notifyDataSetChanged() })
 
         return rootView
     }

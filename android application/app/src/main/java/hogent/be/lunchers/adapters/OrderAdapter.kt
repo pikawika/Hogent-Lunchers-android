@@ -1,5 +1,6 @@
 package hogent.be.lunchers.adapters
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.RecyclerView
@@ -16,6 +17,8 @@ import hogent.be.lunchers.constants.BASE_URL_BACKEND
 import hogent.be.lunchers.models.Reservatie
 import hogent.be.lunchers.viewmodels.OrderViewModel
 import kotlinx.android.synthetic.main.order_list_content.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class OrderAdapter(
     private val parentActivity: MainActivity,
@@ -51,9 +54,9 @@ class OrderAdapter(
         Glide.with(parentActivity).load(BASE_URL_BACKEND + item.lunch.afbeeldingen[0].pad).into(holder.imageView)
         holder.lunchMerchantView.text = item.lunch.handelaar.handelsNaam
         holder.lunchNameView.text = item.lunch.naam
-        holder.statusView.text = item.status.toString()
+        holder.statusView.text = String.format("Status: %s", convertIntToStatus(item.status))
         holder.aantalView.text = String.format("Aantal: %d", item.aantal)
-        holder.dateView.text = item.datum.toString()
+        holder.dateView.text = formatDate(item.datum)
 
         with(holder.itemView) {
             tag = item
@@ -70,5 +73,23 @@ class OrderAdapter(
         val statusView: TextView = view.tv_order_list_content_status
         val aantalView: TextView = view.tv_order_list_content_aantal
         val dateView: TextView = view.tv_order_list_content_date
+    }
+
+    private fun convertIntToStatus(int: Int): String {
+        return when (int) {
+            0 -> "In afwachting"
+            1 -> "Goedgekeurd"
+            2 -> "Afgekeurd"
+            else -> "Onbekend"
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun formatDate(date: Date): String {
+        val day = SimpleDateFormat("dd/MM/yyy").format(date)
+        val format = SimpleDateFormat("HH:mm")
+        format.timeZone = TimeZone.getTimeZone("UTC")
+        val hour = format.format(date)
+        return "$day om $hour"
     }
 }
