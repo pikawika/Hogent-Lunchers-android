@@ -1,6 +1,7 @@
 package hogent.be.lunchers.bases
 
 import android.arch.lifecycle.ViewModel
+import hogent.be.lunchers.context.App.Companion.injector
 import hogent.be.lunchers.injection.components.DaggerNetworkComponent
 import hogent.be.lunchers.injection.components.NetworkComponent
 import hogent.be.lunchers.injection.modules.NetworkModule
@@ -20,15 +21,6 @@ import hogent.be.lunchers.viewmodels.ReservationViewModel
  * https://github.com/hdeweirdt/metar
  */
 abstract class InjectedViewModel : ViewModel() {
-    /**
-     * Er is een instance nodig van de dagger [NetworkComponent] om de injectie mee uit te voeren
-     *
-     * Deze injector zal alle viewmodels injecten en moet dus voorzien worden
-     */
-    private val injector: NetworkComponent = DaggerNetworkComponent
-        .builder()
-        .networkModule(NetworkModule)
-        .build()
 
     /**
      * Injecteren zodra de viewmodel aangemaakt wordt

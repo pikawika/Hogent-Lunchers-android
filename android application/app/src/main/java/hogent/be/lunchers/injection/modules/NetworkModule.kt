@@ -2,6 +2,7 @@
 
 package hogent.be.lunchers.injection.modules
 
+import android.content.Context
 import hogent.be.lunchers.constants.BASE_URL_BACKEND
 import hogent.be.lunchers.networks.LunchersApi
 import dagger.Module
@@ -14,7 +15,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 import com.squareup.moshi.Moshi
+import hogent.be.lunchers.database.OrderDao
+import hogent.be.lunchers.database.OrderDatabase
 import hogent.be.lunchers.extensions.DateParser
+import hogent.be.lunchers.models.ReservatieRepository
 import hogent.be.lunchers.utils.PreferenceUtil
 import okhttp3.Interceptor
 import java.util.*
@@ -30,8 +34,7 @@ import java.util.*
  * https://github.com/hdeweirdt/metar
  */
 @Module
-object NetworkModule {
-
+class NetworkModule(private val context: Context) {
 
     /**
      * Returnt de [LunchersApi] om met de lunchers backend te communiceren
@@ -42,7 +45,6 @@ object NetworkModule {
     internal fun provideLunchersApi(retrofit: Retrofit): LunchersApi {
         return retrofit.create(LunchersApi::class.java)
     }
-
 
     /**
      * Returnt het [Retrofit] object dat voorzien is van
@@ -91,10 +93,6 @@ object NetworkModule {
         }.build()
     }
 
-
-
-
-
     /**
      * Returnt een [Moshi] object als [retrofit2.Converter.Factory] dat de json van de server omzet naar een model object.
      *
@@ -119,4 +117,29 @@ object NetworkModule {
     internal fun provideCallAdapterFactory(): retrofit2.CallAdapter.Factory {
         return RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
     }
+
+    @Provides
+    @Singleton
+    fun provideWordRepository(orderDao: OrderDao): ReservatieRepository {
+        return ReservatieRepository(orderDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWordDao(orderDatabase: OrderDatabase): OrderDao {
+        return orderDatabase.orderDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWordDatabase(context: Context): OrderDatabase {
+        return OrderDatabase.getInstance(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideApplicationContext(): Context {
+        return context.applicationContext
+    }
+
 }
