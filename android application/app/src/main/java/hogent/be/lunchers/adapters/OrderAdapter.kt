@@ -42,7 +42,7 @@ class OrderAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.lunch_list_content, parent, false)
+            .inflate(R.layout.order_list_content, parent, false)
         return ViewHolder(view)
     }
 
