@@ -1,14 +1,15 @@
 package hogent.be.lunchers.activities
 
-import android.annotation.SuppressLint
+import android.Manifest
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.content.pm.PackageManager
 import android.databinding.DataBindingUtil
 import android.location.Location
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.content.PermissionChecker
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -21,6 +22,7 @@ import hogent.be.lunchers.fragments.LunchListFragment
 import hogent.be.lunchers.fragments.MapsFragment
 import hogent.be.lunchers.utils.PreferenceUtil
 import hogent.be.lunchers.fragments.ProfileFragment
+import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -182,8 +184,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("MissingPermission")
     private fun lunchesFromLocation(){
+        if (PermissionChecker.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                1
+            )
+            MessageUtil.showToast("Geef locatietoestemming en probeer opnieuw")
+            return
+        }
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 lunchViewModel.refreshLunchesFromLocation(location?.latitude ?:0.00, location?.longitude ?:0.00)
