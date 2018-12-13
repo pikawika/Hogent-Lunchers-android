@@ -2,6 +2,7 @@
 
 package hogent.be.lunchers.injection.modules
 
+import android.content.Context
 import hogent.be.lunchers.constants.BASE_URL_BACKEND
 import hogent.be.lunchers.networks.LunchersApi
 import dagger.Module
@@ -30,8 +31,7 @@ import java.util.*
  * https://github.com/hdeweirdt/metar
  */
 @Module
-object NetworkModule {
-
+class NetworkModule(private val context: Context) {
 
     /**
      * Returnt de [LunchersApi] om met de lunchers backend te communiceren
@@ -42,7 +42,6 @@ object NetworkModule {
     internal fun provideLunchersApi(retrofit: Retrofit): LunchersApi {
         return retrofit.create(LunchersApi::class.java)
     }
-
 
     /**
      * Returnt het [Retrofit] object dat voorzien is van
@@ -91,10 +90,6 @@ object NetworkModule {
         }.build()
     }
 
-
-
-
-
     /**
      * Returnt een [Moshi] object als [retrofit2.Converter.Factory] dat de json van de server omzet naar een model object.
      *
@@ -119,4 +114,11 @@ object NetworkModule {
     internal fun provideCallAdapterFactory(): retrofit2.CallAdapter.Factory {
         return RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
     }
+
+    @Provides
+    @Singleton
+    fun provideApplicationContext(): Context {
+        return context.applicationContext
+    }
+
 }

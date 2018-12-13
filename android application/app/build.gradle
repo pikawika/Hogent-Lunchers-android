@@ -94,4 +94,9 @@ dependencies {
     //Google Maps en Google Places API
     implementation "com.google.android.gms:play-services-maps:$versions.gmaps"
     implementation "com.google.android.gms:play-services-location:$versions.gmaps"
+
+    // Room components
+    implementation "android.arch.persistence.room:runtime:$versions.room"
+    kapt "android.arch.persistence.room:compiler:$versions.room"
+    androidTestImplementation "android.arch.persistence.room:testing:$versions.room"
 }
