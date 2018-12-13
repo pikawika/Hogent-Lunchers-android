@@ -2,6 +2,7 @@ package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
 import hogent.be.lunchers.bases.InjectedViewModel
+import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.models.Reservatie
 import hogent.be.lunchers.networks.LunchersApi
 import hogent.be.lunchers.utils.MessageUtil.showToast
@@ -15,19 +16,24 @@ class OrderViewModel : InjectedViewModel() {
     @Inject
     lateinit var lunchersApi: LunchersApi
 
-    private val reservations = MutableLiveData<List<Reservatie>>()
+    val reservations = MutableLiveData<List<Reservatie>>()
+
+    private val _selectedOrder = MutableLiveData<Reservatie>()
+
+    val selectedOrder: MutableLiveData<Reservatie>
+        get() = _selectedOrder
 
     private var getAllReservationsSubscription: Disposable
 
     init {
-        reservations.value = emptyList()
+        reservations.value = listOf()
 
         getAllReservationsSubscription = lunchersApi.getAllOrders()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result -> onRetrieveAllReservationsSuccess(result) },
-                { error -> onRetrieveError(error) }
+                { onRetrieveError() }
             )
     }
 
@@ -36,8 +42,10 @@ class OrderViewModel : InjectedViewModel() {
         getAllReservationsSubscription.dispose()
     }
 
+    fun setSelectedOrder(orderId: Int) { reservations.value!!.firstOrNull { it.reservatieId == orderId } }
+
     private fun onRetrieveAllReservationsSuccess(result: List<Reservatie>) { reservations.value = result }
 
-    private fun onRetrieveError(error: Throwable) { showToast("Er is een fout opgetreden tijdens het ophalen van de reservaties.") }
+    private fun onRetrieveError() { showToast("Er is een fout opgetreden tijdens het ophalen van de reservaties.") }
 
 }
