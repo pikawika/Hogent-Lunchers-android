@@ -1,12 +1,12 @@
 package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
+import hogent.be.lunchers.enums.FilterEnum
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.models.*
 import hogent.be.lunchers.networks.LunchersApi
 import hogent.be.lunchers.utils.MessageUtil
+import hogent.be.lunchers.utils.PreferenceUtil
 import hogent.be.lunchers.utils.SearchUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -36,7 +36,7 @@ class LunchViewModel : InjectedViewModel() {
     /**
      * De geselecteerde filter methode
      */
-    private var selectedFilter : FilterEnum = FilterEnum.RECENT
+    private var selectedFilter : FilterEnum
 
     /**
      * een instantie van de lunchersApi om data van de server op te halen
@@ -52,7 +52,7 @@ class LunchViewModel : InjectedViewModel() {
     init {
         //initieel vullen met een lege lijst zodat dit niet nul os
         filteredLunches.value = emptyList()
-        selectedFilter = FilterEnum.RECENT
+        selectedFilter = PreferenceUtil().getDefaultFilterMethod()
         getAllLunchesSubscription = lunchersApi.getAllLunches()
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
@@ -102,8 +102,8 @@ class LunchViewModel : InjectedViewModel() {
      * Zal de lijst van meetings gelijkstellen met het results
      */
     private fun onRetrieveAllLunchesSuccess(result: List<Lunch>) {
-        allLunches = result
-        filteredLunches.value = result
+        allLunches = SearchUtil().filterLunch(selectedFilter, result)
+        filteredLunches.value = SearchUtil().filterLunch(selectedFilter, result)
         //filteredLunches.value = SearchUtil().filterLunch(selectedFilter, result)
     }
 

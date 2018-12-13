@@ -12,6 +12,7 @@
     <string name="title_map">Kaart</string>
     <string name="title_list">Lijst</string>
     <string name="title_profile">Profiel</string>
+    <string name="title_orders">Bestellingen</string>
     <string name="title_activity_maps">Map</string>
     <string name="network_error">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw
         te proberen.
@@ -67,5 +68,13 @@
     <string name="ab_filter_prijs_aflopend">Sorteren op prijs (aflopend)</string>
     <string name="ab_filter_afstand">Sorteren op nabijheid</string>
     <string name="ab_filter_nieuwste">Sorteren op recentheid</string>
+
+    <!-- settings -->
+    <string name="text_settings_title">Instellingen</string>
+    <string name="text_settings_default_filter">Standaard filtermethode</string>
+    <string name="text_settings_default_boot">Startscherm instellen</string>
+    <string name="text_settings_blacklist">Zwarte lijst</string>
+    <string name="text_select_default_filter">Kies standaard filtermethode</string>
+    <string name="text_select_default_boot">Kies standaard startscherm</string>
 
 </resources>
