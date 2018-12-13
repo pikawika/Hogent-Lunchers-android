@@ -45,7 +45,7 @@
     <string name="reservatie_titel">Reservatie van</string>
 
     <!-- search hint -->
-    <string name="lunch_list_fragment_search_hint">Zoeken</string>
+    <string name="lunch_list_fragment_search_hint">Zoeken...</string>
 
     <!-- thank-you screen -->
     <string name="thank_you_fragment_thank_you_message">Bedankt!</string>
@@ -53,5 +53,12 @@
         zodra je reservatie bevestigd is.
     </string>
     <string name="thank_you_fragment_back_button">Terug</string>
+
+    <!-- actionbar -->
+    <string name="ab_filter_prijs_oplopend">Sorteren op prijs (oplopend)</string>
+    <string name="ab_filter_prijs_aflopend">Sorteren op prijs (aflopend)</string>
+    <string name="ab_filter_afstand">Sorteren op nabijheid</string>
+    <string name="ab_filter_nieuwste">Sorteren op recentheid</string>
+
 
 </resources>

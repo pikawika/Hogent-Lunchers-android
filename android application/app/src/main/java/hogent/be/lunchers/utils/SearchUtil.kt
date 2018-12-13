@@ -1,5 +1,7 @@
 package hogent.be.lunchers.utils
 
+import android.util.Log
+import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.models.LunchIngredient
 import hogent.be.lunchers.models.LunchTag
@@ -18,6 +20,24 @@ class SearchUtil{
                 filteredlunches.add(lunch)
             }
         }
+        return filteredlunches.toList()
+    }
+
+    fun filterLunch(filterEnum: FilterEnum, allLunches:List<Lunch>): List<Lunch>{
+        var filteredlunches: List<Lunch> = emptyList()
+
+        if (filterEnum == FilterEnum.RECENT)
+            filteredlunches = allLunches.sortedWith(compareBy { it.lunchId }).reversed()
+
+        if (filterEnum == FilterEnum.PRICEHIGHEST)
+            filteredlunches = allLunches.sortedWith(compareBy { it.prijs }).reversed()
+
+        if (filterEnum == FilterEnum.PRICELOWEST)
+            filteredlunches = allLunches.sortedWith(compareBy { it.prijs })
+
+        if (!filteredlunches.any())
+            filteredlunches = allLunches.sortedWith(compareBy { it.prijs })
+
         return filteredlunches.toList()
     }
 

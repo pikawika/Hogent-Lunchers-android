@@ -1,6 +1,7 @@
 package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
+import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.models.*
 import hogent.be.lunchers.networks.LunchersApi
@@ -30,6 +31,11 @@ class LunchViewModel : InjectedViewModel() {
      * De lijst van alle lunches zoals die van de server gehaald is
      */
     private var allLunches = listOf<Lunch>()
+
+    /**
+     * De geselecteerde filter methode
+     */
+    private var selectedFilter : FilterEnum = FilterEnum.RECENT
 
     /**
      * een instantie van de lunchersApi om data van de server op te halen
@@ -96,6 +102,8 @@ class LunchViewModel : InjectedViewModel() {
     private fun onRetrieveAllLunchesSuccess(result: List<Lunch>) {
         allLunches = result
         filteredLunches.value = result
+        //filteredLunches.value = SearchUtil().filterLunch(selectedFilter, result)
+
     }
 
     /**
@@ -156,6 +164,14 @@ class LunchViewModel : InjectedViewModel() {
      */
     fun search(searchString:String){
         filteredLunches.value = SearchUtil().searchLunch(searchString, allLunches)
+    }
+
+    /**
+     * stelt de filtered type in en updat de lijst
+     */
+    fun setSelectedFilter(filterEnum: FilterEnum){
+        selectedFilter = filterEnum
+        filteredLunches.value = SearchUtil().filterLunch(selectedFilter, allLunches)
     }
 
 }

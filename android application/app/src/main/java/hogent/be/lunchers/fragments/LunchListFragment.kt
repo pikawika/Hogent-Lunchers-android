@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.lunch_list.*
 import kotlinx.android.synthetic.main.lunch_list.view.*
 import android.text.Editable
 import android.text.TextWatcher
-
+import kotlinx.android.synthetic.main.partial_search_filter.view.*
 
 
 class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
@@ -54,13 +54,11 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             lunchAdapter.notifyDataSetChanged()
         })
 
-        rootView.searchBar.addTextChangedListener(object : TextWatcher {
+        rootView.lunch_list_searchandfilter.txt_search.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                lunchViewModel.resetFilteredLunches()
-            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 lunchViewModel.search(s.toString())
