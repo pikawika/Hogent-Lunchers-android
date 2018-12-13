@@ -83,5 +83,12 @@ class ProfileFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+        rootView.buttonReservations.setOnClickListener {
+            activity!!.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, OrderListFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 }

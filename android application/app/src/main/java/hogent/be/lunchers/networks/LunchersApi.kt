@@ -1,6 +1,7 @@
 package hogent.be.lunchers.networks
 
 import hogent.be.lunchers.models.Lunch
+import hogent.be.lunchers.models.Reservatie
 import hogent.be.lunchers.networks.requests.LoginRequest
 import hogent.be.lunchers.networks.requests.RegistreerGebruikerRequest
 import hogent.be.lunchers.networks.requests.ReservatieRequest
@@ -23,6 +24,12 @@ interface LunchersApi {
      */
     @GET("api/lunch")
     fun getAllLunches(): Observable<List<Lunch>>
+
+    /**
+     * Haal alle reservaties op van de gebruiker
+     */
+    @GET("api/reservatie")
+    fun getAllOrders(): Observable<List<Reservatie>>
 
     /**
      * Login en return tokenresponse
