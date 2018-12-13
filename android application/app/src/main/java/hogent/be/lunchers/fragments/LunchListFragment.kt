@@ -81,6 +81,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onRefresh() {
+        lunch_list_searchandfilter.txt_search.setText("")
         retrieveAllLunches()
         lunchViewModel.setSelectedLunch(0)
     }
