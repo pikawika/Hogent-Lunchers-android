@@ -45,7 +45,7 @@
     <string name="reservatie_titel">Reservatie van</string>
 
     <!-- search hint -->
-    <string name="lunch_list_fragment_search_hint">Zoeken</string>
+    <string name="lunch_list_fragment_search_hint">Zoeken...</string>
 
     <!-- thank-you screen -->
     <string name="thank_you_fragment_thank_you_message">Bedankt!</string>
@@ -59,5 +59,12 @@
     <string name="example_reservation_aantal">Aantal: 4</string>
     <string name="example_reservation_date">24/12/2018 om 12u30</string>
     <string name="example_reservation_status">Status: Goedgekeurd</string>
+
+    <!-- actionbar -->
+    <string name="ab_filter_prijs_oplopend">Sorteren op prijs (oplopend)</string>
+    <string name="ab_filter_prijs_aflopend">Sorteren op prijs (aflopend)</string>
+    <string name="ab_filter_afstand">Sorteren op nabijheid</string>
+    <string name="ab_filter_nieuwste">Sorteren op recentheid</string>
+
 
 </resources>
