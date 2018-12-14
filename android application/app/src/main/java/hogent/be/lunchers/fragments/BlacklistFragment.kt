@@ -31,10 +31,16 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private var twoPane: Boolean = false
 
     /**
-     * [AccountViewModel] met de info over aangemede user
+     * [AccountViewModel] met de info over aangemelde user
      */
     //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var accountViewModel: AccountViewModel
+
+    /**
+     * [LunchViewModel] met de info over de lunches
+     */
+    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
+    private lateinit var lunchViewModel: LunchViewModel
 
     private lateinit var blacklistAdapter: BlacklistAdapter
 
@@ -43,6 +49,7 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         //viewmodel vullen
         accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
+        lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
 
         //blacklisteditems van server ophalen
         accountViewModel.refreshBlacklistedItems()
@@ -58,6 +65,8 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         //indien de meetinglijst veranderd moet de adapter opnieuw zijn cards genereren met nieuwe data
         blacklistedItems.observe(this, Observer {
             blacklistAdapter.notifyDataSetChanged()
+            //lunches moeten opnieuw opgehaald worden aangezien backend filtering doet
+            lunchViewModel.refreshLunches()
         })
 
         rootView.blacklist_list.adapter = blacklistAdapter
