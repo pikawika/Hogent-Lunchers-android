@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            tools:listitem="@layout/lunch_list_content"
+            tools:listitem="@layout/item_lunch"
             app:layoutManager="LinearLayoutManager"
             />
 

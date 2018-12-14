@@ -15,7 +15,7 @@ import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.constants.BASE_URL_BACKEND
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.lunch_list_content.view.*
+import kotlinx.android.synthetic.main.item_lunch.view.*
 
 class LunchAdapter(
     private val parentActivity: MainActivity,
@@ -55,7 +55,7 @@ class LunchAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.lunch_list_content, parent, false)
+            .inflate(R.layout.item_lunch, parent, false)
         return ViewHolder(view)
     }
 

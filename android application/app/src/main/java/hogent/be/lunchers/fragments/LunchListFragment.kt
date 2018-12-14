@@ -2,7 +2,6 @@ package hogent.be.lunchers.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -13,13 +12,11 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.adapters.LunchAdapter
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.lunch_list.*
-import kotlinx.android.synthetic.main.lunch_list.view.*
+import kotlinx.android.synthetic.main.fragment_lunch_list.*
+import kotlinx.android.synthetic.main.fragment_lunch_list.view.*
 import android.text.Editable
 import android.text.TextWatcher
-import hogent.be.lunchers.utils.MessageUtil
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_blacklist.view.*
 import kotlinx.android.synthetic.main.partial_search_filter.view.*
 
 
@@ -36,7 +33,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var lunchAdapter: LunchAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.lunch_list, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_lunch_list, container, false)
 
         if (rootView.lunch_detail_container != null) {
             twoPane = true

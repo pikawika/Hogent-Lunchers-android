@@ -13,8 +13,8 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.adapters.LunchAdapter
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.lunch_list.*
-import kotlinx.android.synthetic.main.lunch_list.view.*
+import kotlinx.android.synthetic.main.fragment_lunch_list.*
+import kotlinx.android.synthetic.main.fragment_lunch_list.view.*
 import android.text.Editable
 import android.text.TextWatcher
 import hogent.be.lunchers.adapters.BlacklistAdapter

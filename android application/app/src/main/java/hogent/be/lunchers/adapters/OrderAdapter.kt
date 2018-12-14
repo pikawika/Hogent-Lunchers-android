@@ -1,6 +1,5 @@
 package hogent.be.lunchers.adapters
 
-import android.annotation.SuppressLint
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.RecyclerView
@@ -18,9 +17,7 @@ import hogent.be.lunchers.models.Reservatie
 import hogent.be.lunchers.utils.OrderUtil.convertIntToStatus
 import hogent.be.lunchers.utils.OrderUtil.formatDate
 import hogent.be.lunchers.viewmodels.OrderViewModel
-import kotlinx.android.synthetic.main.order_list_content.view.*
-import java.text.SimpleDateFormat
-import java.util.*
+import kotlinx.android.synthetic.main.item_order.view.*
 
 class OrderAdapter(private val parentActivity: MainActivity, private val reservaties: MutableLiveData<List<Reservatie>>): RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
 
@@ -43,7 +40,7 @@ class OrderAdapter(private val parentActivity: MainActivity, private val reserva
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.order_list_content, parent, false)
+            .inflate(R.layout.item_order, parent, false)
         return ViewHolder(view)
     }
 

@@ -12,10 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
+import hogent.be.lunchers.databinding.FragmentLunchDetailBinding
 import hogent.be.lunchers.databinding.FragmentProfileBinding
-import hogent.be.lunchers.databinding.LunchDetailBinding
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.lunch_detail.view.*
+import kotlinx.android.synthetic.main.fragment_lunch_detail.view.*
 
 
 class LunchDetailFragment : Fragment() {
@@ -29,10 +29,10 @@ class LunchDetailFragment : Fragment() {
     /**
      * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
      */
-    private lateinit var binding: LunchDetailBinding
+    private lateinit var binding: FragmentLunchDetailBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.lunch_detail, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_lunch_detail, container, false)
 
         //viewmodel vullen
         lunchViewModel = ViewModelProviders.of(activity!!).get(LunchViewModel::class.java)
