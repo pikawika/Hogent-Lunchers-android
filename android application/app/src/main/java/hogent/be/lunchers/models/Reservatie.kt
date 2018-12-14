@@ -15,4 +15,5 @@ data class Reservatie(
     val aantal: Int,
     val lunch: Lunch,
     val datum: Date,
-    val status: Int)
+    val status: Int,
+    val opmerking: String)

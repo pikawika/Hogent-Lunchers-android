@@ -41,7 +41,7 @@ class OrderViewModel : InjectedViewModel() {
     private var getAllReservationsSubscription: Disposable
 
     init {
-        _reservations.value = listOf()
+        _reservations.value = emptyList()
 
         _selectedOrder.value = null
 
