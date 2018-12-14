@@ -19,7 +19,10 @@
     </string>
 
     <!-- fragment_lunch_detail-->
-    <string name="button_lunch_detail_tekst">Reserveer deze lunch</string>
+    <string name="button_lunch_detail_reserve">Reserveer deze lunch</string>
+    <string name="button_lunch_detail_call">Bel het restaurant</string>
+    <string name="button_lunch_detail_show_on_map">Bekijk restaurant op de kaart</string>
+    <string name="button_lunch_detail_navigation">Routebeschrijving</string>
 
     <!-- account string -->
     <string name="account_placeholder_gebruikersnaam">Gebruikersnaam</string>

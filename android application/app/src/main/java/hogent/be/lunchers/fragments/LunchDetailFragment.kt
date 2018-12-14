@@ -50,7 +50,7 @@ class LunchDetailFragment : Fragment() {
 
     private fun initListeners(rootView: View){
         //reserveren
-        rootView.button_lunch_detail_reserveren.setOnClickListener {
+        rootView.button_lunch_detail_reserve.setOnClickListener {
             fragmentManager!!.beginTransaction()
                 .replace(R.id.fragment_container, ReservationFragment())
                 .addToBackStack(null)
@@ -58,7 +58,7 @@ class LunchDetailFragment : Fragment() {
         }
 
         //bel
-        rootView.button_lunch_detail_bellen.setOnClickListener{
+        rootView.button_lunch_detail_call.setOnClickListener{
             val builder = AlertDialog.Builder(activity)
             builder.setCancelable(true)
             builder.setTitle("Bellen naar " + lunchViewModel.getSelectedLunch().value?.handelaar?.handelsNaam)
@@ -77,7 +77,7 @@ class LunchDetailFragment : Fragment() {
         }
 
         //locatie clicked
-        rootView.textview_lunch_location_restaurant.setOnClickListener{
+        rootView.text_lunch_detail_location_restaurant.setOnClickListener{
             fragmentManager!!.beginTransaction()
                 .replace(R.id.fragment_container, MapsFragment())
                 .addToBackStack(null)
