@@ -13,9 +13,23 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.5" />
 
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_login_10percent_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.10"/>
+
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_login_90percent_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.90"/>
+
     <ImageView
             android:id="@+id/imageview_login_logo"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
 
             app:layout_constraintDimensionRatio="H,16:11"
@@ -23,13 +37,13 @@
             app:srcCompat="@drawable/ic_logo_red"
             android:tint="@color/colorPrimary"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_10percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_login_90percent_vertical"
             app:layout_constraintBottom_toBottomOf="@+id/guideline_login_50percent_horizontal"
 
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="56dp" app:layout_constraintHorizontal_bias="0.0"/>
 
     <EditText
             android:id="@+id/text_login_gebruikersnaam"
