@@ -34,8 +34,9 @@ class SearchUtil{
         if (filterEnum == FilterEnum.PRICELOWEST)
             filteredlunches = allLunches.sortedWith(compareBy { it.prijs })
 
+        //filter niet gevonden gewoon houden
         if (!filteredlunches.any())
-            filteredlunches = allLunches.sortedWith(compareBy { it.prijs })
+            filteredlunches = allLunches
 
         return filteredlunches.toList()
     }

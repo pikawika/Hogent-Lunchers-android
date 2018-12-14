@@ -28,7 +28,7 @@ class LunchAdapter(
      * [LunchViewModel] met de data over account
      */
     //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
-    private lateinit var lunchViewModel: LunchViewModel
+    private var lunchViewModel: LunchViewModel
 
     private val onClickListener: View.OnClickListener
 
