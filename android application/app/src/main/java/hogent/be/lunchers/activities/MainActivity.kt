@@ -68,6 +68,10 @@ class MainActivity : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+
+        if (lunchViewModel.getSelectedFilter() == FilterEnum.DISTANCE)
+            lunchesFromLocation()
+      
         setSupportActionBar(toolbar)
     }
 
@@ -209,11 +213,13 @@ class MainActivity : AppCompatActivity() {
                 1
             )
             MessageUtil.showToast("Geef locatietoestemming en probeer opnieuw")
-            return
         }
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                lunchViewModel.refreshLunchesFromLocation(location?.latitude ?:0.00, location?.longitude ?:0.00)
+                if (location?.latitude == null || location?.longitude == null)
+                    MessageUtil.showToast("Locatie niet beschikbaar, recentste lunches worden getoond.")
+
+                lunchViewModel.setSelectedFilter(FilterEnum.DISTANCE, location?.latitude ?:0.00, location?.longitude ?:0.00)
             }
     }
 

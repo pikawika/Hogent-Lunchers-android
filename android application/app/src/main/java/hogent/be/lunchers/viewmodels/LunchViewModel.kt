@@ -33,6 +33,17 @@ class LunchViewModel : InjectedViewModel() {
      */
     private var allLunches = listOf<Lunch>()
 
+
+    /**
+     * De longitude waarop user lunches wilt
+     */
+    private var longitude : Double = 0.00
+
+    /**
+     * De latitude waarop user lunches wilt
+     */
+    private var latitude : Double = 0.00
+
     /**
      * De geselecteerde filter methode
      */
@@ -47,26 +58,14 @@ class LunchViewModel : InjectedViewModel() {
     /**
      * De subscription op het get all lunches verzoek
      */
-    private var getAllLunchesSubscription: Disposable
+    private lateinit var getAllLunchesSubscription: Disposable
 
     init {
         //initieel vullen met een lege lijst zodat dit niet nul os
         filteredLunches.value = emptyList()
         selectedFilter = PreferenceUtil().getDefaultFilterMethod()
-        getAllLunchesSubscription = lunchersApi.getAllLunches()
-            //we tell it to fetch the data on background by
-            .subscribeOn(Schedulers.io())
-            //we like the fetched data to be displayed on the MainTread (UI)
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { onRetrieveStart() }
-            .doOnTerminate { onRetrieveFinish() }
-            .subscribe(
-                { result -> onRetrieveAllLunchesSuccess(result) },
-                { error -> onRetrieveError(error) }
-            )
+        refreshLunches()
     }
-
-
 
     /**
      * Functie voor het behandelen van het mislukken van het ophalen van data van de server
@@ -102,9 +101,8 @@ class LunchViewModel : InjectedViewModel() {
      * Zal de lijst van meetings gelijkstellen met het results
      */
     private fun onRetrieveAllLunchesSuccess(result: List<Lunch>) {
-        allLunches = SearchUtil().filterLunch(selectedFilter, result)
+        allLunches = result
         filteredLunches.value = SearchUtil().filterLunch(selectedFilter, result)
-        //filteredLunches.value = SearchUtil().filterLunch(selectedFilter, result)
     }
 
     /**
@@ -147,7 +145,17 @@ class LunchViewModel : InjectedViewModel() {
     * Lunches opnieuw ophalen om te refreshen
     */
     fun refreshLunches(){
-        getAllLunchesSubscription = lunchersApi.getAllLunches()
+        if (selectedFilter == FilterEnum.DISTANCE)
+            refreshLunchesFromLocation()
+        else
+            refreshLunchesDefault()
+    }
+
+    /**
+     * Lunches opnieuw ophalen om te refreshen
+     */
+    private fun refreshLunchesFromLocation(){
+        getAllLunchesSubscription = lunchersApi.getAllLunchesFromLocation(latitude, longitude)
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
             //we like the fetched data to be displayed on the MainTread (UI)
@@ -155,7 +163,10 @@ class LunchViewModel : InjectedViewModel() {
             .doOnSubscribe { onRetrieveStart() }
             .doOnTerminate { onRetrieveFinish() }
             .subscribe(
-                { result -> onRetrieveAllLunchesSuccess(result) },
+                { result -> run {
+                    selectedFilter = FilterEnum.DISTANCE
+                    onRetrieveAllLunchesSuccess(result)
+                } },
                 { error -> onRetrieveError(error) }
             )
     }
@@ -163,8 +174,8 @@ class LunchViewModel : InjectedViewModel() {
     /**
      * Lunches opnieuw ophalen om te refreshen
      */
-    fun refreshLunchesFromLocation(latitude: Double, longitude: Double){
-        getAllLunchesSubscription = lunchersApi.getAllLunchesFromLocation(latitude, longitude)
+    private fun refreshLunchesDefault(){
+        getAllLunchesSubscription = lunchersApi.getAllLunches()
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
             //we like the fetched data to be displayed on the MainTread (UI)
@@ -187,9 +198,22 @@ class LunchViewModel : InjectedViewModel() {
     /**
      * stelt de filtered type in en updat de lijst
      */
-    fun setSelectedFilter(filterEnum: FilterEnum){
+    fun setSelectedFilter(filterEnum: FilterEnum, latitude: Double = 0.00, longitude: Double = 0.00){
         selectedFilter = filterEnum
-        filteredLunches.value = SearchUtil().filterLunch(selectedFilter, allLunches)
+        if (filterEnum == FilterEnum.DISTANCE) {
+            this.longitude = longitude!!
+            this.latitude = latitude!!
+            refreshLunchesFromLocation()
+        } else {
+            filteredLunches.value = SearchUtil().filterLunch(selectedFilter, allLunches)
+        }
+    }
+
+    /**
+     * stelt de filtered type in en updat de lijst
+     */
+    fun getSelectedFilter() : FilterEnum{
+        return selectedFilter
     }
 
 }
