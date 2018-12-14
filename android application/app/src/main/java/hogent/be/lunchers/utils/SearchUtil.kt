@@ -10,12 +10,13 @@ class SearchUtil{
         val filteredlunches = mutableListOf<Lunch>()
 
         for (lunch: Lunch in allLunches){
-            var naamFound = filterNaam(searchString,lunch)
+            var naamFound = filterLunchNaam(searchString,lunch)
             var beschrijvingFound = filterBeschrijving(searchString,lunch)
             var tagFound = filterTags(searchString,lunch)
             var ingredientFound = filterIngredienten(searchString,lunch)
+            var handelsnaamFound = filterHandelsNaam(searchString,lunch)
 
-            if(naamFound || beschrijvingFound || tagFound || ingredientFound){
+            if(naamFound || beschrijvingFound || tagFound || ingredientFound || handelsnaamFound){
                 filteredlunches.add(lunch)
             }
         }
@@ -41,8 +42,15 @@ class SearchUtil{
         return filteredlunches.toList()
     }
 
-    private fun filterNaam(searchString: String, lunch:Lunch): Boolean{
+    private fun filterLunchNaam(searchString: String, lunch:Lunch): Boolean{
         if(lunch.naam.contains(searchString, ignoreCase = true)){
+            return true
+        }
+        return false
+    }
+
+    private fun filterHandelsNaam(searchString: String, lunch:Lunch): Boolean{
+        if(lunch.handelaar.handelsNaam.contains(searchString, ignoreCase = true)){
             return true
         }
         return false
