@@ -95,6 +95,15 @@ class SettingsFragment : Fragment() {
             }
             builder.show()
         }
+
+        //default boot page
+        rootView.btn_settings_blacklist.setOnClickListener {
+            activity!!.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, BlacklistFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     override fun onResume() {

@@ -5,12 +5,10 @@ import hogent.be.lunchers.enums.FilterEnum
 import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.constants.ROL_KLANT
+import hogent.be.lunchers.models.BlacklistedItem
 import hogent.be.lunchers.networks.responses.TokenResponse
 import hogent.be.lunchers.networks.LunchersApi
-import hogent.be.lunchers.networks.requests.LoginRequest
-import hogent.be.lunchers.networks.requests.RegistreerGebruikerRequest
-import hogent.be.lunchers.networks.requests.RegistreerLoginRequest
-import hogent.be.lunchers.networks.requests.WijzigWachtwoordRequest
+import hogent.be.lunchers.networks.requests.*
 import hogent.be.lunchers.networks.responses.BerichtResponse
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.utils.PreferenceUtil
@@ -25,12 +23,22 @@ import javax.inject.Inject
 class AccountViewModel : InjectedViewModel() {
 
     /**
-     * De lijst van alle lunches zoals die van de server gehaald is
+     * De gebruikersnaam van de aangemelde user
      */
     private var gebruikersnaam = MutableLiveData<String>()
 
     /**
-     * De lijst van alle lunches zoals die van de server gehaald is
+     * De lijst van blacklisted items van de aangemelde user
+     */
+    private var blacklistedItems = MutableLiveData<List<BlacklistedItem>>()
+
+    /**
+     * De subscription op blacklisted items verzoeken
+     */
+    private lateinit var blacklistedItemsSubscription: Disposable
+
+    /**
+     * De token van de aangemelde user
      */
     private var token = MutableLiveData<String>()
 
@@ -62,9 +70,12 @@ class AccountViewModel : InjectedViewModel() {
 
 
     init {
+        blacklistedItems.value = emptyList()
         token.value = PreferenceUtil().getToken()
         gebruikersnaam.value = PreferenceUtil().getGebruikersnaam()
         aangemeld.value = token.value != ""
+
+
     }
 
     /**
@@ -135,6 +146,9 @@ class AccountViewModel : InjectedViewModel() {
         if (::registreerSubscription.isInitialized) {
             registreerSubscription.dispose()
         }
+        if (::blacklistedItemsSubscription.isInitialized) {
+            blacklistedItemsSubscription.dispose()
+        }
     }
 
     /**
@@ -154,6 +168,64 @@ class AccountViewModel : InjectedViewModel() {
             )
         this.gebruikersnaam.value = gebruikersnaam
         PreferenceUtil().setGebruikersnaam(gebruikersnaam)
+    }
+
+    /**
+     * Logt de gerbuiker in en returnt of al dan niet gelukt
+     */
+    fun refreshBlacklistedItems() {
+        blacklistedItemsSubscription = lunchersApi.getAllBlacklistedItems()
+            //we tell it to fetch the data on background by
+            .subscribeOn(Schedulers.io())
+            //we like the fetched data to be displayed on the MainTread (UI)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveStart() }
+            .doOnTerminate { onRetrieveFinish() }
+            .subscribe(
+                { result -> onRetrieveBlacklistedItemsSuccess(result) },
+                { error -> onRetrieveError(error) }
+            )
+    }
+
+    /**
+     * Logt de gerbuiker in en returnt of al dan niet gelukt
+     */
+    private fun addBlacklistedItemProcessing(newItem: String) {
+        blacklistedItemsSubscription = lunchersApi.addBlacklistedItem(AddBlacklistedItemRequest(newItem))
+            //we tell it to fetch the data on background by
+            .subscribeOn(Schedulers.io())
+            //we like the fetched data to be displayed on the MainTread (UI)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveStart() }
+            .doOnTerminate { onRetrieveFinish() }
+            .subscribe(
+                { result -> onRetrieveBlacklistedItemsSuccess(result) },
+                { error -> onRetrieveError(error) }
+            )
+    }
+
+    /**
+     * Logt de gerbuiker in en returnt of al dan niet gelukt
+     */
+    private fun deleteBlacklistedItemProcessing(idItemToDelete: Int) {
+        blacklistedItemsSubscription = lunchersApi.deleteBlacklistedItem(idItemToDelete)
+            //we tell it to fetch the data on background by
+            .subscribeOn(Schedulers.io())
+            //we like the fetched data to be displayed on the MainTread (UI)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveStart() }
+            .doOnTerminate { onRetrieveFinish() }
+            .subscribe(
+                { result -> onRetrieveBlacklistedItemsSuccess(result) },
+                { error -> onRetrieveError(error) }
+            )
+    }
+
+    /**
+     * Functie voor het behandelen van het succesvol ophalen van blacklisted items
+     */
+    private fun onRetrieveBlacklistedItemsSuccess(result: List<BlacklistedItem>) {
+        blacklistedItems.value = result
     }
 
     /**
@@ -250,5 +322,28 @@ class AccountViewModel : InjectedViewModel() {
     fun setDefaultBootPage(pageEnum: PageEnum){
         PreferenceUtil().setDefaultBootPage(pageEnum)
     }
+
+    /**
+     * Voegt een [BlacklistedItem] toe
+     */
+    fun addBlacklistedItem(newItem: String){
+        addBlacklistedItemProcessing(newItem)
+    }
+
+    /**
+     * Verwijderd een [BlacklistedItem]
+     */
+    fun deleteBlacklistedItem(itemToDeleteId: Int){
+        deleteBlacklistedItemProcessing(itemToDeleteId)
+    }
+
+    /**
+     * Geeft [BlacklistedItem] lijst
+     */
+    fun getBlacklistedItems() : MutableLiveData<List<BlacklistedItem>>{
+        return blacklistedItems
+    }
+
+
 
 }

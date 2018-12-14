@@ -1,6 +1,12 @@
 package hogent.be.lunchers.utils
 
+import android.app.AlertDialog
+import android.content.Context
+import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.Toast
+import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 
 /**
@@ -18,5 +24,27 @@ object MessageUtil {
     @JvmStatic
     fun showToast(bericht: String, tijd: Int = Toast.LENGTH_LONG) {
         Toast.makeText(MainActivity.getContext(), bericht, tijd).show()
+    }
+
+    @JvmStatic
+    fun showMakeSuggestionDialog( context : Context, title: String, message: String, func: (String) -> Unit) {
+        val editText = EditText(context)
+        editText.setSingleLine(false)
+        editText.hint = "Ingrediënt of tag"
+        val container = FrameLayout(context)
+        val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        params.marginStart = 100
+        params.marginEnd = 100
+        editText.layoutParams = params
+        container.addView(editText)
+
+        AlertDialog.Builder(context)
+            .setTitle(title)
+            .setView(container)
+            .setMessage(message)
+            .setPositiveButton("Voeg toe") { _, _ -> func(editText.text.toString()) }
+            .setNeutralButton("Annuleren") { dialog, _ -> dialog.dismiss() }
+            .create()
+            .show()
     }
 }
