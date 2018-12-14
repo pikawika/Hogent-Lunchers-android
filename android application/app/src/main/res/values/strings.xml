@@ -74,6 +74,7 @@
     <string name="text_settings_default_filter">Standaard filtermethode</string>
     <string name="text_settings_default_boot">Startscherm instellen</string>
     <string name="text_settings_blacklist">Zwarte lijst</string>
+    <string name="text_settings_blacklist_description">Indien een lunch een item van de zwarte lijst heeft (ingrediënt of tag) zal deze niet weergegeven worden.</string>
     <string name="text_select_default_filter">Kies standaard filtermethode</string>
     <string name="text_select_default_boot">Kies standaard startscherm</string>
 

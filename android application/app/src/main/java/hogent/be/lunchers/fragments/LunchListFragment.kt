@@ -27,7 +27,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private var twoPane: Boolean = false
 
     /**
-     * [MeetingViewModel] met de data van alle meetings
+     * [LunchViewModel] met de data van alle lunches
      */
     //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var lunchViewModel : LunchViewModel
