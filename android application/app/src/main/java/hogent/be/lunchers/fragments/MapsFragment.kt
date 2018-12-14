@@ -25,10 +25,14 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.models.Lunch
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
+import android.text.Editable
+import android.text.TextWatcher
 import hogent.be.lunchers.databinding.FragmentMapBinding
 import hogent.be.lunchers.databinding.FragmentProfileBinding
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
+import kotlinx.android.synthetic.main.fragment_map.view.*
+import kotlinx.android.synthetic.main.partial_search_filter.view.*
 import java.io.InputStream
 
 
@@ -73,6 +77,17 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             .replace(R.id.google_map_selectedlunch, PartialLunchCardFragment())
             .commit()
 
+        rootView.map_searchandfilter.txt_search.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                lunchViewModel.search(s.toString())
+            }
+        })
+
         return rootView
     }
 
@@ -112,23 +127,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     // Deze methode plaatst markers op de map via de meegegeven latitude en longitude
     // Als je er op klikt verschijnt de naam en kan je ook via Google Maps navigatie starten
     private fun placeMarkerOnMap(lat: Double, lng: Double, id: String) {
-
         map.addMarker(
             MarkerOptions().position(LatLng(lat, lng))
                 .title(id)
         )
-    }
-
-    private fun getBitmapFromURL(src: String): Bitmap? {
-        var bmp: Bitmap? = null
-        try {
-            val input: InputStream = java.net.URL(src).openStream()
-            bmp = BitmapFactory.decodeStream(input)
-        } catch (e: Exception) {
-            Log.e("Error", e.message)
-            e.printStackTrace()
-        }
-        return bmp
     }
 
     // Functie die de locatie van de gebruiker ophaalt en de camera naar deze locatie laat gaan
@@ -178,6 +180,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     private fun putMarkersOnMap(lunches: List<Lunch>) {
         if (lunches != null) {
+            //alle markers reeds op de kaart wegdoen
+            map.clear()
             lunches.forEach {
                 placeMarkerOnMap(
                     it.handelaar.locatie.latitude,
