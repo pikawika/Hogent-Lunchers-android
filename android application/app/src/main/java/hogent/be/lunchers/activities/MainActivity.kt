@@ -8,20 +8,19 @@ import android.databinding.DataBindingUtil
 import android.location.Location
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.content.PermissionChecker
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
+import hogent.be.lunchers.enums.FilterEnum
 import hogent.be.lunchers.R
 import hogent.be.lunchers.databinding.ActivityMainBinding
-import hogent.be.lunchers.fragments.LoginFragment
-import hogent.be.lunchers.fragments.LunchListFragment
-import hogent.be.lunchers.fragments.MapsFragment
+import hogent.be.lunchers.enums.PageEnum
+import hogent.be.lunchers.fragments.*
 import hogent.be.lunchers.utils.PreferenceUtil
-import hogent.be.lunchers.fragments.ProfileFragment
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import hogent.be.lunchers.viewmodels.LunchViewModel
@@ -69,12 +68,18 @@ class MainActivity : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        initApp()
+        if (lunchViewModel.getSelectedFilter() == FilterEnum.DISTANCE)
+            lunchesFromLocation()
+
+        setSupportActionBar(toolbar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //menu van de toolbar instellen
         menuInflater.inflate(R.menu.toolbar_menu, menu)
+
+        //men moet wachten tot toolbar is ingesteld om hem te kunnen configureren in onze fragments, deze heeft rare lifecycle.
+        showBootPage()
 
         return true
     }
@@ -85,21 +90,46 @@ class MainActivity : AppCompatActivity() {
         initListeners()
     }
 
-    private fun initApp() {
-        setSupportActionBar(toolbar)
-
-        bottom_navigation_view.selectedItemId = R.id.action_list
-
+    private fun showBootPage() {
         if (sharedPreferences.getToken() != ""){
+            var fragment : Fragment
+            when (accountViewModel.getDefaultBootPage()) {
+                PageEnum.MAP -> {
+                    fragment = MapsFragment()
+                    bottom_navigation_view.selectedItemId = R.id.action_map
+                }
+                PageEnum.PROFILE -> {
+                    fragment = ProfileFragment()
+                    bottom_navigation_view.selectedItemId = R.id.action_profile
+                }
+                PageEnum.ORDERSLIST -> {
+                    fragment = OrderListFragment()
+                    bottom_navigation_view.selectedItemId = R.id.action_profile
+                }
+                else -> {
+                    fragment = LunchListFragment()
+                    bottom_navigation_view.selectedItemId = R.id.action_list
+                }
+            }
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, LunchListFragment())
+                .replace(R.id.fragment_container, fragment)
                 .commit()
         } else {
+            //locatie toegang vragen bij eerste keer openen app (aanmeld scherm)
+            if (PermissionChecker.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissions(
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    1
+                )
+            }
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, LoginFragment())
                 .commit()
         }
-
     }
 
     private fun initListeners() {
@@ -182,11 +212,13 @@ class MainActivity : AppCompatActivity() {
                 1
             )
             MessageUtil.showToast("Geef locatietoestemming en probeer opnieuw")
-            return
         }
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                lunchViewModel.refreshLunchesFromLocation(location?.latitude ?:0.00, location?.longitude ?:0.00)
+                if (location?.latitude == null || location?.longitude == null)
+                    MessageUtil.showToast("Locatie niet beschikbaar, recentste lunches worden getoond.")
+
+                lunchViewModel.setSelectedFilter(FilterEnum.DISTANCE, location?.latitude ?:0.00, location?.longitude ?:0.00)
             }
     }
 

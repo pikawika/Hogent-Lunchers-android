@@ -1,7 +1,6 @@
 package hogent.be.lunchers.utils
 
-import android.util.Log
-import com.lennertbontinck.carmeetsandroidapp.enums.FilterEnum
+import hogent.be.lunchers.enums.FilterEnum
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.models.LunchIngredient
 import hogent.be.lunchers.models.LunchTag
@@ -35,8 +34,9 @@ class SearchUtil{
         if (filterEnum == FilterEnum.PRICELOWEST)
             filteredlunches = allLunches.sortedWith(compareBy { it.prijs })
 
+        //filter niet gevonden gewoon houden
         if (!filteredlunches.any())
-            filteredlunches = allLunches.sortedWith(compareBy { it.prijs })
+            filteredlunches = allLunches
 
         return filteredlunches.toList()
     }
