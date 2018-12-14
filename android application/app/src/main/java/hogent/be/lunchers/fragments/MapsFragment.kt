@@ -86,10 +86,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         setUpMap()
     }
 
+    //zet de geselecteerde lunch op de geklikte marker waardoor partial onderaan tevoorschijn komt
+    //en zet de camera zodat de marker in het midden staat met behoud van zoom level
     override fun onMarkerClick(clickedMarker: Marker?): Boolean {
         lunchViewModel.setSelectedLunch(clickedMarker!!.title.toInt())
         clickedMarker.hideInfoWindow()
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(clickedMarker.position, 13f))
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(clickedMarker.position, map.cameraPosition.zoom))
         return true
     }
 
@@ -155,13 +157,13 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             if (location != null && lunchViewModel.getSelectedLunch()?.value == null) {
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13f))
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
             }
         }
 
         if (lunchViewModel.getSelectedLunch()?.value != null) {
             val currentLatLng = LatLng(lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.latitude, lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.longitude)
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13f))
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
         }
     }
 
