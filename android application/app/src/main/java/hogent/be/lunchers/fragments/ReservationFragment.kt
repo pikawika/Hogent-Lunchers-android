@@ -19,6 +19,7 @@ import hogent.be.lunchers.viewmodels.ReservationViewModel
 import kotlinx.android.synthetic.main.fragment_reservation.*
 import kotlinx.android.synthetic.main.fragment_reservation.view.*
 import android.arch.lifecycle.Observer
+import hogent.be.lunchers.activities.MainActivity
 import java.util.Calendar
 
 @Suppress("DEPRECATION")
@@ -141,6 +142,19 @@ class ReservationFragment : Fragment() {
             dialog.show()
         }
         else { MessageUtil.showToast("Gelieve het hele formulier in te vullen.") }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.reservatie_titel)
+        MainActivity.setCanpop(true)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        MainActivity.setCanpop(false)
     }
 
 }

@@ -97,14 +97,15 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onResume() {
         super.onResume()
-
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_settings_blacklist)
+        MainActivity.setCanpop(true)
     }
 
     override fun onPause() {
         super.onPause()
-
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        MainActivity.setCanpop(false)
     }
 
 }

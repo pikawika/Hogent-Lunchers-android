@@ -108,13 +108,14 @@ class SettingsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_settings_title)
+        MainActivity.setCanpop(true)
     }
 
     override fun onPause() {
         super.onPause()
-
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        MainActivity.setCanpop(false)
     }
 }

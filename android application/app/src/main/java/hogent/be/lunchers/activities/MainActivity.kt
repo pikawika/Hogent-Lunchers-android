@@ -9,6 +9,7 @@ import android.location.Location
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v4.content.PermissionChecker
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -28,7 +29,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var sharedPreferences : PreferenceUtil
+    lateinit var sharedPreferences: PreferenceUtil
 
     /**
      * De [AccountViewModel] dat we gebruiken voord de data voor databinding
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
         if (lunchViewModel.getSelectedFilter() == FilterEnum.DISTANCE)
             lunchesFromLocation()
-      
+
         setSupportActionBar(toolbar)
     }
 
@@ -92,8 +93,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showBootPage() {
-        if (sharedPreferences.getToken() != ""){
-            var fragment : Fragment
+        if (accountViewModel.getIsAangmeld().value!!) {
+            var fragment: Fragment
             when (accountViewModel.getDefaultBootPage()) {
                 PageEnum.MAP -> {
                     fragment = MapsFragment()
@@ -114,6 +115,7 @@ class MainActivity : AppCompatActivity() {
             }
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
                 .commit()
         } else {
             //locatie toegang vragen bij eerste keer openen app (aanmeld scherm)
@@ -129,8 +131,18 @@ class MainActivity : AppCompatActivity() {
             }
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, LoginFragment())
+                .addToBackStack(null)
                 .commit()
         }
+    }
+
+    //fysieke back button ingedruk
+    override fun onBackPressed() {
+        //kijk of je mag terug gaan anders poppen
+        if (canPop)
+            supportFragmentManager.popBackStackImmediate()
+        else
+            finish()
     }
 
     private fun initListeners() {
@@ -144,13 +156,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        //supportFragmentManager.popBackStack()
         when (item.itemId) {
             R.id.action_map -> {
                 supportActionBar?.title = "Restaurants in de buurt"
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, MapsFragment())
-                    .commitAllowingStateLoss()
+                    .addToBackStack(null)
+                    .commit()
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -158,15 +170,17 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.title = getString(R.string.app_name)
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, LunchListFragment())
-                    .commitAllowingStateLoss()
+                    .addToBackStack(null)
+                    .commit()
                 return@OnNavigationItemSelectedListener true
             }
 
             R.id.action_profile -> {
                 supportActionBar?.title = "Profiel"
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, ProfileFragment())
-                        .commitAllowingStateLoss()
+                    .replace(R.id.fragment_container, ProfileFragment())
+                    .addToBackStack(null)
+                    .commit()
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -202,7 +216,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun lunchesFromLocation(){
+    private fun lunchesFromLocation() {
         if (PermissionChecker.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -219,7 +233,11 @@ class MainActivity : AppCompatActivity() {
                 if (location?.latitude == null || location?.longitude == null)
                     MessageUtil.showToast("Locatie niet beschikbaar, recentste lunches worden getoond.")
 
-                lunchViewModel.setSelectedFilter(FilterEnum.DISTANCE, location?.latitude ?:0.00, location?.longitude ?:0.00)
+                lunchViewModel.setSelectedFilter(
+                    FilterEnum.DISTANCE,
+                    location?.latitude ?: 0.00,
+                    location?.longitude ?: 0.00
+                )
             }
     }
 
@@ -227,12 +245,20 @@ class MainActivity : AppCompatActivity() {
         //voor globaal gebruik van context
         //handig om toasts van eender waar te doen en gebruik in andere utils
         private var instance: MainActivity? = null
+        private var canPop: Boolean = false
 
         /**
          * returnt de [Context] van de app zijn MainActivity
          */
         fun getContext(): Context {
             return instance!!.applicationContext
+        }
+
+        /**
+         * returnt de [Context] van de app zijn MainActivity
+         */
+        fun setCanpop(boolean: Boolean) {
+            canPop = boolean
         }
     }
 }
