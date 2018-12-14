@@ -1,28 +1,17 @@
 <resources>
-    <string name="app_name">Lunchers</string>
-    <string name="lunch_afbeelding_beschrijving">Een afbeelding van een lunch</string>
-    <string name="lunch_tekst_naam">Lekker Thais</string>
-    <string name="lunch_tekst_prijs">Prijs: € 29,99</string>
-    <string name="lunch_tekst_beschrijving">Geniet van een lekkere Thaise lunch onder de middag. Deze maaltijd bestaat
-        uit 4 kleine Thaise gerechten geserveerd met een kommetje kleefrijst.
-    </string>
-    <string name="textview_lunch_locatie">Arbeidstraat 14, 9300 Aalst</string>
-    <string name="button_lunch_detail_tekst_bellen">Bellen</string>
-    <string name="textview_lunch_detail_restaurant_tekst">Yok Tha</string>
-    <string name="title_map">Kaart</string>
-    <string name="title_list">Lijst</string>
-    <string name="title_profile">Profiel</string>
-    <string name="title_orders">Bestellingen</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="network_error">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw
-        te proberen.
-    </string>
-
     <!-- fragment_lunch_detail-->
     <string name="button_lunch_detail_reserve">Reserveer deze lunch</string>
     <string name="button_lunch_detail_call">Bel het restaurant</string>
     <string name="button_lunch_detail_show_on_map">Bekijk restaurant op de kaart</string>
     <string name="button_lunch_detail_navigation">Routebeschrijving</string>
+
+
+
+
+
+
+
+
 
     <!-- account string -->
     <string name="account_placeholder_gebruikersnaam">Gebruikersnaam</string>
@@ -92,5 +81,25 @@
     <string name="btn_reservation_date">Datum kiezen</string>
     <string name="tv_reservation_date">Kies een datum</string>
     <string name="title_fragment_orderlist">Reservaties</string>
+
+
+    <string name="app_name">Lunchers</string>
+    <string name="lunch_afbeelding_beschrijving">Een afbeelding van een lunch</string>
+    <string name="lunch_tekst_naam">Lekker Thais</string>
+    <string name="lunch_tekst_prijs">Prijs: € 29,99</string>
+    <string name="lunch_tekst_beschrijving">Geniet van een lekkere Thaise lunch onder de middag. Deze maaltijd bestaat
+        uit 4 kleine Thaise gerechten geserveerd met een kommetje kleefrijst.
+    </string>
+    <string name="textview_lunch_locatie">Arbeidstraat 14, 9300 Aalst</string>
+    <string name="button_lunch_detail_tekst_bellen">Bellen</string>
+    <string name="textview_lunch_detail_restaurant_tekst">Yok Tha</string>
+    <string name="title_map">Kaart</string>
+    <string name="title_list">Lijst</string>
+    <string name="title_profile">Profiel</string>
+    <string name="title_orders">Bestellingen</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="network_error">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw
+        te proberen.
+    </string>
 
 </resources>

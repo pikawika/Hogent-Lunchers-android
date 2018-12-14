@@ -190,7 +190,7 @@
             />
 
             <Button
-                    android:id="@+id/lunch_detail_button_show_on_map"
+                    android:id="@+id/button_lunch_detail_show_on_map"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
@@ -206,7 +206,7 @@
             />
 
             <Button
-                    android:id="@+id/lunch_detail_button_navigation"
+                    android:id="@+id/button_lunch_detail_navigation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
@@ -216,11 +216,11 @@
 
                     app:layout_constraintEnd_toStartOf="@+id/guideline_lunch_detail_90percent_vertical"
                     app:layout_constraintStart_toStartOf="@+id/guideline_lunch_detail_10percent_vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/lunch_detail_button_show_on_map"
+                    app:layout_constraintTop_toBottomOf="@+id/button_lunch_detail_show_on_map"
                     app:layout_constraintBottom_toBottomOf="parent"
 
                     android:layout_marginTop="12dp"
-
+                    android:layout_marginBottom="12dp"
             />
 
         </android.support.constraint.ConstraintLayout>

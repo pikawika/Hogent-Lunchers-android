@@ -77,7 +77,7 @@ class LunchDetailFragment : Fragment() {
         }
 
         //locatie clicked
-        rootView.text_lunch_detail_location_restaurant.setOnClickListener{
+        rootView.button_lunch_detail_show_on_map.setOnClickListener{
             fragmentManager!!.beginTransaction()
                 .replace(R.id.fragment_container, MapsFragment())
                 .addToBackStack(null)
