@@ -44,7 +44,8 @@ class PreferenceUtil() {
     fun deletePreferences() {
         sharedPreferences.edit().putString(PREFERENCE_TOKEN, "").apply()
         sharedPreferences.edit().putString(PREFERENCE_GEBRUIKERSNAAM, "").apply()
-        sharedPreferences.edit().putString(PREFERENCE_DEFAULTBOOTPAGE, "").apply()
+        sharedPreferences.edit().putInt(PREFERENCE_DEFAULTBOOTPAGE, 0).apply()
+        sharedPreferences.edit().putInt(PREFERENCE_DEFAULTFILTERMETHOD, 0).apply()
     }
 
     fun getDefaultFilterMethod() : FilterEnum {
@@ -56,23 +57,11 @@ class PreferenceUtil() {
     }
 
     fun getDefaultBootPage() : PageEnum {
-        return PageEnum.values()[sharedPreferences.getInt(PREFERENCE_DEFAULTBOOTPAGE, 1)]
+        return PageEnum.values()[sharedPreferences.getInt(PREFERENCE_DEFAULTBOOTPAGE, 0)]
     }
 
     fun setDefaultBootPage(pageEnum: PageEnum) {
         sharedPreferences.edit().putInt(PREFERENCE_DEFAULTBOOTPAGE, pageEnum.page).apply()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun getTokenId(token:String){
-        val data1 = decode(token, DEFAULT)
-        var text1: String? = null
-        try {
-            text1 = String(data1, Charset.defaultCharset())
-            Log.e("TOKEN as JSON STRING",text1)
-        } catch (e: UnsupportedEncodingException) {
-            e.printStackTrace()
-        }
     }
 
 }
