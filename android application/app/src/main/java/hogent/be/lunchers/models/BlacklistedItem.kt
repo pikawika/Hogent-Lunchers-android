@@ -1,5 +1,7 @@
 package hogent.be.lunchers.models
 
+import com.squareup.moshi.Json
+
 data class BlacklistedItem(
-    val allergyId: Int,
-    val allergyNaam: String)
+    @field:Json(name = "allergyId") val blacklistedItemId: Int,
+    @field:Json(name = "allergyNaam") val blacklistedItemName: String)

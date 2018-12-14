@@ -64,12 +64,22 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         rootView.blacklist_swiperefresh.setOnRefreshListener(this)
 
+        initListeners(rootView)
+
         return rootView
     }
 
     override fun onRefresh() {
         retrieveAllBlacklistedItems()
     }
+
+    fun initListeners(rootView: View) {
+        rootView.blacklist_add_fab.setOnClickListener { v ->
+            MessageUtil.showMakeSuggestionDialog(context!!, "Toevoegen", "Voeg item toe aan zwarte lijst", addBlacklistItem())
+        }
+    }
+
+    fun addBlacklistItem() = { name : String -> accountViewModel.addBlacklistedItem(name) }
 
     private fun retrieveAllBlacklistedItems() {
         accountViewModel.refreshBlacklistedItems()

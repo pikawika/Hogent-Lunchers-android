@@ -1,5 +1,6 @@
 package hogent.be.lunchers.adapters
 
+import android.app.AlertDialog
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.RecyclerView
@@ -7,20 +8,39 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
-import hogent.be.lunchers.constants.BASE_URL_BACKEND
 import hogent.be.lunchers.models.BlacklistedItem
-import hogent.be.lunchers.utils.OrderUtil.convertIntToStatus
-import hogent.be.lunchers.utils.OrderUtil.formatDate
+import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.item_blacklist.view.*
-import kotlinx.android.synthetic.main.order_list_content.view.*
 
 class BlacklistAdapter(private val parentActivity: MainActivity, private val blacklistedItems: MutableLiveData<List<BlacklistedItem>>): RecyclerView.Adapter<BlacklistAdapter.ViewHolder>() {
 
+    private var accountViewModel: AccountViewModel = ViewModelProviders.of(parentActivity).get(AccountViewModel::class.java)
+
+    private val onClickListener: View.OnClickListener
+
     init {
-        //listener
+        onClickListener = View.OnClickListener { v ->
+            val selectedBlacklistedItem = v.tag as BlacklistedItem
+
+            val builder = AlertDialog.Builder(parentActivity)
+            builder.setCancelable(true)
+            builder.setTitle("Verwijderen?")
+            builder.setMessage("wilt u '${selectedBlacklistedItem.blacklistedItemName}' uit uw zwarte lijst verwijderen?")
+            builder.setPositiveButton(
+                "ja"
+            ) { dialog, which ->
+                //op ja geklikt
+                accountViewModel.deleteBlacklistedItem(selectedBlacklistedItem.blacklistedItemId)
+            }
+            builder.setNegativeButton(
+                "nee"
+            ) { dialog, which -> dialog.cancel() }
+
+            val dialog = builder.create()
+            dialog.show()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,7 +51,12 @@ class BlacklistAdapter(private val parentActivity: MainActivity, private val bla
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = blacklistedItems.value!![position]
-        holder.blacklistedItemTitel.text = item.allergyNaam
+        holder.blacklistedItemTitel.text = item.blacklistedItemName
+
+        with(holder.itemView) {
+            tag = item
+            setOnClickListener(onClickListener)
+        }
     }
 
     override fun getItemCount() = blacklistedItems.value!!.size

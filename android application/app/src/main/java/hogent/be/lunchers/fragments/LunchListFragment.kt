@@ -19,6 +19,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import hogent.be.lunchers.utils.MessageUtil
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_blacklist.view.*
 import kotlinx.android.synthetic.main.partial_search_filter.view.*
 
 
@@ -79,6 +80,8 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         return rootView
     }
+
+
 
     override fun onRefresh() {
         lunch_list_searchandfilter.txt_search.setText("")
