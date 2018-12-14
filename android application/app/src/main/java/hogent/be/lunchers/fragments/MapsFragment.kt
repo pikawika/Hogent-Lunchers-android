@@ -193,5 +193,4 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
-
 }

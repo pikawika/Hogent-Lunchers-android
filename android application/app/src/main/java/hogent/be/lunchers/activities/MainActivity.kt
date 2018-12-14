@@ -9,7 +9,6 @@ import android.location.Location
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.content.PermissionChecker
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -78,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //menu van de toolbar instellen
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
 
         //men moet wachten tot toolbar is ingesteld om hem te kunnen configureren in onze fragments, deze heeft rare lifecycle.
         showBootPage()
