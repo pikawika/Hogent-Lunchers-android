@@ -25,9 +25,8 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.models.Lunch
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
-import hogent.be.lunchers.databinding.FragmentGoogleMapsBinding
+import hogent.be.lunchers.databinding.FragmentMapBinding
 import hogent.be.lunchers.databinding.FragmentProfileBinding
-import hogent.be.lunchers.databinding.PartialLunchCardBinding
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import java.io.InputStream
@@ -44,7 +43,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     /**
      * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
      */
-    private lateinit var binding: FragmentGoogleMapsBinding
+    private lateinit var binding: FragmentMapBinding
 
     // Lateinit variabelen zijn standaard null, normaal mag dit niet mag in Kotlin
     // Er wordt echter vanuit gegaan dat ze in OnStart of OnResume of ... geinitialiseerd worden
@@ -53,7 +52,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     private lateinit var lastLocation: Location
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_google_maps, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
 
         //viewmodel vullen
         lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
