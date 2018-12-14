@@ -99,5 +99,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
+        <TextView
+                android:id="@+id/tv_order_detail_message"
+                android:text="@{`Boodschap: ` + orderViewModel.selectedOrder.opmerking}"
+                android:textColor="@android:color/black"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:textSize="18sp"
+                android:drawableStart="@drawable/ic_date_range_black_24dp"
+                android:drawablePadding="6dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_detail_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
     </android.support.constraint.ConstraintLayout>
 </layout>

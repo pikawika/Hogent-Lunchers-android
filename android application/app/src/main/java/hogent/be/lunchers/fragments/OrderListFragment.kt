@@ -24,6 +24,8 @@ class OrderListFragment : Fragment() {
 
         orderViewModel = ViewModelProviders.of(activity!!).get(OrderViewModel::class.java)
 
+        orderViewModel.resetViewModel()
+
         val reservations = orderViewModel.reservations
 
         val adapter = OrderAdapter(activity!! as MainActivity, reservations)
@@ -45,7 +47,7 @@ class OrderListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        (activity as MainActivity).supportActionBar?.title = "Reservaties"
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_fragment_orderlist)
     }
 
 }

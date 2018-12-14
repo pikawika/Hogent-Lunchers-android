@@ -25,15 +25,15 @@
     <string name="account_placeholder_gebruikersnaam">Gebruikersnaam</string>
     <string name="account_placeholder_telefoon">Telefoonnummer</string>
     <string name="account_placeholder_wachtwoord">Wachtwoord</string>
-    <string name="account_placeholder_email">e-mailadres</string>
+    <string name="account_placeholder_email">E-mailadres</string>
     <string name="account_placeholder_bevestigwachtwoord">Bevestig wachtwoord</string>
-    <string name="account_placeholder_voornaam">voornaam</string>
-    <string name="account_placeholder_achternaam">achternaam</string>
+    <string name="account_placeholder_voornaam">Voornaam</string>
+    <string name="account_placeholder_achternaam">Achternaam</string>
     <string name="button_login">Aanmelden</string>
     <string name="button_registreer">Registreer</string>
-    <string name="button_nog_geen_account">Nog geen account? Registreer gratis!</string>
+    <string name="button_nog_geen_account">Nog geen account? Registreer hier!</string>
     <string name="text_hallo">Hallo</string>
-    <string name="button_reeds_eeen_account">Reeds een account? Meld aan!</string>
+    <string name="button_reeds_eeen_account">Al een account? Meld aan!</string>
 
     <!-- wijzig ww -->
     <string name="changepw_title">Wachtwoord Wijzigen</string>
@@ -46,7 +46,7 @@
     <string name="reservatie_titel">Reservatie van</string>
 
     <!-- search hint -->
-    <string name="lunch_list_fragment_search_hint">Zoeken...</string>
+    <string name="lunch_list_fragment_search_hint">Zoeken…</string>
 
     <!-- thank-you screen -->
     <string name="thank_you_fragment_thank_you_message">Bedankt!</string>
@@ -85,5 +85,6 @@
     <string name="tv_reservation_time">Kies een tijd</string>
     <string name="btn_reservation_date">Datum kiezen</string>
     <string name="tv_reservation_date">Kies een datum</string>
+    <string name="title_fragment_orderlist">Reservaties</string>
 
 </resources>
