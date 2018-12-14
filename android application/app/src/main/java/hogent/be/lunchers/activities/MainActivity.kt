@@ -68,9 +68,10 @@ class MainActivity : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+
         if (lunchViewModel.getSelectedFilter() == FilterEnum.DISTANCE)
             lunchesFromLocation()
-
+      
         setSupportActionBar(toolbar)
     }
 
