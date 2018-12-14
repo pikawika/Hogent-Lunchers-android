@@ -64,4 +64,16 @@
             app:layout_constraintStart_toStartOf="@+id/divider_lunchlijst_45percent"
 
             android:layout_marginStart="8dp"/>
+
+    <include
+            android:id="@+id/lunch_list_searchandfilter"
+            layout="@layout/partial_search_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/guide_lunchlijst_35percent_vertical"
+    />
+
+
 </android.support.constraint.ConstraintLayout>
