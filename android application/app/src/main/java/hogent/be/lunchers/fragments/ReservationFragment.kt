@@ -46,10 +46,7 @@ class ReservationFragment : Fragment() {
      */
     private lateinit var binding: FragmentReservationBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_reservation, container, false)
 
@@ -97,13 +94,12 @@ class ReservationFragment : Fragment() {
             val day = c.get(Calendar.DAY_OF_MONTH)
 
 
-            val dpd =
-                DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    reservationViewModel.year = year
-                    reservationViewModel.month = monthOfYear + 1
-                    reservationViewModel.day = dayOfMonth
-                    rootView.reserveren_datePicker_button.text = "$day/$month/$year"
-                }, year, month, day)
+            val dpd = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                        reservationViewModel.year = year
+                        reservationViewModel.month = monthOfYear + 1
+                        reservationViewModel.day = dayOfMonth
+                        rootView.reserveren_datePicker_button.text = "$day/$month/$year"
+                    }, year, month, day)
             dpd.show()
         }
 
@@ -126,28 +122,25 @@ class ReservationFragment : Fragment() {
         if (reserveren_aantal_text.text.toString().toIntOrNull() != null)
             reservationViewModel.amount = reserveren_aantal_text.text.toString().toInt()
 
+        reservationViewModel.message = et_reservation_message.text.toString()
+
         if (reservationViewModel.valid()) {
             val builder = AlertDialog.Builder(activity)
             builder.setCancelable(true)
-            builder.setTitle("Bevestig reservatie")
-            builder.setMessage("Bevestig dat je ${reservationViewModel.amount} keer ${reservationViewModel.getSelectedLunch().value!!.naam} wenst te reserveren op ${reservationViewModel.day}/${reservationViewModel.month}/${reservationViewModel.year}.")
-            builder.setPositiveButton(
-                "Reserveren"
-            ) { dialog, which ->
-                //op ja geklikt
-                reservationViewModel.reserveer()
+            builder.setTitle("Bevestiging reservatie")
+            builder.setMessage("Bevestig dat je " +
+                    "${reservationViewModel.amount} keer " +
+                    "${reservationViewModel.getSelectedLunch().value!!.naam} wenst te reserveren op " +
+                    "${reservationViewModel.day}/${reservationViewModel.month}/${reservationViewModel.year} om " +
+                    "${reservationViewModel.hour}:${reservationViewModel.minute}.")
 
-            }
-            builder.setNegativeButton(
-                "Annuleren"
-            ) { dialog, which -> dialog.cancel() }
+            builder.setPositiveButton("Reserveren") { _, _ -> reservationViewModel.reserveer()}
+            builder.setNegativeButton("Annuleren") { dialog, _ -> dialog.cancel() }
 
             val dialog = builder.create()
             dialog.show()
         }
-        else{
-            MessageUtil.showToast("formulier niet volledig of incorrect ingevuld")
-        }
-
+        else { MessageUtil.showToast("Gelieve het hele formulier in te vullen.") }
     }
+
 }

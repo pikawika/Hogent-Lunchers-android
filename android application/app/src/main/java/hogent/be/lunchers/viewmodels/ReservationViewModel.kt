@@ -10,6 +10,7 @@ import hogent.be.lunchers.networks.requests.WijzigWachtwoordRequest
 import hogent.be.lunchers.networks.responses.BerichtResponse
 import hogent.be.lunchers.utils.DateUtil
 import hogent.be.lunchers.utils.MessageUtil
+import hogent.be.lunchers.utils.MessageUtil.showToast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -75,6 +76,11 @@ class ReservationViewModel : InjectedViewModel() {
     var amount: Int = -1
 
     /**
+     * message
+     */
+    var message: String = ""
+
+    /**
      * returnt de lijst van alle lunches als MutableLiveData
      */
     fun getSelectedLunch(): MutableLiveData<Lunch> {
@@ -100,15 +106,13 @@ class ReservationViewModel : InjectedViewModel() {
      * Veranderd het wachtwoord van de gebruiker
      */
     fun reserveer() {
-        registreerSubscription = lunchersApi.reserveer(ReservatieRequest(lunch.value!!.lunchId, amount, makeJsonDate()))
+        registreerSubscription = lunchersApi.reserveer(ReservatieRequest(lunch.value!!.lunchId, amount, makeJsonDate(), message))
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
             //we like the fetched data to be displayed on the MainTread (UI)
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { onRetrieveStart() }
-            .doOnTerminate { onRetrieveFinish() }
             .subscribe(
-                { result -> onRetrieveReserveerSuccess(result) },
+                { onRetrieveReserveerSuccess() },
                 { error -> onRetrieveError(error) }
             )
     }
@@ -116,42 +120,16 @@ class ReservationViewModel : InjectedViewModel() {
     /**
      * Functie voor het behandelen van het mislukken van het ophalen van data van de server
      */
-    private fun onRetrieveError(error: Throwable) {
-        MessageUtil.showToast("De gevraagde actie is mislukt. " + error.message.toString())
-    }
-
-    /**
-     * Functie voor het behandelen van het starten van een rest api call
-     *
-     * Zal een loading fragment tonen of dergelijke
-     */
-    private fun onRetrieveStart() {
-        //hier begint api call
-        //nog een soort loading voozien
-    }
-
-    /**
-     * Functie voor het behandelen van het eindigen van een rest api call
-     *
-     * Sluit het loading fragment of dergelijke
-     */
-    private fun onRetrieveFinish() {
-        //hier eindigt api call
-        //de loading hier nog stoppen
-    }
+    private fun onRetrieveError(error: Throwable) { showToast("Er is een onverwachte fout opgetreden: ${error.message}") }
 
     /**
      * Functie voor het behandelen van het succesvol aanmelden
      *
      * zal token instellen en opslaan, en aangemeld in de VM op true zetten
      */
-    private fun onRetrieveReserveerSuccess(result: BerichtResponse) {
-        gereserveerd.value = true
-    }
+    private fun onRetrieveReserveerSuccess() { gereserveerd.value = true }
 
-    fun getGereserveerd() : MutableLiveData<Boolean> {
-        return gereserveerd
-    }
+    fun getGereserveerd() : MutableLiveData<Boolean> { return gereserveerd }
 
     fun clear() {
         year = -1
@@ -160,6 +138,7 @@ class ReservationViewModel : InjectedViewModel() {
         hour = -1
         minute = -1
         amount = -1
+        message = ""
         gereserveerd.value = false
     }
 

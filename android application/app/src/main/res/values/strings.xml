@@ -76,5 +76,13 @@
     <string name="text_settings_blacklist">Zwarte lijst</string>
     <string name="text_select_default_filter">Kies standaard filtermethode</string>
     <string name="text_select_default_boot">Kies standaard startscherm</string>
+    <string name="btn_reservation_cancel">Annuleren</string>
+    <string name="btn_reservation_order">Reserveren</string>
+    <string name="et_reservation_message">Persoonlijke boodschap (optioneel)</string>
+    <string name="et_reservation_amount">Aantal personen</string>
+    <string name="et_reservation_time">Tijd kiezen</string>
+    <string name="tv_reservation_time">Kies een tijd</string>
+    <string name="btn_reservation_date">Datum kiezen</string>
+    <string name="tv_reservation_date">Kies een datum</string>
 
 </resources>
