@@ -24,6 +24,8 @@ class OrderListFragment : Fragment() {
 
         orderViewModel = ViewModelProviders.of(activity!!).get(OrderViewModel::class.java)
 
+        orderViewModel.resetViewModel()
+
         val reservations = orderViewModel.reservations
 
         val adapter = OrderAdapter(activity!! as MainActivity, reservations)
@@ -44,8 +46,16 @@ class OrderListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        (activity as MainActivity).supportActionBar?.title = "Reservaties"
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_orders)
+        //is boot screen
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        MainActivity.setCanpop(true)
+    }
+  
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        MainActivity.setCanpop(false)
     }
 
 }

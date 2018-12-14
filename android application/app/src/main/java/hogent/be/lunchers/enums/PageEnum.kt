@@ -5,10 +5,8 @@ package hogent.be.lunchers.enums
  * Elk enumitem heeft een *layoutId* (Int) waarde die overeenstemt met de id van de bijhorende xml die een recyclerviewitem voorstelt.
  * */
 enum class PageEnum(val page: Int) {
-
-    MAP(0),
-    LUNCHLIST(1),
+    LUNCHLIST(0),
+    MAP(1),
     PROFILE(2),
     ORDERSLIST(3)
-
 }

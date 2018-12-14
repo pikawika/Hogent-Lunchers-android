@@ -25,15 +25,16 @@
     <string name="account_placeholder_gebruikersnaam">Gebruikersnaam</string>
     <string name="account_placeholder_telefoon">Telefoonnummer</string>
     <string name="account_placeholder_wachtwoord">Wachtwoord</string>
-    <string name="account_placeholder_email">e-mailadres</string>
+    <string name="account_placeholder_email">E-mailadres</string>
     <string name="account_placeholder_bevestigwachtwoord">Bevestig wachtwoord</string>
-    <string name="account_placeholder_voornaam">voornaam</string>
-    <string name="account_placeholder_achternaam">achternaam</string>
+    <string name="account_placeholder_voornaam">Voornaam</string>
+    <string name="account_placeholder_achternaam">Achternaam</string>
     <string name="button_login">Aanmelden</string>
     <string name="button_registreer">Registreer</string>
-    <string name="button_nog_geen_account">Nog geen account? Registreer gratis!</string>
+    <string name="button_nog_geen_account">Nog geen account? Registreer hier!</string>
     <string name="text_hallo">Hallo</string>
-    <string name="button_reeds_eeen_account">Reeds een account? Meld aan!</string>
+    <string name="button_reeds_eeen_account">Al een account? Meld aan!</string>
+    <string name="text_register">Registreren</string>
 
     <!-- wijzig ww -->
     <string name="changepw_title">Wachtwoord Wijzigen</string>
@@ -43,10 +44,12 @@
     <string name="changepw_confirmbutton">Wijzig wachtwoord</string>
 
     <!-- wijzig ww -->
-    <string name="reservatie_titel">Reservatie van</string>
+    <string name="reservatie_titel_prefix">Reservatie van</string>
+    <string name="reservatie_titel">Reservatie plaatsen</string>
+    <string name="reservatie_geplaatst">Reservatie geplaatst!</string>
 
     <!-- search hint -->
-    <string name="lunch_list_fragment_search_hint">Zoeken...</string>
+    <string name="lunch_list_fragment_search_hint">Zoeken…</string>
 
     <!-- thank-you screen -->
     <string name="thank_you_fragment_thank_you_message">Bedankt!</string>
@@ -74,7 +77,17 @@
     <string name="text_settings_default_filter">Standaard filtermethode</string>
     <string name="text_settings_default_boot">Startscherm instellen</string>
     <string name="text_settings_blacklist">Zwarte lijst</string>
+    <string name="text_settings_blacklist_description">Indien een lunch een item van de zwarte lijst heeft (ingrediënt of tag) zal deze niet weergegeven worden.</string>
     <string name="text_select_default_filter">Kies standaard filtermethode</string>
     <string name="text_select_default_boot">Kies standaard startscherm</string>
+    <string name="btn_reservation_cancel">Annuleren</string>
+    <string name="btn_reservation_order">Reserveren</string>
+    <string name="et_reservation_message">Persoonlijke boodschap (optioneel)</string>
+    <string name="et_reservation_amount">Aantal personen</string>
+    <string name="et_reservation_time">Tijd kiezen</string>
+    <string name="tv_reservation_time">Kies een tijd</string>
+    <string name="btn_reservation_date">Datum kiezen</string>
+    <string name="tv_reservation_date">Kies een datum</string>
+    <string name="title_fragment_orderlist">Reservaties</string>
 
 </resources>

@@ -87,13 +87,14 @@ class LunchDetailFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as MainActivity).supportActionBar?.title = lunchViewModel.getSelectedLunch().value!!.naam
+        MainActivity.setCanpop(true)
     }
 
     override fun onPause() {
         super.onPause()
-
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        MainActivity.setCanpop(false)
     }
 }

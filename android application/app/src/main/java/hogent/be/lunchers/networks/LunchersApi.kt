@@ -1,11 +1,9 @@
 package hogent.be.lunchers.networks
 
+import hogent.be.lunchers.models.BlacklistedItem
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.models.Reservatie
-import hogent.be.lunchers.networks.requests.LoginRequest
-import hogent.be.lunchers.networks.requests.RegistreerGebruikerRequest
-import hogent.be.lunchers.networks.requests.ReservatieRequest
-import hogent.be.lunchers.networks.requests.WijzigWachtwoordRequest
+import hogent.be.lunchers.networks.requests.*
 import hogent.be.lunchers.networks.responses.BerichtResponse
 import hogent.be.lunchers.networks.responses.TokenResponse
 import io.reactivex.Observable
@@ -69,5 +67,22 @@ interface LunchersApi {
     @POST("api/reservatie")
     fun reserveer(@Body reservatieRequest: ReservatieRequest) : Observable<BerichtResponse>
 
+    /**
+     * Verkrijgt alle blacklisted items van de aangemelde user
+     */
+    @GET("api/allergy")
+    fun getAllBlacklistedItems() : Observable<List<BlacklistedItem>>
+
+    /**
+     * Voegt een blacklisted item toe voor aangemelde user
+     */
+    @POST("api/allergy")
+    fun addBlacklistedItem(@Body addBlacklistedItemRequest: AddBlacklistedItemRequest) : Observable<List<BlacklistedItem>>
+
+    /**
+     * Delete een blacklisted item voor aangemelde user
+     */
+    @DELETE("api/allergy/{id}")
+    fun deleteBlacklistedItem(@Path("id") blacklistedItemId: Int) : Observable<List<BlacklistedItem>>
 
 }

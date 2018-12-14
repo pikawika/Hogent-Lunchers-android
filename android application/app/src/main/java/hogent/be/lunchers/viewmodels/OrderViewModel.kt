@@ -2,6 +2,7 @@ package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import com.bumptech.glide.Glide.init
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.models.Reservatie
 import hogent.be.lunchers.models.ReservatieRepository
@@ -33,7 +34,7 @@ class OrderViewModel : InjectedViewModel() {
     val selectedOrder: MutableLiveData<Reservatie>
         get() = _selectedOrder
 
-    private val _roomOrders: LiveData<List<Reservatie>>
+    private var _roomOrders: LiveData<List<Reservatie>>
 
     val roomOrders: LiveData<List<Reservatie>>
         get() = _roomOrders
@@ -41,7 +42,7 @@ class OrderViewModel : InjectedViewModel() {
     private var getAllReservationsSubscription: Disposable
 
     init {
-        _reservations.value = listOf()
+        _reservations.value = emptyList()
 
         _selectedOrder.value = null
 
@@ -59,6 +60,22 @@ class OrderViewModel : InjectedViewModel() {
     override fun onCleared() {
         super.onCleared()
         getAllReservationsSubscription.dispose()
+    }
+
+    fun resetViewModel() {
+        _reservations.value = emptyList()
+
+        _selectedOrder.value = null
+
+        _roomOrders = orderRepo.orders
+
+        getAllReservationsSubscription = lunchersApi.getAllOrders()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result -> onRetrieveAllReservationsSuccess(result) },
+                { onRetrieveError() }
+            )
     }
 
     fun setSelectedOrder(orderId: Int) { _selectedOrder.value =  _reservations.value!!.firstOrNull { it.reservatieId == orderId } }

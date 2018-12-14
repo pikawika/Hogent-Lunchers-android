@@ -60,6 +60,7 @@ class LoginFragment : Fragment() {
         requireActivity().supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container, RegistreerFragment())
+            .addToBackStack(null)
             .commit()
     }
 
