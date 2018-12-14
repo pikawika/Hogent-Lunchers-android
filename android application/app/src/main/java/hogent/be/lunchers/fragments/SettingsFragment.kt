@@ -12,6 +12,7 @@ import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.viewmodels.AccountViewModel
+import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_settings.view.*
 
 
@@ -27,6 +28,12 @@ class SettingsFragment : Fragment() {
     //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var accountViewModel: AccountViewModel
 
+    /**
+     * [LunchViewModel] met de data over de lunches en filters
+     */
+    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
+    private lateinit var lunchViewModel: LunchViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -36,6 +43,7 @@ class SettingsFragment : Fragment() {
 
         //viewmodel vullen
         accountViewModel = ViewModelProviders.of(activity!!).get(AccountViewModel::class.java)
+        lunchViewModel = ViewModelProviders.of(activity!!).get(LunchViewModel::class.java)
 
         setListeners(rootView)
 
@@ -50,10 +58,22 @@ class SettingsFragment : Fragment() {
             builder.setTitle(getString(R.string.text_select_default_filter))
             builder.setItems(filters) { dialog, which ->
                 when (filters[which]) {
-                    getString(R.string.ab_filter_prijs_oplopend) -> accountViewModel.setDefaultFilterMethod(FilterEnum.PRICELOWEST)
-                    getString(R.string.ab_filter_prijs_aflopend) -> accountViewModel.setDefaultFilterMethod(FilterEnum.PRICEHIGHEST)
-                    getString(R.string.ab_filter_afstand) -> accountViewModel.setDefaultFilterMethod(FilterEnum.DISTANCE)
-                    getString(R.string.ab_filter_nieuwste) -> accountViewModel.setDefaultFilterMethod(FilterEnum.RECENT)
+                    getString(R.string.ab_filter_prijs_oplopend) -> {
+                        accountViewModel.setDefaultFilterMethod(FilterEnum.PRICELOWEST)
+                        lunchViewModel.setSelectedFilter(FilterEnum.PRICELOWEST)
+                    }
+                    getString(R.string.ab_filter_prijs_aflopend) -> {
+                        accountViewModel.setDefaultFilterMethod(FilterEnum.PRICEHIGHEST)
+                        lunchViewModel.setSelectedFilter(FilterEnum.PRICEHIGHEST)
+                    }
+                    getString(R.string.ab_filter_afstand) -> {
+                        accountViewModel.setDefaultFilterMethod(FilterEnum.DISTANCE)
+                        lunchViewModel.setSelectedFilter(FilterEnum.DISTANCE)
+                    }
+                    getString(R.string.ab_filter_nieuwste) -> {
+                        accountViewModel.setDefaultFilterMethod(FilterEnum.RECENT)
+                        lunchViewModel.setSelectedFilter(FilterEnum.RECENT)
+                    }
                 }
 
             }
