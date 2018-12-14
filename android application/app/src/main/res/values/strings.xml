@@ -4,6 +4,7 @@
     <string name="button_lunch_detail_call">Bel het restaurant</string>
     <string name="button_lunch_detail_show_on_map">Bekijk restaurant op de kaart</string>
     <string name="button_lunch_detail_navigation">Routebeschrijving</string>
+    <string name="text_no_navigation_app">u heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
 
 
 
