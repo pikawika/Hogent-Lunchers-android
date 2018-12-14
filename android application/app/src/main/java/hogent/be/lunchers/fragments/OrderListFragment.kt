@@ -44,8 +44,16 @@ class OrderListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_orders)
+        //is boot screen
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        MainActivity.setCanpop(true)
+    }
 
-        (activity as MainActivity).supportActionBar?.title = "Reservaties"
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        MainActivity.setCanpop(false)
     }
 
 }

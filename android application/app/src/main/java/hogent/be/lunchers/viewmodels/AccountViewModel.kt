@@ -278,7 +278,7 @@ class AccountViewModel : InjectedViewModel() {
      */
     fun afmelden() {
         PreferenceUtil().deletePreferences()
-        aangemeld.value = PreferenceUtil().getToken() != ""
+        aangemeld.value = false
     }
 
     /**
@@ -292,13 +292,6 @@ class AccountViewModel : InjectedViewModel() {
      * returnt boolean of user al dan niet aangemeld is
      */
     fun getGebruikersnaam() : MutableLiveData<String> {
-        return gebruikersnaam
-    }
-
-    /**
-     * returnt boolean of user al dan niet aangemeld is
-     */
-    fun get() : MutableLiveData<String> {
         return gebruikersnaam
     }
 

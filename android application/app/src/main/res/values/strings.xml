@@ -33,6 +33,7 @@
     <string name="button_registreer">Registreer</string>
     <string name="button_nog_geen_account">Nog geen account? Registreer gratis!</string>
     <string name="text_hallo">Hallo</string>
+    <string name="text_register">Registreer</string>
     <string name="button_reeds_eeen_account">Reeds een account? Meld aan!</string>
 
     <!-- wijzig ww -->
@@ -43,7 +44,9 @@
     <string name="changepw_confirmbutton">Wijzig wachtwoord</string>
 
     <!-- wijzig ww -->
-    <string name="reservatie_titel">Reservatie van</string>
+    <string name="reservatie_titel_prefix">Reservatie van</string>
+    <string name="reservatie_titel">Reservatie plaatsen</string>
+    <string name="reservatie_geplaatst">Reservatie geplaatst!</string>
 
     <!-- search hint -->
     <string name="lunch_list_fragment_search_hint">Zoeken...</string>

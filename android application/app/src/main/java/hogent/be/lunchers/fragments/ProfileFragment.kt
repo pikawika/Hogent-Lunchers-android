@@ -49,11 +49,10 @@ class ProfileFragment : Fragment() {
         //indien aangemeld naar lijst gaan
         aangemeld.observe(this, Observer {
             if (!aangemeld.value!!) {
-                activity!!.supportFragmentManager.popBackStackImmediate(0, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-
                 activity!!.supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container, LoginFragment())
+                    .addToBackStack(null)
                     .commit()
             }
         })
