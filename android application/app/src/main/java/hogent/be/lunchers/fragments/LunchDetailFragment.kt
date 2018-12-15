@@ -102,7 +102,7 @@ class LunchDetailFragment : Fragment() {
             if (mapIntent.resolveActivity(packageManager) != null) {
                 startActivity(mapIntent)
             } else {
-                MessageUtil.showToast(getString(R.string.text_error_no_navigation_app))
+                MessageUtil.showToast(getString(R.string.error_no_navigation_app))
             }
         }
     }

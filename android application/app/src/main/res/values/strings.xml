@@ -12,9 +12,14 @@
     <string name="alt_shared_logo">Lunchers logo</string>
     <string name="text_shared_register">Registreren</string>
     <string name="text_shared_thanks">Bedankt!</string>
+    <string name="hint_shared_search">Zoeken…</string>
+
 
     <!-- Errors -->
-    <string name="text_error_no_navigation_app">U heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
+    <string name="error_no_navigation_app">U heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
+    <string name="error_network">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw
+        te proberen.
+    </string>
 
     <!-- Fragment_lunch_detail -->
     <string name="button_lunch_detail_reserve">Reserveer deze lunch</string>
@@ -82,9 +87,6 @@
     <string name="reservatie_titel">Reservatie plaatsen</string>
     <string name="reservatie_geplaatst">Reservatie geplaatst!</string>
 
-    <!-- search hint -->
-    <string name="lunch_list_fragment_search_hint">Zoeken…</string>
-
     <!-- Order List Fragment -->
     <string name="error_fetching_orders">Er is een fout opgetreden tijdens het ophalen van de reservaties.</string>
   
@@ -114,8 +116,5 @@
     <string name="title_profile">Profiel</string>
     <string name="title_orders">Bestellingen</string>
     <string name="title_activity_maps">Map</string>
-    <string name="network_error">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw
-        te proberen.
-    </string>
 
 </resources>
