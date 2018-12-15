@@ -46,7 +46,7 @@ class OrderListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_orders)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_order_list_title)
         //is boot screen
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         MainActivity.setCanpop(true)

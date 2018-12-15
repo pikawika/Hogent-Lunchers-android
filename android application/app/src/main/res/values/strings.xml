@@ -20,6 +20,7 @@
     <string name="error_network">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw
         te proberen.
     </string>
+    <string name="error_fetching_orders">Er is een fout opgetreden tijdens het ophalen van de reservaties.</string>
 
     <!-- Fragment_lunch_detail -->
     <string name="button_lunch_detail_reserve">Reserveer deze lunch</string>
@@ -63,6 +64,8 @@
     <string name="text_reservation_pick_time">Kies een tijd</string>
     <string name="btn_reservation_pick_date">Datum kiezen</string>
     <string name="text_reservation_pick_a_date">Kies een datum</string>
+    <string name="text_reservation_place">Reservatie plaatsen</string>
+    <string name="text_reservation_placed">Reservatie geplaatst!</string>
 
     <!-- fragment_thanks -->
     <string name="text_thanks_message">Je reservatie is geplaatst! De handelaar laat jou weten van zodra je reservatie bevestigd is.</string>
@@ -74,47 +77,32 @@
 
     <!-- item_order -->
     <string name="alt_item_order_image">Afbeelding van een bestelde lunch</string>
-
-
-
-
-
-
-
-
-    <!-- wijzig ww -->
-
-    <string name="reservatie_titel">Reservatie plaatsen</string>
-    <string name="reservatie_geplaatst">Reservatie geplaatst!</string>
-
-    <!-- Order List Fragment -->
-    <string name="error_fetching_orders">Er is een fout opgetreden tijdens het ophalen van de reservaties.</string>
   
     <!-- actionbar -->
-    <string name="ab_filter_prijs_oplopend">Sorteren op prijs (oplopend)</string>
-    <string name="ab_filter_prijs_aflopend">Sorteren op prijs (aflopend)</string>
-    <string name="ab_filter_afstand">Sorteren op nabijheid</string>
-    <string name="ab_filter_nieuwste">Sorteren op recentheid</string>
+    <string name="ab_filter_price_az">Sorteren op prijs (oplopend)</string>
+    <string name="ab_filter_price_za">Sorteren op prijs (aflopend)</string>
+    <string name="ab_filter_distance">Sorteren op nabijheid</string>
+    <string name="ab_filter_recent">Sorteren op recentheid</string>
 
     <!-- settings -->
     <string name="text_settings_title">Voorkeuren</string>
     <string name="text_settings_default_filter">Standaard filtermethode</string>
     <string name="text_settings_default_boot">Startscherm instellen</string>
     <string name="text_settings_blacklist">Zwarte lijst</string>
-    <string name="text_select_default_filter">Kies standaard filtermethode</string>
-    <string name="text_select_default_boot">Kies standaard startscherm</string>
+    <string name="text_settings_select_default_filter">Kies standaard filtermethode</string>
+    <string name="text_settings_select_default_boot">Kies standaard startscherm</string>
 
-    <string name="title_fragment_orderlist">Reservaties</string>
+    <!-- Fragment_order_list -->
+    <string name="text_order_list_title">Reservaties</string>
 
-
+    <!-- general -->
     <string name="app_name">Lunchers</string>
-    <string name="textview_lunch_locatie">Arbeidstraat 14, 9300 Aalst</string>
+
     <string name="button_lunch_detail_tekst_bellen">Bellen</string>
-    <string name="textview_lunch_detail_restaurant_tekst">Yok Tha</string>
-    <string name="title_map">Kaart</string>
-    <string name="title_list">Lijst</string>
-    <string name="title_profile">Profiel</string>
-    <string name="title_orders">Bestellingen</string>
-    <string name="title_activity_maps">Map</string>
+
+    <!-- Menu -->
+    <string name="text_map_title">Kaart</string>
+    <string name="text_list_title">Lijst</string>
+    <string name="text_profile_title">Profiel</string>
 
 </resources>

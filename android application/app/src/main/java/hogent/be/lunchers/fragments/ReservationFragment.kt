@@ -147,7 +147,7 @@ class ReservationFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.reservatie_titel)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_reservation_place)
         MainActivity.setCanpop(true)
     }
 

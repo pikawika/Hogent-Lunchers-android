@@ -53,24 +53,24 @@ class SettingsFragment : Fragment() {
     private fun setListeners(rootView: View) {
         //default filter methode
         rootView.btn_settings_default_filter.setOnClickListener {
-            val filters = arrayOf(getString(R.string.ab_filter_prijs_oplopend), getString(R.string.ab_filter_prijs_aflopend), getString(R.string.ab_filter_afstand), getString(R.string.ab_filter_nieuwste))
+            val filters = arrayOf(getString(R.string.ab_filter_price_az), getString(R.string.ab_filter_price_za), getString(R.string.ab_filter_distance), getString(R.string.ab_filter_recent))
             val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle(getString(R.string.text_select_default_filter))
+            builder.setTitle(getString(R.string.text_settings_select_default_filter))
             builder.setItems(filters) { dialog, which ->
                 when (filters[which]) {
-                    getString(R.string.ab_filter_prijs_oplopend) -> {
+                    getString(R.string.ab_filter_price_az) -> {
                         accountViewModel.setDefaultFilterMethod(FilterEnum.PRICELOWEST)
                         lunchViewModel.setSelectedFilter(FilterEnum.PRICELOWEST)
                     }
-                    getString(R.string.ab_filter_prijs_aflopend) -> {
+                    getString(R.string.ab_filter_price_za) -> {
                         accountViewModel.setDefaultFilterMethod(FilterEnum.PRICEHIGHEST)
                         lunchViewModel.setSelectedFilter(FilterEnum.PRICEHIGHEST)
                     }
-                    getString(R.string.ab_filter_afstand) -> {
+                    getString(R.string.ab_filter_distance) -> {
                         accountViewModel.setDefaultFilterMethod(FilterEnum.DISTANCE)
                         lunchViewModel.setSelectedFilter(FilterEnum.DISTANCE)
                     }
-                    getString(R.string.ab_filter_nieuwste) -> {
+                    getString(R.string.ab_filter_recent) -> {
                         accountViewModel.setDefaultFilterMethod(FilterEnum.RECENT)
                         lunchViewModel.setSelectedFilter(FilterEnum.RECENT)
                     }
@@ -82,15 +82,15 @@ class SettingsFragment : Fragment() {
 
         //default boot page
         rootView.btn_settings_default_tab.setOnClickListener {
-            val pages = arrayOf(getString(R.string.title_map), getString(R.string.title_list), getString(R.string.title_profile), getString(R.string.title_orders))
+            val pages = arrayOf(getString(R.string.text_map_title), getString(R.string.text_list_title), getString(R.string.text_profile_title), getString(R.string.text_order_list_title))
             val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle(getString(R.string.text_select_default_boot))
+            builder.setTitle(getString(R.string.text_settings_select_default_boot))
             builder.setItems(pages) { dialog, which ->
                 when (pages[which]) {
-                    getString(R.string.title_map) -> accountViewModel.setDefaultBootPage(PageEnum.MAP)
-                    getString(R.string.title_list) -> accountViewModel.setDefaultBootPage(PageEnum.LUNCHLIST)
-                    getString(R.string.title_profile) -> accountViewModel.setDefaultBootPage(PageEnum.PROFILE)
-                    getString(R.string.title_orders) -> accountViewModel.setDefaultBootPage(PageEnum.ORDERSLIST)
+                    getString(R.string.text_map_title) -> accountViewModel.setDefaultBootPage(PageEnum.MAP)
+                    getString(R.string.text_list_title) -> accountViewModel.setDefaultBootPage(PageEnum.LUNCHLIST)
+                    getString(R.string.text_profile_title) -> accountViewModel.setDefaultBootPage(PageEnum.PROFILE)
+                    getString(R.string.text_order_list_title) -> accountViewModel.setDefaultBootPage(PageEnum.ORDERSLIST)
                 }
             }
             builder.show()
