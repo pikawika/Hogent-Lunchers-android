@@ -7,7 +7,7 @@
         tools:ignore="Autofill"
 >
 
-    <!-- data binding -->
+    <!-- Data binding -->
     <data>
         <import type="android.view.View"/>
 
@@ -49,6 +49,7 @@
                     app:layout_constraintGuide_percent="0.9"
             />
 
+            <!-- Title -->
             <TextView
                     android:id="@+id/text_reservation_title"
                     android:layout_width="0dp"
@@ -66,6 +67,7 @@
                     android:layout_marginTop="16dp"
             />
 
+            <!-- Lunch name -->
             <TextView
                     android:id="@+id/text_reservation_lunch_name"
                     android:layout_width="0dp"
@@ -84,6 +86,7 @@
                     android:layout_marginTop="8dp"
             />
 
+            <!-- Pick date -->
             <TextView
                     android:id="@+id/text_pick_date"
                     android:layout_width="0dp"
@@ -117,6 +120,7 @@
                     android:layout_marginTop="4dp"
             />
 
+            <!-- Pick time -->
             <TextView
                     android:id="@+id/text_pick_time"
                     android:layout_width="0dp"
@@ -150,6 +154,7 @@
                     android:layout_marginTop="4dp"
             />
 
+            <!-- Choose amount -->
             <EditText
                     android:id="@+id/text_reservation_amount"
                     android:layout_width="0dp"
@@ -166,6 +171,7 @@
                     android:layout_marginTop="16dp"
             />
 
+            <!-- Optional message -->
             <EditText
                     android:id="@+id/text_reservation_message"
                     android:layout_width="0dp"
@@ -185,6 +191,7 @@
                     android:layout_marginTop="16dp"
             />
 
+            <!-- Confirm -->
             <Button
                     android:id="@+id/btn_reservation_confirm"
                     android:layout_width="0dp"
@@ -201,6 +208,7 @@
                     android:layout_marginTop="16dp"
             />
 
+            <!-- Cancel -->
             <Button
                     android:id="@+id/btn_reservation_cancel"
                     android:layout_width="0dp"
