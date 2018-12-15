@@ -5,7 +5,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import hogent.be.lunchers.constants.BASE_URL_BACKEND
 import android.widget.TextView
-
+import hogent.be.lunchers.models.Locatie
 
 
 /**
@@ -34,6 +34,18 @@ object DataBindingUtil {
         {
             view.text = String.format("%.2f", value)
 
+        }
+    }
+
+    /**
+     * Zorgt er voor dat locatie mooi wordt weergegeven
+     */
+    @JvmStatic
+    @BindingAdapter("android:restaurantLocation")
+    fun setRestaurantLocation(view: TextView, location: Locatie?) {
+        if (location != null)
+        {
+            view.text = location.straat + " " + location.huisnummer + ", " + location.postcode + " " + location.gemeente
         }
     }
 
