@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_thank_you.view.*
+import kotlinx.android.synthetic.main.fragment_thanks.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -24,11 +24,20 @@ class ThankYouFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val rootView= inflater.inflate(R.layout.fragment_thank_you, container, false)
+        val rootView= inflater.inflate(R.layout.fragment_thanks, container, false)
 
-        rootView.backButton.setOnClickListener {
+        rootView.btn_thanks_back.setOnClickListener {
             activity!!.bottom_navigation_mainactivity.selectedItemId = R.id.action_list
         }
+
+        rootView.btn_thanks_reservations.setOnClickListener {
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container_mainactivity, OrderListFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
         return rootView
     }
 

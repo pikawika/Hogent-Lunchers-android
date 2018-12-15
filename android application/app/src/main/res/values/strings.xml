@@ -11,6 +11,7 @@
     <string name="text_shared_my_reservations">Mijn reservaties</string>
     <string name="alt_shared_logo">Lunchers logo</string>
     <string name="text_shared_register">Registreren</string>
+    <string name="text_shared_thanks">Bedankt!</string>
 
     <!-- Errors -->
     <string name="text_error_no_navigation_app">U heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
@@ -58,8 +59,10 @@
     <string name="btn_reservation_pick_date">Datum kiezen</string>
     <string name="text_reservation_pick_a_date">Kies een datum</string>
 
-
-
+    <!-- fragment_thanks -->
+    <string name="text_thanks_message">Je reservatie is geplaatst! De handelaar laat jou weten van zodra je reservatie bevestigd is.</string>
+    <string name="btn_thanks_back_to_list">Terug naar de lijst</string>
+    <string name="text_thanks_to_reservation">Bekijk reservaties</string>
 
 
 
@@ -73,9 +76,6 @@
     <string name="lunch_list_fragment_search_hint">Zoeken…</string>
 
     <!-- thank-you screen -->
-    <string name="thank_you_fragment_thank_you_message">Bedankt!</string>
-    <string name="thank_you_fragment_bevestiging_reservatie">Je reservatie is geplaatst! De handelaar laat jou weten van zodra je reservatie bevestigd is.</string>
-    <string name="thank_you_fragment_back_button">Terug</string>
     <string name="example_reservation_lunch_merchant">Reservatie bij Qarfa</string>
     <string name="example_reservation_lunch_name">Biefstuk met frietjes</string>
     <string name="example_reservation_aantal">Aantal: 4</string>

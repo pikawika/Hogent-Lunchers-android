@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+>
+
+    <!-- Virtual divider vertical 10% -->
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_thank_you_10percent_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1"
+    />
+
+    <!-- Virtual divider vertical 90% -->
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_thank_you_90percent_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9"
+    />
+
+    <TextView
+            android:id="@+id/text_thanks_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/text_shared_thanks"
+            android:textSize="50sp"
+            android:textAlignment="center"
+
+            app:layout_constraintStart_toStartOf="@+id/guideline_thank_you_10percent_vertical"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_thank_you_90percent_vertical"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/text_thanks_message"
+            app:layout_constraintVertical_chainStyle="packed"/>
+
+    <TextView
+            android:id="@+id/text_thanks_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/text_thanks_message"
+            android:textAlignment="center"
+            android:textSize="20sp"
+
+            app:layout_constraintStart_toStartOf="@+id/guideline_thank_you_10percent_vertical"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_thank_you_90percent_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/text_thanks_title"
+
+            android:layout_marginTop="16dp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/btn_thanks_reservations"/>
+
+    <Button
+            android:id="@+id/btn_thanks_reservations"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:background="@color/colorPrimary"
+            android:text="@string/text_thanks_to_reservation"
+            android:textColor="@android:color/white"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_thanks_message"
+            app:layout_constraintStart_toStartOf="@+id/guideline_thank_you_10percent_vertical"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_thank_you_90percent_vertical"
+
+            android:layout_marginTop="16dp"
+            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintBottom_toTopOf="@+id/btn_thanks_back"/>
+
+    <Button
+            android:id="@+id/btn_thanks_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:textColor="@android:color/black"
+            android:text="@string/btn_thanks_back_to_list"
+            android:background="@color/lightGrey"
+
+            app:layout_constraintTop_toBottomOf="@+id/btn_thanks_reservations"
+            app:layout_constraintStart_toStartOf="@+id/guideline_thank_you_10percent_vertical"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_thank_you_90percent_vertical"
+
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.5"/>
+
+
+</android.support.constraint.ConstraintLayout>
