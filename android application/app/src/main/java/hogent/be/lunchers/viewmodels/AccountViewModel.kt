@@ -6,6 +6,7 @@ import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.constants.ROL_KLANT
 import hogent.be.lunchers.models.BlacklistedItem
+import hogent.be.lunchers.models.ReservatieRepository
 import hogent.be.lunchers.networks.responses.TokenResponse
 import hogent.be.lunchers.networks.LunchersApi
 import hogent.be.lunchers.networks.requests.*
@@ -15,12 +16,16 @@ import hogent.be.lunchers.utils.PreferenceUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.doAsync
 import javax.inject.Inject
 
 /**
  * Een [InjectedViewModel] klasse die alle lunches bevat.
  */
 class AccountViewModel : InjectedViewModel() {
+
+    @Inject
+    lateinit var orderRepo: ReservatieRepository
 
     /**
      * De gebruikersnaam van de aangemelde user
@@ -278,6 +283,7 @@ class AccountViewModel : InjectedViewModel() {
      */
     fun afmelden() {
         PreferenceUtil().deletePreferences()
+        doAsync { orderRepo.clearDatabase() }
         aangemeld.value = false
     }
 
