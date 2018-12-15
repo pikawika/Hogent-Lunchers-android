@@ -10,4 +10,8 @@ class ReservatieRepository(private val orderDao: OrderDao) {
         orders.forEach { orderDao.insert(it) }
     }
 
+    fun clearDatabase() {
+        orderDao.deleteAllOrders()
+    }
 }
+
