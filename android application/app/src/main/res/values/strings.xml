@@ -3,13 +3,14 @@
     <string name="text_new_password">Nieuw wachtwoord</string>
     <string name="text_confirm_password">Bevestig wachtwoord</string>
     <string name="text_password">Wachtwoord</string>
+    <string name="text_no_navigation_app">U heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
 
     <!-- fragment_lunch_detail -->
     <string name="button_lunch_detail_reserve">Reserveer deze lunch</string>
     <string name="button_lunch_detail_call">Bel het restaurant</string>
     <string name="button_lunch_detail_show_on_map">Bekijk restaurant op de kaart</string>
     <string name="button_lunch_detail_navigation">Routebeschrijving</string>
-    <string name="text_no_navigation_app">u heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
+    <string name="alt_lunch_detail_image">Afbeelding van geselecteerde lunch</string>
 
     <!-- fragment_blacklist -->
     <string name="text_blacklist_title">Zwarte lijst</string>
@@ -24,7 +25,8 @@
     <string name="button_login">Aanmelden</string>
     <string name="button_login_register">Nog geen account? Registreer hier!</string>
 
-
+    <!-- fragment_order_detail -->
+    <string name="alt_order_detail_image">Afbeelding van geselecteerde bestelde lunch</string>
 
 
 
@@ -52,7 +54,6 @@
     <string name="thank_you_fragment_thank_you_message">Bedankt!</string>
     <string name="thank_you_fragment_bevestiging_reservatie">Je reservatie is geplaatst! De handelaar laat jou weten van zodra je reservatie bevestigd is.</string>
     <string name="thank_you_fragment_back_button">Terug</string>
-    <string name="description_order_list_content_image">Image of a lunch</string>
     <string name="example_reservation_lunch_merchant">Reservatie bij Qarfa</string>
     <string name="example_reservation_lunch_name">Biefstuk met frietjes</string>
     <string name="example_reservation_aantal">Aantal: 4</string>

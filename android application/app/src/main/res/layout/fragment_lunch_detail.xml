@@ -48,7 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
 
-                    android:contentDescription="@string/lunch_afbeelding_beschrijving"
+                    android:contentDescription="@string/alt_lunch_detail_image"
                     app:layout_constraintDimensionRatio="H,16:9"
                     android:scaleType="centerCrop"
                     android:src="@{lunchViewModel.getSelectedLunch().afbeeldingen[0].pad}"
