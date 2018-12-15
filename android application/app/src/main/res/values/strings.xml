@@ -4,12 +4,12 @@
     <string name="text_confirm_password">Bevestig wachtwoord</string>
     <string name="text_password">Wachtwoord</string>
     <string name="text_no_navigation_app">U heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
+    <string name="button_call_restaurant">Bel het restaurant</string>
+    <string name="button_show_restaurant_on_map">Bekijk restaurant op de kaart</string>
+    <string name="button_navigation">Routebeschrijving</string>
 
     <!-- fragment_lunch_detail -->
     <string name="button_lunch_detail_reserve">Reserveer deze lunch</string>
-    <string name="button_lunch_detail_call">Bel het restaurant</string>
-    <string name="button_lunch_detail_show_on_map">Bekijk restaurant op de kaart</string>
-    <string name="button_lunch_detail_navigation">Routebeschrijving</string>
     <string name="alt_lunch_detail_image">Afbeelding van geselecteerde lunch</string>
 
     <!-- fragment_blacklist -->
