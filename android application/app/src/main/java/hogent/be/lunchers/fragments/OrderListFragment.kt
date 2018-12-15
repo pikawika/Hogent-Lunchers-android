@@ -34,9 +34,9 @@ class OrderListFragment : Fragment() {
 
         reservations.observe(this, Observer { adapter.notifyDataSetChanged() })
 
-        // De reservaties die in de Room database zitten worden alvast opgehaald,
-        // indien er via het internet geen reservaties werden opgehaald, zullen
-        // de reservaties uit de lokale databank ingeladen worden
+        // De reservations die in de Room database zitten worden alvast opgehaald,
+        // indien er via het internet geen reservations werden opgehaald, zullen
+        // de reservations uit de lokale databank ingeladen worden
         orderViewModel.roomOrders.observe(activity!! as MainActivity, Observer {
             if (reservations.value!!.isEmpty()) orderViewModel.setReservations(it!!)
         })

@@ -2,7 +2,7 @@ package hogent.be.lunchers.networks
 
 import hogent.be.lunchers.models.BlacklistedItem
 import hogent.be.lunchers.models.Lunch
-import hogent.be.lunchers.models.Reservatie
+import hogent.be.lunchers.models.Reservation
 import hogent.be.lunchers.networks.requests.*
 import hogent.be.lunchers.networks.responses.BerichtResponse
 import hogent.be.lunchers.networks.responses.TokenResponse
@@ -22,17 +22,17 @@ interface LunchersApi {
 
     /**
 
-     * Haal alle lunches op dichts bij locatie
+     * Haal alle lunches op dichts bij location
      * https://lunchers.ml/api/lunch?latitude=1&longitude=1
      */
     @GET("api/lunch")
     fun getAllLunchesFromLocation(@Query("latitude") latitude: Double, @Query("longitude") longitude: Double): Observable<List<Lunch>>
 
     /*
-     * Haal alle reservaties op van de gebruiker
+     * Haal alle reservations op van de gebruiker
      */
     @GET("api/reservatie")
-    fun getAllOrders(): Observable<List<Reservatie>>
+    fun getAllOrders(): Observable<List<Reservation>>
 
     /**
      * Login en return tokenresponse

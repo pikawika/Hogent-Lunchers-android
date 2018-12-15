@@ -3,12 +3,10 @@ package hogent.be.lunchers.viewmodels
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import hogent.be.lunchers.bases.InjectedViewModel
-import hogent.be.lunchers.models.Reservatie
+import hogent.be.lunchers.models.Reservation
 import hogent.be.lunchers.models.ReservatieRepository
 import hogent.be.lunchers.networks.LunchersApi
 import hogent.be.lunchers.utils.MessageUtil
-import hogent.be.lunchers.utils.OrderUtil.convertIntToStatus
-import hogent.be.lunchers.utils.OrderUtil.formatDate
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -23,19 +21,19 @@ class OrderViewModel : InjectedViewModel() {
     @Inject
     lateinit var orderRepo: ReservatieRepository
 
-    private val _reservations = MutableLiveData<List<Reservatie>>()
+    private val _reservations = MutableLiveData<List<Reservation>>()
 
-    val reservations: MutableLiveData<List<Reservatie>>
+    val reservations: MutableLiveData<List<Reservation>>
         get() = _reservations
 
-    private var _selectedOrder = MutableLiveData<Reservatie>()
+    private var _selectedOrder = MutableLiveData<Reservation>()
 
-    val selectedOrder: MutableLiveData<Reservatie>
+    val selectedOrder: MutableLiveData<Reservation>
         get() = _selectedOrder
 
-    private var _roomOrders: LiveData<List<Reservatie>>
+    private var _roomOrders: LiveData<List<Reservation>>
 
-    val roomOrders: LiveData<List<Reservatie>>
+    val roomOrders: LiveData<List<Reservation>>
         get() = _roomOrders
 
     private var getAllReservationsSubscription: Disposable
@@ -77,15 +75,15 @@ class OrderViewModel : InjectedViewModel() {
             )
     }
 
-    fun setSelectedOrder(orderId: Int) { _selectedOrder.value =  _reservations.value!!.firstOrNull { it.reservatieId == orderId } }
+    fun setSelectedOrder(orderId: Int) { _selectedOrder.value =  _reservations.value!!.firstOrNull { it.reservationId == orderId } }
 
-    fun setReservations(reservations: List<Reservatie>) { _reservations.value = reservations }
+    fun setReservations(reservations: List<Reservation>) { _reservations.value = reservations }
 
-    private fun onRetrieveAllReservationsSuccess(result: List<Reservatie>) {
+    private fun onRetrieveAllReservationsSuccess(result: List<Reservation>) {
         setReservations(result)
         doAsync { orderRepo.insert(result) }
     }
 
-    private fun onRetrieveError() { MessageUtil.showToast("Er is een fout opgetreden tijdens het ophalen van de reservaties van het internet.") }
+    private fun onRetrieveError() { MessageUtil.showToast("Er is een fout opgetreden tijdens het ophalen van de reservations van het internet.") }
 
 }

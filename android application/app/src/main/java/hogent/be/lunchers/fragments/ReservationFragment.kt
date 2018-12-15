@@ -131,7 +131,7 @@ class ReservationFragment : Fragment() {
             builder.setTitle("Bevestiging reservatie")
             builder.setMessage("Bevestig dat je " +
                     "${reservationViewModel.amount} keer " +
-                    "${reservationViewModel.getSelectedLunch().value!!.naam} wenst te reserveren op " +
+                    "${reservationViewModel.getSelectedLunch().value!!.name} wenst te reserveren op " +
                     "${reservationViewModel.day}/${reservationViewModel.month}/${reservationViewModel.year} om " +
                     "${reservationViewModel.hour}:${reservationViewModel.minute}.")
 

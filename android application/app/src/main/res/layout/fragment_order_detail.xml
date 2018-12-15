@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
 
-                    android:src="@{orderViewModel.selectedOrder.lunch.afbeeldingen[0].pad}"
+                    android:src="@{orderViewModel.selectedOrder.lunch.images[0].path}"
                     tools:src="@tools:sample/backgrounds/scenic"
                     android:contentDescription="@string/alt_order_detail_image"
                     android:scaleType="centerCrop"
@@ -62,7 +62,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
-                    android:text="@{`Lunch: ` + orderViewModel.selectedOrder.lunch.naam}"
+                    android:text="@{`Lunch: ` + orderViewModel.selectedOrder.lunch.name}"
                     tools:text="Name of ordered lunch"
                     android:textSize="24sp"
                     android:textColor="@android:color/black"
@@ -81,7 +81,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
-                    android:text="@{orderViewModel.selectedOrder.lunch.beschrijving}"
+                    android:text="@{orderViewModel.selectedOrder.lunch.description}"
                     tools:text="A nice description"
                     android:textAlignment="center"
                     android:textSize="16sp"
@@ -99,7 +99,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
-                    android:text="@{@string/text_order_detail_restaurant + ' ' + orderViewModel.selectedOrder.lunch.handelaar.handelsNaam}"
+                    android:text="@{@string/text_order_detail_restaurant + ' ' + orderViewModel.selectedOrder.lunch.merchant.companyName}"
                     tools:text="Restaurant: x"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
@@ -119,7 +119,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
-                    android:orderAmount="@{orderViewModel.selectedOrder.aantal}"
+                    android:orderAmount="@{orderViewModel.selectedOrder.amount}"
                     tools:text="Amount ordered"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
@@ -160,7 +160,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
-                    android:orderDate="@{orderViewModel.selectedOrder.datum}"
+                    android:orderDate="@{orderViewModel.selectedOrder.date}"
                     tools:text="Date when lunch will take place"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
@@ -180,14 +180,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
-                    android:text="@{@string/text_order_detail_message + ' ' + orderViewModel.selectedOrder.opmerking}"
+                    android:text="@{@string/text_order_detail_message + ' ' + orderViewModel.selectedOrder.message}"
                     tools:text="Optional message to restaurant"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:drawableStart="@drawable/ic_attachment_red_24dp"
                     android:drawablePadding="6dp"
 
-                    android:visibility='@{TextUtils.isEmpty(orderViewModel.selectedOrder.opmerking) ? View.GONE : View.VISIBLE}'
+                    android:visibility='@{TextUtils.isEmpty(orderViewModel.selectedOrder.message) ? View.GONE : View.VISIBLE}'
 
                     app:layout_constraintStart_toStartOf="@+id/guideline_order_detail_10percent_vertical"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_order_detail_90percent_vertical"

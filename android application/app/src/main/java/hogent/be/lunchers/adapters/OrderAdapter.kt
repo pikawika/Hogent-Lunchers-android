@@ -13,14 +13,14 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.constants.BASE_URL_BACKEND
 import hogent.be.lunchers.fragments.OrderDetailFragment
-import hogent.be.lunchers.models.Reservatie
+import hogent.be.lunchers.models.Reservation
 import hogent.be.lunchers.utils.OrderUtil.convertIntToStatus
 import hogent.be.lunchers.utils.OrderUtil.formatDate
 import hogent.be.lunchers.utils.StringFormattingUtil
 import hogent.be.lunchers.viewmodels.OrderViewModel
 import kotlinx.android.synthetic.main.item_order.view.*
 
-class OrderAdapter(private val parentActivity: MainActivity, private val reservaties: MutableLiveData<List<Reservatie>>): RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
+class OrderAdapter(private val parentActivity: MainActivity, private val reservaties: MutableLiveData<List<Reservation>>): RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
 
     private var orderViewModel: OrderViewModel = ViewModelProviders.of(parentActivity).get(OrderViewModel::class.java)
 
@@ -28,8 +28,8 @@ class OrderAdapter(private val parentActivity: MainActivity, private val reserva
 
     init {
         onClickListener = View.OnClickListener { v ->
-            val selectedOrder = v.tag as Reservatie
-            orderViewModel.setSelectedOrder(selectedOrder.reservatieId)
+            val selectedOrder = v.tag as Reservation
+            orderViewModel.setSelectedOrder(selectedOrder.reservationId)
 
             parentActivity.supportFragmentManager
                 .beginTransaction()
@@ -47,12 +47,12 @@ class OrderAdapter(private val parentActivity: MainActivity, private val reserva
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = reservaties.value!![position]
-        Glide.with(parentActivity).load(BASE_URL_BACKEND + item.lunch.afbeeldingen[0].pad).into(holder.imageView)
-        holder.lunchMerchantView.text = item.lunch.handelaar.handelsNaam
-        holder.lunchNameView.text = item.lunch.naam
+        Glide.with(parentActivity).load(BASE_URL_BACKEND + item.lunch.images[0].path).into(holder.imageView)
+        holder.lunchMerchantView.text = item.lunch.merchant.companyName
+        holder.lunchNameView.text = item.lunch.name
         holder.statusView.text = String.format("Status: %s", convertIntToStatus(item.status))
-        holder.aantalView.text = StringFormattingUtil.amountOfPeopleToString(item.aantal)
-        holder.dateView.text = formatDate(item.datum)
+        holder.aantalView.text = StringFormattingUtil.amountOfPeopleToString(item.amount)
+        holder.dateView.text = formatDate(item.date)
 
         with(holder.itemView) {
             tag = item

@@ -5,7 +5,7 @@ import hogent.be.lunchers.database.OrderDao
 class ReservatieRepository(private val orderDao: OrderDao) {
     val orders = orderDao.getAllOrders()
 
-    fun insert(orders: List<Reservatie>) {
+    fun insert(orders: List<Reservation>) {
         if (orders.isNotEmpty()) orderDao.deleteAllOrders()
         orders.forEach { orderDao.insert(it) }
     }

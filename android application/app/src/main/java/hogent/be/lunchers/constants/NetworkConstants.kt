@@ -6,6 +6,6 @@ package hogent.be.lunchers.constants
 const val BASE_URL_BACKEND: String = "https://www.lunchers.ml/"
 
 /**
- * De klanten rol die backend kent
+ * De klanten role die backend kent
  * */
 const val ROL_KLANT: String = "klant"

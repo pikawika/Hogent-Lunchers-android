@@ -1,11 +1,11 @@
 package hogent.be.lunchers.utils
 
-import hogent.be.lunchers.models.Locatie
+import hogent.be.lunchers.models.Location
 
 object StringFormattingUtil {
     @JvmStatic
-    fun locationToString(location: Locatie) : String {
-        return location.straat + " " + location.huisnummer + ", " + location.postcode + " " + location.gemeente
+    fun locationToString(location: Location) : String {
+        return location.street + " " + location.houseNumber + ", " + location.postalCode + " " + location.city
     }
 
     @JvmStatic

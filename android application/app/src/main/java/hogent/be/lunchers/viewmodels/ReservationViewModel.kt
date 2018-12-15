@@ -20,7 +20,7 @@ import javax.inject.Inject
 import kotlin.math.min
 
 /**
- * Een [InjectedViewModel] klasse die de reservaties behandeld.
+ * Een [InjectedViewModel] klasse die de reservations behandeld.
  */
 class ReservationViewModel : InjectedViewModel() {
 
@@ -71,7 +71,7 @@ class ReservationViewModel : InjectedViewModel() {
     var minute: Int = -1
 
     /**
-     * aantal
+     * amount
      */
     var amount: Int = -1
 

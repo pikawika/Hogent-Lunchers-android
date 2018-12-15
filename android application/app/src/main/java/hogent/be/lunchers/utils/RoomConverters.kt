@@ -8,11 +8,11 @@ import java.util.*
 
 class RoomConverters {
 
-    // Een Long terug omzetten naar een datum
+    // Een Long terug omzetten naar een date
     @TypeConverter
     fun fromTimestamp(value: Long?): Date? { return value?.let { Date(it) } }
 
-    // Een datum omzetten naar een Long
+    // Een date omzetten naar een Long
     @TypeConverter
     fun dateToTimestamp(date: Date?): Long? { return date?.time }
 

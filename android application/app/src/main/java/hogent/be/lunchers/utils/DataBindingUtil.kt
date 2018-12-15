@@ -5,7 +5,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import hogent.be.lunchers.constants.BASE_URL_BACKEND
 import android.widget.TextView
-import hogent.be.lunchers.models.Locatie
+import hogent.be.lunchers.models.Location
 import java.util.*
 
 
@@ -39,11 +39,11 @@ object DataBindingUtil {
     }
 
     /**
-     * Zorgt er voor dat locatie mooi wordt weergegeven
+     * Zorgt er voor dat location mooi wordt weergegeven
      */
     @JvmStatic
     @BindingAdapter("android:restaurantLocation")
-    fun setRestaurantLocation(view: TextView, location: Locatie?) {
+    fun setRestaurantLocation(view: TextView, location: Location?) {
         if (location != null)
         {
             view.text = StringFormattingUtil.locationToString(location)
@@ -51,7 +51,7 @@ object DataBindingUtil {
     }
 
     /**
-     * Zorgt er voor dat order datum mooi wordt weergegeven
+     * Zorgt er voor dat order date mooi wordt weergegeven
      */
     @JvmStatic
     @BindingAdapter("android:orderDate")

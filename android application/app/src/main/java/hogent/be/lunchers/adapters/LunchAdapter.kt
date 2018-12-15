@@ -62,12 +62,12 @@ class LunchAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = lunches.value!![position]
-        Glide.with(parentActivity).load(BASE_URL_BACKEND + item.afbeeldingen[0].pad).into(holder.afbeeldingView)
-        holder.naamView.text = item.naam
-        holder.beschrijvingView.text = item.beschrijving
-        holder.prijsView.text = String.format("€ %.2f", item.prijs)
-        holder.restaurant.text = item.handelaar.handelsNaam
-        holder.location.text = StringFormattingUtil.locationToString(item.handelaar.locatie)
+        Glide.with(parentActivity).load(BASE_URL_BACKEND + item.images[0].path).into(holder.afbeeldingView)
+        holder.naamView.text = item.name
+        holder.beschrijvingView.text = item.description
+        holder.prijsView.text = String.format("€ %.2f", item.price)
+        holder.restaurant.text = item.merchant.companyName
+        holder.location.text = StringFormattingUtil.locationToString(item.merchant.location)
 
         with(holder.itemView) {
             tag = item

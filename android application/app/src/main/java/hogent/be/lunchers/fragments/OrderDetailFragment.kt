@@ -43,14 +43,14 @@ class OrderDetailFragment : Fragment() {
         rootView.button_order_detail_call.setOnClickListener {
             val builder = AlertDialog.Builder(activity)
             builder.setCancelable(true)
-            builder.setTitle("Bellen naar " + orderViewModel.selectedOrder.value!!.lunch.handelaar.handelsNaam)
-            builder.setMessage("Wil je nu bellen naar " + orderViewModel.selectedOrder.value!!.lunch.handelaar.telefoonnummer + "?")
+            builder.setTitle("Bellen naar " + orderViewModel.selectedOrder.value!!.lunch.merchant.companyName)
+            builder.setMessage("Wil je nu bellen naar " + orderViewModel.selectedOrder.value!!.lunch.merchant.phoneNumber + "?")
             builder.setPositiveButton(
                 "Nu bellen"
             ) { dialog, which ->
                 val phoneIntent = Intent(Intent.ACTION_DIAL)
                 phoneIntent.data =
-                        Uri.parse("tel:" + orderViewModel.selectedOrder.value!!.lunch.handelaar.telefoonnummer)
+                        Uri.parse("tel:" + orderViewModel.selectedOrder.value!!.lunch.merchant.phoneNumber)
                 startActivity(phoneIntent)
             }
             builder.setNegativeButton(
@@ -65,12 +65,12 @@ class OrderDetailFragment : Fragment() {
         rootView.button_order_detail_navigation.setOnClickListener {
             val mapIntent = Intent(Intent.ACTION_VIEW)
             mapIntent.data = Uri.parse(
-                "geo:" + orderViewModel.selectedOrder.value!!.lunch.handelaar.locatie.latitude + "," +
-                        orderViewModel.selectedOrder.value!!.lunch.handelaar.locatie.longitude + "?q=" +
-                        orderViewModel.selectedOrder.value!!.lunch.handelaar.locatie.straat + "+" +
-                        orderViewModel.selectedOrder.value!!.lunch.handelaar.locatie.huisnummer + "+" +
-                        orderViewModel.selectedOrder.value!!.lunch.handelaar.locatie.postcode + "+" +
-                        orderViewModel.selectedOrder.value!!.lunch.handelaar.locatie.gemeente
+                "geo:" + orderViewModel.selectedOrder.value!!.lunch.merchant.location.latitude + "," +
+                        orderViewModel.selectedOrder.value!!.lunch.merchant.location.longitude + "?q=" +
+                        orderViewModel.selectedOrder.value!!.lunch.merchant.location.street + "+" +
+                        orderViewModel.selectedOrder.value!!.lunch.merchant.location.houseNumber + "+" +
+                        orderViewModel.selectedOrder.value!!.lunch.merchant.location.postalCode + "+" +
+                        orderViewModel.selectedOrder.value!!.lunch.merchant.location.city
             )
             val packageManager = activity!!.packageManager
             if (mapIntent.resolveActivity(packageManager) != null) {
@@ -84,7 +84,7 @@ class OrderDetailFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = orderViewModel.selectedOrder.value!!.lunch.naam
+        (activity as MainActivity).supportActionBar?.title = orderViewModel.selectedOrder.value!!.lunch.name
         MainActivity.setCanpop(true)
     }
 

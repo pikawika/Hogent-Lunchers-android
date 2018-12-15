@@ -54,6 +54,7 @@ class ChangePasswordFragment : Fragment() {
             }
             else {
                 accountViewModel.changePassword(text_change_password_new_password.text.toString())
+                activity!!.supportFragmentManager.popBackStack()
             }
         }
     }

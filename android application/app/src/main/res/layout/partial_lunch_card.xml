@@ -48,7 +48,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline_partial_lunch_card_40percent_vertical"
                     app:layout_constraintDimensionRatio="H,16:9"
                     android:scaleType="centerCrop"
-                    android:src="@{lunchViewModel.getSelectedLunch().afbeeldingen[0].pad}"
+                    android:src="@{lunchViewModel.getSelectedLunch().images[0].path}"
                     tools:src="@tools:sample/backgrounds/scenic"
 
 
@@ -65,7 +65,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
-                    android:text="@{lunchViewModel.getSelectedLunch().naam}"
+                    android:text="@{lunchViewModel.getSelectedLunch().name}"
                     tools:text="A nice lunch"
                     android:textSize="20sp"
                     android:textColor="@android:color/black"
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
 
                     android:drawableLeft="@drawable/ic_euro_symbol_red_24dp"
-                    android:text="@{lunchViewModel.getSelectedLunch().prijs}"
+                    android:text="@{lunchViewModel.getSelectedLunch().price}"
                     tools:text="25"
                     android:textSize="18sp"
                     android:drawablePadding="6dp"
@@ -106,7 +106,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
-                    android:text="@{lunchViewModel.getSelectedLunch().handelaar.handelsNaam}"
+                    android:text="@{lunchViewModel.getSelectedLunch().merchant.companyName}"
                     android:drawableLeft="@drawable/ic_restaurant_menu_red_24dp"
                     tools:text="Restaurant"
                     android:drawablePadding="6dp"

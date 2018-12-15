@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     /**
-     * Client voor het ophalen van de locatie van een user
+     * Client voor het ophalen van de location van een user
      */
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
                 .addToBackStack(null)
                 .commit()
         } else {
-            //locatie toegang vragen bij eerste keer openen app (aanmeld scherm)
+            //location toegang vragen bij eerste keer openen app (aanmeld scherm)
             if (PermissionChecker.checkSelfPermission(
                     this,
                     Manifest.permission.ACCESS_FINE_LOCATION
@@ -230,7 +230,7 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 if (location?.latitude == null || location?.longitude == null)
-                    MessageUtil.showToast("Locatie niet beschikbaar, recentste lunches worden getoond.")
+                    MessageUtil.showToast("Location niet beschikbaar, recentste lunches worden getoond.")
 
                 lunchViewModel.setSelectedFilter(
                     FilterEnum.DISTANCE,

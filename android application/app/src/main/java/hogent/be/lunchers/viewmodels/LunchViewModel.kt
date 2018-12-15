@@ -189,7 +189,7 @@ class LunchViewModel : InjectedViewModel() {
     }
 
     /**
-     * zoekt met searchstring op naam, beschrijvng, ingredienten en tags
+     * zoekt met searchstring op name, beschrijvng, ingredienten en tags
      */
     fun search(searchString:String){
         filteredLunches.value = SearchUtil().searchLunch(searchString, allLunches)

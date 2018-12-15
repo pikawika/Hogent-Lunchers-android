@@ -51,7 +51,7 @@
                     android:contentDescription="@string/alt_lunch_detail_image"
                     app:layout_constraintDimensionRatio="H,16:9"
                     android:scaleType="centerCrop"
-                    android:src="@{lunchViewModel.getSelectedLunch().afbeeldingen[0].pad}"
+                    android:src="@{lunchViewModel.getSelectedLunch().images[0].path}"
                     tools:src="@tools:sample/backgrounds/scenic"
 
                     app:layout_constraintTop_toTopOf="parent"
@@ -65,7 +65,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
-                    android:text="@{lunchViewModel.getSelectedLunch().naam}"
+                    android:text="@{lunchViewModel.getSelectedLunch().name}"
                     tools:text="A tasty lunch"
                     android:textSize="24sp"
                     android:textColor="@android:color/black"
@@ -84,7 +84,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
-                    android:text="@{lunchViewModel.getSelectedLunch().beschrijving}"
+                    android:text="@{lunchViewModel.getSelectedLunch().description}"
                     tools:text="A nice description"
                     android:textAlignment="center"
 
@@ -103,7 +103,7 @@
 
                     android:drawableStart="@drawable/ic_euro_symbol_red_24dp"
                     android:drawablePadding="6dp"
-                    android:text="@{lunchViewModel.getSelectedLunch().prijs}"
+                    android:text="@{lunchViewModel.getSelectedLunch().price}"
                     tools:text="25"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
@@ -123,7 +123,7 @@
 
                     android:drawableStart="@drawable/ic_restaurant_menu_red_24dp"
                     android:drawablePadding="6dp"
-                    android:text="@{lunchViewModel.getSelectedLunch().handelaar.handelsNaam}"
+                    android:text="@{lunchViewModel.getSelectedLunch().merchant.companyName}"
                     tools:text="Restaurant"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
@@ -144,7 +144,7 @@
                     android:drawableStart="@drawable/ic_location_red_24dp"
                     android:drawablePadding="6dp"
                     android:textColor="@android:color/black"
-                    android:restaurantLocation="@{lunchViewModel.getSelectedLunch().handelaar.locatie}"
+                    android:restaurantLocation="@{lunchViewModel.getSelectedLunch().merchant.location}"
                     tools:text="Address of restaurant"
 
                     app:layout_constraintStart_toStartOf="@+id/guideline_lunch_detail_10percent_vertical"

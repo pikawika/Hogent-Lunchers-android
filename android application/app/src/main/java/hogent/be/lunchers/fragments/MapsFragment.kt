@@ -65,7 +65,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         val mapFragment = (childFragmentManager.findFragmentById(R.id.map_google_maps_fragment)) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        // Een variabele voor het gebruiken van de locatie van de gebruiker
+        // Een variabele voor het gebruiken van de location van de gebruiker
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity())
 
         childFragmentManager
@@ -105,8 +105,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         return true
     }
 
-    // Deze methode wordt opgeroepen nadat de app de gebruiker gevraagd heeft om de locatie permissie te geven
-    // Indien de gebruiker permissie tot zijn/haar locatie heeft gegeven, wordt de methode setUpMap uitgevoerd
+    // Deze methode wordt opgeroepen nadat de app de gebruiker gevraagd heeft om de location permissie te geven
+    // Indien de gebruiker permissie tot zijn/haar location heeft gegeven, wordt de methode setUpMap uitgevoerd
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
@@ -121,7 +121,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     }
 
     // Deze methode plaatst markers op de map via de meegegeven latitude en longitude
-    // Als je er op klikt verschijnt de naam en kan je ook via Google Maps navigatie starten
+    // Als je er op klikt verschijnt de name en kan je ook via Google Maps navigatie starten
     private fun placeMarkerOnMap(lat: Double, lng: Double, id: String) {
         map.addMarker(
             MarkerOptions().position(LatLng(lat, lng))
@@ -129,9 +129,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         )
     }
 
-    // Functie die de locatie van de gebruiker ophaalt en de camera naar deze locatie laat gaan
+    // Functie die de location van de gebruiker ophaalt en de camera naar deze location laat gaan
     private fun setUpMap() {
-        // De gebruiker toestemming vragen voor zijn/haar locatie te gebruiken
+        // De gebruiker toestemming vragen voor zijn/haar location te gebruiken
         // Momenteel is het nog zo dat na het toestemming geven de app nog eens opnieuw opgestart moet worden
         if (checkSelfPermission(
                 this.requireContext(),
@@ -159,12 +159,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         }
 
         if (lunchViewModel.getSelectedLunch()?.value != null) {
-            val currentLatLng = LatLng(lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.latitude, lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.longitude)
+            val currentLatLng = LatLng(lunchViewModel.getSelectedLunch().value!!.merchant.location.latitude, lunchViewModel.getSelectedLunch().value!!.merchant.location.longitude)
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
         }
     }
 
-    // Deze methode haalt alle lunches op en plaatst van iedere lunch de handelaar op de kaart
+    // Deze methode haalt alle lunches op en plaatst van iedere lunch de merchant op de kaart
     private fun retrieveAllLunches() {
         val list = lunchViewModel.getFilteredLunches()
 
@@ -180,8 +180,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             map.clear()
             lunches.forEach {
                 placeMarkerOnMap(
-                    it.handelaar.locatie.latitude,
-                    it.handelaar.locatie.longitude,
+                    it.merchant.location.latitude,
+                    it.merchant.location.longitude,
                     it.lunchId.toString()
                 )
             }
