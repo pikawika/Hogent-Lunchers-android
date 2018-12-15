@@ -9,6 +9,8 @@
     <string name="text_shared_change_password">Wachtwoord Wijzigen</string>
     <string name="text_shared_hello">Hallo</string>
     <string name="text_shared_my_reservations">Mijn reservaties</string>
+    <string name="alt_shared_logo">Lunchers logo</string>
+    <string name="text_shared_register">Registreren</string>
 
     <!-- Errors -->
     <string name="text_error_no_navigation_app">U heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
@@ -25,7 +27,6 @@
     <string name="button_change_password">Wijzig wachtwoord</string>
 
     <!-- Fragment_login -->
-    <string name="alt_login_logo">Lunchers logo</string>
     <string name="button_login">Aanmelden</string>
     <string name="button_login_register">Nog geen account? Registreer hier!</string>
 
@@ -38,19 +39,16 @@
     <!-- Fragment_profile -->
     <string name="text_fragment_profile_logout">Afmelden</string>
 
+    <!-- Fragment_register -->
+    <string name="placeholder_register_username">Gebruikersnaam</string>
+    <string name="placeholder_register_phonenumber">Telefoonnummer</string>
+    <string name="placeholder_register_email">E-mailadres</string>
+    <string name="placeholder_register_first_name">Voornaam</string>
+    <string name="placeholder_register_last_name">Achternaam</string>
+    <string name="btn_register_have_an_account">Al een account? Meld aan!</string>
 
 
 
-
-    <!-- account string -->
-    <string name="account_placeholder_gebruikersnaam">Gebruikersnaam</string>
-    <string name="account_placeholder_telefoon">Telefoonnummer</string>
-    <string name="account_placeholder_email">E-mailadres</string>
-    <string name="account_placeholder_voornaam">Voornaam</string>
-    <string name="account_placeholder_achternaam">Achternaam</string>
-    <string name="button_registreer">Registreer</string>
-    <string name="button_reeds_eeen_account">Al een account? Meld aan!</string>
-    <string name="text_register">Registreren</string>
 
 
     <!-- wijzig ww -->

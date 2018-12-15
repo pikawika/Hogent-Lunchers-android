@@ -47,11 +47,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun setListeners(fragment: View) {
-        fragment.button_login.setOnClickListener {
+        fragment.btn_login_confirm.setOnClickListener {
             login()
         }
 
-        fragment.button_login_register.setOnClickListener {
+        fragment.btn_login_register.setOnClickListener {
             registreer()
         }
     }
