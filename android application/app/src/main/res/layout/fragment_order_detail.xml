@@ -7,6 +7,8 @@
 >
     <!-- Data binding -->
     <data>
+        <import type="android.view.View"/>
+        <import type="android.text.TextUtils"/>
         <variable name="orderViewModel" type="hogent.be.lunchers.viewmodels.OrderViewModel"/>
     </data>
 
@@ -78,7 +80,7 @@
                 android:text="@{orderViewModel.selectedOrder.lunch.beschrijving}"
                 tools:text="A nice description"
                 android:textAlignment="center"
-                android:textSize="16dp"
+                android:textSize="16sp"
 
                 app:layout_constraintStart_toStartOf="@+id/guideline_order_detail_10percent_vertical"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_order_detail_90percent_vertical"
@@ -93,8 +95,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
-                android:text="@{`Handelaar: ` + orderViewModel.selectedOrder.lunch.handelaar.handelsNaam}"
-                tools:text="Restaurant"
+                android:text="@{@string/text_order_detail_restaurant + ' ' + orderViewModel.selectedOrder.lunch.handelaar.handelsNaam}"
+                tools:text="Restaurant: x"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
                 android:drawableStart="@drawable/ic_restaurant_menu_red_24dp"
@@ -113,7 +115,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
-                android:text="@{`Aantal: ` + orderViewModel.selectedOrder.aantal + ` personen`}"
+                android:orderAmount="@{orderViewModel.selectedOrder.aantal}"
                 tools:text="Amount ordered"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
@@ -134,7 +136,7 @@
                 android:layout_height="wrap_content"
 
 
-                android:text="@{`Status: ` + orderViewModel.formatStatusSelectedOrder()}"
+                android:orderStatus="@{orderViewModel.selectedOrder.status}"
                 tools:text="status of order"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -168,18 +170,20 @@
                 android:layout_marginTop="8dp"
         />
 
-        <!-- Optional message to restaurant -->
+        <!-- Optional message to restaurant, only show if present -->
         <TextView
                 android:id="@+id/text_order_detail_message"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
-                android:text="@{`Boodschap: ` + orderViewModel.selectedOrder.opmerking}"
+                android:text="@{@string/text_order_detail_message + ' ' + orderViewModel.selectedOrder.opmerking}"
                 tools:text="Optional message to restaurant"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:drawableStart="@drawable/ic_attachment_red_24dp"
                 android:drawablePadding="6dp"
+
+                android:visibility='@{TextUtils.isEmpty(orderViewModel.selectedOrder.opmerking) ? View.GONE : View.VISIBLE}'
 
                 app:layout_constraintStart_toStartOf="@+id/guideline_order_detail_10percent_vertical"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_order_detail_90percent_vertical"

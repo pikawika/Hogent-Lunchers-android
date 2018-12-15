@@ -62,5 +62,29 @@ object DataBindingUtil {
         }
     }
 
+    /**
+     * Zorgt er voor dat order amount mooi wordt weergegeven
+     */
+    @JvmStatic
+    @BindingAdapter("android:orderAmount")
+    fun setOrderAmount(view: TextView, amount: Int?) {
+        if (amount != null)
+        {
+            view.text = "Aantal: " + amount + " personen"
+        }
+    }
+
+    /**
+     * Zorgt er voor dat order status mooi wordt weergegeven
+     */
+    @JvmStatic
+    @BindingAdapter("android:orderStatus")
+    fun setOrderStatus(view: TextView, status: Int?) {
+        if (status != null)
+        {
+            view.text = "Status: " + OrderUtil.convertIntToStatus(status)
+        }
+    }
+
 
 }

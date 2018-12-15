@@ -27,6 +27,9 @@
 
     <!-- fragment_order_detail -->
     <string name="alt_order_detail_image">Afbeelding van geselecteerde bestelde lunch</string>
+    <string name="text_order_detail_restaurant">Restaurant:</string>
+    <string name="text_order_detail_status">Status:</string>
+    <string name="text_order_detail_message">Opmerking:</string>
 
 
 

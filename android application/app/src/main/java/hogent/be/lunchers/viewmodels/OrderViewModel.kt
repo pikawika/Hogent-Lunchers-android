@@ -88,6 +88,4 @@ class OrderViewModel : InjectedViewModel() {
 
     private fun onRetrieveError() { MessageUtil.showToast("Er is een fout opgetreden tijdens het ophalen van de reservaties van het internet.") }
 
-    fun formatStatusSelectedOrder(): String { return convertIntToStatus(_selectedOrder.value!!.status) }
-
 }
