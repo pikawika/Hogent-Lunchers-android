@@ -70,10 +70,10 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         rootView.swipe_refresh_layout.setOnRefreshListener(this)
 
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = true
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = true
 
         return rootView
     }
@@ -94,20 +94,20 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     //opties menu instellen
     @Override
     override fun onStart() {
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = true
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = true
         super.onStart()
     }
 
     //opties menu verwijderen
     @Override
     override fun onPause() {
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = false
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_afstand)?.isVisible = false
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = false
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = false
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = false
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_afstand)?.isVisible = false
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = false
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = false
         super.onPause()
     }
 

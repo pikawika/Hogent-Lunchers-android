@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Fragment to display blacklisted items in a list with add and delete options -->
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,22 +8,25 @@
         android:layout_height="match_parent"
 >
 
-    <!-- virtuele scheidingslijn verticaal 10% -->
+    <!-- Virtual divider vertical 10% -->
     <android.support.constraint.Guideline
             android:id="@+id/guideline_blacklist_10percent_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1"/>
+            app:layout_constraintGuide_percent="0.1"
+    />
 
-    <!-- virtuele scheidingslijn verticaal 90% -->
+    <!-- Virtual divider vertical 90% -->
     <android.support.constraint.Guideline
             android:id="@+id/guideline_blacklist_90percent_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9"/>
+            app:layout_constraintGuide_percent="0.9"
+    />
 
+    <!-- Title -->
     <TextView
             android:id="@+id/txt_blacklist_title"
             android:layout_width="0dp"
@@ -38,14 +42,16 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline_blacklist_90percent_vertical"
             app:layout_constraintTop_toTopOf="parent"
 
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+    />
 
+    <!-- Description -->
     <TextView
             android:id="@+id/txt_blacklist_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:text="@string/text_settings_blacklist_description"
+            android:text="@string/text_blacklist_description"
             android:textStyle="bold"
             android:textAlignment="center"
 
@@ -57,6 +63,7 @@
             android:layout_marginBottom="160dp"
     />
 
+    <!-- List enclosed in swipe to refresh -->
     <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/blacklist_swiperefresh"
             android:layout_width="0dp"
@@ -64,17 +71,19 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_blacklist_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline_blacklist_10percent_vertical"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_blacklist_90percent_vertical" >
+            app:layout_constraintEnd_toStartOf="@+id/guideline_blacklist_90percent_vertical">
 
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/blacklist_list"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layoutManager="LinearLayoutManager"
-                tools:listitem="@layout/item_blacklist"/>
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_blacklist"
+        />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
+    <!-- FAB to add blaclisted item -->
     <android.support.design.widget.FloatingActionButton
             android:id="@+id/blacklist_add_fab"
             android:layout_width="wrap_content"
@@ -85,12 +94,11 @@
             app:srcCompat="@drawable/ic_add_white_24dp"
             app:backgroundTint="@color/colorPrimary"
 
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
 
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            />
+    />
 
 </android.support.constraint.ConstraintLayout>

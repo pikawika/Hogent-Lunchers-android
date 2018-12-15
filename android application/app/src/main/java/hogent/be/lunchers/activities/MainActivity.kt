@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         if (lunchViewModel.getSelectedFilter() == FilterEnum.DISTANCE)
             lunchesFromLocation()
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar_mainactivity)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        toolbar.setNavigationOnClickListener {
+        toolbar_mainactivity.setNavigationOnClickListener {
             supportFragmentManager.popBackStack()
             supportActionBar?.title = getString(R.string.app_name)
             supportActionBar?.setDisplayHomeAsUpEnabled(false)

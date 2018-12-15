@@ -1,14 +1,14 @@
 <resources>
-    <!-- fragment_lunch_detail-->
+    <!-- fragment_lunch_detail -->
     <string name="button_lunch_detail_reserve">Reserveer deze lunch</string>
     <string name="button_lunch_detail_call">Bel het restaurant</string>
     <string name="button_lunch_detail_show_on_map">Bekijk restaurant op de kaart</string>
     <string name="button_lunch_detail_navigation">Routebeschrijving</string>
     <string name="text_no_navigation_app">u heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
 
-
-
-
+    <!-- fragment_blacklist -->
+    <string name="text_blacklist_title">Zwarte lijst</string>
+    <string name="text_blacklist_description">Indien een lunch een item van de zwarte lijst heeft (ingrediënt of tag) zal deze niet weergegeven worden.</string>
 
 
 
@@ -70,7 +70,6 @@
     <string name="text_settings_default_filter">Standaard filtermethode</string>
     <string name="text_settings_default_boot">Startscherm instellen</string>
     <string name="text_settings_blacklist">Zwarte lijst</string>
-    <string name="text_settings_blacklist_description">Indien een lunch een item van de zwarte lijst heeft (ingrediënt of tag) zal deze niet weergegeven worden.</string>
     <string name="text_select_default_filter">Kies standaard filtermethode</string>
     <string name="text_select_default_boot">Kies standaard startscherm</string>
     <string name="btn_reservation_cancel">Annuleren</string>
