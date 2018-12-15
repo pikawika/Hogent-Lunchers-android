@@ -16,6 +16,7 @@ import hogent.be.lunchers.fragments.OrderDetailFragment
 import hogent.be.lunchers.models.Reservatie
 import hogent.be.lunchers.utils.OrderUtil.convertIntToStatus
 import hogent.be.lunchers.utils.OrderUtil.formatDate
+import hogent.be.lunchers.utils.StringFormattingUtil
 import hogent.be.lunchers.viewmodels.OrderViewModel
 import kotlinx.android.synthetic.main.item_order.view.*
 
@@ -50,7 +51,7 @@ class OrderAdapter(private val parentActivity: MainActivity, private val reserva
         holder.lunchMerchantView.text = item.lunch.handelaar.handelsNaam
         holder.lunchNameView.text = item.lunch.naam
         holder.statusView.text = String.format("Status: %s", convertIntToStatus(item.status))
-        holder.aantalView.text = String.format("Aantal: %d personen", item.aantal)
+        holder.aantalView.text = StringFormattingUtil.amountOfPeopleToString(item.aantal)
         holder.dateView.text = formatDate(item.datum)
 
         with(holder.itemView) {
@@ -62,7 +63,7 @@ class OrderAdapter(private val parentActivity: MainActivity, private val reserva
     override fun getItemCount() = reservaties.value!!.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.iv_order_list_content_lunchafbeelding
+        val imageView: ImageView = view.img_item_order
         val lunchMerchantView: TextView = view.tv_order_list_content_lunch_merchant
         val lunchNameView: TextView = view.tv_order_list_content_lunch_name
         val statusView: TextView = view.tv_order_list_content_status

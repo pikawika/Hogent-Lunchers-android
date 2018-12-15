@@ -67,6 +67,10 @@
     <!-- item_lunch -->
     <string name="alt_text_lunch">Afbeelding van een lunch</string>
 
+    <!-- item_order -->
+    <string name="alt_item_order_image">Afbeelding van een bestelde lunch</string>
+
+
 
 
 
@@ -80,14 +84,6 @@
 
     <!-- search hint -->
     <string name="lunch_list_fragment_search_hint">Zoeken…</string>
-
-    <!-- thank-you screen -->
-    <string name="example_reservation_lunch_merchant">Reservatie bij Qarfa</string>
-    <string name="example_reservation_lunch_name">Biefstuk met frietjes</string>
-    <string name="example_reservation_aantal">Aantal: 4</string>
-    <string name="example_reservation_date">24/12/2018 om 12u30</string>
-    <string name="example_reservation_status">Status: Goedgekeurd</string>
-
 
     <!-- Order List Fragment -->
     <string name="error_fetching_orders">Er is een fout opgetreden tijdens het ophalen van de reservaties.</string>

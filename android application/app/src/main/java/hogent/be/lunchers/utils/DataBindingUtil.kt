@@ -70,7 +70,7 @@ object DataBindingUtil {
     fun setOrderAmount(view: TextView, amount: Int?) {
         if (amount != null)
         {
-            view.text = "Aantal: " + amount + " personen"
+            view.text = StringFormattingUtil.amountOfPeopleToString(amount)
         }
     }
 

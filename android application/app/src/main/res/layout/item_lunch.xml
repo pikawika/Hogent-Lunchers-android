@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
+        <!-- Virtual divider vertical 10% -->
         <android.support.constraint.Guideline
                 android:id="@+id/guideline_item_lunch_10percent_vertical"
                 android:layout_width="wrap_content"

@@ -7,4 +7,9 @@ object StringFormattingUtil {
     fun locationToString(location: Locatie) : String {
         return location.straat + " " + location.huisnummer + ", " + location.postcode + " " + location.gemeente
     }
+
+    @JvmStatic
+    fun amountOfPeopleToString(amount: Int) : String {
+        return "Aantal: " + amount + (if (amount == 1) " persoon" else " personen")
+    }
 }
