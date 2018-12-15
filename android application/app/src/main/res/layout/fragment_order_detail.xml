@@ -202,7 +202,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
-                    android:text="@string/button_call_restaurant"
+                    android:text="@string/text_shared_call_restaurant"
                     android:background="@color/colorPrimary"
                     android:textColor="@android:color/white"
 
@@ -219,7 +219,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
-                    android:text="@string/button_navigation"
+                    android:text="@string/text_shared_button_navigation"
                     android:background="@color/lightGrey"
                     android:textColor="#000"
 

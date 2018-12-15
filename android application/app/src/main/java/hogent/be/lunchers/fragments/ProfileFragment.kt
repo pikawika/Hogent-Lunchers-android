@@ -75,25 +75,25 @@ class ProfileFragment : Fragment() {
 
     private fun setListeners(rootView: View) {
         //afmeldknop
-        rootView.buttonLogout.setOnClickListener {
+        rootView.btn_profile_logout.setOnClickListener {
             afmelden()
         }
         //ww wijzigen knop
-        rootView.buttonChangePassword.setOnClickListener {
+        rootView.btn_profile_change_password.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container_mainactivity, ChangePasswordFragment())
                 .addToBackStack(null)
                 .commit()
         }
-        rootView.buttonReservations.setOnClickListener {
+        rootView.btn_profile_reservations.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container_mainactivity, OrderListFragment())
                 .addToBackStack(null)
                 .commit()
         }
-        rootView.profile_button_preferences.setOnClickListener {
+        rootView.btn_profile_preferences.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container_mainactivity, SettingsFragment())

@@ -37,7 +37,7 @@ class ChangePasswordFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_change_password_title)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_shared_change_password)
         MainActivity.setCanpop(true)
     }
 

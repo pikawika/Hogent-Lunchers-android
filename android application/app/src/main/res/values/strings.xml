@@ -1,35 +1,44 @@
 <resources>
-    <!-- universal -->
-    <string name="text_new_password">Nieuw wachtwoord</string>
-    <string name="text_confirm_password">Bevestig wachtwoord</string>
-    <string name="text_password">Wachtwoord</string>
-    <string name="text_no_navigation_app">U heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
-    <string name="button_call_restaurant">Bel het restaurant</string>
-    <string name="button_show_restaurant_on_map">Bekijk restaurant op de kaart</string>
-    <string name="button_navigation">Routebeschrijving</string>
+    <!-- Shared over multiple -->
+    <string name="text_shared_new_password">Nieuw wachtwoord</string>
+    <string name="text_shared_confirm_password">Bevestig wachtwoord</string>
+    <string name="text_shared_password">Wachtwoord</string>
+    <string name="text_shared_call_restaurant">Bel het restaurant</string>
+    <string name="text_shared_show_restaurant_on_map">Bekijk restaurant op de kaart</string>
+    <string name="text_shared_button_navigation">Routebeschrijving</string>
+    <string name="text_shared_change_password">Wachtwoord Wijzigen</string>
+    <string name="text_shared_hello">Hallo</string>
+    <string name="text_shared_my_reservations">Mijn reservaties</string>
 
-    <!-- fragment_lunch_detail -->
+    <!-- Errors -->
+    <string name="text_error_no_navigation_app">U heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
+
+    <!-- Fragment_lunch_detail -->
     <string name="button_lunch_detail_reserve">Reserveer deze lunch</string>
     <string name="alt_lunch_detail_image">Afbeelding van geselecteerde lunch</string>
 
-    <!-- fragment_blacklist -->
+    <!-- Fragment_blacklist -->
     <string name="text_blacklist_title">Zwarte lijst</string>
     <string name="text_blacklist_description">Indien een lunch een item van de zwarte lijst heeft (ingrediënt of tag) zal deze niet weergegeven worden.</string>
 
-    <!-- fragment_change_password -->
-    <string name="text_change_password_title">Wachtwoord Wijzigen</string>
+    <!-- Fragment_change_password -->
     <string name="button_change_password">Wijzig wachtwoord</string>
 
-    <!-- fragment_login -->
+    <!-- Fragment_login -->
     <string name="alt_login_logo">Lunchers logo</string>
     <string name="button_login">Aanmelden</string>
     <string name="button_login_register">Nog geen account? Registreer hier!</string>
 
-    <!-- fragment_order_detail -->
+    <!-- Fragment_order_detail -->
     <string name="alt_order_detail_image">Afbeelding van geselecteerde bestelde lunch</string>
     <string name="text_order_detail_restaurant">Restaurant:</string>
     <string name="text_order_detail_status">Status:</string>
     <string name="text_order_detail_message">Opmerking:</string>
+
+    <!-- Fragment_profile -->
+    <string name="text_fragment_profile_logout">Afmelden</string>
+
+
 
 
 
@@ -40,7 +49,6 @@
     <string name="account_placeholder_voornaam">Voornaam</string>
     <string name="account_placeholder_achternaam">Achternaam</string>
     <string name="button_registreer">Registreer</string>
-    <string name="text_hallo">Hallo</string>
     <string name="button_reeds_eeen_account">Al een account? Meld aan!</string>
     <string name="text_register">Registreren</string>
 
@@ -74,7 +82,7 @@
     <string name="ab_filter_nieuwste">Sorteren op recentheid</string>
 
     <!-- settings -->
-    <string name="text_settings_title">Instellingen</string>
+    <string name="text_settings_title">Voorkeuren</string>
     <string name="text_settings_default_filter">Standaard filtermethode</string>
     <string name="text_settings_default_boot">Startscherm instellen</string>
     <string name="text_settings_blacklist">Zwarte lijst</string>
