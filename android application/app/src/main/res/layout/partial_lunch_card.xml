@@ -41,7 +41,7 @@
 
             <!-- Image -->
             <ImageView
-                    android:id="@+id/image_partial_lunch_card"
+                    android:id="@+id/img_partial_lunch_card"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
 
@@ -68,7 +68,7 @@
                     android:textSize="20sp"
                     android:textColor="@android:color/black"
                     app:layout_constraintStart_toStartOf="@+id/guideline_partial_lunch_card_40percent_vertical"
-                    app:layout_constraintStart_toEndOf="@+id/image_partial_lunch_card"
+                    app:layout_constraintStart_toEndOf="@+id/img_partial_lunch_card"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 
@@ -90,7 +90,7 @@
                     android:drawablePadding="6dp"
 
                     app:layout_constraintStart_toStartOf="@+id/guideline_partial_lunch_card_40percent_vertical"
-                    app:layout_constraintStart_toEndOf="@+id/image_partial_lunch_card"
+                    app:layout_constraintStart_toEndOf="@+id/img_partial_lunch_card"
                     app:layout_constraintTop_toBottomOf="@+id/text_partial_lunch_card_title"
                     app:layout_constraintEnd_toEndOf="parent"
 
@@ -111,7 +111,7 @@
                     android:textSize="18sp"
 
                     app:layout_constraintStart_toStartOf="@+id/guideline_partial_lunch_card_40percent_vertical"
-                    app:layout_constraintStart_toEndOf="@+id/image_partial_lunch_card"
+                    app:layout_constraintStart_toEndOf="@+id/img_partial_lunch_card"
                     app:layout_constraintTop_toBottomOf="@+id/text_partial_lunch_card_price"
                     app:layout_constraintEnd_toEndOf="parent"
 
