@@ -14,7 +14,7 @@
 
     <!-- Name with thrash cans -->
     <TextView
-            android:id="@+id/txt_item_blacklist"
+            android:id="@+id/text_item_blacklist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
