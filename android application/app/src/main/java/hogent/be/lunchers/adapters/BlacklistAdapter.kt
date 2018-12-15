@@ -62,6 +62,6 @@ class BlacklistAdapter(private val parentActivity: MainActivity, private val bla
     override fun getItemCount() = blacklistedItems.value!!.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val blacklistedItemTitel: TextView = view.txt_item_blacklist
+        val blacklistedItemTitel: TextView = view.text_item_blacklist
     }
 }

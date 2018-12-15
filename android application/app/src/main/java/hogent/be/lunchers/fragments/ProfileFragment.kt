@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,7 +50,7 @@ class ProfileFragment : Fragment() {
             if (!aangemeld.value!!) {
                 activity!!.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragment_container, LoginFragment())
+                    .replace(R.id.fragment_container_mainactivity, LoginFragment())
                     .addToBackStack(null)
                     .commit()
             }
@@ -76,28 +75,28 @@ class ProfileFragment : Fragment() {
 
     private fun setListeners(rootView: View) {
         //afmeldknop
-        rootView.buttonLogout.setOnClickListener {
+        rootView.btn_profile_logout.setOnClickListener {
             afmelden()
         }
         //ww wijzigen knop
-        rootView.buttonChangePassword.setOnClickListener {
+        rootView.btn_profile_change_password.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, ChangePasswordFragment())
+                .replace(R.id.fragment_container_mainactivity, ChangePasswordFragment())
                 .addToBackStack(null)
                 .commit()
         }
-        rootView.buttonReservations.setOnClickListener {
+        rootView.btn_profile_reservations.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, OrderListFragment())
+                .replace(R.id.fragment_container_mainactivity, OrderListFragment())
                 .addToBackStack(null)
                 .commit()
         }
-        rootView.profile_button_preferences.setOnClickListener {
+        rootView.btn_profile_preferences.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, SettingsFragment())
+                .replace(R.id.fragment_container_mainactivity, SettingsFragment())
                 .addToBackStack(null)
                 .commit()
         }

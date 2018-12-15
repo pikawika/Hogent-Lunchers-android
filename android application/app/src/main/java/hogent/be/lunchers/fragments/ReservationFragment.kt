@@ -64,7 +64,7 @@ class ReservationFragment : Fragment() {
             if (gereserveerd.value == true) {
                 activity!!.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragment_container, ThankYouFragment())
+                    .replace(R.id.fragment_container_mainactivity, ThankYouFragment())
                     .addToBackStack(null)
                     .commit()
             }
@@ -80,15 +80,15 @@ class ReservationFragment : Fragment() {
     }
 
     private fun initListeners(rootView: View) {
-        rootView.reserveren_submit_button.setOnClickListener {
+        rootView.btn_reservation_confirm.setOnClickListener {
             reserveren()
         }
 
-        rootView.reserveren_cancel_button.setOnClickListener {
+        rootView.btn_reservation_cancel.setOnClickListener {
             activity!!.supportFragmentManager.popBackStackImmediate()
         }
 
-        rootView.reserveren_datePicker_button.setOnClickListener {
+        rootView.btn_reservation_pick_date.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
@@ -99,12 +99,12 @@ class ReservationFragment : Fragment() {
                         reservationViewModel.year = year
                         reservationViewModel.month = monthOfYear + 1
                         reservationViewModel.day = dayOfMonth
-                        rootView.reserveren_datePicker_button.text = "$day/$month/$year"
+                        rootView.btn_reservation_pick_date.text = "$day/$month/$year"
                     }, year, month, day)
             dpd.show()
         }
 
-        rootView.reserveren_timePicker_button.setOnClickListener {
+        rootView.btn_reservation_pick_time.setOnClickListener {
             val c = Calendar.getInstance()
 
             val hh = c.get(Calendar.HOUR_OF_DAY)
@@ -113,17 +113,17 @@ class ReservationFragment : Fragment() {
                 reservationViewModel.hour = hour
                 reservationViewModel.minute = min
 
-                rootView.reserveren_timePicker_button.text = "$hour:$min"
+                rootView.btn_reservation_pick_time.text = "$hour:$min"
             }
             TimePickerDialog(activity, timeSetListener, hh, mm, true).show()
         }
     }
 
     private fun reserveren() {
-        if (reserveren_aantal_text.text.toString().toIntOrNull() != null)
-            reservationViewModel.amount = reserveren_aantal_text.text.toString().toInt()
+        if (text_reservation_amount.text.toString().toIntOrNull() != null)
+            reservationViewModel.amount = text_reservation_amount.text.toString().toInt()
 
-        reservationViewModel.message = et_reservation_message.text.toString()
+        reservationViewModel.message = text_reservation_message.text.toString()
 
         if (reservationViewModel.valid()) {
             val builder = AlertDialog.Builder(activity)
@@ -147,7 +147,7 @@ class ReservationFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.reservatie_titel)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_reservation_place)
         MainActivity.setCanpop(true)
     }
 

@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Fragment to change preference settings of user -->
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <!-- virtuele scheidingslijn verticaal 10% -->
+    <!-- Virtual divider vertical 10% -->
     <android.support.constraint.Guideline
             android:id="@+id/guideline_settings_10percent_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1"/>
 
-    <!-- virtuele scheidingslijn verticaal 90% -->
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1"
+    />
+
+    <!-- Virtual divider vertical 90% -->
     <android.support.constraint.Guideline
             android:id="@+id/guideline_settings_90percent_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9"/>
 
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9"
+    />
+
+    <!-- Title -->
     <TextView
-            android:id="@+id/txt_settings_title"
+            android:id="@+id/text_settings_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -35,40 +43,38 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_settings_default_filter"
             app:layout_constraintTop_toTopOf="parent"
 
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginBottom="16dp"
 
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintVertical_chainStyle="packed"/>
 
+    <!-- Default filter method -->
     <Button
             android:id="@+id/btn_settings_default_filter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:textColor="#000"
+            android:textColor="@android:color/black"
             android:text="@string/text_settings_default_filter"
             android:background="@color/lightGrey"
 
-            app:layout_constraintTop_toBottomOf="@+id/txt_settings_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_settings_title"
             app:layout_constraintStart_toStartOf="@id/guideline_settings_10percent_vertical"
             app:layout_constraintEnd_toEndOf="@id/guideline_settings_90percent_vertical"
             app:layout_constraintBottom_toTopOf="@+id/btn_settings_default_tab"
 
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="16dp"
 
             app:layout_constraintHorizontal_bias="0.5"
     />
 
+    <!-- Default boot page -->
     <Button
             android:id="@+id/btn_settings_default_tab"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:textColor="#000"
+            android:textColor="@android:color/black"
             android:text="@string/text_settings_default_boot"
             android:background="@color/lightGrey"
 
@@ -77,19 +83,18 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_settings_90percent_vertical"
             app:layout_constraintBottom_toTopOf="@+id/btn_settings_blacklist"
 
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="16dp"
 
             app:layout_constraintHorizontal_bias="0.5"
     />
 
+    <!-- Blacklist -->
     <Button
             android:id="@+id/btn_settings_blacklist"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:textColor="#000"
+            android:textColor="@android:color/black"
             android:text="@string/text_settings_blacklist"
             android:background="@color/lightGrey"
 
@@ -98,8 +103,6 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_settings_90percent_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
 
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="16dp"
 
             app:layout_constraintHorizontal_bias="0.5"/>

@@ -39,7 +39,7 @@ class LoginFragment : Fragment() {
             if (aangemeld.value == true) {
                 //simuleert een button click op lijst om er voor te zorgen dat juiste
                 //item actief is + zet fragment etc automatisch juist
-                parentActivity.bottom_navigation_view.selectedItemId = R.id.action_list
+                parentActivity.bottom_navigation_mainactivity.selectedItemId = R.id.action_list
             }
         })
 
@@ -47,11 +47,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun setListeners(fragment: View) {
-        fragment.button_login_login.setOnClickListener {
+        fragment.btn_login_confirm.setOnClickListener {
             login()
         }
 
-        fragment.button_login_registreren.setOnClickListener {
+        fragment.btn_login_register.setOnClickListener {
             registreer()
         }
     }
@@ -59,13 +59,13 @@ class LoginFragment : Fragment() {
     private fun registreer() {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_container, RegistreerFragment())
+            .replace(R.id.fragment_container_mainactivity, RegistreerFragment())
             .addToBackStack(null)
             .commit()
     }
 
     private fun login() {
-        accountViewModel.login(text_login_gebruikersnaam.text.toString(), text_login_wachtwoord.text.toString())
+        accountViewModel.login(text_login_username.text.toString(), text_login_password.text.toString())
     }
 
 }

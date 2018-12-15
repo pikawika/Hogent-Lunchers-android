@@ -12,10 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
+import hogent.be.lunchers.databinding.FragmentLunchDetailBinding
 import hogent.be.lunchers.databinding.FragmentProfileBinding
-import hogent.be.lunchers.databinding.LunchDetailBinding
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.lunch_detail.view.*
+import kotlinx.android.synthetic.main.fragment_lunch_detail.view.*
+import hogent.be.lunchers.utils.MessageUtil
 
 
 class LunchDetailFragment : Fragment() {
@@ -29,10 +30,10 @@ class LunchDetailFragment : Fragment() {
     /**
      * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
      */
-    private lateinit var binding: LunchDetailBinding
+    private lateinit var binding: FragmentLunchDetailBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.lunch_detail, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_lunch_detail, container, false)
 
         //viewmodel vullen
         lunchViewModel = ViewModelProviders.of(activity!!).get(LunchViewModel::class.java)
@@ -48,28 +49,31 @@ class LunchDetailFragment : Fragment() {
         return rootView
     }
 
-    private fun initListeners(rootView: View){
+    private fun initListeners(rootView: View) {
         //reserveren
-        rootView.button_lunch_detail_reserveren.setOnClickListener {
+        rootView.button_lunch_detail_reserve.setOnClickListener {
             fragmentManager!!.beginTransaction()
-                .replace(R.id.fragment_container, ReservationFragment())
+                .replace(R.id.fragment_container_mainactivity, ReservationFragment())
                 .addToBackStack(null)
                 .commit()
         }
 
         //bel
-        rootView.button_lunch_detail_bellen.setOnClickListener{
+        rootView.button_lunch_detail_call.setOnClickListener {
             val builder = AlertDialog.Builder(activity)
             builder.setCancelable(true)
             builder.setTitle("Bellen naar " + lunchViewModel.getSelectedLunch().value?.handelaar?.handelsNaam)
             builder.setMessage("Wil je nu bellen naar " + lunchViewModel.getSelectedLunch().value?.handelaar?.telefoonnummer + "?")
-            builder.setPositiveButton("Nu bellen"
+            builder.setPositiveButton(
+                "Nu bellen"
             ) { dialog, which ->
                 val phoneIntent = Intent(Intent.ACTION_DIAL)
-                phoneIntent.data = Uri.parse("tel:"+lunchViewModel.getSelectedLunch().value?.handelaar?.telefoonnummer)
+                phoneIntent.data =
+                        Uri.parse("tel:" + lunchViewModel.getSelectedLunch().value?.handelaar?.telefoonnummer)
                 startActivity(phoneIntent)
             }
-            builder.setNegativeButton("Annuleren"
+            builder.setNegativeButton(
+                "Annuleren"
             ) { dialog, which -> dialog.cancel() }
 
             val dialog = builder.create()
@@ -77,11 +81,29 @@ class LunchDetailFragment : Fragment() {
         }
 
         //locatie clicked
-        rootView.textview_lunch_location_restaurant.setOnClickListener{
+        rootView.button_lunch_detail_show_on_map.setOnClickListener {
             fragmentManager!!.beginTransaction()
-                .replace(R.id.fragment_container, MapsFragment())
+                .replace(R.id.fragment_container_mainactivity, MapsFragment())
                 .addToBackStack(null)
                 .commit()
+        }
+
+        rootView.button_lunch_detail_navigation.setOnClickListener {
+            val mapIntent = Intent(Intent.ACTION_VIEW)
+            mapIntent.data = Uri.parse(
+                "geo:" + lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.latitude + "," +
+                        lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.longitude + "?q=" +
+                        lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.straat + "+" +
+                        lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.huisnummer + "+" +
+                        lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.postcode + "+" +
+                        lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.gemeente
+            )
+            val packageManager = activity!!.packageManager
+            if (mapIntent.resolveActivity(packageManager) != null) {
+                startActivity(mapIntent)
+            } else {
+                MessageUtil.showToast(getString(R.string.error_no_navigation_app))
+            }
         }
     }
 

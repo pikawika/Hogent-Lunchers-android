@@ -1,85 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- A fragment to change your password -->
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="Autofill"
+>
 
-    <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+    <!-- Virtual divider vertical 10% -->
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_change_password_10percent_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1"
+    />
+
+    <!-- Virtual divider vertical 90% -->
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_change_password_90percent_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9"
+    />
+
+    <!-- Title -->
+    <TextView
+            android:id="@+id/text_change_password_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/text_shared_change_password"
+            android:textSize="30sp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textAlignment="center"
+
+            app:layout_constraintStart_toStartOf="@+id/guideline_change_password_10percent_vertical"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_change_password_90percent_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_change_password_new_password"
+
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_chainStyle="packed"
+            />
+
+    <!-- Enter password field -->
+    <EditText
+            android:id="@+id/text_change_password_new_password"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:inputType="textPassword"
+            android:hint="@string/text_shared_new_password"
+
+            app:layout_constraintStart_toStartOf="@+id/guideline_change_password_10percent_vertical"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_change_password_90percent_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/text_change_password_title"
+            app:layout_constraintBottom_toTopOf="@+id/text_change_password_confirm_password"
+
+            android:layout_marginTop="12dp"
+            app:layout_constraintHorizontal_bias="0.5"
+            />
+
+    <!-- Repeat password field -->
+    <EditText
+            android:id="@+id/text_change_password_confirm_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:inputType="textPassword"
+            android:hint="@string/text_shared_confirm_password"
+
+            app:layout_constraintStart_toStartOf="@+id/guideline_change_password_10percent_vertical"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_change_password_90percent_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/text_change_password_new_password"
+            app:layout_constraintBottom_toTopOf="@+id/button_change_password"
+
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintHorizontal_bias="0.5"
+            />
 
-        <TextView
-                android:id="@+id/text_changepw_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+    <!-- Confirm change password button -->
+    <Button
+            android:id="@+id/button_change_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
 
-                android:text="@string/changepw_title"
-                android:textSize="30sp"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:textAlignment="center"
+            android:text="@string/button_change_password"
 
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline_change_password_10percent_vertical"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_change_password_90percent_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/text_change_password_confirm_password"
+            app:layout_constraintBottom_toBottomOf="parent"
 
-                android:layout_marginEnd="24dp"
-                android:layout_marginStart="24dp"
-                android:paddingBottom="16dp"
-        />
+            android:layout_marginTop="12dp"
+            app:layout_constraintHorizontal_bias="0.5"
+    />
 
-        <EditText
-                android:id="@+id/text_changepw_newpw"
-
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-
-                android:inputType="textPassword"
-                android:hint="@string/changepw_newpw"
-
-                app:layout_constraintTop_toBottomOf="@+id/text_changepw_title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-
-                android:layout_marginEnd="24dp"
-                android:layout_marginStart="24dp"
-                android:paddingBottom="16dp"
-        />
-
-        <EditText
-                android:id="@+id/text_changepw_newpc_confirm"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-
-                android:inputType="textPassword"
-                android:hint="@string/changepw_newpwconfirm"
-
-                app:layout_constraintTop_toBottomOf="@+id/text_changepw_newpw"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-
-                android:layout_marginEnd="24dp"
-                android:layout_marginStart="24dp"
-                android:paddingBottom="16dp"
-        />
-
-        <Button
-                android:id="@+id/button_change_password"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-
-                android:text="@string/changepw_confirmbutton"
-
-                app:layout_constraintTop_toBottomOf="@+id/text_changepw_newpc_confirm"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-
-                android:layout_marginEnd="24dp"
-                android:layout_marginStart="24dp"
-        />
-    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

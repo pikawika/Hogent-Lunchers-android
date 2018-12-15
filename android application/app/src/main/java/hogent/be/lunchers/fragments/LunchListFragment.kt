@@ -2,7 +2,6 @@ package hogent.be.lunchers.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -13,14 +12,12 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.adapters.LunchAdapter
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.lunch_list.*
-import kotlinx.android.synthetic.main.lunch_list.view.*
+import kotlinx.android.synthetic.main.fragment_lunch_list.*
+import kotlinx.android.synthetic.main.fragment_lunch_list.view.*
 import android.text.Editable
 import android.text.TextWatcher
-import hogent.be.lunchers.utils.MessageUtil
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_blacklist.view.*
-import kotlinx.android.synthetic.main.partial_search_filter.view.*
+import kotlinx.android.synthetic.main.partial_search.view.*
 
 
 class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
@@ -36,9 +33,9 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var lunchAdapter: LunchAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.lunch_list, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_lunch_list, container, false)
 
-        if (rootView.lunch_detail_container != null) {
+        if (rootView.fragment_container_lunch_list != null) {
             twoPane = true
         }
 
@@ -58,7 +55,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             lunchAdapter.notifyDataSetChanged()
         })
 
-        rootView.lunch_list_searchandfilter.txt_search.addTextChangedListener(object : TextWatcher {
+        rootView.searchpartial_lunch_list.txt_search.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
 
@@ -69,14 +66,14 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             }
         })
 
-        rootView.lunch_list.adapter = lunchAdapter
+        rootView.recycler_lunch_list.adapter = lunchAdapter
 
-        rootView.swipe_refresh_layout.setOnRefreshListener(this)
+        rootView.swipe_refresh_lunch_list.setOnRefreshListener(this)
 
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = true
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = true
 
         return rootView
     }
@@ -84,33 +81,33 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
     override fun onRefresh() {
-        lunch_list_searchandfilter.txt_search.setText("")
+        searchpartial_lunch_list.txt_search.setText("")
         retrieveAllLunches()
         lunchViewModel.setSelectedLunch(0)
     }
 
     private fun retrieveAllLunches() {
         lunchViewModel.refreshLunches()
-        swipe_refresh_layout?.isRefreshing = false
+        swipe_refresh_lunch_list?.isRefreshing = false
     }
 
     //opties menu instellen
     @Override
     override fun onStart() {
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = true
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = true
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = true
         super.onStart()
     }
 
     //opties menu verwijderen
     @Override
     override fun onPause() {
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = false
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_afstand)?.isVisible = false
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = false
-        activity!!.toolbar.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = false
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = false
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_afstand)?.isVisible = false
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = false
+        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = false
         super.onPause()
     }
 

@@ -13,8 +13,8 @@ import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_registreer.*
-import kotlinx.android.synthetic.main.fragment_registreer.view.*
+import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.fragment_register.view.*
 
 class RegistreerFragment : Fragment() {
 
@@ -25,7 +25,7 @@ class RegistreerFragment : Fragment() {
     private lateinit var accountViewModel : AccountViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_registreer, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_register, container, false)
 
         setListeners(rootView)
 
@@ -41,7 +41,7 @@ class RegistreerFragment : Fragment() {
             if (aangemeld.value == true) {
                 //simuleert een button click op lijst om er voor te zorgen dat juiste
                 //item actief is + zet fragment etc automatisch juist
-                parentActivity.bottom_navigation_view.selectedItemId = R.id.action_list
+                parentActivity.bottom_navigation_mainactivity.selectedItemId = R.id.action_list
             }
         })
 
@@ -49,47 +49,47 @@ class RegistreerFragment : Fragment() {
     }
 
     fun setListeners(fragment: View) {
-        fragment.button_registreer_login.setOnClickListener {
+        fragment.btn_register_login.setOnClickListener {
             login()
         }
 
-        fragment.button_registreer_registreren.setOnClickListener {
+        fragment.btn_register_confirm.setOnClickListener {
             registreer()
         }
     }
 
     private fun registreer() {
         //er is een veld leeg
-        if (text_registreer_telefoon.text.toString() == ""  ||
-            text_registreer_voornaam.text.toString() == ""  ||
-            text_registreer_achternaam.text.toString() == ""  ||
-            text_registreer_email.text.toString() == ""  ||
-            text_registreer_gebruikersnaam.text.toString() == ""  ||
-            text_registreer_wachtwoord.text.toString() == ""  ||
-            text_registreer_bevestigwachtwoord.text.toString() == "" ) {
+        if (text_register_phone_number.text.toString() == ""  ||
+            text_register_first_name.text.toString() == ""  ||
+            text_register_last_name.text.toString() == ""  ||
+            text_register_email.text.toString() == ""  ||
+            text_register_username.text.toString() == ""  ||
+            text_register_password.text.toString() == ""  ||
+            text_register_confirm_password.text.toString() == "" ) {
             MessageUtil.showToast("Gelieve alle velden in te vullen")
         }
 
         //wws niet gelijk
-        else if (text_registreer_wachtwoord.text.toString() != text_registreer_bevestigwachtwoord.text.toString()) {
+        else if (text_register_password.text.toString() != text_register_confirm_password.text.toString()) {
             MessageUtil.showToast("Wachtwoorden komen niet overeen")
         }
 
         //registreerKlant
         else {
-            accountViewModel.registreerKlant(text_registreer_telefoon.text.toString(),
-                    text_registreer_voornaam.text.toString(),
-                    text_registreer_achternaam.text.toString(),
-                    text_registreer_email.text.toString(),
-                    text_registreer_gebruikersnaam.text.toString(),
-                    text_registreer_wachtwoord.text.toString())
+            accountViewModel.registreerKlant(text_register_phone_number.text.toString(),
+                    text_register_first_name.text.toString(),
+                    text_register_last_name.text.toString(),
+                    text_register_email.text.toString(),
+                    text_register_username.text.toString(),
+                    text_register_password.text.toString())
         }
     }
 
     private fun login() {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_container, LoginFragment())
+            .replace(R.id.fragment_container_mainactivity, LoginFragment())
             .addToBackStack(null)
             .commit()
     }
@@ -97,7 +97,7 @@ class RegistreerFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_register)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_shared_register)
         MainActivity.setCanpop(true)
     }
 
