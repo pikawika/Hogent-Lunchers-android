@@ -72,7 +72,8 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_blacklist_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline_blacklist_10percent_vertical"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_blacklist_90percent_vertical">
+            app:layout_constraintEnd_toStartOf="@+id/guideline_blacklist_90percent_vertical"
+    >
 
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_blacklist"

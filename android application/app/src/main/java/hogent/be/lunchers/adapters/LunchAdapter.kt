@@ -14,6 +14,7 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.constants.BASE_URL_BACKEND
 import hogent.be.lunchers.models.Lunch
+import hogent.be.lunchers.utils.StringFormattingUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.item_lunch.view.*
 
@@ -63,8 +64,10 @@ class LunchAdapter(
         val item = lunches.value!![position]
         Glide.with(parentActivity).load(BASE_URL_BACKEND + item.afbeeldingen[0].pad).into(holder.afbeeldingView)
         holder.naamView.text = item.naam
-        holder.prijsView.text = String.format("€ %.2f", item.prijs)
         holder.beschrijvingView.text = item.beschrijving
+        holder.prijsView.text = String.format("€ %.2f", item.prijs)
+        holder.restaurant.text = item.handelaar.handelsNaam
+        holder.location.text = StringFormattingUtil.locationToString(item.handelaar.locatie)
 
         with(holder.itemView) {
             tag = item
@@ -76,8 +79,10 @@ class LunchAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val afbeeldingView: ImageView = view.imageview_list_item_afbeelding
-        val naamView: TextView = view.textview_list_item_naam
-        val prijsView: TextView = view.textview_list_item_prijs
-        val beschrijvingView: TextView = view.textview_list_item_beschrijving
+        val naamView: TextView = view.text_item_lunch_name
+        val beschrijvingView: TextView = view.text_item_lunch_description
+        val prijsView: TextView = view.text_item_lunch_price
+        val restaurant: TextView = view.text_item_lunch_restaurant
+        val location: TextView = view.text_item_lunch_location
     }
 }

@@ -46,7 +46,7 @@ object DataBindingUtil {
     fun setRestaurantLocation(view: TextView, location: Locatie?) {
         if (location != null)
         {
-            view.text = location.straat + " " + location.huisnummer + ", " + location.postcode + " " + location.gemeente
+            view.text = StringFormattingUtil.locationToString(location)
         }
     }
 
