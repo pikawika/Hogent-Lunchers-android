@@ -47,11 +47,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun setListeners(fragment: View) {
-        fragment.button_login_login.setOnClickListener {
+        fragment.button_login.setOnClickListener {
             login()
         }
 
-        fragment.button_login_registreren.setOnClickListener {
+        fragment.button_login_register.setOnClickListener {
             registreer()
         }
     }
@@ -65,7 +65,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun login() {
-        accountViewModel.login(text_login_gebruikersnaam.text.toString(), text_login_wachtwoord.text.toString())
+        accountViewModel.login(text_login_username.text.toString(), text_login_password.text.toString())
     }
 
 }

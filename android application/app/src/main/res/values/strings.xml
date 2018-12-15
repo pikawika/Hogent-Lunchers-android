@@ -1,4 +1,9 @@
 <resources>
+    <!-- universal -->
+    <string name="text_new_password">Nieuw wachtwoord</string>
+    <string name="text_confirm_password">Bevestig wachtwoord</string>
+    <string name="text_password">Wachtwoord</string>
+
     <!-- fragment_lunch_detail -->
     <string name="button_lunch_detail_reserve">Reserveer deze lunch</string>
     <string name="button_lunch_detail_call">Bel het restaurant</string>
@@ -12,10 +17,12 @@
 
     <!-- fragment_change_password -->
     <string name="text_change_password_title">Wachtwoord Wijzigen</string>
-    <string name="text_change_password_new_password">Nieuw wachtwoord</string>
-    <string name="text_change_password_confirm_new_password">Bevestig nieuw wachtwoord</string>
     <string name="button_change_password">Wijzig wachtwoord</string>
 
+    <!-- fragment_login -->
+    <string name="alt_login_logo">Lunchers logo</string>
+    <string name="button_login">Aanmelden</string>
+    <string name="button_login_register">Nog geen account? Registreer hier!</string>
 
 
 
@@ -24,19 +31,13 @@
     <!-- account string -->
     <string name="account_placeholder_gebruikersnaam">Gebruikersnaam</string>
     <string name="account_placeholder_telefoon">Telefoonnummer</string>
-    <string name="account_placeholder_wachtwoord">Wachtwoord</string>
     <string name="account_placeholder_email">E-mailadres</string>
-    <string name="account_placeholder_bevestigwachtwoord">Bevestig wachtwoord</string>
     <string name="account_placeholder_voornaam">Voornaam</string>
     <string name="account_placeholder_achternaam">Achternaam</string>
-    <string name="button_login">Aanmelden</string>
     <string name="button_registreer">Registreer</string>
-    <string name="button_nog_geen_account">Nog geen account? Registreer hier!</string>
     <string name="text_hallo">Hallo</string>
     <string name="button_reeds_eeen_account">Al een account? Meld aan!</string>
     <string name="text_register">Registreren</string>
-
-
 
 
     <!-- wijzig ww -->
