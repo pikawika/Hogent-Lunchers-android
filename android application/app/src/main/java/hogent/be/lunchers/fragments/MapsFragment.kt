@@ -8,7 +8,6 @@ import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.PermissionChecker.checkSelfPermission
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,8 +22,6 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import hogent.be.lunchers.R
 import hogent.be.lunchers.models.Lunch
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
 import android.text.Editable
 import android.text.TextWatcher
 import hogent.be.lunchers.databinding.FragmentMapBinding
@@ -33,7 +30,6 @@ import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_map.view.*
 import kotlinx.android.synthetic.main.partial_search.view.*
-import java.io.InputStream
 
 
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -66,7 +62,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         binding.setLifecycleOwner(activity)
 
         // Een fragment voor de Google map
-        val mapFragment = (childFragmentManager.findFragmentById(R.id.google_map)) as SupportMapFragment
+        val mapFragment = (childFragmentManager.findFragmentById(R.id.map_google_maps_fragment)) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         // Een variabele voor het gebruiken van de locatie van de gebruiker
@@ -74,10 +70,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
         childFragmentManager
             .beginTransaction()
-            .replace(R.id.google_map_selectedlunch, PartialLunchCardFragment())
+            .replace(R.id.map_selected_lunch, PartialLunchCardFragment())
             .commit()
 
-        rootView.map_searchandfilter.txt_search.addTextChangedListener(object : TextWatcher {
+        rootView.map_search.txt_search.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
 
