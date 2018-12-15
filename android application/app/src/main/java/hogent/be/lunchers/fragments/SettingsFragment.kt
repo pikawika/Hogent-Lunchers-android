@@ -100,7 +100,7 @@ class SettingsFragment : Fragment() {
         rootView.btn_settings_blacklist.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, BlacklistFragment())
+                .replace(R.id.fragment_container_mainactivity, BlacklistFragment())
                 .addToBackStack(null)
                 .commit()
         }

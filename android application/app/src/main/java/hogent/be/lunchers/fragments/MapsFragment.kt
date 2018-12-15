@@ -32,7 +32,7 @@ import hogent.be.lunchers.databinding.FragmentProfileBinding
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_map.view.*
-import kotlinx.android.synthetic.main.partial_search_filter.view.*
+import kotlinx.android.synthetic.main.partial_search.view.*
 import java.io.InputStream
 
 

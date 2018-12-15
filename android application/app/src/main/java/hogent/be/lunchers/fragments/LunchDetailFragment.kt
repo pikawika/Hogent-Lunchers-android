@@ -16,7 +16,6 @@ import hogent.be.lunchers.databinding.FragmentLunchDetailBinding
 import hogent.be.lunchers.databinding.FragmentProfileBinding
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_lunch_detail.view.*
-import android.content.pm.PackageManager
 import hogent.be.lunchers.utils.MessageUtil
 
 
@@ -54,7 +53,7 @@ class LunchDetailFragment : Fragment() {
         //reserveren
         rootView.button_lunch_detail_reserve.setOnClickListener {
             fragmentManager!!.beginTransaction()
-                .replace(R.id.fragment_container, ReservationFragment())
+                .replace(R.id.fragment_container_mainactivity, ReservationFragment())
                 .addToBackStack(null)
                 .commit()
         }
@@ -84,7 +83,7 @@ class LunchDetailFragment : Fragment() {
         //locatie clicked
         rootView.button_lunch_detail_show_on_map.setOnClickListener {
             fragmentManager!!.beginTransaction()
-                .replace(R.id.fragment_container, MapsFragment())
+                .replace(R.id.fragment_container_mainactivity, MapsFragment())
                 .addToBackStack(null)
                 .commit()
         }

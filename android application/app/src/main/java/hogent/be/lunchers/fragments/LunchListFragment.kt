@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_lunch_list.view.*
 import android.text.Editable
 import android.text.TextWatcher
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.partial_search_filter.view.*
+import kotlinx.android.synthetic.main.partial_search.view.*
 
 
 class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
@@ -35,7 +35,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_lunch_list, container, false)
 
-        if (rootView.lunch_detail_container != null) {
+        if (rootView.fragment_container_lunch_list != null) {
             twoPane = true
         }
 
@@ -55,7 +55,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             lunchAdapter.notifyDataSetChanged()
         })
 
-        rootView.lunch_list_searchandfilter.txt_search.addTextChangedListener(object : TextWatcher {
+        rootView.searchpartial_lunch_list.txt_search.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
 
@@ -66,9 +66,9 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             }
         })
 
-        rootView.lunch_list.adapter = lunchAdapter
+        rootView.recycler_lunch_list.adapter = lunchAdapter
 
-        rootView.swipe_refresh_layout.setOnRefreshListener(this)
+        rootView.swipe_refresh_lunch_list.setOnRefreshListener(this)
 
         activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
         activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
@@ -81,14 +81,14 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
     override fun onRefresh() {
-        lunch_list_searchandfilter.txt_search.setText("")
+        searchpartial_lunch_list.txt_search.setText("")
         retrieveAllLunches()
         lunchViewModel.setSelectedLunch(0)
     }
 
     private fun retrieveAllLunches() {
         lunchViewModel.refreshLunches()
-        swipe_refresh_layout?.isRefreshing = false
+        swipe_refresh_lunch_list?.isRefreshing = false
     }
 
     //opties menu instellen

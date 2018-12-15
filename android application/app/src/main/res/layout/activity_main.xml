@@ -32,19 +32,19 @@
 
         <!-- Fragment container -->
         <FrameLayout
-                android:id="@+id/fragment_container"
+                android:id="@+id/fragment_container_mainactivity"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_mainactivity"
-                app:layout_constraintBottom_toTopOf="@id/bottom_navigation_view"
+                app:layout_constraintBottom_toTopOf="@id/bottom_navigation_mainactivity"
         />
 
         <!-- Bottom navigation | hide when not logged in -->
         <android.support.design.widget.BottomNavigationView
-                android:id="@+id/bottom_navigation_view"
+                android:id="@+id/bottom_navigation_mainactivity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 

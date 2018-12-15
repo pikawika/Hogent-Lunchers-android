@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,7 +50,7 @@ class ProfileFragment : Fragment() {
             if (!aangemeld.value!!) {
                 activity!!.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragment_container, LoginFragment())
+                    .replace(R.id.fragment_container_mainactivity, LoginFragment())
                     .addToBackStack(null)
                     .commit()
             }
@@ -83,21 +82,21 @@ class ProfileFragment : Fragment() {
         rootView.buttonChangePassword.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, ChangePasswordFragment())
+                .replace(R.id.fragment_container_mainactivity, ChangePasswordFragment())
                 .addToBackStack(null)
                 .commit()
         }
         rootView.buttonReservations.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, OrderListFragment())
+                .replace(R.id.fragment_container_mainactivity, OrderListFragment())
                 .addToBackStack(null)
                 .commit()
         }
         rootView.profile_button_preferences.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, SettingsFragment())
+                .replace(R.id.fragment_container_mainactivity, SettingsFragment())
                 .addToBackStack(null)
                 .commit()
         }

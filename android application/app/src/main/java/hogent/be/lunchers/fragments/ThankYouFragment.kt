@@ -27,7 +27,7 @@ class ThankYouFragment : Fragment() {
         val rootView= inflater.inflate(R.layout.fragment_thank_you, container, false)
 
         rootView.backButton.setOnClickListener {
-            activity!!.bottom_navigation_view.selectedItemId = R.id.action_list
+            activity!!.bottom_navigation_mainactivity.selectedItemId = R.id.action_list
         }
         return rootView
     }

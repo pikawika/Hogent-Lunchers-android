@@ -41,12 +41,12 @@ class LunchAdapter(
             if (twoPane) {
                 parentActivity.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.lunch_detail_container, LunchDetailFragment())
+                    .replace(R.id.fragment_container_lunch_list, LunchDetailFragment())
                     .commit()
             } else {
                 parentActivity.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragment_container, LunchDetailFragment())
+                    .replace(R.id.fragment_container_mainactivity, LunchDetailFragment())
                     .addToBackStack(null)
                     .commit()
             }

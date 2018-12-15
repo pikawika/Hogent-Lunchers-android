@@ -32,7 +32,7 @@ class OrderAdapter(private val parentActivity: MainActivity, private val reserva
 
             parentActivity.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, OrderDetailFragment())
+                .replace(R.id.fragment_container_mainactivity, OrderDetailFragment())
                 .addToBackStack(null)
                 .commit()
         }

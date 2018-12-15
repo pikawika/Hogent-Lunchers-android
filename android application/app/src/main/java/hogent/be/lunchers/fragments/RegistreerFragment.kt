@@ -41,7 +41,7 @@ class RegistreerFragment : Fragment() {
             if (aangemeld.value == true) {
                 //simuleert een button click op lijst om er voor te zorgen dat juiste
                 //item actief is + zet fragment etc automatisch juist
-                parentActivity.bottom_navigation_view.selectedItemId = R.id.action_list
+                parentActivity.bottom_navigation_mainactivity.selectedItemId = R.id.action_list
             }
         })
 
@@ -89,7 +89,7 @@ class RegistreerFragment : Fragment() {
     private fun login() {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_container, LoginFragment())
+            .replace(R.id.fragment_container_mainactivity, LoginFragment())
             .addToBackStack(null)
             .commit()
     }

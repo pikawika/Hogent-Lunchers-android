@@ -64,7 +64,7 @@ class ReservationFragment : Fragment() {
             if (gereserveerd.value == true) {
                 activity!!.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragment_container, ThankYouFragment())
+                    .replace(R.id.fragment_container_mainactivity, ThankYouFragment())
                     .addToBackStack(null)
                     .commit()
             }

@@ -37,7 +37,7 @@
 
         <include
                 android:id="@+id/map_searchandfilter"
-                layout="@layout/partial_search_filter"
+                layout="@layout/partial_search"
                 app:layout_constraintTop_toTopOf="parent"
         />
 
