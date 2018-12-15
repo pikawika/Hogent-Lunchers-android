@@ -78,7 +78,7 @@ class LunchAdapter(
     override fun getItemCount() = lunches.value!!.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val afbeeldingView: ImageView = view.imageview_list_item_afbeelding
+        val afbeeldingView: ImageView = view.img_item_lunch
         val naamView: TextView = view.text_item_lunch_name
         val beschrijvingView: TextView = view.text_item_lunch_description
         val prijsView: TextView = view.text_item_lunch_price

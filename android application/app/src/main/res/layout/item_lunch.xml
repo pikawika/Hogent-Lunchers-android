@@ -38,7 +38,7 @@
 
         <!-- Image -->
         <ImageView
-                android:id="@+id/imageview_list_item_afbeelding"
+                android:id="@+id/img_item_lunch"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
 
@@ -63,7 +63,7 @@
                 android:textColor="@android:color/black"
                 android:textAlignment="center"
 
-                app:layout_constraintTop_toBottomOf="@+id/imageview_list_item_afbeelding"
+                app:layout_constraintTop_toBottomOf="@+id/img_item_lunch"
                 app:layout_constraintStart_toStartOf="@+id/guideline_item_lunch_10percent_vertical"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_item_lunch_90percent_vertical"
 
@@ -86,7 +86,7 @@
                 android:layout_marginTop="4dp"
         />
 
-        <!-- prijs -->
+        <!-- Price -->
         <TextView
                 android:id="@+id/text_item_lunch_price"
                 android:layout_width="0dp"
@@ -105,7 +105,7 @@
                 android:layout_marginTop="8dp"
         />
 
-        <!-- restaurant -->
+        <!-- Restaurant -->
         <TextView
                 android:id="@+id/text_item_lunch_restaurant"
                 android:layout_width="0dp"
@@ -124,7 +124,7 @@
                 android:layout_marginTop="8dp"
         />
 
-        <!-- locatie -->
+        <!-- Location -->
         <TextView
                 android:id="@+id/text_item_lunch_location"
                 android:layout_width="0dp"
