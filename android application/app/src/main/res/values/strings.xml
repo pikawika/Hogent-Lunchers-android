@@ -10,6 +10,13 @@
     <string name="text_blacklist_title">Zwarte lijst</string>
     <string name="text_blacklist_description">Indien een lunch een item van de zwarte lijst heeft (ingrediënt of tag) zal deze niet weergegeven worden.</string>
 
+    <!-- fragment_change_password -->
+    <string name="text_change_password_title">Wachtwoord Wijzigen</string>
+    <string name="text_change_password_new_password">Nieuw wachtwoord</string>
+    <string name="text_change_password_confirm_new_password">Bevestig nieuw wachtwoord</string>
+    <string name="button_change_password">Wijzig wachtwoord</string>
+
+
 
 
 
@@ -29,12 +36,8 @@
     <string name="button_reeds_eeen_account">Al een account? Meld aan!</string>
     <string name="text_register">Registreren</string>
 
-    <!-- wijzig ww -->
-    <string name="changepw_title">Wachtwoord Wijzigen</string>
-    <string name="changepw_oldpw">Oud wachtwoord</string>
-    <string name="changepw_newpw">Nieuw wachtwoord</string>
-    <string name="changepw_newpwconfirm">Bevestig nieuw wachtwoord</string>
-    <string name="changepw_confirmbutton">Wijzig wachtwoord</string>
+
+
 
     <!-- wijzig ww -->
     <string name="reservatie_titel_prefix">Reservatie van</string>
