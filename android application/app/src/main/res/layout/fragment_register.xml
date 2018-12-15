@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fragment to display blacklisted items in a list with add and delete options -->
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="Autofill"
+>
+
+    <!-- Virtual divider horizontal 50% -->
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_register_50percent_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5"
+    />
+
+    <!-- Virtual divider vertical 50% -->
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_register_50percent_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"
+    />
+
+    <!-- Virtual divider horizontal 10% -->
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_register_10percent_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.10"
+    />
+
+    <!-- Virtual divider horizontal 90% -->
+    <android.support.constraint.Guideline
+            android:id="@+id/guideline_register_90percent_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.90"
+    />
+
+    <!-- Logo -->
+    <ImageView
+            android:id="@+id/img_register_logo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintDimensionRatio="H,16:11"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_logo_red"
+            android:tint="@color/colorPrimary"
+            android:contentDescription="@string/alt_shared_logo"
+
+            app:layout_constraintStart_toStartOf="@+id/guideline_register_10percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_register_90percent_vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/guideline_register_50percent_horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+    />
+
+    <!-- First name -->
+    <EditText
+            android:id="@+id/text_register_first_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/placeholder_register_first_name"
+            android:inputType="text"
+
+            app:layout_constraintTop_toBottomOf="@+id/guideline_register_50percent_horizontal"
+            app:layout_constraintStart_toStartOf="@+id/guideline_register_10percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_register_50percent_vertical"
+    />
+
+    <!-- Last name -->
+    <EditText
+            android:id="@+id/text_register_last_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/placeholder_register_last_name"
+            android:inputType="text"
+
+            app:layout_constraintTop_toBottomOf="@+id/guideline_register_50percent_horizontal"
+            app:layout_constraintStart_toStartOf="@+id/guideline_register_50percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_register_90percent_vertical"
+    />
+
+    <!-- Email -->
+    <EditText
+            android:id="@+id/text_register_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/placeholder_register_email"
+            android:inputType="textEmailAddress"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_register_last_name"
+            app:layout_constraintStart_toStartOf="@+id/guideline_register_10percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_register_90percent_vertical"
+    />
+
+    <!-- Username -->
+    <EditText
+            android:id="@+id/text_register_username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/placeholder_register_username"
+            android:inputType="text"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_register_email"
+            app:layout_constraintStart_toStartOf="@+id/guideline_register_10percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_register_50percent_vertical"
+    />
+
+    <!-- Phone number -->
+    <EditText
+            android:id="@+id/text_register_phone_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/placeholder_register_phonenumber"
+            android:inputType="phone"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_register_email"
+            app:layout_constraintStart_toStartOf="@+id/guideline_register_50percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_register_90percent_vertical"
+    />
+
+    <!-- Password -->
+    <EditText
+            android:id="@+id/text_register_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/text_shared_password"
+            android:inputType="textPassword"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_register_username"
+            app:layout_constraintStart_toStartOf="@+id/guideline_register_10percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_register_50percent_vertical"
+    />
+
+    <!-- Confirm password -->
+    <EditText
+            android:id="@+id/text_register_confirm_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/text_shared_confirm_password"
+            android:inputType="textPassword"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_register_phone_number"
+            app:layout_constraintStart_toStartOf="@+id/guideline_register_50percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_register_90percent_vertical"
+    />
+
+    <!-- Confirm register -->
+    <Button
+            android:id="@+id/btn_register_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/text_shared_register"
+
+            app:layout_constraintStart_toStartOf="@+id/guideline_register_10percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_register_90percent_vertical"
+
+            app:layout_constraintTop_toBottomOf="@+id/text_register_password"
+
+            android:layout_marginTop="15dp"
+    />
+
+    <!-- Go to login -->
+    <TextView
+            android:id="@+id/btn_register_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/btn_register_have_an_account"
+            android:textAlignment="center"
+
+            app:layout_constraintStart_toStartOf="@+id/guideline_register_10percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_register_90percent_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/btn_register_confirm"
+
+            android:layout_marginTop="15dp"
+    />
+
+</android.support.constraint.ConstraintLayout>

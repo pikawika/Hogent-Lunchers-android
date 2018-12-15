@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A list item to display a lunch -->
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_margin="10dp"
+        app:cardElevation="5dp"
+>
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <!-- Virtual divider vertical 10% -->
+        <android.support.constraint.Guideline
+                android:id="@+id/guideline_item_lunch_10percent_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1"
+        />
+
+        <!-- Virtual divider vertical 90% -->
+        <android.support.constraint.Guideline
+                android:id="@+id/guideline_item_lunch_90percent_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9"
+        />
+
+        <!-- Image -->
+        <ImageView
+                android:id="@+id/img_item_lunch"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                app:layout_constraintDimensionRatio="H,16:9"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/alt_text_lunch"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+        />
+
+        <!-- Title -->
+        <TextView
+                android:id="@+id/text_item_lunch_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                tools:text="Name of a lunch"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:textAlignment="center"
+
+                app:layout_constraintTop_toBottomOf="@+id/img_item_lunch"
+                app:layout_constraintStart_toStartOf="@+id/guideline_item_lunch_10percent_vertical"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_item_lunch_90percent_vertical"
+
+                android:layout_marginTop="12dp"
+        />
+
+        <!-- Description -->
+        <TextView
+                android:id="@+id/text_item_lunch_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                tools:text="The description of a lunch"
+                android:textAlignment="center"
+
+                app:layout_constraintTop_toBottomOf="@+id/text_item_lunch_name"
+                app:layout_constraintStart_toStartOf="@+id/guideline_item_lunch_10percent_vertical"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_item_lunch_90percent_vertical"
+
+                android:layout_marginTop="4dp"
+        />
+
+        <!-- Price -->
+        <TextView
+                android:id="@+id/text_item_lunch_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:drawableLeft="@drawable/ic_euro_symbol_red_24dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                tools:text="20"
+                android:drawablePadding="6dp"
+
+                app:layout_constraintStart_toStartOf="@+id/guideline_item_lunch_10percent_vertical"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_item_lunch_90percent_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/text_item_lunch_description"
+
+                android:layout_marginTop="8dp"
+        />
+
+        <!-- Restaurant -->
+        <TextView
+                android:id="@+id/text_item_lunch_restaurant"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:drawableLeft="@drawable/ic_restaurant_menu_red_24dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                tools:text="Restaurant"
+                android:drawablePadding="6dp"
+
+                app:layout_constraintStart_toStartOf="@+id/guideline_item_lunch_10percent_vertical"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_item_lunch_90percent_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/text_item_lunch_price"
+
+                android:layout_marginTop="8dp"
+        />
+
+        <!-- Location -->
+        <TextView
+                android:id="@+id/text_item_lunch_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:drawableLeft="@drawable/ic_location_red_24dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                tools:text="Location"
+                android:drawablePadding="6dp"
+
+                app:layout_constraintStart_toStartOf="@+id/guideline_item_lunch_10percent_vertical"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_item_lunch_90percent_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/text_item_lunch_restaurant"
+
+                android:layout_marginTop="8dp"
+                android:paddingBottom="12dp"
+        />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>
+
+

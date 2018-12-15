@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- Fragment to show the google maps with our markers and the selected lunch -->
+<!-- Uses data binding to only show partial lunch card if a lunch is selected -->
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+>
+    <!-- Data binding -->
     <data>
         <import type="android.view.View"/>
 
@@ -10,32 +16,42 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".fragments.MapsFragment">
 
+        <!-- Google Maps fragment as recommended by Google -->
         <fragment
-                android:id="@+id/google_map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:id="@+id/map_google_maps_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
+        <!-- Framelayout to show our databinded selected lunch -->
         <FrameLayout
-                android:id="@+id/google_map_selectedlunch"
+                android:id="@+id/map_selected_lunch"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+
                 android:visibility="@{lunchViewModel.getSelectedLunch != null? View.VISIBLE : View.GONE}"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-
         />
 
+        <!-- Search -->
+        <include
+                android:id="@+id/map_search"
+                layout="@layout/partial_search"
+                app:layout_constraintTop_toTopOf="parent"
+        />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

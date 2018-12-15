@@ -14,8 +14,9 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.constants.BASE_URL_BACKEND
 import hogent.be.lunchers.models.Lunch
+import hogent.be.lunchers.utils.StringFormattingUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.lunch_list_content.view.*
+import kotlinx.android.synthetic.main.item_lunch.view.*
 
 class LunchAdapter(
     private val parentActivity: MainActivity,
@@ -41,12 +42,12 @@ class LunchAdapter(
             if (twoPane) {
                 parentActivity.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.lunch_detail_container, LunchDetailFragment())
+                    .replace(R.id.fragment_container_lunch_list, LunchDetailFragment())
                     .commit()
             } else {
                 parentActivity.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fragment_container, LunchDetailFragment())
+                    .replace(R.id.fragment_container_mainactivity, LunchDetailFragment())
                     .addToBackStack(null)
                     .commit()
             }
@@ -55,7 +56,7 @@ class LunchAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.lunch_list_content, parent, false)
+            .inflate(R.layout.item_lunch, parent, false)
         return ViewHolder(view)
     }
 
@@ -63,8 +64,10 @@ class LunchAdapter(
         val item = lunches.value!![position]
         Glide.with(parentActivity).load(BASE_URL_BACKEND + item.afbeeldingen[0].pad).into(holder.afbeeldingView)
         holder.naamView.text = item.naam
-        holder.prijsView.text = String.format("€ %.2f", item.prijs)
         holder.beschrijvingView.text = item.beschrijving
+        holder.prijsView.text = String.format("€ %.2f", item.prijs)
+        holder.restaurant.text = item.handelaar.handelsNaam
+        holder.location.text = StringFormattingUtil.locationToString(item.handelaar.locatie)
 
         with(holder.itemView) {
             tag = item
@@ -75,9 +78,11 @@ class LunchAdapter(
     override fun getItemCount() = lunches.value!!.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val afbeeldingView: ImageView = view.imageview_list_item_afbeelding
-        val naamView: TextView = view.textview_list_item_naam
-        val prijsView: TextView = view.textview_list_item_prijs
-        val beschrijvingView: TextView = view.textview_list_item_beschrijving
+        val afbeeldingView: ImageView = view.img_item_lunch
+        val naamView: TextView = view.text_item_lunch_name
+        val beschrijvingView: TextView = view.text_item_lunch_description
+        val prijsView: TextView = view.text_item_lunch_price
+        val restaurant: TextView = view.text_item_lunch_restaurant
+        val location: TextView = view.text_item_lunch_location
     }
 }

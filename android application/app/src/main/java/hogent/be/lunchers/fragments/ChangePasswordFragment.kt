@@ -37,7 +37,7 @@ class ChangePasswordFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.changepw_title)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_shared_change_password)
         MainActivity.setCanpop(true)
     }
 
@@ -49,11 +49,11 @@ class ChangePasswordFragment : Fragment() {
 
     private fun setListeners(fragment: View) {
         fragment.button_change_password.setOnClickListener {
-            if (text_changepw_newpw.text.toString() != text_changepw_newpc_confirm.text.toString()) {
+            if (text_change_password_new_password.text.toString() != text_change_password_confirm_password.text.toString()) {
                 MessageUtil.showToast("Wachtwoorden komen niet overeen")
             }
             else {
-                accountViewModel.changePassword(text_changepw_newpw.text.toString())
+                accountViewModel.changePassword(text_change_password_new_password.text.toString())
             }
         }
     }

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A fragment to show the details of a lunch, uses data binding -->
+<layout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+>
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+                name="lunchViewModel"
+                type="hogent.be.lunchers.viewmodels.LunchViewModel"/>
+    </data>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <!-- Virtual divider horizontal 10% -->
+            <android.support.constraint.Guideline
+                    android:id="@+id/guideline_lunch_detail_10percent_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.1"
+            />
+
+
+            <!-- Virtual divider horizontal 90% -->
+            <android.support.constraint.Guideline
+                    android:id="@+id/guideline_lunch_detail_90percent_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.9"
+            />
+
+            <!-- Image -->
+            <ImageView
+                    android:id="@+id/img_lunch_detail_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+
+                    android:contentDescription="@string/alt_lunch_detail_image"
+                    app:layout_constraintDimensionRatio="H,16:9"
+                    android:scaleType="centerCrop"
+                    android:src="@{lunchViewModel.getSelectedLunch().afbeeldingen[0].pad}"
+                    tools:src="@tools:sample/backgrounds/scenic"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+            />
+
+            <!-- Lunchname -->
+            <TextView
+                    android:id="@+id/text_lunch_detail_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:text="@{lunchViewModel.getSelectedLunch().naam}"
+                    tools:text="A tasty lunch"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center"
+
+                    app:layout_constraintStart_toStartOf="@+id/guideline_lunch_detail_10percent_vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_lunch_detail_90percent_vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/img_lunch_detail_image"
+
+                    android:layout_marginTop="12dp"
+            />
+
+            <!-- Lunch description -->
+            <TextView
+                    android:id="@+id/text_lunch_detail_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:text="@{lunchViewModel.getSelectedLunch().beschrijving}"
+                    tools:text="A nice description"
+                    android:textAlignment="center"
+
+                    app:layout_constraintStart_toStartOf="@+id/guideline_lunch_detail_10percent_vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_lunch_detail_90percent_vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/text_lunch_detail_name"
+
+                    android:layout_marginTop="8dp"
+            />
+
+            <!-- lunch price -->
+            <TextView
+                    android:id="@+id/text_lunch_detail_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:drawableStart="@drawable/ic_euro_symbol_red_24dp"
+                    android:drawablePadding="6dp"
+                    android:text="@{lunchViewModel.getSelectedLunch().prijs}"
+                    tools:text="25"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+
+                    app:layout_constraintStart_toStartOf="@+id/guideline_lunch_detail_10percent_vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_lunch_detail_90percent_vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/text_lunch_detail_description"
+
+                    android:layout_marginTop="12dp"
+            />
+
+            <!-- restaurant name -->
+            <TextView
+                    android:id="@+id/text_lunch_detail_restaurant"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:drawableStart="@drawable/ic_restaurant_menu_red_24dp"
+                    android:drawablePadding="6dp"
+                    android:text="@{lunchViewModel.getSelectedLunch().handelaar.handelsNaam}"
+                    tools:text="Restaurant"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+
+                    app:layout_constraintStart_toStartOf="@+id/guideline_lunch_detail_10percent_vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_lunch_detail_90percent_vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/text_lunch_detail_price"
+
+                    android:layout_marginTop="8dp"
+            />
+
+            <!-- restaurant address -->
+            <TextView
+                    android:id="@+id/text_lunch_detail_location_restaurant"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:drawableStart="@drawable/ic_location_red_24dp"
+                    android:drawablePadding="6dp"
+                    android:textColor="@android:color/black"
+                    android:restaurantLocation="@{lunchViewModel.getSelectedLunch().handelaar.locatie}"
+                    tools:text="Address of restaurant"
+
+                    app:layout_constraintStart_toStartOf="@+id/guideline_lunch_detail_10percent_vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_lunch_detail_90percent_vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/text_lunch_detail_restaurant"
+
+                    android:layout_marginTop="8dp"
+            />
+
+            <!-- reserve -->
+            <Button
+                    android:id="@+id/button_lunch_detail_reserve"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/button_lunch_detail_reserve"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@android:color/white"
+
+                    app:layout_constraintStart_toStartOf="@+id/guideline_lunch_detail_10percent_vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_lunch_detail_90percent_vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/text_lunch_detail_location_restaurant"
+
+                    android:layout_marginTop="12dp"
+            />
+
+            <!-- call -->
+            <Button
+                    android:id="@+id/button_lunch_detail_call"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/text_shared_call_restaurant"
+                    android:background="@color/lightGrey"
+                    android:textColor="#000"
+
+                    app:layout_constraintStart_toStartOf="@+id/guideline_lunch_detail_10percent_vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_lunch_detail_90percent_vertical"
+                    app:layout_constraintTop_toBottomOf="@id/button_lunch_detail_reserve"
+
+                    android:layout_marginTop="12dp"
+            />
+
+            <!-- view on map -->
+            <Button
+                    android:id="@+id/button_lunch_detail_show_on_map"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/text_shared_show_restaurant_on_map"
+                    android:background="@color/lightGrey"
+                    android:textColor="#000"
+
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_lunch_detail_90percent_vertical"
+                    app:layout_constraintStart_toStartOf="@+id/guideline_lunch_detail_10percent_vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/button_lunch_detail_call"
+
+                    android:layout_marginTop="12dp"
+            />
+
+            <!-- get navigation -->
+            <Button
+                    android:id="@+id/button_lunch_detail_navigation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/text_shared_button_navigation"
+                    android:background="@color/lightGrey"
+                    android:textColor="#000"
+
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_lunch_detail_90percent_vertical"
+                    app:layout_constraintStart_toStartOf="@+id/guideline_lunch_detail_10percent_vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/button_lunch_detail_show_on_map"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+            />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

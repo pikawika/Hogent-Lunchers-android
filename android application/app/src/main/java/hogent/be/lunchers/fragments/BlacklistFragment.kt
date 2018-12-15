@@ -2,7 +2,6 @@ package hogent.be.lunchers.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -11,19 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
-import hogent.be.lunchers.adapters.LunchAdapter
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.lunch_list.*
-import kotlinx.android.synthetic.main.lunch_list.view.*
-import android.text.Editable
-import android.text.TextWatcher
 import hogent.be.lunchers.adapters.BlacklistAdapter
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_blacklist.*
 import kotlinx.android.synthetic.main.fragment_blacklist.view.*
-import kotlinx.android.synthetic.main.partial_search_filter.view.*
 
 
 class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
@@ -69,9 +61,9 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             lunchViewModel.refreshLunches()
         })
 
-        rootView.blacklist_list.adapter = blacklistAdapter
+        rootView.recycler_blacklist.adapter = blacklistAdapter
 
-        rootView.blacklist_swiperefresh.setOnRefreshListener(this)
+        rootView.swipe_refresh_blacklist.setOnRefreshListener(this)
 
         initListeners(rootView)
 
@@ -83,7 +75,7 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     fun initListeners(rootView: View) {
-        rootView.blacklist_add_fab.setOnClickListener { v ->
+        rootView.fab_blacklist_add.setOnClickListener { v ->
             MessageUtil.showMakeSuggestionDialog(context!!, "Toevoegen", "Voeg item toe aan zwarte lijst", addBlacklistItem())
         }
     }
@@ -92,7 +84,7 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private fun retrieveAllBlacklistedItems() {
         accountViewModel.refreshBlacklistedItems()
-        blacklist_swiperefresh?.isRefreshing = false
+        swipe_refresh_blacklist?.isRefreshing = false
     }
 
     override fun onResume() {

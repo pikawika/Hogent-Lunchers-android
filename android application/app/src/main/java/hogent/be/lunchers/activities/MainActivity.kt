@@ -9,7 +9,6 @@ import android.location.Location
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.content.PermissionChecker
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -73,12 +72,12 @@ class MainActivity : AppCompatActivity() {
         if (lunchViewModel.getSelectedFilter() == FilterEnum.DISTANCE)
             lunchesFromLocation()
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar_mainactivity)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //menu van de toolbar instellen
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
 
         //men moet wachten tot toolbar is ingesteld om hem te kunnen configureren in onze fragments, deze heeft rare lifecycle.
         showBootPage()
@@ -98,23 +97,23 @@ class MainActivity : AppCompatActivity() {
             when (accountViewModel.getDefaultBootPage()) {
                 PageEnum.MAP -> {
                     fragment = MapsFragment()
-                    bottom_navigation_view.selectedItemId = R.id.action_map
+                    bottom_navigation_mainactivity.selectedItemId = R.id.action_map
                 }
                 PageEnum.PROFILE -> {
                     fragment = ProfileFragment()
-                    bottom_navigation_view.selectedItemId = R.id.action_profile
+                    bottom_navigation_mainactivity.selectedItemId = R.id.action_profile
                 }
                 PageEnum.ORDERSLIST -> {
                     fragment = OrderListFragment()
-                    bottom_navigation_view.selectedItemId = R.id.action_profile
+                    bottom_navigation_mainactivity.selectedItemId = R.id.action_profile
                 }
                 else -> {
                     fragment = LunchListFragment()
-                    bottom_navigation_view.selectedItemId = R.id.action_list
+                    bottom_navigation_mainactivity.selectedItemId = R.id.action_list
                 }
             }
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
+                .replace(R.id.fragment_container_mainactivity, fragment)
                 .addToBackStack(null)
                 .commit()
         } else {
@@ -130,7 +129,7 @@ class MainActivity : AppCompatActivity() {
                 )
             }
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, LoginFragment())
+                .replace(R.id.fragment_container_mainactivity, LoginFragment())
                 .addToBackStack(null)
                 .commit()
         }
@@ -146,13 +145,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        toolbar.setNavigationOnClickListener {
+        toolbar_mainactivity.setNavigationOnClickListener {
             supportFragmentManager.popBackStack()
             supportActionBar?.title = getString(R.string.app_name)
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
         }
 
-        bottom_navigation_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        bottom_navigation_mainactivity.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -160,7 +159,7 @@ class MainActivity : AppCompatActivity() {
             R.id.action_map -> {
                 supportActionBar?.title = "Restaurants in de buurt"
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, MapsFragment())
+                    .replace(R.id.fragment_container_mainactivity, MapsFragment())
                     .addToBackStack(null)
                     .commit()
                 return@OnNavigationItemSelectedListener true
@@ -169,7 +168,7 @@ class MainActivity : AppCompatActivity() {
             R.id.action_list -> {
                 supportActionBar?.title = getString(R.string.app_name)
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, LunchListFragment())
+                    .replace(R.id.fragment_container_mainactivity, LunchListFragment())
                     .addToBackStack(null)
                     .commit()
                 return@OnNavigationItemSelectedListener true
@@ -178,7 +177,7 @@ class MainActivity : AppCompatActivity() {
             R.id.action_profile -> {
                 supportActionBar?.title = "Profiel"
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, ProfileFragment())
+                    .replace(R.id.fragment_container_mainactivity, ProfileFragment())
                     .addToBackStack(null)
                     .commit()
                 return@OnNavigationItemSelectedListener true

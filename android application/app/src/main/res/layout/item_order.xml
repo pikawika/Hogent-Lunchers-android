@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A list item to display an ordered lunch -->
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_margin="10dp"
+
+        app:cardElevation="5dp">
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    >
+
+        <!-- Virtual divider vertical 40% -->
+        <android.support.constraint.Guideline
+                android:id="@+id/guideline_order_list_content_40percent_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.4"
+        />
+
+        <!-- Image -->
+        <ImageView
+                android:id="@+id/img_item_order"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/alt_item_order_image"
+                app:layout_constraintDimensionRatio="H,1:1"
+                tools:srcCompat="@tools:sample/avatars[12]"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_order_list_content_40percent_vertical"
+        />
+
+        <!-- Restaurant -->
+        <TextView
+                android:id="@+id/tv_order_list_content_lunch_merchant"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                tools:text="Restaurant"
+                android:textSize="24sp"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline_order_list_content_40percent_vertical"
+
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+        />
+
+        <!-- Lunch name -->
+        <TextView
+                android:id="@+id/tv_order_list_content_lunch_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+
+                tools:text="A tasty ordered lunch"
+                android:textSize="18sp"
+
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_list_content_lunch_merchant"
+                app:layout_constraintStart_toEndOf="@+id/guideline_order_list_content_40percent_vertical"
+
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+        />
+
+        <!-- Amount -->
+        <TextView
+                android:id="@+id/tv_order_list_content_aantal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                tools:text="Amount"
+                android:drawableStart="@drawable/ic_aantal_red_24dp"
+                android:drawablePadding="6dp"
+                android:textSize="18sp"
+
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_list_content_lunch_name"
+                app:layout_constraintStart_toEndOf="@+id/guideline_order_list_content_40percent_vertical"
+
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+        />
+
+        <!-- Status -->
+        <TextView
+                android:id="@+id/tv_order_list_content_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                tools:text="Status"
+                android:drawableStart="@drawable/ic_email_black_24dp"
+                android:drawablePadding="6dp"
+                android:textSize="18sp"
+
+                app:layout_constraintStart_toEndOf="@+id/guideline_order_list_content_40percent_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_list_content_aantal"
+
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+        />
+
+        <!-- Date -->
+        <TextView
+                android:id="@+id/tv_order_list_content_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                tools:text="Date to go lunching"
+                android:drawableStart="@drawable/ic_date_range_black_24dp"
+                android:drawablePadding="6dp"
+                android:textSize="18sp"
+
+                app:layout_constraintStart_toEndOf="@+id/guideline_order_list_content_40percent_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_list_content_status"
+
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="8dp"
+        />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

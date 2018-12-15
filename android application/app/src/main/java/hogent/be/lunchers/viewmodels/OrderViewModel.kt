@@ -2,7 +2,6 @@ package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import com.bumptech.glide.Glide.init
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.models.Reservatie
 import hogent.be.lunchers.models.ReservatieRepository
@@ -88,9 +87,5 @@ class OrderViewModel : InjectedViewModel() {
     }
 
     private fun onRetrieveError() { MessageUtil.showToast("Er is een fout opgetreden tijdens het ophalen van de reservaties van het internet.") }
-
-    fun formatDateSelectedOrder(): String { return formatDate(_selectedOrder.value!!.datum) }
-
-    fun formatStatusSelectedOrder(): String { return convertIntToStatus(_selectedOrder.value!!.status) }
 
 }

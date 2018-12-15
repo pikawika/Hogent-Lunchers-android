@@ -1,36 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Fragment for the list of lunches (small screen) -->
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" android:focusable="true" android:focusableInTouchMode="true"
+        android:orientation="vertical"
 >
 
+    <!-- The lunch list enclosed in a swipe to refresh -->
     <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
+            android:id="@+id/swipe_refresh_lunch_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintStart_toStartOf="parent"
+    >
 
         <android.support.v7.widget.RecyclerView
-                android:id="@+id/lunch_list"
+                android:id="@+id/recycler_lunch_list"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layoutManager="LinearLayoutManager"
-                tools:listitem="@layout/lunch_list_content"/>
+
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_lunch"
+        />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
+    <!-- The search bar -->
     <include
-            android:id="@+id/lunch_list_searchandfilter"
-            layout="@layout/partial_search_filter"
+            android:id="@+id/searchpartial_lunch_list"
+
+            layout="@layout/partial_search"
+
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
     />
 
 </android.support.constraint.ConstraintLayout>

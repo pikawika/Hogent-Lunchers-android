@@ -1,34 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Fragment to login -->
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="Autofill"
+>
 
-
+    <!-- Virtual divider horizontal 50% -->
     <android.support.constraint.Guideline
             android:id="@+id/guideline_login_50percent_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
 
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5"
+    />
+
+    <!-- Virtual divider vertical 10% -->
     <android.support.constraint.Guideline
             android:id="@+id/guideline_login_10percent_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.10"/>
 
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.10"
+    />
+
+    <!-- Virtual divider vertical 90% -->
     <android.support.constraint.Guideline
             android:id="@+id/guideline_login_90percent_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.90"/>
 
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.90"
+    />
+
+    <!-- Logo -->
     <ImageView
-            android:id="@+id/imageview_login_logo"
+            android:id="@+id/img_login_logo"
             android:layout_width="0dp"
             android:layout_height="0dp"
 
@@ -36,77 +49,73 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_logo_red"
             android:tint="@color/colorPrimary"
-
+            android:contentDescription="@string/alt_shared_logo"
+            
+            app:layout_constraintEnd_toStartOf="@+id/guideline_login_90percent_vertical"
             app:layout_constraintStart_toStartOf="@+id/guideline_login_10percent_vertical"
-            app:layout_constraintEnd_toEndOf="@+id/guideline_login_90percent_vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/guideline_login_50percent_horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_login_50percent_horizontal"
+    />
 
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="56dp" app:layout_constraintHorizontal_bias="0.0"/>
-
+    <!-- Username -->
     <EditText
-            android:id="@+id/text_login_gebruikersnaam"
+            android:id="@+id/text_login_username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:hint="@string/account_placeholder_gebruikersnaam"
+            android:hint="@string/placeholder_register_username"
             android:inputType="text"
 
             app:layout_constraintTop_toBottomOf="@+id/guideline_login_50percent_horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_10percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_login_90percent_vertical"
+    />
 
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"/>
-
+    <!-- Password -->
     <EditText
-            android:id="@+id/text_login_wachtwoord"
+            android:id="@+id/text_login_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:hint="@string/account_placeholder_wachtwoord"
+            android:hint="@string/text_shared_password"
             android:inputType="textPassword"
 
-            app:layout_constraintTop_toBottomOf="@+id/text_login_gebruikersnaam"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_login_username"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_10percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_login_90percent_vertical"
 
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"/>
+            android:layout_marginTop="8dp"
+    />
 
+    <!-- Sign in button -->
     <Button
-            android:id="@+id/button_login_login"
+            android:id="@+id/btn_login_confirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
             android:text="@string/button_login"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_login_wachtwoord"
+            app:layout_constraintTop_toBottomOf="@+id/text_login_password"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_10percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_login_90percent_vertical"
 
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
     />
 
+    <!-- Register link -->
     <TextView
-            android:id="@+id/button_login_registreren"
+            android:id="@+id/btn_login_register"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:text="@string/button_nog_geen_account"
+            android:text="@string/button_login_register"
             android:textAlignment="center"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_login_login"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login_confirm"
+            app:layout_constraintStart_toStartOf="@+id/guideline_login_10percent_vertical"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_login_90percent_vertical"
 
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
     />
 
 </android.support.constraint.ConstraintLayout>
