@@ -93,7 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:text="@string/button_login"
+            android:text="@string/text_login"
 
             app:layout_constraintTop_toBottomOf="@+id/text_login_password"
             app:layout_constraintStart_toStartOf="@+id/guideline_login_10percent_vertical"

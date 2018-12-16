@@ -16,6 +16,7 @@
     <string name="text_cancel">Annuleer</string>
     <string name="text_add">Toevoegen</string>
     <string name="text_add_to_blacklist">Voeg een nieuw item toe aan de zwarte lijst</string>
+    <string name="text_login">Aanmelden</string>
 
     <!-- Shared over multiple: alt -->
     <string name="alt_logo">Lunchers logo</string>
@@ -57,7 +58,6 @@
     <string name="button_change_password">Wijzig wachtwoord</string>
 
     <!-- Fragment_login -->
-    <string name="button_login">Aanmelden</string>
     <string name="button_login_register">Nog geen account? Registreer hier!</string>
 
     <!-- Fragment_order_detail -->
