@@ -1,9 +1,6 @@
-@file:Suppress("DEPRECATION")
-
 package hogent.be.lunchers.injection.modules
 
 import android.content.Context
-import hogent.be.lunchers.constants.BASE_URL_LUNCHERS
 import hogent.be.lunchers.networks.LunchersApi
 import dagger.Module
 import dagger.Provides
@@ -19,7 +16,7 @@ import hogent.be.lunchers.constants.BASE_URL_LUNCHERS_API
 import hogent.be.lunchers.database.OrderDao
 import hogent.be.lunchers.database.OrderDatabase
 import hogent.be.lunchers.extensions.DateParser
-import hogent.be.lunchers.repositories.ReservatieRepository
+import hogent.be.lunchers.repositories.OrderRepository
 import hogent.be.lunchers.utils.PreferenceUtil
 import okhttp3.Interceptor
 import java.util.*
@@ -67,7 +64,7 @@ class NetworkModule(private val context: Context) {
     }
 
     /**
-     * Return een [OkHttpClient] die momenteel de body logt voor debugging redenen
+     * Returnt een [OkHttpClient] die momenteel de body logt voor debugging redenen
      *
      * Hier kan mogelijk later een methode voorzien worden om header te voorzien van token
      */
@@ -78,7 +75,7 @@ class NetworkModule(private val context: Context) {
             this.level = HttpLoggingInterceptor.Level.BODY
         }
 
-        val authInterceptor : Interceptor = Interceptor { chain ->
+        val authInterceptor = Interceptor { chain ->
             val accessToken = PreferenceUtil().getToken()
 
             chain.proceed(
@@ -111,7 +108,7 @@ class NetworkModule(private val context: Context) {
     }
 
     /**
-     * Return [retrofit2.CallAdapter.Factory] object als een [retrofit2.CallAdapter.Factory] dat de calls naar de api managed.
+     * Returnt [retrofit2.CallAdapter.Factory] dat de calls naar de api managed.
      */
     @Provides
     @Singleton
@@ -119,24 +116,36 @@ class NetworkModule(private val context: Context) {
         return RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
     }
 
+    /**
+     * Returnt [OrderRepository] voor room.
+     */
     @Provides
     @Singleton
-    fun provideWordRepository(orderDao: OrderDao): ReservatieRepository {
-        return ReservatieRepository(orderDao)
+    fun provideOrderRepository(orderDao: OrderDao): OrderRepository {
+        return OrderRepository(orderDao)
     }
 
+    /**
+     * Returnt [OrderDao] voor room.
+     */
     @Provides
     @Singleton
-    fun provideWordDao(orderDatabase: OrderDatabase): OrderDao {
+    fun provideOrderDao(orderDatabase: OrderDatabase): OrderDao {
         return orderDatabase.orderDao()
     }
 
+    /**
+     * Returnt [OrderDatabase] voor room.
+     */
     @Provides
     @Singleton
-    fun provideWordDatabase(context: Context): OrderDatabase {
+    fun provideOrderDatabase(context: Context): OrderDatabase {
         return OrderDatabase.getInstance(context)
     }
 
+    /**
+     * Returnt de [Context] voor gebruik alvorens de is geladen en hij daar dus niet beschikbaar is.
+     */
     @Provides
     @Singleton
     fun provideApplicationContext(): Context {

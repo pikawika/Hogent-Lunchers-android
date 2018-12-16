@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.models.Order
-import hogent.be.lunchers.repositories.ReservatieRepository
+import hogent.be.lunchers.repositories.OrderRepository
 import hogent.be.lunchers.networks.LunchersApi
 import hogent.be.lunchers.utils.MessageUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +19,7 @@ class OrderViewModel : InjectedViewModel() {
     lateinit var lunchersApi: LunchersApi
 
     @Inject
-    lateinit var orderRepo: ReservatieRepository
+    lateinit var orderRepo: OrderRepository
 
     private val _reservations = MutableLiveData<List<Order>>()
 
@@ -60,11 +60,7 @@ class OrderViewModel : InjectedViewModel() {
     }
 
     fun resetViewModel() {
-        _reservations.value = emptyList()
-
         _selectedOrder.value = null
-
-        _roomOrders = orderRepo.orders
 
         getAllReservationsSubscription = lunchersApi.getAllOrders()
             .subscribeOn(Schedulers.io())

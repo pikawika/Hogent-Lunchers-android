@@ -6,7 +6,7 @@ import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.constants.ROLE_CUSTOMER
 import hogent.be.lunchers.models.BlacklistedItem
-import hogent.be.lunchers.repositories.ReservatieRepository
+import hogent.be.lunchers.repositories.OrderRepository
 import hogent.be.lunchers.networks.responses.TokenResponse
 import hogent.be.lunchers.networks.LunchersApi
 import hogent.be.lunchers.networks.requests.*
@@ -25,7 +25,7 @@ import javax.inject.Inject
 class AccountViewModel : InjectedViewModel() {
 
     @Inject
-    lateinit var orderRepo: ReservatieRepository
+    lateinit var orderRepo: OrderRepository
 
     /**
      * De gebruikersnaam van de aangemelde user
