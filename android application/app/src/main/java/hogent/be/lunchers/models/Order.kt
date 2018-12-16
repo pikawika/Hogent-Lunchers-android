@@ -10,7 +10,7 @@ import java.util.*
  * De tabelName parameter duidt de name van de tabel aan waarvan objecten van dit type opgeslagen worden.
  */
 @Entity(tableName = "order_table")
-data class Reservation(
+data class Order(
     // Elke entiteit heeft behoefte aan een primaire sleutel
     @field:Json(name = "reservatieId") @PrimaryKey val reservationId: Int,
     @field:Json(name = "aantal") val amount: Int,

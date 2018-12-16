@@ -13,6 +13,9 @@
     <string name="text_shared_register">Registreren</string>
     <string name="text_shared_thanks">Bedankt!</string>
     <string name="hint_shared_search">Zoeken…</string>
+    <string name="text_shared_yes">Ja</string>
+    <string name="text_shared_no">Nee</string>
+    <string name="text_shared_cancel">Annuleer</string>
 
 
     <!-- Errors -->
@@ -27,6 +30,10 @@
     <string name="warning_we_need_location_acces">De lunchers app heeft uw locatie nodig voor een optimale werking te
         garanderen.
     </string>
+
+    <!-- questions -->
+    <string name="question_delete">Verwijderen?</string>
+    <string name="question_want_to_delete_following_blacklisted">Wilt u volgende item van uw zwarte lijst verwijderen</string>
 
     <!-- Fragment_lunch_detail -->
     <string name="button_lunch_detail_reserve">Reserveer deze lunch</string>

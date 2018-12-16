@@ -3,7 +3,7 @@ package hogent.be.lunchers.viewmodels
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import hogent.be.lunchers.bases.InjectedViewModel
-import hogent.be.lunchers.models.Reservation
+import hogent.be.lunchers.models.Order
 import hogent.be.lunchers.repositories.ReservatieRepository
 import hogent.be.lunchers.networks.LunchersApi
 import hogent.be.lunchers.utils.MessageUtil
@@ -21,19 +21,19 @@ class OrderViewModel : InjectedViewModel() {
     @Inject
     lateinit var orderRepo: ReservatieRepository
 
-    private val _reservations = MutableLiveData<List<Reservation>>()
+    private val _reservations = MutableLiveData<List<Order>>()
 
-    val reservations: MutableLiveData<List<Reservation>>
+    val reservations: MutableLiveData<List<Order>>
         get() = _reservations
 
-    private var _selectedOrder = MutableLiveData<Reservation>()
+    private var _selectedOrder = MutableLiveData<Order>()
 
-    val selectedOrder: MutableLiveData<Reservation>
+    val selectedOrder: MutableLiveData<Order>
         get() = _selectedOrder
 
-    private var _roomOrders: LiveData<List<Reservation>>
+    private var _roomOrders: LiveData<List<Order>>
 
-    val roomOrders: LiveData<List<Reservation>>
+    val roomOrders: LiveData<List<Order>>
         get() = _roomOrders
 
     private var getAllReservationsSubscription: Disposable
@@ -77,9 +77,9 @@ class OrderViewModel : InjectedViewModel() {
 
     fun setSelectedOrder(orderId: Int) { _selectedOrder.value =  _reservations.value!!.firstOrNull { it.reservationId == orderId } }
 
-    fun setReservations(reservations: List<Reservation>) { _reservations.value = reservations }
+    fun setReservations(orders: List<Order>) { _reservations.value = orders }
 
-    private fun onRetrieveAllReservationsSuccess(result: List<Reservation>) {
+    private fun onRetrieveAllReservationsSuccess(result: List<Order>) {
         setReservations(result)
         doAsync { orderRepo.insert(result) }
     }

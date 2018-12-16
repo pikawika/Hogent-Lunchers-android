@@ -2,7 +2,7 @@ package hogent.be.lunchers.networks
 
 import hogent.be.lunchers.models.BlacklistedItem
 import hogent.be.lunchers.models.Lunch
-import hogent.be.lunchers.models.Reservation
+import hogent.be.lunchers.models.Order
 import hogent.be.lunchers.networks.requests.*
 import hogent.be.lunchers.networks.responses.BerichtResponse
 import hogent.be.lunchers.networks.responses.TokenResponse
@@ -32,7 +32,7 @@ interface LunchersApi {
      * Haal alle reservations op van de gebruiker
      */
     @GET("api/reservatie")
-    fun getAllOrders(): Observable<List<Reservation>>
+    fun getAllOrders(): Observable<List<Order>>
 
     /**
      * Login en return tokenresponse

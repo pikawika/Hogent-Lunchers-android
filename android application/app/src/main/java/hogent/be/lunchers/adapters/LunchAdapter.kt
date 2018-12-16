@@ -28,17 +28,21 @@ class LunchAdapter(
     /**
      * [LunchViewModel] met de data over account
      */
-    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
-    private var lunchViewModel: LunchViewModel
+    private var lunchViewModel: LunchViewModel = ViewModelProviders.of(parentActivity).get(LunchViewModel::class.java)
 
+    /**
+     * Een *on click listener* die er voor zorgt dat op het klikken van een [Lunch]
+     * naar de bijhorende [LunchDetailFragment] gegaan wordt.
+     */
     private val onClickListener: View.OnClickListener
 
     init {
-        lunchViewModel = ViewModelProviders.of(parentActivity).get(LunchViewModel::class.java)
+        //indien op een lunch geklikt haal uit de tag desbetreffende lunch op en toon detailpagina
         onClickListener = View.OnClickListener { v ->
             val selectedLunch = v.tag as Lunch
             lunchViewModel.setSelectedLunch(selectedLunch.lunchId)
 
+            //indien twopane moet je het in de subcontainer tonen anders in de container van mainactivity
             if (twoPane) {
                 parentActivity.supportFragmentManager
                     .beginTransaction()
@@ -54,20 +58,28 @@ class LunchAdapter(
         }
     }
 
+    /**
+     * *item_lunch* layout istellen als content van een lijstitem
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_lunch, parent, false)
         return ViewHolder(view)
     }
 
+    /**
+     * Vult de viewholder met de nodige data.
+     *
+     * De viewholder krijgt ook een tag zijnde de bijhorende [Lunch]
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = lunches.value!![position]
-        Glide.with(parentActivity).load(BASE_URL_BACKEND + item.images[0].path).into(holder.afbeeldingView)
-        holder.naamView.text = item.name
-        holder.beschrijvingView.text = item.description
-        holder.prijsView.text = String.format("€ %.2f", item.price)
-        holder.restaurant.text = item.merchant.companyName
-        holder.location.text = StringFormattingUtil.locationToString(item.merchant.location)
+        Glide.with(parentActivity).load(BASE_URL_BACKEND + item.images[0].path).into(holder.lunchImageView)
+        holder.lunchNameView.text = item.name
+        holder.lunchDescriptionView.text = item.description
+        holder.lunchPriceView.text = String.format("€ %.2f", item.price)
+        holder.lunchRestaurantView.text = item.merchant.companyName
+        holder.lunchLocationView.text = StringFormattingUtil.locationToString(item.merchant.location)
 
         with(holder.itemView) {
             tag = item
@@ -75,14 +87,29 @@ class LunchAdapter(
         }
     }
 
+    /**
+     * Methode die recyclerview nodig heeft om te bepalen hoeveel items hij moet renderen.
+     *
+     * Dit is het aantal items in de meegeven lijst [lunches].
+     */
     override fun getItemCount() = lunches.value!!.size
 
+    /**
+     * Viewholder die:
+     * - [lunchImageView]
+     * - [lunchNameView]
+     * - [lunchDescriptionView]
+     * - [lunchPriceView]
+     * - [lunchRestaurantView]
+     * - [lunchLocationView]
+     * hun bijhorend UI element bijhoud om later op te vullen.
+     */
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val afbeeldingView: ImageView = view.img_item_lunch
-        val naamView: TextView = view.text_item_lunch_name
-        val beschrijvingView: TextView = view.text_item_lunch_description
-        val prijsView: TextView = view.text_item_lunch_price
-        val restaurant: TextView = view.text_item_lunch_restaurant
-        val location: TextView = view.text_item_lunch_location
+        val lunchImageView: ImageView = view.img_item_lunch
+        val lunchNameView: TextView = view.text_item_lunch_name
+        val lunchDescriptionView: TextView = view.text_item_lunch_description
+        val lunchPriceView: TextView = view.text_item_lunch_price
+        val lunchRestaurantView: TextView = view.text_item_lunch_restaurant
+        val lunchLocationView: TextView = view.text_item_lunch_location
     }
 }
