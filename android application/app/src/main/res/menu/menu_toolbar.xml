@@ -4,14 +4,14 @@
 
     <item
             android:id="@+id/ab_filter_price_lowest"
-            android:title="@string/ab_filter_price_az"
+            android:title="@string/ab_filter_price_lowest"
             app:showAsAction="never"
             android:visible="false"
     />
 
     <item
             android:id="@+id/ab_filter_price_highest"
-            android:title="@string/ab_filter_price_za"
+            android:title="@string/ab_filter_price_highest"
             app:showAsAction="never"
             android:visible="false"
     />

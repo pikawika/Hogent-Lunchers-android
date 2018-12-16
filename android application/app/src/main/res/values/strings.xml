@@ -112,8 +112,8 @@
     <string name="alt_item_order_image">Afbeelding van een bestelde lunch</string>
 
     <!-- actionbar -->
-    <string name="ab_filter_price_az">Sorteren op prijs (oplopend)</string>
-    <string name="ab_filter_price_za">Sorteren op prijs (aflopend)</string>
+    <string name="ab_filter_price_lowest">Sorteren op prijs (oplopend)</string>
+    <string name="ab_filter_price_highest">Sorteren op prijs (aflopend)</string>
     <string name="ab_filter_distance">Sorteren op nabijheid</string>
     <string name="ab_filter_recent">Sorteren op recentheid</string>
 
