@@ -68,21 +68,19 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         rootView.swipe_refresh_lunch_list.setOnRefreshListener(this)
 
-        initListeners(rootView)
-
         return rootView
     }
 
     /**
      * Instantieer de listeners
      */
-    private fun initListeners(rootView: View) {
+    private fun initListeners() {
         //indien de lunchlijst veranderd moet de adapter opnieuw zijn cards genereren met nieuwe data
         lunches.observe(this, Observer {
             lunchAdapter.notifyDataSetChanged()
         })
 
-        rootView.searchpartial_lunch_list.txt_search.addTextChangedListener(object : TextWatcher {
+        searchpartial_lunch_list.txt_search.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
 
@@ -138,6 +136,12 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
      */
     private fun checkSetTwoPane(rootView: View) {
         twoPane = rootView.fragment_container_lunch_list != null
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        initListeners()
     }
 
 

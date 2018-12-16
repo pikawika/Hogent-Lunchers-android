@@ -16,7 +16,7 @@ import hogent.be.lunchers.databinding.FragmentLunchDetailBinding
 import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.fragment_lunch_detail.view.*
+import kotlinx.android.synthetic.main.fragment_lunch_detail.*
 
 /**
  * Een [Fragment] voor het weergeven van de details van een selectedLunch.
@@ -45,17 +45,15 @@ class LunchDetailFragment : Fragment() {
         binding.lunchViewModel = lunchViewModel
         binding.setLifecycleOwner(activity)
 
-        initListeners(rootView)
-
         return rootView
     }
 
     /**
      * Instantieer de listeners
      */
-    private fun initListeners(rootView: View) {
+    private fun initListeners() {
         //reserveren
-        rootView.button_lunch_detail_reserve.setOnClickListener {
+        button_lunch_detail_reserve.setOnClickListener {
             fragmentManager!!.beginTransaction()
                 .replace(R.id.fragment_container_mainactivity, ReservationFragment())
                 .addToBackStack(null)
@@ -63,7 +61,7 @@ class LunchDetailFragment : Fragment() {
         }
 
         //bel
-        rootView.button_lunch_detail_call.setOnClickListener {
+        button_lunch_detail_call.setOnClickListener {
             val builder = AlertDialog.Builder(activity)
             builder.setCancelable(true)
             builder.setTitle(getString(R.string.text_call_to) + ": " + lunchViewModel.selectedLunch.value!!.merchant.companyName)
@@ -85,7 +83,7 @@ class LunchDetailFragment : Fragment() {
         }
 
         //toon op kaart
-        rootView.button_lunch_detail_show_on_map.setOnClickListener {
+        button_lunch_detail_show_on_map.setOnClickListener {
             fragmentManager!!.beginTransaction()
                 .replace(R.id.fragment_container_mainactivity, MapsFragment())
                 .addToBackStack(null)
@@ -93,7 +91,7 @@ class LunchDetailFragment : Fragment() {
         }
 
         //navigatie
-        rootView.button_lunch_detail_navigation.setOnClickListener {
+        button_lunch_detail_navigation.setOnClickListener {
             val mapIntent = Intent(Intent.ACTION_VIEW)
             mapIntent.data = Uri.parse(
                 "geo:" + lunchViewModel.selectedLunch.value!!.merchant.location.latitude + "," +
@@ -114,6 +112,24 @@ class LunchDetailFragment : Fragment() {
     }
 
     /**
+     * Stop de listeners
+     */
+    @Suppress("UNUSED_EXPRESSION")
+    private fun stopListeners() {
+        //reserveren
+        button_lunch_detail_reserve.setOnClickListener { null }
+
+        //bel
+        button_lunch_detail_call.setOnClickListener { null }
+
+        //toon op kaart
+        button_lunch_detail_show_on_map.setOnClickListener { null }
+
+        //navigatie
+        button_lunch_detail_navigation.setOnClickListener { null }
+    }
+
+    /**
      * Stel de actionbar zijn titel in en enable back knop
      */
     override fun onResume() {
@@ -128,5 +144,16 @@ class LunchDetailFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         GuiUtil.removeCanPop(requireActivity() as MainActivity)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        initListeners()
+    }
+
+    override fun onStop() {
+        stopListeners()
+        super.onStop()
     }
 }

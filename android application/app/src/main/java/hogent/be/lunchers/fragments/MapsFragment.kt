@@ -25,11 +25,12 @@ import com.google.android.gms.maps.model.MarkerOptions
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.databinding.FragmentMapBinding
+import hogent.be.lunchers.models.BlacklistedItem
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.fragment_map.view.*
+import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.partial_search.view.*
 
 /**
@@ -77,16 +78,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             .replace(R.id.map_selected_lunch, PartialLunchCardFragment())
             .commit()
 
-        initListeners(rootView)
-
         return rootView
     }
 
     /**
      * Instantieer de listeners
      */
-    private fun initListeners(rootView: View) {
-        rootView.map_search.txt_search.addTextChangedListener(object : TextWatcher {
+    private fun initListeners() {
+        map_search.txt_search.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
 
@@ -208,6 +207,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_map_title))
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        initListeners()
+    }
 
     // Een companion object kan je zien als een statische variabele
     // In dit geval is het de request code die we proberen terug te krijgen

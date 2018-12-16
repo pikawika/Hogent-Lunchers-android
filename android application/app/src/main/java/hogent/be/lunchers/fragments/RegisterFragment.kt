@@ -14,7 +14,6 @@ import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_register.*
-import kotlinx.android.synthetic.main.fragment_register.view.*
 
 /**
  * Een [Fragment] waarmee een gebruiker hem kan registreren.
@@ -35,12 +34,13 @@ class RegisterFragment : Fragment() {
         //viewmodel vullen
         accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
 
-        setListeners(rootView)
-
         return rootView
     }
 
-    private fun setListeners(fragment: View) {
+    /**
+     * Instantieer de listeners
+     */
+    private fun initListeners() {
         //indien aangemeld naar lijst gaan
         accountViewModel.isLoggedIn.observe(this, Observer {
             if (accountViewModel.isLoggedIn.value == true) {
@@ -50,19 +50,29 @@ class RegisterFragment : Fragment() {
             }
         })
 
-        fragment.btn_register_login.setOnClickListener {
+        btn_register_login.setOnClickListener {
             login()
         }
 
-        fragment.btn_register_confirm.setOnClickListener {
-            registreer()
+        btn_register_confirm.setOnClickListener {
+            register()
         }
+    }
+
+    /**
+     * Stop de listeners
+     */
+    @Suppress("UNUSED_EXPRESSION")
+    private fun stopListeners() {
+        btn_register_login.setOnClickListener { null }
+
+        btn_register_confirm.setOnClickListener { null }
     }
 
     /**
      * Kijkt of velden ingevuld zijn en wachtwoorden overeenkomen en probeert vervolgens te registreren
      */
-    private fun registreer() {
+    private fun register() {
         //er is een veld leeg
         if (text_register_phone_number.text.toString() == ""  ||
             text_register_first_name.text.toString() == ""  ||
@@ -116,6 +126,17 @@ class RegisterFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         GuiUtil.removeCanPop(requireActivity() as MainActivity)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        initListeners()
+    }
+
+    override fun onStop() {
+        stopListeners()
+        super.onStop()
     }
 
 }
