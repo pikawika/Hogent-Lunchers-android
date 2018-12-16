@@ -13,7 +13,6 @@ import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_change_passord.*
-import kotlinx.android.synthetic.main.fragment_change_passord.view.*
 
 /**
  * Een [Fragment] voor het bewerken van een gebruiker zijn wachtwoord.
@@ -34,26 +33,38 @@ class ChangePasswordFragment : Fragment() {
         //viewmodel vullen
         accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
 
-        initListeners(rootView)
-
         return rootView
     }
 
     /**
      * Instantieer de listeners
      */
-    private fun initListeners(fragment: View) {
+    private fun initListeners() {
         //wijzig ww geklikt
-        fragment.button_change_password.setOnClickListener {
+        button_change_password.setOnClickListener {
             when {
-                text_change_password_new_password.text.toString() != text_change_password_confirm_password.text.toString() -> MessageUtil.showToast(getString(R.string.warning_passwords_not_equal))
-                TextUtils.isEmpty(text_change_password_new_password.text.toString()) -> MessageUtil.showToast(getString(R.string.warning_empty_fields))
+                text_change_password_new_password.text.toString() != text_change_password_confirm_password.text.toString() -> MessageUtil.showToast(
+                    getString(R.string.warning_passwords_not_equal)
+                )
+                TextUtils.isEmpty(text_change_password_new_password.text.toString()) -> MessageUtil.showToast(
+                    getString(
+                        R.string.warning_empty_fields
+                    )
+                )
                 else -> {
                     accountViewModel.changePassword(text_change_password_new_password.text.toString())
                     activity!!.supportFragmentManager.popBackStack()
                 }
             }
         }
+    }
+
+    /**
+     * Stopt de listeners
+     */
+    private fun stopListeners() {
+        //wijzig ww geklikt
+        button_change_password.setOnClickListener { null }
     }
 
     /**
@@ -71,6 +82,17 @@ class ChangePasswordFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         GuiUtil.removeCanPop(requireActivity() as MainActivity)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        initListeners()
+    }
+
+    override fun onStop() {
+        stopListeners()
+        super.onStop()
     }
 
 
