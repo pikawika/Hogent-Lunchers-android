@@ -42,6 +42,7 @@
         te proberen.
     </string>
     <string name="error_fetching_orders">Er is een fout opgetreden tijdens het ophalen van de reservaties.</string>
+    <string name="error_loading_from_internet">Er is een fout opgetreden tijdens het ophalen van de data via het internet.</string>
 
     <!-- Warnings -->
     <string name="warning_we_need_location_acces">De lunchers app heeft uw locatie nodig voor een optimale werking te

@@ -39,7 +39,7 @@ class OrderListFragment : Fragment() {
 
         //viewmodel vullen en lokale link bijhouden
         orderViewModel = ViewModelProviders.of(requireActivity()).get(OrderViewModel::class.java)
-        orders = orderViewModel.reservations
+        orders = orderViewModel.orders
 
         orderAdapter = OrderAdapter(requireActivity() as MainActivity, orders)
 
@@ -55,7 +55,7 @@ class OrderListFragment : Fragment() {
      */
     private fun initListeners() {
         orderViewModel.roomOrders.observe(requireActivity() as MainActivity, Observer {
-            if (orderViewModel.reservations.value!!.isEmpty()) orderViewModel.setReservations(it!!)
+            if (orderViewModel.orders.value!!.isEmpty()) orderViewModel.setReservations(it!!)
         })
 
         orders.observe(this, Observer { orderAdapter.notifyDataSetChanged() })

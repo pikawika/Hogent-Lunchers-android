@@ -11,7 +11,7 @@ import hogent.be.lunchers.utils.RoomConvertersUtil
  */
 @Database(entities = [Order::class], version = 1)
 // Type Converters worden gebruikt om complexe objecten op te kunnen slaan
-// in ons geval wordt dit gebruikt voor de date en de lunch van de reservations.
+// in ons geval wordt dit gebruikt voor de date en de lunch van de orders.
 // Momenteel V1 wegens nog niet online staan van app, app zal bij aanpassen model moeten verwijderd worden
 // of update methodologie voorzien moeten worden.
 @TypeConverters(RoomConvertersUtil::class)

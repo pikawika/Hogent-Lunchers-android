@@ -29,7 +29,7 @@ interface LunchersApi {
     fun getAllLunchesFromLocation(@Query("latitude") latitude: Double, @Query("longitude") longitude: Double): Observable<List<Lunch>>
 
     /**
-     * Haal alle reservations op van de gebruiker
+     * Haal alle orders op van de gebruiker
      */
     @GET("reservatie")
     fun getAllOrders(): Observable<List<Order>>

@@ -20,7 +20,7 @@ import javax.inject.Inject
 import kotlin.math.min
 
 /**
- * Een [InjectedViewModel] klasse die de reservations behandeld.
+ * Een [InjectedViewModel] klasse die de orders behandeld.
  */
 class ReservationViewModel : InjectedViewModel() {
 
