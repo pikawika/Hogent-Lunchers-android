@@ -105,7 +105,7 @@ class ReservationViewModel : InjectedViewModel() {
     /**
      * Veranderd het wachtwoord van de gebruiker
      */
-    fun reserveer() {
+    fun placeReservation() {
         registreerSubscription = lunchersApi.reserveer(ReservatieRequest(lunch.value!!.lunchId, amount, makeJsonDate(), message))
             //we tell it to fetch the data on background by
             .subscribeOn(Schedulers.io())
@@ -129,7 +129,7 @@ class ReservationViewModel : InjectedViewModel() {
      */
     private fun onRetrieveReserveerSuccess() { gereserveerd.value = true }
 
-    fun getGereserveerd() : MutableLiveData<Boolean> { return gereserveerd }
+    fun getReservationPlaced() : MutableLiveData<Boolean> { return gereserveerd }
 
     fun clear() {
         year = -1

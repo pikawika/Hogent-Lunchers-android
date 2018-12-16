@@ -68,7 +68,7 @@ class LoginFragment : Fragment() {
     private fun register() {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_container_mainactivity, RegistreerFragment())
+            .replace(R.id.fragment_container_mainactivity, RegisterFragment())
             .addToBackStack(null)
             .commit()
     }

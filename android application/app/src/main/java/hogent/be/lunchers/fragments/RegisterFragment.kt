@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
 
-class RegistreerFragment : Fragment() {
+class RegisterFragment : Fragment() {
 
     /**
      * [AccountViewModel] met de data over account
@@ -27,10 +27,10 @@ class RegistreerFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_register, container, false)
 
-        setListeners(rootView)
-
         //viewmodel vullen
         accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
+
+        setListeners(rootView)
 
         return rootView
     }

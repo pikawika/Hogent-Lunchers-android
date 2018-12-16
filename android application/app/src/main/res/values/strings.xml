@@ -21,6 +21,9 @@
     <string name="text_want_to_call_to">Wilt u bellen naar</string>
     <string name="text_lunch_list">Lunchlijst</string>
     <string name="text_reservation">Reservatie</string>
+    <string name="text_confirm_reservation">Bevestig reservatie</string>
+    <string name="text_date">%1$d/%2$d/%3$d</string>
+    <string name="text_time">%1$s:%2$s</string>
 
     <!-- Shared over multiple: alt -->
     <string name="alt_logo">Lunchers logo</string>
@@ -47,6 +50,7 @@
     <!-- questions -->
     <string name="question_delete">Verwijderen?</string>
     <string name="question_want_to_delete_following_blacklisted">Wilt u volgende item van uw zwarte lijst verwijderen</string>
+    <string name="question_want_to_order">Bevestig dat je %1$d keer %2$s wenst te reserveren op %3$s om %4$s.</string>
 
     <!-- Fragment_lunch_detail -->
     <string name="button_lunch_detail_reserve">Reserveer deze lunch</string>
