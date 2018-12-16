@@ -4,12 +4,12 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
+import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -32,23 +32,19 @@ class RegistreerFragment : Fragment() {
         //viewmodel vullen
         accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
 
-        //aangemeld en parentactivity bijhouden
-        val aangemeld = accountViewModel.getIsLoggedIn()
-        val parentActivity = (activity as AppCompatActivity)
-
-        //indien aangemeld naar lijst gaan
-        aangemeld.observe(this, Observer {
-            if (aangemeld.value == true) {
-                //simuleert een button click op lijst om er voor te zorgen dat juiste
-                //item actief is + zet fragment etc automatisch juist
-                parentActivity.bottom_navigation_mainactivity.selectedItemId = R.id.action_list
-            }
-        })
-
         return rootView
     }
 
     private fun setListeners(fragment: View) {
+        //indien aangemeld naar lijst gaan
+        accountViewModel.getIsLoggedIn().observe(this, Observer {
+            if (accountViewModel.getIsLoggedIn().value == true) {
+                //simuleert een button click op lijst om er voor te zorgen dat juiste
+                //item actief is + zet fragment etc automatisch juist
+                (requireActivity() as MainActivity).bottom_navigation_mainactivity.selectedItemId = R.id.action_list
+            }
+        })
+
         fragment.btn_register_login.setOnClickListener {
             login()
         }
@@ -94,17 +90,21 @@ class RegistreerFragment : Fragment() {
             .commit()
     }
 
+    /**
+     * Stel de actionbar zijn titel in en enable back knop
+     */
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_register)
-        MainActivity.setCanpop(true)
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_register))
+        GuiUtil.setCanPop(requireActivity() as MainActivity)
     }
 
+    /**
+     * Disable backnop
+     */
     override fun onPause() {
         super.onPause()
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        MainActivity.setCanpop(false)
+        GuiUtil.removeCanPop(requireActivity() as MainActivity)
     }
 
 }

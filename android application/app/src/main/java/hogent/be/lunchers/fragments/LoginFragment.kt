@@ -77,11 +77,11 @@ class LoginFragment : Fragment() {
      * Controleert de waarden en logt in
      */
     private fun login() {
-        when {
-            TextUtils.isEmpty(text_login_username.text.toString()) && TextUtils.isEmpty(text_login_password.text.toString())
-            -> MessageUtil.showToast(getString(R.string.warning_empty_fields))
-            else -> accountViewModel.login(text_login_username.text.toString(), text_login_password.text.toString())
-        }
+        //velden leeg
+        if (TextUtils.isEmpty(text_login_username.text.toString()) && TextUtils.isEmpty(text_login_password.text.toString()))
+            MessageUtil.showToast(getString(R.string.warning_empty_fields)
+        )
+        else accountViewModel.login(text_login_username.text.toString(), text_login_password.text.toString())
     }
 
     /**
