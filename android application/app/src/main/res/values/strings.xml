@@ -20,6 +20,7 @@
     <string name="text_call_to">Bellen naar</string>
     <string name="text_want_to_call_to">Wilt u bellen naar</string>
     <string name="text_lunch_list">Lunchlijst</string>
+    <string name="text_reservation">Reservatie</string>
 
     <!-- Shared over multiple: alt -->
     <string name="alt_logo">Lunchers logo</string>

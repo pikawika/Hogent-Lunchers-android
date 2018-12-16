@@ -23,9 +23,11 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import hogent.be.lunchers.R
+import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.databinding.FragmentMapBinding
 import hogent.be.lunchers.databinding.FragmentProfileBinding
 import hogent.be.lunchers.models.Lunch
+import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_map.view.*
@@ -148,7 +150,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
             )
-            MessageUtil.showToast("Geef locatietoestemming en probeer opnieuw")
+            MessageUtil.showToast(getString(R.string.warning_we_need_location_acces))
             return
         }
 
@@ -193,8 +195,16 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 it.lunchId.toString()
             )
         }
-
     }
+
+    /**
+     * Stel de actionbar zijn titel in
+     */
+    override fun onResume() {
+        super.onResume()
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_map_title))
+    }
+
 
     // Een companion object kan je zien als een statische variabele
     // In dit geval is het de request code die we proberen terug te krijgen

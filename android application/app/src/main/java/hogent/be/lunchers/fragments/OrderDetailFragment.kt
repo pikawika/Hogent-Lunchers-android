@@ -15,21 +15,32 @@ import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.databinding.FragmentOrderDetailBinding
+import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.OrderViewModel
 import kotlinx.android.synthetic.main.fragment_order_detail.view.*
 
 class OrderDetailFragment : Fragment() {
 
+    /**
+     * [orderViewModel] met de info over de orders.
+     */
     private lateinit var orderViewModel: OrderViewModel
+
+    /**
+     * De effectieve binding.
+     */
     private lateinit var binding: FragmentOrderDetailBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_detail, container, false)
 
-        orderViewModel = ViewModelProviders.of(activity!!).get(OrderViewModel::class.java)
+        //viewmodel vullen
+        orderViewModel = ViewModelProviders.of(requireActivity()).get(OrderViewModel::class.java)
 
         val rootView = binding.root
+
+        //databinding
         binding.orderViewModel = orderViewModel
         binding.setLifecycleOwner(activity)
 
@@ -38,24 +49,27 @@ class OrderDetailFragment : Fragment() {
         return rootView
     }
 
+    /**
+     * Instantieer de listeners
+     */
     private fun initListeners(rootView: View) {
         //call restaurant
         rootView.button_order_detail_call.setOnClickListener {
             val builder = AlertDialog.Builder(activity)
             builder.setCancelable(true)
-            builder.setTitle("Bellen naar " + orderViewModel.selectedOrder.value!!.lunch.merchant.companyName)
-            builder.setMessage("Wil je nu bellen naar " + orderViewModel.selectedOrder.value!!.lunch.merchant.phoneNumber + "?")
+            builder.setTitle(getString(R.string.text_call_to) + ": " + orderViewModel.selectedOrder.value!!.lunch.merchant.companyName)
+            builder.setMessage(getString(R.string.text_want_to_call_to) + ": " + orderViewModel.selectedOrder.value!!.lunch.merchant.phoneNumber + "?")
             builder.setPositiveButton(
-                "Nu bellen"
-            ) { dialog, which ->
+                getString(R.string.text_yes)
+            ) { _, _ ->
                 val phoneIntent = Intent(Intent.ACTION_DIAL)
                 phoneIntent.data =
                         Uri.parse("tel:" + orderViewModel.selectedOrder.value!!.lunch.merchant.phoneNumber)
                 startActivity(phoneIntent)
             }
             builder.setNegativeButton(
-                "Annuleren"
-            ) { dialog, which -> dialog.cancel() }
+                getString(R.string.text_no)
+            ) { dialog, _ -> dialog.cancel() }
 
             val dialog = builder.create()
             dialog.show()
@@ -81,17 +95,21 @@ class OrderDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * Stel de actionbar zijn titel in en enable back knop
+     */
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = orderViewModel.selectedOrder.value!!.lunch.name
-        MainActivity.setCanpop(true)
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_reservation))
+        GuiUtil.setCanPop(requireActivity() as MainActivity)
     }
 
+    /**
+     * Disable backnop
+     */
     override fun onPause() {
         super.onPause()
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        MainActivity.setCanpop(false)
+        GuiUtil.removeCanPop(requireActivity() as MainActivity)
     }
 
 }
