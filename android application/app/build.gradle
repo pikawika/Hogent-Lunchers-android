@@ -101,8 +101,8 @@ dependencies {
     androidTestImplementation "android.arch.persistence.room:testing:$versions.room"
 
     // Gson
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation "com.google.code.gson:gson:$versions.gson"
 
     // Anko
-    implementation 'org.jetbrains.anko:anko-common:0.10.4'
+    implementation "org.jetbrains.anko:anko-common:$versions.anko"
 }

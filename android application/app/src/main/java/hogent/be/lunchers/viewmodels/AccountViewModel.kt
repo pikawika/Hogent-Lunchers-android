@@ -76,8 +76,8 @@ class AccountViewModel : InjectedViewModel() {
 
     init {
         blacklistedItems.value = emptyList()
-        token.value = PreferenceUtil().getToken()
-        gebruikersnaam.value = PreferenceUtil().getGebruikersnaam()
+        token.value = PreferenceUtil.getToken()
+        gebruikersnaam.value = PreferenceUtil.getUsername()
         aangemeld.value = token.value != ""
 
 
@@ -117,7 +117,7 @@ class AccountViewModel : InjectedViewModel() {
      */
     private fun onRetrieveLoginSuccess(result: TokenResponse) {
         token.value = result.token
-        PreferenceUtil().setToken(result.token)
+        PreferenceUtil.setToken(result.token)
         aangemeld.value = true
     }
 
@@ -128,7 +128,7 @@ class AccountViewModel : InjectedViewModel() {
      */
     private fun onRetrieveRegistreerSuccess(result: TokenResponse) {
         token.value = result.token
-        PreferenceUtil().setToken(result.token)
+        PreferenceUtil.setToken(result.token)
         aangemeld.value = true
     }
 
@@ -172,7 +172,7 @@ class AccountViewModel : InjectedViewModel() {
                 { error -> onRetrieveError(error) }
             )
         this.gebruikersnaam.value = gebruikersnaam
-        PreferenceUtil().setGebruikersnaam(gebruikersnaam)
+        PreferenceUtil.setUsername(gebruikersnaam)
     }
 
     /**
@@ -275,14 +275,14 @@ class AccountViewModel : InjectedViewModel() {
                 { error -> onRetrieveError(error) }
             )
         this.gebruikersnaam.value = gebruikersnaam
-        PreferenceUtil().setGebruikersnaam(gebruikersnaam)
+        PreferenceUtil.setUsername(gebruikersnaam)
     }
 
     /**
      * meld af door token te verwijderen en aangemeld vm te veranderen
      */
     fun afmelden() {
-        PreferenceUtil().deletePreferences()
+        PreferenceUtil.deletePreferences()
         doAsync { orderRepo.clearDatabase() }
         aangemeld.value = false
     }
@@ -305,21 +305,21 @@ class AccountViewModel : InjectedViewModel() {
      * returnt boolean of user al dan niet aangemeld is
      */
     fun setDefaultFilterMethod(filterEnum: FilterEnum){
-        PreferenceUtil().setDefaultFilterMethod(filterEnum)
+        PreferenceUtil.setDefaultFilterMethod(filterEnum)
     }
 
     /**
      * returnt boolean of user al dan niet aangemeld is
      */
     fun getDefaultBootPage() : PageEnum {
-        return PreferenceUtil().getDefaultBootPage()
+        return PreferenceUtil.getDefaultBootPage()
     }
 
     /**
      * returnt boolean of user al dan niet aangemeld is
      */
     fun setDefaultBootPage(pageEnum: PageEnum){
-        PreferenceUtil().setDefaultBootPage(pageEnum)
+        PreferenceUtil.setDefaultBootPage(pageEnum)
     }
 
     /**

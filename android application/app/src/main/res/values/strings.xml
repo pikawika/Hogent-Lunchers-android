@@ -24,6 +24,9 @@
     <string name="text_confirm_reservation">Bevestig reservatie</string>
     <string name="text_date">%1$d/%2$d/%3$d</string>
     <string name="text_time">%1$s:%2$s</string>
+    <string name="text_amount">Aantal</string>
+    <string name="text_person_lowercase">persoon</string>
+    <string name="text_persons_lowercase">personen</string>
 
     <!-- Shared over multiple: alt -->
     <string name="alt_logo">Lunchers logo</string>
@@ -137,5 +140,11 @@
     <string name="text_map_title">Kaart</string>
     <string name="text_list_title">Lijst</string>
     <string name="text_profile_title">Profiel</string>
+
+    <!-- Status enum -->
+    <string name="text_status_awaited">In afwachting</string>
+    <string name="text_status_accepted">Goedgekeurd</string>
+    <string name="text_status_declined">Afgekeurd</string>
+    <string name="text_status_unknown">Onbekend</string>
 
 </resources>

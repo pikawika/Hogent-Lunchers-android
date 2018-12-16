@@ -4,7 +4,7 @@ import android.arch.persistence.room.*
 import android.content.Context
 import hogent.be.lunchers.constants.ROOM_ORDER_DATABASE_NAME
 import hogent.be.lunchers.models.Order
-import hogent.be.lunchers.utils.RoomConverters
+import hogent.be.lunchers.utils.RoomConvertersUtil
 
 /**
  * De database met als entity [Order] en childs
@@ -14,7 +14,7 @@ import hogent.be.lunchers.utils.RoomConverters
 // in ons geval wordt dit gebruikt voor de date en de lunch van de reservations.
 // Momenteel V1 wegens nog niet online staan van app, app zal bij aanpassen model moeten verwijderd worden
 // of update methodologie voorzien moeten worden.
-@TypeConverters(RoomConverters::class)
+@TypeConverters(RoomConvertersUtil::class)
 abstract class OrderDatabase : RoomDatabase() {
 
     abstract fun orderDao() : OrderDao

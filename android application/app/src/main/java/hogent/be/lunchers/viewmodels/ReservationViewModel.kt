@@ -99,7 +99,7 @@ class ReservationViewModel : InjectedViewModel() {
     }
 
     private fun makeJsonDate() : String{
-        return DateUtil().formatDateForJson(year,month,day,hour,minute)
+        return DateUtil.formatDateForJson(year,month,day,hour,minute)
     }
 
     /**

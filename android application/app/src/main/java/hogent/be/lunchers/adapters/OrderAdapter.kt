@@ -14,8 +14,8 @@ import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.constants.BASE_URL_LUNCHERS
 import hogent.be.lunchers.fragments.OrderDetailFragment
 import hogent.be.lunchers.models.Order
+import hogent.be.lunchers.utils.DateUtil
 import hogent.be.lunchers.utils.OrderUtil.convertIntToStatus
-import hogent.be.lunchers.utils.OrderUtil.formatDate
 import hogent.be.lunchers.utils.StringFormattingUtil
 import hogent.be.lunchers.viewmodels.OrderViewModel
 import kotlinx.android.synthetic.main.item_order.view.*
@@ -68,7 +68,7 @@ class OrderAdapter(private val parentActivity: MainActivity, private val orders:
         holder.orderLunchNameView.text = item.lunch.name
         holder.orderStatusView.text = String.format("Status: %s", convertIntToStatus(item.status))
         holder.orderAmountView.text = StringFormattingUtil.amountOfPeopleToString(item.amount)
-        holder.orderDateView.text = formatDate(item.date)
+        holder.orderDateView.text = DateUtil.formatDate(item.date)
 
         with(holder.itemView) {
             tag = item

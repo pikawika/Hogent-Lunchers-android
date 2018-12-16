@@ -4,57 +4,97 @@ import android.content.Context
 import hogent.be.lunchers.enums.FilterEnum
 import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.activities.MainActivity
+import hogent.be.lunchers.constants.*
 
+/**
+ * Een util om je te helpen met de shared preferences van de app
+ *
+ * Shared preferences staan ingesteld op private zijnde dat ze niet toegangelijk zijn vanuit andere applicaties
+ */
+object PreferenceUtil {
+    /**
+     * De shared preferences in [Context.MODE_PRIVATE] zodat andere applicaties hier niet aan kunnen
+     */
+    private val sharedPreferences = MainActivity.getContext().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
 
-class PreferenceUtil() {
-
-    val PREFERENCES_NAME = "lunchersPreferences"
-    val PREFERENCE_TOKEN = "lunchersToken"
-    val PREFERENCE_GEBRUIKERSNAAM = "lunchersGebruikersnaam"
-    val PREFERENCE_DEFAULTBOOTPAGE = "lunchersDefaultBootPage"
-    val PREFERENCE_DEFAULTFILTERMETHOD = "lunchersDefaultFilterMethod"
-    private val CONTEXT = MainActivity.getContext()
-
-
-    private val sharedPreferences = CONTEXT.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
-
-    fun getToken() : String {
+    /**
+     * Haalt de token op van de shared preferences
+     */
+    @JvmStatic
+    fun getToken() : String? {
         return sharedPreferences.getString(PREFERENCE_TOKEN, "")
     }
 
+    /**
+     * Slaat de token op in de shared prefences
+     *
+     * @param token : de token van de aangemelde gebruiker
+     */
+    @JvmStatic
     fun setToken(token : String) {
         sharedPreferences.edit().putString(PREFERENCE_TOKEN, token).apply()
     }
 
-    fun getGebruikersnaam() : String {
-        return sharedPreferences.getString(PREFERENCE_GEBRUIKERSNAAM, "")
+    /**
+     * Haalt de gebruikersnaam op van de shared preferences
+     */
+    @JvmStatic
+    fun getUsername() : String? {
+        return sharedPreferences.getString(PREFERENCE_USERNAME, "")
     }
 
-    fun setGebruikersnaam(gebruikersnaam : String) {
-        sharedPreferences.edit().putString(PREFERENCE_GEBRUIKERSNAAM, gebruikersnaam).apply()
+    /**
+     * Slaat de gebruikersnaam op in de shared prefences
+     *
+     * @param username : de gebruikersnaam van de aangemelde user
+     */
+    @JvmStatic
+    fun setUsername(username : String) {
+        sharedPreferences.edit().putString(PREFERENCE_USERNAME, username).apply()
     }
 
-    fun deletePreferences() {
-        sharedPreferences.edit().putString(PREFERENCE_TOKEN, "").apply()
-        sharedPreferences.edit().putString(PREFERENCE_GEBRUIKERSNAAM, "").apply()
-        sharedPreferences.edit().putInt(PREFERENCE_DEFAULTBOOTPAGE, 0).apply()
-        sharedPreferences.edit().putInt(PREFERENCE_DEFAULTFILTERMETHOD, 0).apply()
-    }
-
+    /**
+     * Haalt de standaard filtermethode op van de shared preferences
+     */
+    @JvmStatic
     fun getDefaultFilterMethod() : FilterEnum {
         return FilterEnum.values()[sharedPreferences.getInt(PREFERENCE_DEFAULTFILTERMETHOD, 0)]
     }
 
+    /**
+     * Slaat de standaard filtermethode op in de shared prefences
+     *
+     * @param filterEnum : de standaard filtermethode als [FilterEnum]
+     */
+    @JvmStatic
     fun setDefaultFilterMethod(filterEnum: FilterEnum) {
         sharedPreferences.edit().putInt(PREFERENCE_DEFAULTFILTERMETHOD, filterEnum.filter).apply()
     }
 
+    /**
+     * Haalt de standaard startpagina op van de shared preferences
+     */
+    @JvmStatic
     fun getDefaultBootPage() : PageEnum {
         return PageEnum.values()[sharedPreferences.getInt(PREFERENCE_DEFAULTBOOTPAGE, 0)]
     }
 
+    /**
+     * Slaat de standaard startpagina op in de shared prefences
+     *
+     * @param pageEnum : de standaard startpagina als [PageEnum]
+     */
+    @JvmStatic
     fun setDefaultBootPage(pageEnum: PageEnum) {
         sharedPreferences.edit().putInt(PREFERENCE_DEFAULTBOOTPAGE, pageEnum.page).apply()
+    }
+
+    /**
+     * Verwijderd alle sharedPreferences
+     */
+    @JvmStatic
+    fun deletePreferences() {
+        sharedPreferences.edit().clear().apply()
     }
 
 }

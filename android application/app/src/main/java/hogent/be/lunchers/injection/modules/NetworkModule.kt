@@ -76,7 +76,7 @@ class NetworkModule(private val context: Context) {
         }
 
         val authInterceptor = Interceptor { chain ->
-            val accessToken = PreferenceUtil().getToken()
+            val accessToken = PreferenceUtil.getToken()
 
             chain.proceed(
                 chain.request().newBuilder()

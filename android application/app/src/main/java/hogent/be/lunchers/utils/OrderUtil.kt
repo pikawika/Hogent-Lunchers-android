@@ -1,28 +1,25 @@
 package hogent.be.lunchers.utils
 
-import android.annotation.SuppressLint
-import java.text.SimpleDateFormat
-import java.util.*
+import hogent.be.lunchers.R
+import hogent.be.lunchers.activities.MainActivity
 
+/**
+ * Een util om je te helpen werken met orders
+ */
 object OrderUtil {
 
+    /**
+     * Converteert de int waarde van de backend zijn enum status naar de bijhorende string
+     */
     @JvmStatic
     fun convertIntToStatus(int: Int): String {
         return when (int) {
-            0 -> "In afwachting"
-            1 -> "Goedgekeurd"
-            2 -> "Afgekeurd"
-            else -> "Onbekend"
+            0 -> MainActivity.getContext().getString(R.string.text_status_awaited)
+            1 -> MainActivity.getContext().getString(R.string.text_status_accepted)
+            2 -> MainActivity.getContext().getString(R.string.text_status_declined)
+            else -> MainActivity.getContext().getString(R.string.text_status_unknown)
         }
     }
 
-    @JvmStatic
-    @SuppressLint("SimpleDateFormat")
-    fun formatDate(date: Date): String {
-        val day = SimpleDateFormat("dd/MM/yyy").format(date)
-        val format = SimpleDateFormat("HH:mm")
-        format.timeZone = TimeZone.getTimeZone("UTC")
-        val hour = format.format(date)
-        return "$day om $hour"
-    }
+
 }

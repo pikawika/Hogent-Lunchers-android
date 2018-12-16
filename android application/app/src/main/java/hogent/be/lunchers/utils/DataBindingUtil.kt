@@ -58,7 +58,7 @@ object DataBindingUtil {
     fun setOrderDate(view: TextView, date: Date?) {
         if (date != null)
         {
-            view.text = "Datum: " + OrderUtil.formatDate(date)
+            view.text = "Datum: " + DateUtil.formatDate(date)
         }
     }
 

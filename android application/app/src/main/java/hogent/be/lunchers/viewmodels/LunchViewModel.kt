@@ -63,7 +63,7 @@ class LunchViewModel : InjectedViewModel() {
     init {
         //initieel vullen met een lege lijst zodat dit niet nul os
         filteredLunches.value = emptyList()
-        selectedFilter = PreferenceUtil().getDefaultFilterMethod()
+        selectedFilter = PreferenceUtil.getDefaultFilterMethod()
         refreshLunches()
     }
 
@@ -102,7 +102,7 @@ class LunchViewModel : InjectedViewModel() {
      */
     private fun onRetrieveAllLunchesSuccess(result: List<Lunch>) {
         allLunches = result
-        filteredLunches.value = SearchUtil().filterLunch(selectedFilter, result)
+        filteredLunches.value = SearchUtil.filterLunch(selectedFilter, result)
     }
 
     /**
@@ -192,7 +192,7 @@ class LunchViewModel : InjectedViewModel() {
      * zoekt met searchstring op name, beschrijvng, ingredienten en tags
      */
     fun search(searchString:String){
-        filteredLunches.value = SearchUtil().searchLunch(searchString, allLunches)
+        filteredLunches.value = SearchUtil.searchLunch(searchString, allLunches)
     }
 
     /**
@@ -205,12 +205,12 @@ class LunchViewModel : InjectedViewModel() {
             this.latitude = latitude!!
             refreshLunchesFromLocation()
         } else {
-            filteredLunches.value = SearchUtil().filterLunch(selectedFilter, allLunches)
+            filteredLunches.value = SearchUtil.filterLunch(selectedFilter, allLunches)
         }
     }
 
     /**
-     * stelt de filtered type in en updat de lijst
+     * stelt de filtered type in en update de lijst
      */
     fun getSelectedFilter() : FilterEnum{
         return selectedFilter

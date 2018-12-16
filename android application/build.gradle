@@ -46,7 +46,13 @@ buildscript {
             'databinding'    : "3.1.4",
 
             //room voor lokale persistentie
-            'room'          : "1.1.1"
+            'room'          : "1.1.1",
+
+            //om room objecten correct te parsen daar waar Moshi te kort schiet
+            'gson'          : "2.8.5",
+
+            //anko
+            'anko'          : "0.10.4"
     ]
     repositories {
         google()
