@@ -50,72 +50,91 @@
             app:srcCompat="@drawable/ic_logo_red"
             android:tint="@color/colorPrimary"
             android:contentDescription="@string/alt_logo"
-            
+
             app:layout_constraintEnd_toStartOf="@+id/guideline_login_90percent_vertical"
             app:layout_constraintStart_toStartOf="@+id/guideline_login_10percent_vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/guideline_login_50percent_horizontal"
     />
 
-    <!-- Username -->
-    <EditText
-            android:id="@+id/text_login_username"
+    <ScrollView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:hint="@string/placeholder_register_username"
-            android:inputType="text"
-
-            app:layout_constraintTop_toBottomOf="@+id/guideline_login_50percent_horizontal"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_login_90percent_vertical"
             app:layout_constraintStart_toStartOf="@+id/guideline_login_10percent_vertical"
-            app:layout_constraintEnd_toEndOf="@+id/guideline_login_90percent_vertical"
-    />
+            app:layout_constraintTop_toBottomOf="@id/guideline_login_50percent_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+    >
 
-    <!-- Password -->
-    <EditText
-            android:id="@+id/text_login_password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+        >
 
-            android:hint="@string/text_password"
-            android:inputType="textPassword"
 
-            app:layout_constraintTop_toBottomOf="@+id/text_login_username"
-            app:layout_constraintStart_toStartOf="@+id/guideline_login_10percent_vertical"
-            app:layout_constraintEnd_toEndOf="@+id/guideline_login_90percent_vertical"
+            <!-- Username -->
+            <EditText
+                    android:id="@+id/text_login_username"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
 
-            android:layout_marginTop="8dp"
-    />
+                    android:hint="@string/placeholder_register_username"
+                    android:inputType="text"
 
-    <!-- Sign in button -->
-    <Button
-            android:id="@+id/btn_login_confirm"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+            />
 
-            android:text="@string/text_login"
+            <!-- Password -->
+            <EditText
+                    android:id="@+id/text_login_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
 
-            app:layout_constraintTop_toBottomOf="@+id/text_login_password"
-            app:layout_constraintStart_toStartOf="@+id/guideline_login_10percent_vertical"
-            app:layout_constraintEnd_toEndOf="@+id/guideline_login_90percent_vertical"
+                    android:hint="@string/text_password"
+                    android:inputType="textPassword"
 
-            android:layout_marginTop="12dp"
-    />
+                    app:layout_constraintTop_toBottomOf="@+id/text_login_username"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
 
-    <!-- Register link -->
-    <TextView
-            android:id="@+id/btn_login_register"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+            />
 
-            android:text="@string/button_login_register"
-            android:textAlignment="center"
+            <!-- Sign in button -->
+            <Button
+                    android:id="@+id/btn_login_confirm"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
 
-            app:layout_constraintTop_toBottomOf="@+id/btn_login_confirm"
-            app:layout_constraintStart_toStartOf="@+id/guideline_login_10percent_vertical"
-            app:layout_constraintEnd_toEndOf="@+id/guideline_login_90percent_vertical"
+                    android:text="@string/text_login"
 
-            android:layout_marginTop="12dp"
-    />
+                    app:layout_constraintTop_toBottomOf="@+id/text_login_password"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    android:layout_marginTop="12dp"
+            />
+
+            <!-- Register link -->
+            <TextView
+                    android:id="@+id/btn_login_register"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/button_login_register"
+                    android:textAlignment="center"
+
+                    app:layout_constraintTop_toBottomOf="@+id/btn_login_confirm"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    android:layout_marginTop="12dp"
+            />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

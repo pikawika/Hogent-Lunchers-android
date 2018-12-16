@@ -178,7 +178,7 @@
                     android:layout_height="wrap_content"
 
                     android:inputType="textMultiLine"
-                    android:lines="5"
+                    android:lines="3"
                     android:scrollbars="vertical"
                     android:ems="10"
                     android:gravity="top|start"

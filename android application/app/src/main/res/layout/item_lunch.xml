@@ -42,6 +42,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
 
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+
                 tools:srcCompat="@tools:sample/backgrounds/scenic"
                 app:layout_constraintDimensionRatio="WH,16:9"
                 android:scaleType="centerCrop"
