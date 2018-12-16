@@ -66,14 +66,14 @@ class LunchDetailFragment : Fragment() {
         rootView.button_lunch_detail_call.setOnClickListener {
             val builder = AlertDialog.Builder(activity)
             builder.setCancelable(true)
-            builder.setTitle(getString(R.string.text_call_to) + ": " + lunchViewModel.getSelectedLunch().value!!.merchant.companyName)
-            builder.setMessage(getString(R.string.text_want_to_call_to) + ": " + lunchViewModel.getSelectedLunch().value!!.merchant.phoneNumber + "?")
+            builder.setTitle(getString(R.string.text_call_to) + ": " + lunchViewModel.selectedLunch.value!!.merchant.companyName)
+            builder.setMessage(getString(R.string.text_want_to_call_to) + ": " + lunchViewModel.selectedLunch.value!!.merchant.phoneNumber + "?")
             builder.setPositiveButton(
                 getString(R.string.text_yes)
             ) { _, _ ->
                 val phoneIntent = Intent(Intent.ACTION_DIAL)
                 phoneIntent.data =
-                        Uri.parse("tel:" + lunchViewModel.getSelectedLunch().value!!.merchant.phoneNumber)
+                        Uri.parse("tel:" + lunchViewModel.selectedLunch.value!!.merchant.phoneNumber)
                 startActivity(phoneIntent)
             }
             builder.setNegativeButton(
@@ -96,12 +96,12 @@ class LunchDetailFragment : Fragment() {
         rootView.button_lunch_detail_navigation.setOnClickListener {
             val mapIntent = Intent(Intent.ACTION_VIEW)
             mapIntent.data = Uri.parse(
-                "geo:" + lunchViewModel.getSelectedLunch().value!!.merchant.location.latitude + "," +
-                        lunchViewModel.getSelectedLunch().value!!.merchant.location.longitude + "?q=" +
-                        lunchViewModel.getSelectedLunch().value!!.merchant.location.street + "+" +
-                        lunchViewModel.getSelectedLunch().value!!.merchant.location.houseNumber + "+" +
-                        lunchViewModel.getSelectedLunch().value!!.merchant.location.postalCode + "+" +
-                        lunchViewModel.getSelectedLunch().value!!.merchant.location.city
+                "geo:" + lunchViewModel.selectedLunch.value!!.merchant.location.latitude + "," +
+                        lunchViewModel.selectedLunch.value!!.merchant.location.longitude + "?q=" +
+                        lunchViewModel.selectedLunch.value!!.merchant.location.street + "+" +
+                        lunchViewModel.selectedLunch.value!!.merchant.location.houseNumber + "+" +
+                        lunchViewModel.selectedLunch.value!!.merchant.location.postalCode + "+" +
+                        lunchViewModel.selectedLunch.value!!.merchant.location.city
             )
             //kijk of er gps app is op de gsm
             val packageManager = requireActivity().packageManager
@@ -118,7 +118,7 @@ class LunchDetailFragment : Fragment() {
      */
     override fun onResume() {
         super.onResume()
-        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, lunchViewModel.getSelectedLunch().value!!.name)
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, lunchViewModel.selectedLunch.value!!.name)
         GuiUtil.setCanPop(requireActivity() as MainActivity)
     }
 

@@ -52,7 +52,7 @@ class ReservationFragment : Fragment() {
         reservationViewModel = ViewModelProviders.of(requireActivity()).get(ReservationViewModel::class.java)
 
         //get selected lunch from lunchvm
-        reservationViewModel.setSelectedLunch(lunchViewModel.getSelectedLunch().value!!)
+        reservationViewModel.setSelectedLunch(lunchViewModel.selectedLunch.value!!)
 
         val rootView = binding.root
 

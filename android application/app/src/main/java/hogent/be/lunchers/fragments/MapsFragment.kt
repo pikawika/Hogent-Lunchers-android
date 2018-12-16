@@ -162,17 +162,17 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         retrieveAllLunches()
 
         fusedLocationClient.lastLocation.addOnSuccessListener(this.requireActivity()) { location ->
-            if (location != null && lunchViewModel.getSelectedLunch().value == null) {
+            if (location != null && lunchViewModel.selectedLunch.value == null) {
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
             }
         }
 
-        if (lunchViewModel.getSelectedLunch().value != null) {
+        if (lunchViewModel.selectedLunch.value != null) {
             val currentLatLng = LatLng(
-                lunchViewModel.getSelectedLunch().value!!.merchant.location.latitude,
-                lunchViewModel.getSelectedLunch().value!!.merchant.location.longitude
+                lunchViewModel.selectedLunch.value!!.merchant.location.latitude,
+                lunchViewModel.selectedLunch.value!!.merchant.location.longitude
             )
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
         }
@@ -180,7 +180,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
 
     // Deze methode haalt alle lunches op en plaatst van iedere lunch de merchant op de kaart
     private fun retrieveAllLunches() {
-        val list = lunchViewModel.getFilteredLunches()
+        val list = lunchViewModel.filteredLunches
 
 
         list.observe(this, Observer {

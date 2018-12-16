@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         //indien defaultfilter op afstand is moet de locatie opgevraagd worden
-        if (lunchViewModel.getSelectedFilter() == FilterEnum.DISTANCE)
+        if (lunchViewModel.selectedFilter == FilterEnum.DISTANCE)
             lunchesFromLocation()
 
         //toolbar instellen als actionbar

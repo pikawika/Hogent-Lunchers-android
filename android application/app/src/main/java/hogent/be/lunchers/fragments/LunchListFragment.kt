@@ -59,7 +59,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         //lijst vullen met lunches uit viewmodel.
         //We doen niet direct .value maar behouden het als mutueablelivedata mits we hier op willen op observen
-        lunches = lunchViewModel.getFilteredLunches()
+        lunches = lunchViewModel.filteredLunches
 
         //adapter aanmaken
         lunchAdapter = LunchAdapter(this.requireActivity() as MainActivity, lunches, twoPane)
