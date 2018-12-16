@@ -15,6 +15,9 @@ import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
+/**
+ * Een [Fragment] voor het weergeven van profiel gerelateerde opties
+ */
 class ProfileFragment : Fragment() {
 
     /**

@@ -18,7 +18,11 @@ import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_lunch_detail.view.*
 
-
+/**
+ * Een [Fragment] voor het weergeven van de details van een lunch.
+ *
+ * Gerbuikt model binding voor de [LunchViewModel.selectedLunch] weer te geven.
+ */
 class LunchDetailFragment : Fragment() {
 
     /**

@@ -20,7 +20,9 @@ import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_blacklist.*
 import kotlinx.android.synthetic.main.fragment_blacklist.view.*
 
-
+/**
+ * Een [Fragment] voor het weergeven en bewerken van een gebruiker zijn [BlacklistedItem].
+ */
 class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     /**

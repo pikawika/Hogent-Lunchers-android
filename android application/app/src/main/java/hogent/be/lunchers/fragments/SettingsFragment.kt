@@ -18,8 +18,7 @@ import kotlinx.android.synthetic.main.fragment_settings.view.*
 
 
 /**
- * De [SettingsFragment] vooorziet opties voor de gebruiker zijnde zijn blacklist en default boot scherm.
- *
+ * De [SettingsFragment] vooorziet opties voor de gebruiker zijnde zijn blacklist, standaard filtermethode en standaard startscherm.
  */
 class SettingsFragment : Fragment() {
 

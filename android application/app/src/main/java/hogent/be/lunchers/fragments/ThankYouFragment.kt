@@ -11,6 +11,9 @@ import hogent.be.lunchers.utils.GuiUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_thanks.view.*
 
+/**
+ * Een [Fragment] voor het weergeven van een bedankt boodschap na het plaatsen van een reservatie via [ReservationFragment]
+ */
 class ThankYouFragment : Fragment() {
 
     override fun onCreateView(

@@ -22,6 +22,9 @@ import kotlinx.android.synthetic.main.fragment_reservation.*
 import kotlinx.android.synthetic.main.fragment_reservation.view.*
 import java.util.*
 
+/**
+ * Een [Fragment] voor het plaatsen van een reservatie
+ */
 class ReservationFragment : Fragment() {
 
     /**

@@ -11,6 +11,9 @@ import hogent.be.lunchers.R
 import hogent.be.lunchers.databinding.PartialLunchCardBinding
 import hogent.be.lunchers.viewmodels.LunchViewModel
 
+/**
+ * Een [Fragment] om te gebruiken in andere [Fragment], toont de [LunchViewModel.selectedLunch].
+ */
 class PartialLunchCardFragment : Fragment() {
 
     /**

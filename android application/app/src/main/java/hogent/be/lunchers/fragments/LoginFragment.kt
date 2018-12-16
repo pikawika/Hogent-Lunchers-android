@@ -18,6 +18,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
+/**
+ * Een [Fragment] waar een gebruiker zich kan aanmelden of kan doorklikken naar registreren.
+ */
 class LoginFragment : Fragment() {
 
     /**

@@ -15,6 +15,9 @@ import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_change_passord.*
 import kotlinx.android.synthetic.main.fragment_change_passord.view.*
 
+/**
+ * Een [Fragment] voor het bewerken van een gebruiker zijn wachtwoord.
+ */
 class ChangePasswordFragment : Fragment() {
 
     /**

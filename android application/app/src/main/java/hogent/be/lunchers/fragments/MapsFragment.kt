@@ -32,7 +32,11 @@ import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_map.view.*
 import kotlinx.android.synthetic.main.partial_search.view.*
 
-
+/**
+ * Een [Fragment] voor het weergeven van alle [Lunch] op de kaart, met filtering van een gebruiker zijn [BlacklistedItem].
+ *
+ * User kan zoeken en filteren.
+ */
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     /**

@@ -20,6 +20,11 @@ import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.OrderViewModel
 import kotlinx.android.synthetic.main.fragment_order_detail.view.*
 
+/**
+ * Een [Fragment] voor het weergeven van de details van een order.
+ *
+ * Gerbuikt model binding voor de [OrderViewModel._selectedOrder] weer te geven.
+ */
 class OrderDetailFragment : Fragment() {
 
     /**

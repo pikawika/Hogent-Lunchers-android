@@ -17,11 +17,16 @@ import kotlinx.android.synthetic.main.fragment_lunch_list.*
 import kotlinx.android.synthetic.main.fragment_lunch_list.view.*
 import android.text.Editable
 import android.text.TextWatcher
+import hogent.be.lunchers.models.BlacklistedItem
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.utils.GuiUtil
 import kotlinx.android.synthetic.main.partial_search.view.*
 
-
+/**
+ * Een [Fragment] voor het weergeven van alle [Lunch] in een lijst, met filtering van een gebruiker zijn [BlacklistedItem].
+ *
+ * User kan zoeken en filteren
+ */
 class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     /**

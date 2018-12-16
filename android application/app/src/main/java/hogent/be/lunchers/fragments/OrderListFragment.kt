@@ -16,6 +16,9 @@ import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.viewmodels.OrderViewModel
 import kotlinx.android.synthetic.main.fragment_order_list.view.*
 
+/**
+ * Een [Fragment] voor het weergeven van alle [Order] van de gebruiker in een lijst.
+ */
 class OrderListFragment : Fragment() {
 
     private lateinit var orderViewModel: OrderViewModel
