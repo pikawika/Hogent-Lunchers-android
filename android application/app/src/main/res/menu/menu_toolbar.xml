@@ -3,28 +3,28 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/ab_filter_prijs_oplopend"
+            android:id="@+id/ab_filter_price_lowest"
             android:title="@string/ab_filter_price_az"
             app:showAsAction="never"
             android:visible="false"
     />
 
     <item
-            android:id="@+id/ab_filter_prijs_aflopend"
+            android:id="@+id/ab_filter_price_highest"
             android:title="@string/ab_filter_price_za"
             app:showAsAction="never"
             android:visible="false"
     />
 
     <item
-            android:id="@+id/ab_filter_afstand"
+            android:id="@+id/ab_filter_distance"
             android:title="@string/ab_filter_distance"
             app:showAsAction="never"
             android:visible="false"
     />
 
     <item
-            android:id="@+id/ab_filter_nieuwste"
+            android:id="@+id/ab_filter_newest"
             android:title="@string/ab_filter_recent"
             app:showAsAction="never"
             android:visible="false"

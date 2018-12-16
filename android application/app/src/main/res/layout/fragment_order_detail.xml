@@ -49,7 +49,7 @@
                     tools:src="@tools:sample/backgrounds/scenic"
                     android:contentDescription="@string/alt_order_detail_image"
                     android:scaleType="centerCrop"
-                    app:layout_constraintDimensionRatio="H,16:9"
+                    app:layout_constraintDimensionRatio="WH,16:9"
 
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

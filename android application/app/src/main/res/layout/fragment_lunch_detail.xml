@@ -49,7 +49,7 @@
                     android:layout_height="0dp"
 
                     android:contentDescription="@string/alt_lunch_detail_image"
-                    app:layout_constraintDimensionRatio="H,16:9"
+                    app:layout_constraintDimensionRatio="WH,16:9"
                     android:scaleType="centerCrop"
                     android:src="@{lunchViewModel.getSelectedLunch().images[0].path}"
                     tools:src="@tools:sample/backgrounds/scenic"

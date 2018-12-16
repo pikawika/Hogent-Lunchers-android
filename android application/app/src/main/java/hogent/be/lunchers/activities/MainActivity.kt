@@ -205,22 +205,22 @@ class MainActivity : AppCompatActivity() {
         //het item dat gelklikt is uit de toolbar
         //dit id moet in theorie altijd ingevuld zijn want enkel dan weet je wat aangeduid en kan je bijhorende actie uitvoeren
         when (item?.itemId) {
-            R.id.ab_filter_prijs_oplopend -> {
+            R.id.ab_filter_price_lowest -> {
                 lunchViewModel.setSelectedFilter(FilterEnum.PRICE_LOWEST)
                 return super.onOptionsItemSelected(item)
             }
 
-            R.id.ab_filter_prijs_aflopend -> {
+            R.id.ab_filter_price_highest -> {
                 lunchViewModel.setSelectedFilter(FilterEnum.PRICE_HIGHEST)
                 return super.onOptionsItemSelected(item)
             }
 
-            R.id.ab_filter_afstand -> {
+            R.id.ab_filter_distance -> {
                 lunchesFromLocation()
                 return super.onOptionsItemSelected(item)
             }
 
-            R.id.ab_filter_nieuwste -> {
+            R.id.ab_filter_newest -> {
                 lunchViewModel.setSelectedFilter(FilterEnum.RECENT)
                 return super.onOptionsItemSelected(item)
             }

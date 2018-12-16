@@ -46,7 +46,7 @@
                     android:layout_height="0dp"
 
                     app:layout_constraintEnd_toStartOf="@+id/guideline_partial_lunch_card_40percent_vertical"
-                    app:layout_constraintDimensionRatio="H,16:9"
+                    app:layout_constraintDimensionRatio="WH,16:9"
                     android:scaleType="centerCrop"
                     android:src="@{lunchViewModel.getSelectedLunch().images[0].path}"
                     tools:src="@tools:sample/backgrounds/scenic"
