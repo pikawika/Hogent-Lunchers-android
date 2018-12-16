@@ -48,7 +48,7 @@ class RegistreerFragment : Fragment() {
         return rootView
     }
 
-    fun setListeners(fragment: View) {
+    private fun setListeners(fragment: View) {
         fragment.btn_register_login.setOnClickListener {
             login()
         }
