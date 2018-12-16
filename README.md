@@ -6,6 +6,7 @@ Dit is de GitHub repository (deel Android App) voor het project Lunchers van Tea
 > [Download de app](https://www.lennertbontinck.com/ftp/apk/lunchers.apk)
 
 user: lennert
+
 wachtwoord: Wachtwoord123
 
 <sub>Deze server bevind zich bij [Brent](#groepsleden) thuis en kan dus soms uitstaan voor stroombesparing, aarzel niet om contact op te nemen met [Brent](#groepsleden) bij problemen. De downloadlink is momenteel gehost bij [Lennert](#groepsleden), indien de link niet werkt aarzel dan niet contact op te nemen met [Lennert](#groepsleden)</sub>
