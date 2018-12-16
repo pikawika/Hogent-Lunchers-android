@@ -95,7 +95,7 @@
                 app:layout_constraintStart_toStartOf="@id/guideline_profile_10percent_vertical"
                 app:layout_constraintEnd_toEndOf="@id/guideline_profile_90percent_vertical"
                 app:layout_constraintTop_toBottomOf="@+id/txt_profile_username"
-                app:layout_constraintBottom_toTopOf="@+id/btn_profile_reservations"
+                app:layout_constraintBottom_toTopOf="@+id/btn_profile_orders"
 
                 android:layout_marginTop="16dp"
 
@@ -104,7 +104,7 @@
 
         <!-- My orders -->
         <Button
-                android:id="@+id/btn_profile_reservations"
+                android:id="@+id/btn_profile_orders"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
@@ -134,7 +134,7 @@
 
                 app:layout_constraintStart_toStartOf="@id/guideline_profile_10percent_vertical"
                 app:layout_constraintEnd_toEndOf="@id/guideline_profile_90percent_vertical"
-                app:layout_constraintTop_toBottomOf="@+id/btn_profile_reservations"
+                app:layout_constraintTop_toBottomOf="@+id/btn_profile_orders"
                 app:layout_constraintBottom_toTopOf="@+id/btn_profile_logout"
 
                 android:layout_marginTop="16dp"
