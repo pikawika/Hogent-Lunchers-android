@@ -14,7 +14,7 @@ import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.fragment_preferences.view.*
+import kotlinx.android.synthetic.main.fragment_preferences.*
 
 
 /**
@@ -44,27 +44,25 @@ class PreferencesFragment : Fragment() {
         accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
         lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
 
-        initListeners(rootView)
-
         return rootView
     }
 
     /**
      * Instantieer de listeners
      */
-    private fun initListeners(rootView: View) {
+    private fun initListeners() {
         //default filter methode
-        rootView.btn_settings_default_filter.setOnClickListener {
+        btn_settings_default_filter.setOnClickListener {
             showDefaultFilterSelector()
         }
 
         //default boot page
-        rootView.btn_settings_default_tab.setOnClickListener {
+        btn_settings_default_tab.setOnClickListener {
             showBootPageSelector()
         }
 
         //zwarte lijst
-        rootView.btn_settings_blacklist.setOnClickListener {
+        btn_settings_blacklist.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container_mainactivity, BlacklistFragment())
@@ -74,11 +72,26 @@ class PreferencesFragment : Fragment() {
     }
 
     /**
+     * Stop de listeners
+     */
+    @Suppress("UNUSED_EXPRESSION")
+    private fun stopListeners() {
+        //default filter methode
+        btn_settings_default_filter.setOnClickListener { null }
+
+        //default boot page
+        btn_settings_default_tab.setOnClickListener { null }
+
+        //zwarte lijst
+        btn_settings_blacklist.setOnClickListener { null }
+    }
+
+    /**
      * Toont het keuze menu voor de standaard filter en stelt de gekozen standaard fitler in.
      *
      * De lijst van lunches wordt ook gerefresht aangezien een nieuwe filter geselecteerd is.
      */
-    private fun showDefaultFilterSelector(){
+    private fun showDefaultFilterSelector() {
         val filters = arrayOf(
             getString(R.string.ab_filter_price_lowest),
             getString(R.string.ab_filter_price_highest),
@@ -114,7 +127,7 @@ class PreferencesFragment : Fragment() {
     /**
      * Toont het keuze menu voor de boot page en stelt de gekozen boot page in.
      */
-    private fun showBootPageSelector(){
+    private fun showBootPageSelector() {
         val pages = arrayOf(
             getString(R.string.text_map_title),
             getString(R.string.text_list_title),
@@ -149,5 +162,16 @@ class PreferencesFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         GuiUtil.removeCanPop(requireActivity() as MainActivity)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        initListeners()
+    }
+
+    override fun onStop() {
+        stopListeners()
+        super.onStop()
     }
 }

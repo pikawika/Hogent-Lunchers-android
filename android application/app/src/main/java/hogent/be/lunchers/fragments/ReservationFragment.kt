@@ -19,7 +19,6 @@ import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import hogent.be.lunchers.viewmodels.ReservationViewModel
 import kotlinx.android.synthetic.main.fragment_reservation.*
-import kotlinx.android.synthetic.main.fragment_reservation.view.*
 import java.util.*
 
 /**
@@ -60,15 +59,13 @@ class ReservationFragment : Fragment() {
         binding.reservationViewModel = reservationViewModel
         binding.setLifecycleOwner(activity)
 
-        initListeners(rootView)
-
         return rootView
     }
 
     /**
      * Instantieer de listeners
      */
-    private fun initListeners(rootView: View) {
+    private fun initListeners() {
         //reservatie voltooid
         reservationViewModel.reservationPlaced.observe(this, Observer {
             if (reservationViewModel.reservationPlaced.value == true) {
@@ -81,37 +78,55 @@ class ReservationFragment : Fragment() {
         })
 
         //confirm geklikt
-        rootView.btn_reservation_confirm.setOnClickListener {
+        btn_reservation_confirm.setOnClickListener {
             placeReservation()
         }
 
         //cancel geklikt
-        rootView.btn_reservation_cancel.setOnClickListener {
+        btn_reservation_cancel.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStackImmediate()
         }
 
         //datum kiezen geklikt
-        rootView.btn_reservation_pick_date.setOnClickListener {
-            showDatePicker(rootView)
+        btn_reservation_pick_date.setOnClickListener {
+            showDatePicker()
         }
 
         //uur kiezen geklikt
-        rootView.btn_reservation_pick_time.setOnClickListener {
-            showTimePicker(rootView)
+        btn_reservation_pick_time.setOnClickListener {
+            showTimePicker()
         }
+    }
+
+    /**
+     * Instantieer de listeners
+     */
+    @Suppress("UNUSED_EXPRESSION")
+    private fun stopListeners() {
+        //confirm geklikt
+        btn_reservation_confirm.setOnClickListener { null }
+
+        //cancel geklikt
+        btn_reservation_cancel.setOnClickListener { null }
+
+        //datum kiezen geklikt
+        btn_reservation_pick_date.setOnClickListener { null }
+
+        //uur kiezen geklikt
+        btn_reservation_pick_time.setOnClickListener { null }
     }
 
     /**
      * Toont een timepicker en stelt de gekozen tijd bij de [ReservationViewModel] in.
      */
-    private fun showTimePicker(rootView: View) {
+    private fun showTimePicker() {
         val today = Calendar.getInstance()
 
         val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
             reservationViewModel.hour = hour
             reservationViewModel.minute = minute
 
-            rootView.btn_reservation_pick_time.text =
+            btn_reservation_pick_time.text =
                     getString(R.string.text_time, String.format("%02d", hour), String.format("%02d", minute))
         }
         TimePickerDialog(
@@ -126,7 +141,7 @@ class ReservationFragment : Fragment() {
     /**
      * Toont een datepicker en stelt de gekozen datum bij de [ReservationViewModel] in.
      */
-    private fun showDatePicker(rootView: View) {
+    private fun showDatePicker() {
         val today = Calendar.getInstance()
 
         val dpd =
@@ -136,7 +151,7 @@ class ReservationFragment : Fragment() {
                     reservationViewModel.year = year
                     reservationViewModel.month = monthOfYear + 1
                     reservationViewModel.day = dayOfMonth
-                    rootView.btn_reservation_pick_date.text =
+                    btn_reservation_pick_date.text =
                             getString(R.string.text_date, dayOfMonth, (monthOfYear + 1), year)
                 },
                 today.get(Calendar.YEAR),
@@ -204,6 +219,16 @@ class ReservationFragment : Fragment() {
         super.onPause()
         GuiUtil.removeCanPop(requireActivity() as MainActivity)
         reservationViewModel.clear()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initListeners()
+    }
+
+    override fun onStop() {
+        stopListeners()
+        super.onStop()
     }
 
 }

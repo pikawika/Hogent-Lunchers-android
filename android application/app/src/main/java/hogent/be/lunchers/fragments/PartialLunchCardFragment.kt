@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.databinding.PartialLunchCardBinding
 import hogent.be.lunchers.viewmodels.LunchViewModel
+import kotlinx.android.synthetic.main.partial_lunch_card.*
 
 /**
  * Een [Fragment] om te gebruiken in andere [Fragment], toont de [LunchViewModel.selectedLunch].
@@ -38,17 +39,35 @@ class PartialLunchCardFragment : Fragment() {
         binding.lunchViewModel = lunchViewModel
         binding.setLifecycleOwner(activity)
 
-        initListeners(rootView)
-
         return rootView
     }
 
-    private fun initListeners(rootView: View) {
-        rootView.setOnClickListener {
+    /**
+     * Instantieer de listeners
+     */
+    private fun initListeners() {
+        partial_lunch_card.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_mainactivity, LunchDetailFragment())
                 .addToBackStack(null)
                 .commit()
         }
+    }
+
+    /**
+     * Stop de listeners
+     */
+    @Suppress("UNUSED_EXPRESSION")
+    private fun stopListeners() { null }
+
+    override fun onStart() {
+        super.onStart()
+
+        initListeners()
+    }
+
+    override fun onStop() {
+        stopListeners()
+        super.onStop()
     }
 }

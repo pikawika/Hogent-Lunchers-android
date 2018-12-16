@@ -66,20 +66,18 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         //lijst zijn adapter instellen
         rootView.recycler_blacklist.adapter = blacklistAdapter
 
-        initListeners(rootView)
-
         return rootView
     }
 
     /**
      * Instantieer de listeners
      */
-    private fun initListeners(rootView: View) {
+    private fun initListeners() {
         //lijst zijn swipe to refresh listenen
-        rootView.swipe_refresh_blacklist.setOnRefreshListener(this)
+        swipe_refresh_blacklist.setOnRefreshListener(this)
 
         //bij het aanklikken van de add fab een popup tonen die om een naam vraagt voor het toe te voegen list item
-        rootView.fab_blacklist_add.setOnClickListener {
+        fab_blacklist_add.setOnClickListener {
             MessageUtil.showDialogWithTextInput(
                 requireContext(),
                 getString(R.string.text_add),
@@ -95,6 +93,16 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             //lunches moeten opnieuw opgehaald worden aangezien backend filtering doet
             lunchViewModel.refreshLunches()
         })
+    }
+
+    /**
+     * Stop de listeners
+     */
+    @Suppress("UNUSED_EXPRESSION")
+    private fun stopListeners() {
+        swipe_refresh_blacklist.setOnRefreshListener(null)
+
+        fab_blacklist_add.setOnClickListener { null }
     }
 
     /**
@@ -132,6 +140,17 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onPause() {
         super.onPause()
         GuiUtil.removeCanPop(requireActivity() as MainActivity)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        initListeners()
+    }
+
+    override fun onStop() {
+        stopListeners()
+        super.onStop()
     }
 
 }

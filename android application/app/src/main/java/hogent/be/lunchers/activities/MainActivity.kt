@@ -88,8 +88,12 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        //listeners instantiëren
         initListeners()
+    }
+
+    override fun onStop() {
+        stopListeners()
+        super.onStop()
     }
 
     /**
@@ -164,6 +168,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         bottom_navigation_mainactivity.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+    }
+
+    /**
+     * Stopt de listeners van de [MainActivity].
+     */
+    private fun stopListeners() {
+        toolbar_mainactivity.setNavigationOnClickListener { null }
+
+        bottom_navigation_mainactivity.setOnNavigationItemSelectedListener(null)
     }
 
     /**
@@ -251,7 +264,7 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 if (location?.latitude == null)
-                    //gps staat uit/ geen locatie
+                //gps staat uit/ geen locatie
                     MessageUtil.showToast(getString(R.string.error_no_gps_signal))
                 else {
                     //long en lat gekregen
