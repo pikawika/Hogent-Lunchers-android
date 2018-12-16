@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="@string/text_shared_hello"
+                android:text="@string/text_hello"
                 android:textSize="30sp"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="@{accountViewModel.getGebruikersnaam()}"
+                android:text="@{accountViewModel.username}"
                 tools:text="Team GDPR"
                 android:textSize="30sp"
                 android:textColor="@color/colorPrimary"
@@ -89,13 +89,13 @@
                 android:layout_height="wrap_content"
 
                 android:textColor="@android:color/black"
-                android:text="@string/text_shared_change_password"
+                android:text="@string/text_change_password"
                 android:background="@color/lightGrey"
 
                 app:layout_constraintStart_toStartOf="@id/guideline_profile_10percent_vertical"
                 app:layout_constraintEnd_toEndOf="@id/guideline_profile_90percent_vertical"
                 app:layout_constraintTop_toBottomOf="@+id/txt_profile_username"
-                app:layout_constraintBottom_toTopOf="@+id/btn_profile_reservations"
+                app:layout_constraintBottom_toTopOf="@+id/btn_profile_orders"
 
                 android:layout_marginTop="16dp"
 
@@ -104,12 +104,12 @@
 
         <!-- My orders -->
         <Button
-                android:id="@+id/btn_profile_reservations"
+                android:id="@+id/btn_profile_orders"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
                 android:textColor="@android:color/black"
-                android:text="@string/text_shared_my_reservations"
+                android:text="@string/text_my_reservations"
                 android:background="@color/lightGrey"
 
                 app:layout_constraintStart_toStartOf="@id/guideline_profile_10percent_vertical"
@@ -129,12 +129,12 @@
                 android:layout_height="wrap_content"
 
                 android:textColor="#000"
-                android:text="@string/text_settings_title"
+                android:text="@string/text_preferences_title"
                 android:background="@color/lightGrey"
 
                 app:layout_constraintStart_toStartOf="@id/guideline_profile_10percent_vertical"
                 app:layout_constraintEnd_toEndOf="@id/guideline_profile_90percent_vertical"
-                app:layout_constraintTop_toBottomOf="@+id/btn_profile_reservations"
+                app:layout_constraintTop_toBottomOf="@+id/btn_profile_orders"
                 app:layout_constraintBottom_toTopOf="@+id/btn_profile_logout"
 
                 android:layout_marginTop="16dp"

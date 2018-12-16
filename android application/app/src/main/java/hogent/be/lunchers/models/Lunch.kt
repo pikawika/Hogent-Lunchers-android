@@ -1,19 +1,25 @@
 package hogent.be.lunchers.models
 
 import android.os.Parcelable
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+/**
+ * Een [Lunch] hehoort tot een [merchant] en bevat tal van informatie.
+ *
+ * Deze klas is Parcelable zodat retrofit deze kan gebruiken
+ */
 @Parcelize
 data class Lunch(
     val lunchId: Int,
-    val naam: String,
-    val prijs: Double,
+    @field:Json(name = "naam") val name: String,
+    @field:Json(name = "prijs") val price: Double,
     val lunchIngredienten: List<LunchIngredient>,
-    val beschrijving: String,
-    val afbeeldingen: List<Afbeelding>,
-    val beginDatum: Date,
-    val eindDatum: Date,
+    @field:Json(name = "beschrijving") val description: String,
+    @field:Json(name = "afbeeldingen") val images: List<Image>,
+    @field:Json(name = "beginDatum") val startDate: Date,
+    @field:Json(name = "eindDatum") val endDate: Date,
     val lunchTags: List<LunchTag>,
-    val handelaar: Handelaar
+    @field:Json(name = "handelaar") val merchant: Merchant
 ) : Parcelable

@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="@string/text_settings_title"
+            android:text="@string/text_preferences_title"
             android:textSize="30sp"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
 
             android:textColor="@android:color/black"
-            android:text="@string/text_settings_default_filter"
+            android:text="@string/text_preferences_default_filter"
             android:background="@color/lightGrey"
 
             app:layout_constraintTop_toBottomOf="@+id/text_settings_title"
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
 
             android:textColor="@android:color/black"
-            android:text="@string/text_settings_default_boot"
+            android:text="@string/text_preferences_default_boot"
             android:background="@color/lightGrey"
 
             app:layout_constraintTop_toBottomOf="@+id/btn_settings_default_filter"
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
 
             android:textColor="@android:color/black"
-            android:text="@string/text_settings_blacklist"
+            android:text="@string/text_preferences_blacklist"
             android:background="@color/lightGrey"
 
             app:layout_constraintTop_toBottomOf="@+id/btn_settings_default_tab"

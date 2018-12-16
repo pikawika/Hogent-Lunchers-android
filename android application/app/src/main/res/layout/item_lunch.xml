@@ -43,7 +43,7 @@
                 android:layout_height="0dp"
 
                 tools:srcCompat="@tools:sample/backgrounds/scenic"
-                app:layout_constraintDimensionRatio="H,16:9"
+                app:layout_constraintDimensionRatio="WH,16:9"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/alt_text_lunch"
 

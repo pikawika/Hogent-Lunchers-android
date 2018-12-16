@@ -28,14 +28,24 @@ interface NetworkComponent {
     fun inject(lunchViewModel: LunchViewModel)
 
     /**
-     * Doet dependency injection op de meegegeven AccountViewModel
+     * Doet dependency injection op de meegegeven [AccountViewModel]
      *
      * @param accountViewModel De [AccountViewModel] dat je wilt voorzien van dependency injection. Verplicht van type [AccountViewModel].
      */
     fun inject(accountViewModel: AccountViewModel)
 
+    /**
+     * Doet dependency injection op de meegegeven [ReservationViewModel]
+     *
+     * @param reservationViewModel De [ReservationViewModel] dat je wilt voorzien van dependency injection. Verplicht van type [ReservationViewModel].
+     */
     fun inject(reservationViewModel: ReservationViewModel)
 
+    /**
+     * Doet dependency injection op de meegegeven [OrderViewModel]
+     *
+     * @param orderViewModel De [OrderViewModel] dat je wilt voorzien van dependency injection. Verplicht van type [OrderViewModel].
+     */
     fun inject(orderViewModel: OrderViewModel)
 
 }

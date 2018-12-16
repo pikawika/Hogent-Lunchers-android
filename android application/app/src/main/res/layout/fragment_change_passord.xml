@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:text="@string/text_shared_change_password"
+            android:text="@string/text_change_password"
             android:textSize="30sp"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
 
             android:inputType="textPassword"
-            android:hint="@string/text_shared_new_password"
+            android:hint="@string/text_new_password"
 
             app:layout_constraintStart_toStartOf="@+id/guideline_change_password_10percent_vertical"
             app:layout_constraintEnd_toStartOf="@+id/guideline_change_password_90percent_vertical"
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
 
             android:inputType="textPassword"
-            android:hint="@string/text_shared_confirm_password"
+            android:hint="@string/text_confirm_password"
 
             app:layout_constraintStart_toStartOf="@+id/guideline_change_password_10percent_vertical"
             app:layout_constraintEnd_toStartOf="@+id/guideline_change_password_90percent_vertical"

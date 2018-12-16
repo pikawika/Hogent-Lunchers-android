@@ -8,6 +8,8 @@ import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.PermissionChecker.checkSelfPermission
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,31 +23,33 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import hogent.be.lunchers.R
-import hogent.be.lunchers.models.Lunch
-import android.text.Editable
-import android.text.TextWatcher
+import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.databinding.FragmentMapBinding
-import hogent.be.lunchers.databinding.FragmentProfileBinding
+import hogent.be.lunchers.models.Lunch
+import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_map.view.*
 import kotlinx.android.synthetic.main.partial_search.view.*
 
-
+/**
+ * Een [Fragment] voor het weergeven van alle [Lunch] op de kaart, met filtering van een gebruiker zijn [BlacklistedItem].
+ *
+ * User kan zoeken en filteren.
+ */
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     /**
      * [LunchViewModel] met de data over account
      */
-    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var lunchViewModel: LunchViewModel
 
     /**
-     * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
+     * De [FragmentMapBinding] dat we gebruiken voor de effeciteve databinding
      */
     private lateinit var binding: FragmentMapBinding
 
-    // Lateinit variabelen zijn standaard null, normaal mag dit niet mag in Kotlin
+    // Lateinit variabelen zijn standaard null, normaal mag dit niet in Kotlin
     // Er wordt echter vanuit gegaan dat ze in OnStart of OnResume of ... geinitialiseerd worden
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -65,7 +69,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         val mapFragment = (childFragmentManager.findFragmentById(R.id.map_google_maps_fragment)) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        // Een variabele voor het gebruiken van de locatie van de gebruiker
+        // Een variabele voor het gebruiken van de location van de gebruiker
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity())
 
         childFragmentManager
@@ -73,6 +77,15 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             .replace(R.id.map_selected_lunch, PartialLunchCardFragment())
             .commit()
 
+        initListeners(rootView)
+
+        return rootView
+    }
+
+    /**
+     * Instantieer de listeners
+     */
+    private fun initListeners(rootView: View) {
         rootView.map_search.txt_search.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
@@ -83,8 +96,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 lunchViewModel.search(s.toString())
             }
         })
-
-        return rootView
     }
 
     // Functie die wordt opgeroepen nadat de map geladen is
@@ -105,8 +116,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         return true
     }
 
-    // Deze methode wordt opgeroepen nadat de app de gebruiker gevraagd heeft om de locatie permissie te geven
-    // Indien de gebruiker permissie tot zijn/haar locatie heeft gegeven, wordt de methode setUpMap uitgevoerd
+    // Deze methode wordt opgeroepen nadat de app de gebruiker gevraagd heeft om de location permissie te geven
+    // Indien de gebruiker permissie tot zijn/haar location heeft gegeven, wordt de methode setUpMap uitgevoerd
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
@@ -121,7 +132,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     }
 
     // Deze methode plaatst markers op de map via de meegegeven latitude en longitude
-    // Als je er op klikt verschijnt de naam en kan je ook via Google Maps navigatie starten
+    // Als je er op klikt verschijnt de name en kan je ook via Google Maps navigatie starten
     private fun placeMarkerOnMap(lat: Double, lng: Double, id: String) {
         map.addMarker(
             MarkerOptions().position(LatLng(lat, lng))
@@ -129,9 +140,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         )
     }
 
-    // Functie die de locatie van de gebruiker ophaalt en de camera naar deze locatie laat gaan
+    // Functie die de location van de gebruiker ophaalt en de camera naar deze location laat gaan
     private fun setUpMap() {
-        // De gebruiker toestemming vragen voor zijn/haar locatie te gebruiken
+        // De gebruiker toestemming vragen voor zijn/haar location te gebruiken
         // Momenteel is het nog zo dat na het toestemming geven de app nog eens opnieuw opgestart moet worden
         if (checkSelfPermission(
                 this.requireContext(),
@@ -142,7 +153,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
             )
-            MessageUtil.showToast("Geef locatietoestemming en probeer opnieuw")
+            MessageUtil.showToast(getString(R.string.warning_we_need_location_acces))
             return
         }
 
@@ -151,22 +162,25 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         retrieveAllLunches()
 
         fusedLocationClient.lastLocation.addOnSuccessListener(this.requireActivity()) { location ->
-            if (location != null && lunchViewModel.getSelectedLunch()?.value == null) {
+            if (location != null && lunchViewModel.selectedLunch.value == null) {
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
             }
         }
 
-        if (lunchViewModel.getSelectedLunch()?.value != null) {
-            val currentLatLng = LatLng(lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.latitude, lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.longitude)
+        if (lunchViewModel.selectedLunch.value != null) {
+            val currentLatLng = LatLng(
+                lunchViewModel.selectedLunch.value!!.merchant.location.latitude,
+                lunchViewModel.selectedLunch.value!!.merchant.location.longitude
+            )
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
         }
     }
 
-    // Deze methode haalt alle lunches op en plaatst van iedere lunch de handelaar op de kaart
+    // Deze methode haalt alle lunches op en plaatst van iedere lunch de merchant op de kaart
     private fun retrieveAllLunches() {
-        val list = lunchViewModel.getFilteredLunches()
+        val list = lunchViewModel.filteredLunches
 
 
         list.observe(this, Observer {
@@ -175,19 +189,26 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     }
 
     private fun putMarkersOnMap(lunches: List<Lunch>) {
-        if (lunches != null) {
-            //alle markers reeds op de kaart wegdoen
-            map.clear()
-            lunches.forEach {
-                placeMarkerOnMap(
-                    it.handelaar.locatie.latitude,
-                    it.handelaar.locatie.longitude,
-                    it.lunchId.toString()
-                )
-            }
+        //alle markers reeds op de kaart wegdoen
+        map.clear()
+        lunches.forEach {
+            placeMarkerOnMap(
+                it.merchant.location.latitude,
+                it.merchant.location.longitude,
+                it.lunchId.toString()
+            )
         }
     }
-    
+
+    /**
+     * Stel de actionbar zijn titel in
+     */
+    override fun onResume() {
+        super.onResume()
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_map_title))
+    }
+
+
     // Een companion object kan je zien als een statische variabele
     // In dit geval is het de request code die we proberen terug te krijgen
     companion object {

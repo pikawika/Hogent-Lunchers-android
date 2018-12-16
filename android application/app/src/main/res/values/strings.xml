@@ -1,26 +1,60 @@
 <resources>
-    <!-- Shared over multiple -->
-    <string name="text_shared_new_password">Nieuw wachtwoord</string>
-    <string name="text_shared_confirm_password">Bevestig wachtwoord</string>
-    <string name="text_shared_password">Wachtwoord</string>
-    <string name="text_shared_call_restaurant">Bel het restaurant</string>
-    <string name="text_shared_show_restaurant_on_map">Bekijk restaurant op de kaart</string>
-    <string name="text_shared_button_navigation">Routebeschrijving</string>
-    <string name="text_shared_change_password">Wachtwoord Wijzigen</string>
-    <string name="text_shared_hello">Hallo</string>
-    <string name="text_shared_my_reservations">Mijn reservaties</string>
-    <string name="alt_shared_logo">Lunchers logo</string>
-    <string name="text_shared_register">Registreren</string>
-    <string name="text_shared_thanks">Bedankt!</string>
-    <string name="hint_shared_search">Zoeken…</string>
+    <!-- Shared over multiple: text -->
+    <string name="text_new_password">Nieuw wachtwoord</string>
+    <string name="text_confirm_password">Bevestig wachtwoord</string>
+    <string name="text_password">Wachtwoord</string>
+    <string name="text_call_restaurant">Bel het restaurant</string>
+    <string name="text_show_restaurant_on_map">Bekijk restaurant op de kaart</string>
+    <string name="text_button_navigation">Routebeschrijving</string>
+    <string name="text_change_password">Wachtwoord Wijzigen</string>
+    <string name="text_hello">Hallo</string>
+    <string name="text_my_reservations">Mijn reservaties</string>
+    <string name="text_register">Registreren</string>
+    <string name="text_thanks">Bedankt!</string>
+    <string name="text_yes">Ja</string>
+    <string name="text_no">Nee</string>
+    <string name="text_cancel">Annuleer</string>
+    <string name="text_add">Toevoegen</string>
+    <string name="text_add_to_blacklist">Voeg een nieuw item toe aan de zwarte lijst</string>
+    <string name="text_login">Aanmelden</string>
+    <string name="text_call_to">Bellen naar</string>
+    <string name="text_want_to_call_to">Wilt u bellen naar</string>
+    <string name="text_lunch_list">Lunchlijst</string>
+    <string name="text_reservation">Reservatie</string>
+    <string name="text_confirm_reservation">Bevestig reservatie</string>
+    <string name="text_date">%1$d/%2$d/%3$d</string>
+    <string name="text_time">%1$s:%2$s</string>
+    <string name="text_amount">Aantal</string>
+    <string name="text_person_lowercase">persoon</string>
+    <string name="text_persons_lowercase">personen</string>
 
+    <!-- Shared over multiple: alt -->
+    <string name="alt_logo">Lunchers logo</string>
+
+    <!-- Shared over multiple: hint -->
+    <string name="hint_search">Zoeken…</string>
+    <string name="hint_ingredient_tag">Ingrediënt of tag</string>
 
     <!-- Errors -->
     <string name="error_no_navigation_app">U heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
+    <string name="error_no_gps_signal">We kunnnen uw huidige locatie niet bepalen.</string>
     <string name="error_network">Er is een probleem opgetreden bij het ophalen van de lunches. Gelieve het later opnieuw
         te proberen.
     </string>
     <string name="error_fetching_orders">Er is een fout opgetreden tijdens het ophalen van de reservaties.</string>
+    <string name="error_loading_from_internet">Er is een fout opgetreden tijdens het ophalen van de data via het internet.</string>
+
+    <!-- Warnings -->
+    <string name="warning_we_need_location_acces">De lunchers app heeft uw locatie nodig voor een optimale werking te
+        garanderen.
+    </string>
+    <string name="warning_passwords_not_equal">Wachtwoorden komen niet overeen</string>
+    <string name="warning_empty_fields">Gelieve alle velden in te vullen</string>
+
+    <!-- questions -->
+    <string name="question_delete">Verwijderen?</string>
+    <string name="question_want_to_delete_following_blacklisted">Wilt u volgende item van uw zwarte lijst verwijderen</string>
+    <string name="question_want_to_order">Bevestig dat je %1$d keer %2$s wenst te reserveren op %3$s om %4$s.</string>
 
     <!-- Fragment_lunch_detail -->
     <string name="button_lunch_detail_reserve">Reserveer deze lunch</string>
@@ -28,13 +62,14 @@
 
     <!-- Fragment_blacklist -->
     <string name="text_blacklist_title">Zwarte lijst</string>
-    <string name="text_blacklist_description">Indien een lunch een item van de zwarte lijst heeft (ingrediënt of tag) zal deze niet weergegeven worden.</string>
+    <string name="text_blacklist_description">Indien een lunch een item van de zwarte lijst heeft (ingrediënt of tag)
+        zal deze niet weergegeven worden.
+    </string>
 
     <!-- Fragment_change_password -->
     <string name="button_change_password">Wijzig wachtwoord</string>
 
     <!-- Fragment_login -->
-    <string name="button_login">Aanmelden</string>
     <string name="button_login_register">Nog geen account? Registreer hier!</string>
 
     <!-- Fragment_order_detail -->
@@ -68,7 +103,9 @@
     <string name="text_reservation_placed">Reservatie geplaatst!</string>
 
     <!-- fragment_thanks -->
-    <string name="text_thanks_message">Je reservatie is geplaatst! De handelaar laat jou weten van zodra je reservatie bevestigd is.</string>
+    <string name="text_thanks_message">Je reservatie is geplaatst! De handelaar laat jou weten van zodra je reservatie
+        bevestigd is.
+    </string>
     <string name="btn_thanks_back_to_list">Terug naar de lijst</string>
     <string name="text_thanks_to_reservation">Bekijk reservaties</string>
 
@@ -77,20 +114,20 @@
 
     <!-- item_order -->
     <string name="alt_item_order_image">Afbeelding van een bestelde lunch</string>
-  
+
     <!-- actionbar -->
-    <string name="ab_filter_price_az">Sorteren op prijs (oplopend)</string>
-    <string name="ab_filter_price_za">Sorteren op prijs (aflopend)</string>
+    <string name="ab_filter_price_lowest">Sorteren op prijs (oplopend)</string>
+    <string name="ab_filter_price_highest">Sorteren op prijs (aflopend)</string>
     <string name="ab_filter_distance">Sorteren op nabijheid</string>
     <string name="ab_filter_recent">Sorteren op recentheid</string>
 
     <!-- settings -->
-    <string name="text_settings_title">Voorkeuren</string>
-    <string name="text_settings_default_filter">Standaard filtermethode</string>
-    <string name="text_settings_default_boot">Startscherm instellen</string>
-    <string name="text_settings_blacklist">Zwarte lijst</string>
-    <string name="text_settings_select_default_filter">Kies standaard filtermethode</string>
-    <string name="text_settings_select_default_boot">Kies standaard startscherm</string>
+    <string name="text_preferences_title">Voorkeuren</string>
+    <string name="text_preferences_default_filter">Standaard filtermethode</string>
+    <string name="text_preferences_default_boot">Startscherm instellen</string>
+    <string name="text_preferences_blacklist">Zwarte lijst</string>
+    <string name="text_preferences_select_default_filter">Kies standaard filtermethode</string>
+    <string name="text_preferences_select_default_boot">Kies standaard startscherm</string>
 
     <!-- Fragment_order_list -->
     <string name="text_order_list_title">Reservaties</string>
@@ -104,5 +141,11 @@
     <string name="text_map_title">Kaart</string>
     <string name="text_list_title">Lijst</string>
     <string name="text_profile_title">Profiel</string>
+
+    <!-- Status enum -->
+    <string name="text_status_awaited">In afwachting</string>
+    <string name="text_status_accepted">Goedgekeurd</string>
+    <string name="text_status_declined">Afgekeurd</string>
+    <string name="text_status_unknown">Onbekend</string>
 
 </resources>

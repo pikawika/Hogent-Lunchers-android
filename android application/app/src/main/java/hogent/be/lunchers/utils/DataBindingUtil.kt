@@ -3,9 +3,9 @@ package hogent.be.lunchers.utils
 import android.databinding.BindingAdapter
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import hogent.be.lunchers.constants.BASE_URL_BACKEND
+import hogent.be.lunchers.constants.BASE_URL_LUNCHERS
 import android.widget.TextView
-import hogent.be.lunchers.models.Locatie
+import hogent.be.lunchers.models.Location
 import java.util.*
 
 
@@ -21,7 +21,7 @@ object DataBindingUtil {
     fun setImageUrl(view: ImageView, url: String?) {
         if (url != null)
         {
-            Glide.with(view.context).load(BASE_URL_BACKEND + url).into(view)
+            Glide.with(view.context).load(BASE_URL_LUNCHERS + url).into(view)
         }
     }
 
@@ -39,11 +39,11 @@ object DataBindingUtil {
     }
 
     /**
-     * Zorgt er voor dat locatie mooi wordt weergegeven
+     * Zorgt er voor dat location mooi wordt weergegeven
      */
     @JvmStatic
     @BindingAdapter("android:restaurantLocation")
-    fun setRestaurantLocation(view: TextView, location: Locatie?) {
+    fun setRestaurantLocation(view: TextView, location: Location?) {
         if (location != null)
         {
             view.text = StringFormattingUtil.locationToString(location)
@@ -51,14 +51,14 @@ object DataBindingUtil {
     }
 
     /**
-     * Zorgt er voor dat order datum mooi wordt weergegeven
+     * Zorgt er voor dat order date mooi wordt weergegeven
      */
     @JvmStatic
     @BindingAdapter("android:orderDate")
     fun setOrderDate(view: TextView, date: Date?) {
         if (date != null)
         {
-            view.text = "Datum: " + OrderUtil.formatDate(date)
+            view.text = "Datum: " + DateUtil.formatDate(date)
         }
     }
 

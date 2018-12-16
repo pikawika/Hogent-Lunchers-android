@@ -214,11 +214,11 @@ final class IsoConverter {
     }
 
     /**
-     * Zero pad a number to a specified length
+     * Zero path a number to a specified length
      *
      * @param buffer buffer to use for padding
-     * @param value the integer value to pad if necessary.
-     * @param length the length of the string we should zero pad
+     * @param value the integer value to path if necessary.
+     * @param length the length of the string we should zero path
      */
     private static void padInt(StringBuilder buffer, int value, int length) {
         String strValue = Integer.toString(value);

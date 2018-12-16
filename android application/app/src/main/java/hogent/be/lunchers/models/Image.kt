@@ -1,16 +1,16 @@
 package hogent.be.lunchers.models
 
 import android.os.Parcelable
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 /**
- * Een [LunchTag] vormt een tussentabel tussen de [Lunch] en de [Tag]
+ * Een [Image] van een [Lunch].
  *
  * Deze klas is Parcelable zodat retrofit deze kan gebruiken
  */
 @Parcelize
-data class LunchIngredient(
-    val ingredientId: Int,
-    val lunchId: Int,
-    val ingredient: Ingredient
+data class Image(
+    @field:Json(name = "afbeeldingId") val imageId: Int,
+    @field:Json(name = "pad") val path: String
 ) : Parcelable

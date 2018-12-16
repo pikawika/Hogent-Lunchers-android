@@ -5,67 +5,95 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
+import hogent.be.lunchers.activities.MainActivity
+import hogent.be.lunchers.utils.GuiUtil
+import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
+/**
+ * Een [Fragment] waar een gebruiker zich kan aanmelden of kan doorklikken naar registreren.
+ */
 class LoginFragment : Fragment() {
 
     /**
      * [AccountViewModel] met de data over account
      */
-    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
-    private lateinit var accountViewModel : AccountViewModel
+    private lateinit var accountViewModel: AccountViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_login, container, false)
 
-        setListeners(rootView)
-
         //viewmodel vullen
         accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
 
-        //aangemeld en parentactivity bijhouden
-        val aangemeld = accountViewModel.getIsAangmeld()
-        val parentActivity = (activity as AppCompatActivity)
-
-        //indien aangemeld naar lijst gaan
-        aangemeld.observe(this, Observer {
-            if (aangemeld.value == true) {
-                //simuleert een button click op lijst om er voor te zorgen dat juiste
-                //item actief is + zet fragment etc automatisch juist
-                parentActivity.bottom_navigation_mainactivity.selectedItemId = R.id.action_list
-            }
-        })
+        initListeners(rootView)
 
         return rootView
     }
 
-    private fun setListeners(fragment: View) {
+    /**
+     * Instantieer de listeners
+     */
+    private fun initListeners(fragment: View) {
+        //aangemeld en parentactivity bijhouden
+        val loggedIn = accountViewModel.isLoggedIn
+
+        //indien aangemeld naar lijst gaan
+        loggedIn.observe(this, Observer {
+            if (loggedIn.value == true) {
+                //simuleert een button click op lijst om er voor te zorgen dat juiste
+                //item actief is + zet fragment etc automatisch juist
+                (requireActivity() as AppCompatActivity).bottom_navigation_mainactivity.selectedItemId =
+                        R.id.action_list
+            }
+        })
+
         fragment.btn_login_confirm.setOnClickListener {
             login()
         }
 
         fragment.btn_login_register.setOnClickListener {
-            registreer()
+            register()
         }
     }
 
-    private fun registreer() {
+    /**
+     * Controleert de waarden en voert registratie uit
+     */
+    private fun register() {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_container_mainactivity, RegistreerFragment())
+            .replace(R.id.fragment_container_mainactivity, RegisterFragment())
             .addToBackStack(null)
             .commit()
     }
 
+    /**
+     * Controleert de waarden en logt in
+     */
     private fun login() {
-        accountViewModel.login(text_login_username.text.toString(), text_login_password.text.toString())
+        //velden leeg
+        if (TextUtils.isEmpty(text_login_username.text.toString()) && TextUtils.isEmpty(text_login_password.text.toString()))
+            MessageUtil.showToast(getString(R.string.warning_empty_fields)
+        )
+        else accountViewModel.login(text_login_username.text.toString(), text_login_password.text.toString())
     }
+
+    /**
+     * Stel de actionbar zijn titel in
+     */
+    override fun onResume() {
+        super.onResume()
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_login))
+    }
+
 
 }

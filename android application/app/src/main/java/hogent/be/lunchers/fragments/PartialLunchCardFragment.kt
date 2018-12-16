@@ -8,20 +8,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
-import hogent.be.lunchers.databinding.FragmentProfileBinding
 import hogent.be.lunchers.databinding.PartialLunchCardBinding
 import hogent.be.lunchers.viewmodels.LunchViewModel
 
+/**
+ * Een [Fragment] om te gebruiken in andere [Fragment], toont de [LunchViewModel.selectedLunch].
+ */
 class PartialLunchCardFragment : Fragment() {
 
     /**
-     * [LunchViewModel] met de data over account
+     * [LunchViewModel] met de data over de lunches
      */
-    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var lunchViewModel: LunchViewModel
 
     /**
-     * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
+     * De [PartialLunchCardBinding] dat we gebruiken voor de effeciteve databinding
      */
     private lateinit var binding: PartialLunchCardBinding
 
@@ -29,18 +30,20 @@ class PartialLunchCardFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.partial_lunch_card, container, false)
 
         //viewmodel vullen
-        lunchViewModel = ViewModelProviders.of(activity!!).get(LunchViewModel::class.java)
+        lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
 
         val rootView = binding.root
+
+        //databinding
         binding.lunchViewModel = lunchViewModel
         binding.setLifecycleOwner(activity)
 
-        setListeners(rootView)
+        initListeners(rootView)
 
         return rootView
     }
 
-    private fun setListeners(rootView: View) {
+    private fun initListeners(rootView: View) {
         rootView.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_mainactivity, LunchDetailFragment())

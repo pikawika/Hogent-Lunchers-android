@@ -7,27 +7,32 @@ import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
+import hogent.be.lunchers.utils.GuiUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_thanks.view.*
 
 /**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [ThankYouFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [ThankYouFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
+ * Een [Fragment] voor het weergeven van een bedankt boodschap na het plaatsen van een reservatie via [ReservationFragment]
  */
 class ThankYouFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val rootView= inflater.inflate(R.layout.fragment_thanks, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val rootView = inflater.inflate(R.layout.fragment_thanks, container, false)
 
+        initListeners(rootView)
+
+        return rootView
+    }
+
+    /**
+     * Instantieer de listeners
+     */
+    private fun initListeners(rootView: View) {
         rootView.btn_thanks_back.setOnClickListener {
-            activity!!.bottom_navigation_mainactivity.selectedItemId = R.id.action_list
+            requireActivity().bottom_navigation_mainactivity.selectedItemId = R.id.action_list
         }
 
         rootView.btn_thanks_reservations.setOnClickListener {
@@ -37,14 +42,13 @@ class ThankYouFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-
-        return rootView
     }
 
+    /**
+     * Stel de actionbar zijn titel in
+     */
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_reservation_placed)
-        MainActivity.setCanpop(false)
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_reservation_placed))
     }
 }

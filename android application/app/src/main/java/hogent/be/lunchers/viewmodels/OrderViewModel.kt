@@ -2,13 +2,13 @@ package hogent.be.lunchers.viewmodels
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import hogent.be.lunchers.R
+import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.bases.InjectedViewModel
-import hogent.be.lunchers.models.Reservatie
-import hogent.be.lunchers.models.ReservatieRepository
+import hogent.be.lunchers.models.Order
 import hogent.be.lunchers.networks.LunchersApi
+import hogent.be.lunchers.repositories.OrderRepository
 import hogent.be.lunchers.utils.MessageUtil
-import hogent.be.lunchers.utils.OrderUtil.convertIntToStatus
-import hogent.be.lunchers.utils.OrderUtil.formatDate
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -21,31 +21,24 @@ class OrderViewModel : InjectedViewModel() {
     lateinit var lunchersApi: LunchersApi
 
     @Inject
-    lateinit var orderRepo: ReservatieRepository
+    lateinit var orderRepo: OrderRepository
 
-    private val _reservations = MutableLiveData<List<Reservatie>>()
+    val orders = MutableLiveData<List<Order>>()
 
-    val reservations: MutableLiveData<List<Reservatie>>
-        get() = _reservations
+    var selectedOrder = MutableLiveData<Order>()
+        private set
 
-    private var _selectedOrder = MutableLiveData<Reservatie>()
-
-    val selectedOrder: MutableLiveData<Reservatie>
-        get() = _selectedOrder
-
-    private var _roomOrders: LiveData<List<Reservatie>>
-
-    val roomOrders: LiveData<List<Reservatie>>
-        get() = _roomOrders
+    var roomOrders: LiveData<List<Order>>
+        private set
 
     private var getAllReservationsSubscription: Disposable
 
     init {
-        _reservations.value = emptyList()
+        orders.value = emptyList()
 
-        _selectedOrder.value = null
+        selectedOrder.value = null
 
-        _roomOrders = orderRepo.orders
+        roomOrders = orderRepo.orders
 
         getAllReservationsSubscription = lunchersApi.getAllOrders()
             .subscribeOn(Schedulers.io())
@@ -62,11 +55,7 @@ class OrderViewModel : InjectedViewModel() {
     }
 
     fun resetViewModel() {
-        _reservations.value = emptyList()
-
-        _selectedOrder.value = null
-
-        _roomOrders = orderRepo.orders
+        selectedOrder.value = null
 
         getAllReservationsSubscription = lunchersApi.getAllOrders()
             .subscribeOn(Schedulers.io())
@@ -77,15 +66,21 @@ class OrderViewModel : InjectedViewModel() {
             )
     }
 
-    fun setSelectedOrder(orderId: Int) { _selectedOrder.value =  _reservations.value!!.firstOrNull { it.reservatieId == orderId } }
+    fun setSelectedOrder(orderId: Int) {
+        selectedOrder.value = orders.value!!.firstOrNull { it.reservationId == orderId }
+    }
 
-    fun setReservations(reservations: List<Reservatie>) { _reservations.value = reservations }
+    fun setReservations(orders: List<Order>) {
+        this.orders.value = orders
+    }
 
-    private fun onRetrieveAllReservationsSuccess(result: List<Reservatie>) {
+    private fun onRetrieveAllReservationsSuccess(result: List<Order>) {
         setReservations(result)
         doAsync { orderRepo.insert(result) }
     }
 
-    private fun onRetrieveError() { MessageUtil.showToast("Er is een fout opgetreden tijdens het ophalen van de reservaties van het internet.") }
+    private fun onRetrieveError() {
+        MessageUtil.showToast(MainActivity.getContext().getString(R.string.error_loading_from_internet))
+    }
 
 }
