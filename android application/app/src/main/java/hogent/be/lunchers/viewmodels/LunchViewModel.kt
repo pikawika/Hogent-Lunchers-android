@@ -136,8 +136,8 @@ class LunchViewModel : InjectedViewModel() {
     fun setSelectedFilter(filterEnum: FilterEnum, latitude: Double = 0.00, longitude: Double = 0.00) {
         selectedFilter = filterEnum
         if (filterEnum == FilterEnum.DISTANCE) {
-            this.longitude = longitude!!
-            this.latitude = latitude!!
+            this.longitude = longitude
+            this.latitude = latitude
             refreshLunchesFromLocation()
         } else {
             filteredLunches.value = SearchUtil.filterLunch(selectedFilter, allLunches)
