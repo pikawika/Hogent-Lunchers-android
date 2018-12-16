@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_order_detail.view.*
 /**
  * Een [Fragment] voor het weergeven van de details van een order.
  *
- * Gerbuikt model binding voor de [OrderViewModel._selectedOrder] weer te geven.
+ * Gerbuikt model binding voor de [OrderViewModel.selectedOrder] weer te geven.
  */
 class OrderDetailFragment : Fragment() {
 

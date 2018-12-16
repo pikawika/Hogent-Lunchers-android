@@ -45,8 +45,6 @@ class OrderListFragment : Fragment() {
 
         rootView.recycler_order_list.adapter = orderAdapter
 
-        initListeners()
-
         return rootView
     }
 
@@ -77,6 +75,12 @@ class OrderListFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         GuiUtil.removeCanPop(requireActivity() as MainActivity)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        initListeners()
     }
 
 }

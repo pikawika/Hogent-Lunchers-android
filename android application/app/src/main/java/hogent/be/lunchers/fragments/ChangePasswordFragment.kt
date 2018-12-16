@@ -62,6 +62,7 @@ class ChangePasswordFragment : Fragment() {
     /**
      * Stopt de listeners
      */
+    @Suppress("UNUSED_EXPRESSION")
     private fun stopListeners() {
         //wijzig ww geklikt
         button_change_password.setOnClickListener { null }

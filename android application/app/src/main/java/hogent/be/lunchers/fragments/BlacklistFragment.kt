@@ -98,6 +98,7 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     /**
      * Stop de listeners
      */
+    @Suppress("UNUSED_EXPRESSION")
     private fun stopListeners() {
         swipe_refresh_blacklist.setOnRefreshListener(null)
 

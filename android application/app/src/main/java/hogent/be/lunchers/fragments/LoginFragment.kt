@@ -63,8 +63,9 @@ class LoginFragment : Fragment() {
     }
 
     /**
-     * Instantieer de listeners
+     * Stop de listeners
      */
+    @Suppress("UNUSED_EXPRESSION")
     private fun stopListeners() {
         btn_login_confirm.setOnClickListener { null }
 
