@@ -42,8 +42,8 @@ class RegisterFragment : Fragment() {
 
     private fun setListeners(fragment: View) {
         //indien aangemeld naar lijst gaan
-        accountViewModel.getIsLoggedIn().observe(this, Observer {
-            if (accountViewModel.getIsLoggedIn().value == true) {
+        accountViewModel.isLoggedIn.observe(this, Observer {
+            if (accountViewModel.isLoggedIn.value == true) {
                 //simuleert een button click op lijst om er voor te zorgen dat juiste
                 //item actief is + zet fragment etc automatisch juist
                 (requireActivity() as MainActivity).bottom_navigation_mainactivity.selectedItemId = R.id.action_list

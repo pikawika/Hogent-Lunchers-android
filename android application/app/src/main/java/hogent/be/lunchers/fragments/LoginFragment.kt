@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
      */
     private fun initListeners(fragment: View) {
         //aangemeld en parentactivity bijhouden
-        val loggedIn = accountViewModel.getIsLoggedIn()
+        val loggedIn = accountViewModel.isLoggedIn
 
         //indien aangemeld naar lijst gaan
         loggedIn.observe(this, Observer {

@@ -26,6 +26,7 @@ class OrderViewModel : InjectedViewModel() {
     val reservations: MutableLiveData<List<Order>>
         get() = _reservations
 
+
     private var _selectedOrder = MutableLiveData<Order>()
 
     val selectedOrder: MutableLiveData<Order>

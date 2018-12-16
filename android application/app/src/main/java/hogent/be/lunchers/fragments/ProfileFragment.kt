@@ -53,8 +53,8 @@ class ProfileFragment : Fragment() {
 
     private fun setListeners(rootView: View) {
         //indien aangemeld naar lijst gaan
-        accountViewModel.getIsLoggedIn().observe(this, Observer {
-            if (!accountViewModel.getIsLoggedIn().value!!) {
+        accountViewModel.isLoggedIn.observe(this, Observer {
+            if (!accountViewModel.isLoggedIn.value!!) {
                 requireActivity().supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container_mainactivity, LoginFragment())
@@ -104,7 +104,7 @@ class ProfileFragment : Fragment() {
 
     private fun afmelden() {
 
-        accountViewModel.afmelden()
+        accountViewModel.logout()
     }
 
 

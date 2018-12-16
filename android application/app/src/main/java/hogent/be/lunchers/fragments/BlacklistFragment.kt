@@ -58,7 +58,7 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         //lijst vullen met lunches uit viewmodel.
         //We doen niet direct .value maar behouden het als mutueablelivedata mits we hier op willen op observen
-        blacklistedItems = accountViewModel.getBlacklistedItems()
+        blacklistedItems = accountViewModel.blacklistedItems
 
         //adapter aanmaken die de lijst van blacklistedItems zal weergeven
         blacklistAdapter = BlacklistAdapter(requireActivity() as MainActivity, blacklistedItems)
