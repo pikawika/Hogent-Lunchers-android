@@ -199,17 +199,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         }
     }
 
-    /**
-     * Stel de actionbar zijn titel in
-     */
-    override fun onResume() {
-        super.onResume()
-        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_map_title))
-    }
-
     override fun onStart() {
         super.onStart()
-
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_map_title))
         initListeners()
     }
 

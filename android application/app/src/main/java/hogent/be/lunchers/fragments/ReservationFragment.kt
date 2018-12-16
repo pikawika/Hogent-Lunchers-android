@@ -203,31 +203,17 @@ class ReservationFragment : Fragment() {
         }
     }
 
-    /**
-     * Stelt de actionbar zijn titel in en enable back knop.
-     */
-    override fun onResume() {
-        super.onResume()
-        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_reservation_place))
-        GuiUtil.setCanPop(requireActivity() as MainActivity)
-    }
-
-    /**
-     * Disable backnop en clear reservation vm.
-     */
-    override fun onPause() {
-        super.onPause()
-        GuiUtil.removeCanPop(requireActivity() as MainActivity)
-        reservationViewModel.clear()
-    }
-
     override fun onStart() {
         super.onStart()
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_reservation_place))
+        GuiUtil.setCanPop(requireActivity() as MainActivity)
         initListeners()
     }
 
     override fun onStop() {
         stopListeners()
+        GuiUtil.removeCanPop(requireActivity() as MainActivity)
+        reservationViewModel.clear()
         super.onStop()
     }
 

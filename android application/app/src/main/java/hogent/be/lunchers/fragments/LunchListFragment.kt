@@ -115,23 +115,6 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     /**
-     * Stel de actionbar zijn titel in en toont de filtermethoden.
-     */
-    override fun onResume() {
-        GuiUtil.showFilterMethods(requireActivity() as MainActivity)
-        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_lunch_list))
-        super.onResume()
-    }
-
-    /**
-     * Verbergt de filtermethoden.
-     */
-    override fun onPause() {
-        GuiUtil.hideFilterMethods(requireActivity() as MainActivity)
-        super.onPause()
-    }
-
-    /**
      * Kijkt of twopane is en stelt het in
      */
     private fun checkSetTwoPane(rootView: View) {
@@ -140,8 +123,14 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onStart() {
         super.onStart()
-
+        GuiUtil.showFilterMethods(requireActivity() as MainActivity)
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_lunch_list))
         initListeners()
+    }
+
+    override fun onStop() {
+        GuiUtil.hideFilterMethods(requireActivity() as MainActivity)
+        super.onStop()
     }
 
 
