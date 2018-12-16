@@ -77,7 +77,7 @@ class LunchAdapter(
         Glide.with(parentActivity).load(BASE_URL_LUNCHERS + item.images[0].path).into(holder.lunchImageView)
         holder.lunchNameView.text = item.name
         holder.lunchDescriptionView.text = item.description
-        holder.lunchPriceView.text = String.format("€ %.2f", item.price)
+        holder.lunchPriceView.text = String.format("%.2f", item.price)
         holder.lunchRestaurantView.text = item.merchant.companyName
         holder.lunchLocationView.text = StringFormattingUtil.locationToString(item.merchant.location)
 
