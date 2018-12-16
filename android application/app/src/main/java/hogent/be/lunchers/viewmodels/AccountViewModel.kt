@@ -6,7 +6,7 @@ import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.constants.ROL_KLANT
 import hogent.be.lunchers.models.BlacklistedItem
-import hogent.be.lunchers.models.ReservatieRepository
+import hogent.be.lunchers.repositories.ReservatieRepository
 import hogent.be.lunchers.networks.responses.TokenResponse
 import hogent.be.lunchers.networks.LunchersApi
 import hogent.be.lunchers.networks.requests.*

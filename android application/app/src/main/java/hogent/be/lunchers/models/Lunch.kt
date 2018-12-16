@@ -5,6 +5,11 @@ import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+/**
+ * Een [Lunch] hehoort tot een [merchant] en bevat tal van informatie.
+ *
+ * Deze klas is Parcelable zodat retrofit deze kan gebruiken
+ */
 @Parcelize
 data class Lunch(
     val lunchId: Int,

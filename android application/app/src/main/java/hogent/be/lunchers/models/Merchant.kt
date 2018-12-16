@@ -4,6 +4,11 @@ import android.os.Parcelable
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Een [Merchant] heeft een lijst van [Lunch]es en info van zijn handelszaak
+ *
+ * Deze klas is Parcelable zodat retrofit deze kan gebruiken
+ */
 @Parcelize
 data class Merchant(
     @field:Json(name = "handelsNaam") val companyName: String,

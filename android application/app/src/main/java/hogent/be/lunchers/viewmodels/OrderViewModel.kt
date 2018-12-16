@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import hogent.be.lunchers.bases.InjectedViewModel
 import hogent.be.lunchers.models.Reservation
-import hogent.be.lunchers.models.ReservatieRepository
+import hogent.be.lunchers.repositories.ReservatieRepository
 import hogent.be.lunchers.networks.LunchersApi
 import hogent.be.lunchers.utils.MessageUtil
 import io.reactivex.android.schedulers.AndroidSchedulers

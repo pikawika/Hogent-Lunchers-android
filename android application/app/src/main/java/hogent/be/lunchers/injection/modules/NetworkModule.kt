@@ -18,7 +18,7 @@ import com.squareup.moshi.Moshi
 import hogent.be.lunchers.database.OrderDao
 import hogent.be.lunchers.database.OrderDatabase
 import hogent.be.lunchers.extensions.DateParser
-import hogent.be.lunchers.models.ReservatieRepository
+import hogent.be.lunchers.repositories.ReservatieRepository
 import hogent.be.lunchers.utils.PreferenceUtil
 import okhttp3.Interceptor
 import java.util.*
