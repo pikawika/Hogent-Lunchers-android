@@ -28,7 +28,7 @@ interface LunchersApi {
     @GET("lunch")
     fun getAllLunchesFromLocation(@Query("latitude") latitude: Double, @Query("longitude") longitude: Double): Observable<List<Lunch>>
 
-    /*
+    /**
      * Haal alle reservations op van de gebruiker
      */
     @GET("reservatie")
@@ -57,7 +57,7 @@ interface LunchersApi {
      * zijn wachtwoord wilt wijzigen
      */
     @POST("gebruiker//wijzigWachtwoord")
-    fun changePassword(@Body wijzigWachtwoordRequest: WijzigWachtwoordRequest) : Observable<BerichtResponse>
+    fun changePassword(@Body wijzigWachtwoordRequest: WijzigWachtwoordRequest): Observable<BerichtResponse>
 
     /**
      * Reserveert een lunch
@@ -65,24 +65,29 @@ interface LunchersApi {
      * @param reservatieRequest een [ReservatieRequest] object met de nodige gegevens voor reservatie
      */
     @POST("reservatie")
-    fun reserveer(@Body reservatieRequest: ReservatieRequest) : Observable<BerichtResponse>
+    fun reserveer(@Body reservatieRequest: ReservatieRequest): Observable<BerichtResponse>
 
     /**
      * Verkrijgt alle blacklisted items van de aangemelde user
      */
     @GET("allergy")
-    fun getAllBlacklistedItems() : Observable<List<BlacklistedItem>>
+    fun getAllBlacklistedItems(): Observable<List<BlacklistedItem>>
 
     /**
      * Voegt een blacklisted item toe voor aangemelde user
+     *
+     * @param addBlacklistedItemRequest een [AddBlacklistedItemRequest] object met een veld *naam* van een
+     * zwarte lijst item dat de gebruiker wilt toevoegen
      */
     @POST("allergy")
-    fun addBlacklistedItem(@Body addBlacklistedItemRequest: AddBlacklistedItemRequest) : Observable<List<BlacklistedItem>>
+    fun addBlacklistedItem(@Body addBlacklistedItemRequest: AddBlacklistedItemRequest): Observable<List<BlacklistedItem>>
 
     /**
      * Delete een blacklisted item voor aangemelde user
+     *
+     * @param blacklistedItemId een [Int] die de id representeert van het [BlacklistedItem] dat de gebruiker wenst te verwijderen
      */
     @DELETE("allergy/{id}")
-    fun deleteBlacklistedItem(@Path("id") blacklistedItemId: Int) : Observable<List<BlacklistedItem>>
+    fun deleteBlacklistedItem(@Path("id") blacklistedItemId: Int): Observable<List<BlacklistedItem>>
 
 }
