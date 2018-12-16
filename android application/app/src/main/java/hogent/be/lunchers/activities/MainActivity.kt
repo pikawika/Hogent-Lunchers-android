@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
     private fun showBootPage() {
         // indien aangemeld uit vm halen welke bootpagina is en die tonen
         // en higlight nav item goed instellen
-        if (accountViewModel.getIsAangmeld().value!!) {
+        if (accountViewModel.getIsLoggedIn().value!!) {
             val fragment: Fragment
             when (accountViewModel.getDefaultBootPage()) {
                 PageEnum.MAP -> {

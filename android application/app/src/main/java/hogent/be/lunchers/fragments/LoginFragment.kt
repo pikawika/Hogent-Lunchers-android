@@ -23,7 +23,6 @@ class LoginFragment : Fragment() {
     /**
      * [AccountViewModel] met de data over account
      */
-    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var accountViewModel: AccountViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,11 +41,11 @@ class LoginFragment : Fragment() {
      */
     private fun initListeners(fragment: View) {
         //aangemeld en parentactivity bijhouden
-        val aangemeld = accountViewModel.getIsAangmeld()
+        val loggedIn = accountViewModel.getIsLoggedIn()
 
         //indien aangemeld naar lijst gaan
-        aangemeld.observe(this, Observer {
-            if (aangemeld.value == true) {
+        loggedIn.observe(this, Observer {
+            if (loggedIn.value == true) {
                 //simuleert een button click op lijst om er voor te zorgen dat juiste
                 //item actief is + zet fragment etc automatisch juist
                 (requireActivity() as AppCompatActivity).bottom_navigation_mainactivity.selectedItemId =

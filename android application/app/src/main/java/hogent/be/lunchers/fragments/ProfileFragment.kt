@@ -43,7 +43,7 @@ class ProfileFragment : Fragment() {
         binding.setLifecycleOwner(activity)
 
         //aangemeld bijhouden
-        val aangemeld = accountViewModel.getIsAangmeld()
+        val aangemeld = accountViewModel.getIsLoggedIn()
 
         //indien aangemeld naar lijst gaan
         aangemeld.observe(this, Observer {

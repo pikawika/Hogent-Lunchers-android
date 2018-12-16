@@ -33,7 +33,7 @@ class RegistreerFragment : Fragment() {
         accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
 
         //aangemeld en parentactivity bijhouden
-        val aangemeld = accountViewModel.getIsAangmeld()
+        val aangemeld = accountViewModel.getIsLoggedIn()
         val parentActivity = (activity as AppCompatActivity)
 
         //indien aangemeld naar lijst gaan

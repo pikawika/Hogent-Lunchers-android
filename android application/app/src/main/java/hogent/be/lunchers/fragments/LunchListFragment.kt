@@ -24,10 +24,13 @@ import kotlinx.android.synthetic.main.partial_search.view.*
 
 class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
+    /**
+     * [Boolean] of huidige omgeving al dan niet twopane is.
+     */
     private var twoPane: Boolean = false
 
     /**
-     * [LunchViewModel] met de data van alle lunches
+     * [LunchViewModel] met de data van alle lunches.
      */
     private lateinit var lunchViewModel : LunchViewModel
 
@@ -37,7 +40,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var lunchAdapter: LunchAdapter
 
     /**
-     * [LunchAdapter] die de lijst vult.
+     * De lunches van de backend.
      */
     private lateinit var lunches: MutableLiveData<List<Lunch>>
 

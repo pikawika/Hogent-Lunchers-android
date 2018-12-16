@@ -29,7 +29,7 @@ class ChangePasswordFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_change_passord, container, false)
 
         //viewmodel vullen
-        accountViewModel = ViewModelProviders.of(activity!!).get(AccountViewModel::class.java)
+        accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
 
         initListeners(rootView)
 

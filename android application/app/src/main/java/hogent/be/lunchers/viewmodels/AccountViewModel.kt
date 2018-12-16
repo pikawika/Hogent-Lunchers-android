@@ -290,7 +290,7 @@ class AccountViewModel : InjectedViewModel() {
     /**
      * returnt boolean of user al dan niet aangemeld is
      */
-    fun getIsAangmeld() : MutableLiveData<Boolean> {
+    fun getIsLoggedIn() : MutableLiveData<Boolean> {
         return aangemeld
     }
 

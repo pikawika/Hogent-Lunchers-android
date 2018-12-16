@@ -1,5 +1,6 @@
 package hogent.be.lunchers.fragments
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -37,6 +38,11 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
      */
     private lateinit var blacklistAdapter: BlacklistAdapter
 
+    /**
+     * De [BlacklistedItem] van de backend.
+     */
+    private lateinit var blacklistedItems: MutableLiveData<List<BlacklistedItem>>
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_blacklist, container, false)
 
@@ -50,17 +56,10 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         //lijst vullen met lunches uit viewmodel.
         //We doen niet direct .value maar behouden het als mutueablelivedata mits we hier op willen op observen
-        val blacklistedItems = accountViewModel.getBlacklistedItems()
+        blacklistedItems = accountViewModel.getBlacklistedItems()
 
         //adapter aanmaken die de lijst van blacklistedItems zal weergeven
         blacklistAdapter = BlacklistAdapter(requireActivity() as MainActivity, blacklistedItems)
-
-        //indien de blacklistedItems veranderden moet de adapter opnieuw zijn cards genereren met nieuwe data
-        blacklistedItems.observe(this, Observer {
-            blacklistAdapter.notifyDataSetChanged()
-            //lunches moeten opnieuw opgehaald worden aangezien backend filtering doet
-            lunchViewModel.refreshLunches()
-        })
 
         //lijst zijn adapter instellen
         rootView.recycler_blacklist.adapter = blacklistAdapter
@@ -87,6 +86,13 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 addBlacklistItem()
             )
         }
+
+        //indien de blacklistedItems veranderden moet de adapter opnieuw zijn cards genereren met nieuwe data
+        blacklistedItems.observe(this, Observer {
+            blacklistAdapter.notifyDataSetChanged()
+            //lunches moeten opnieuw opgehaald worden aangezien backend filtering doet
+            lunchViewModel.refreshLunches()
+        })
     }
 
     /**
