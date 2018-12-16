@@ -8,6 +8,9 @@ Dit is de GitHub repository (deel Android App) voor het project Lunchers van Tea
 user: lennert  
 wachtwoord: Wachtwoord123
 
+Note!  
+Bij registeren letten op nummer als +32491234567 en wachtwoord van voldoende lengte (zie frontend voor betere errorcodes)
+
 <sub>Deze server bevind zich bij [Brent](#groepsleden) thuis en kan dus soms uitstaan voor stroombesparing, aarzel niet om contact op te nemen met [Brent](#groepsleden) bij problemen. De downloadlink is momenteel gehost bij [Lennert](#groepsleden), indien de link niet werkt aarzel dan niet contact op te nemen met [Lennert](#groepsleden)</sub>
 
 
