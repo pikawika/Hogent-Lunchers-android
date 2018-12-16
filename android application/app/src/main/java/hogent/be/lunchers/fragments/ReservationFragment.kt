@@ -51,7 +51,7 @@ class ReservationFragment : Fragment() {
         lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
         reservationViewModel = ViewModelProviders.of(requireActivity()).get(ReservationViewModel::class.java)
 
-        //get selected lunch from lunchvm
+        //get selected selectedLunch from lunchvm
         reservationViewModel.setSelectedLunch(lunchViewModel.selectedLunch.value!!)
 
         val rootView = binding.root
@@ -70,8 +70,8 @@ class ReservationFragment : Fragment() {
      */
     private fun initListeners(rootView: View) {
         //reservatie voltooid
-        reservationViewModel.getReservationPlaced().observe(this, Observer {
-            if (reservationViewModel.getReservationPlaced().value == true) {
+        reservationViewModel.reservationPlaced.observe(this, Observer {
+            if (reservationViewModel.reservationPlaced.value == true) {
                 requireActivity().supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container_mainactivity, ThankYouFragment())
@@ -163,7 +163,7 @@ class ReservationFragment : Fragment() {
                 getString(
                     R.string.question_want_to_order,
                     reservationViewModel.amount,
-                    reservationViewModel.getSelectedLunch().value!!.name,
+                    reservationViewModel.selectedLunch.value!!.name,
                     getString(
                         R.string.text_date,
                         reservationViewModel.day,

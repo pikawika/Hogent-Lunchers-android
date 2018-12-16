@@ -19,7 +19,7 @@ import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_lunch_detail.view.*
 
 /**
- * Een [Fragment] voor het weergeven van de details van een lunch.
+ * Een [Fragment] voor het weergeven van de details van een selectedLunch.
  *
  * Gerbuikt model binding voor de [LunchViewModel.selectedLunch] weer te geven.
  */
