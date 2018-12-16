@@ -3,7 +3,7 @@ package hogent.be.lunchers.utils
 import android.databinding.BindingAdapter
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import hogent.be.lunchers.constants.BASE_URL_BACKEND
+import hogent.be.lunchers.constants.BASE_URL_LUNCHERS
 import android.widget.TextView
 import hogent.be.lunchers.models.Location
 import java.util.*
@@ -21,7 +21,7 @@ object DataBindingUtil {
     fun setImageUrl(view: ImageView, url: String?) {
         if (url != null)
         {
-            Glide.with(view.context).load(BASE_URL_BACKEND + url).into(view)
+            Glide.with(view.context).load(BASE_URL_LUNCHERS + url).into(view)
         }
     }
 

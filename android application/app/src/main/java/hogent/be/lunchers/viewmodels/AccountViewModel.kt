@@ -4,7 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import hogent.be.lunchers.enums.FilterEnum
 import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.bases.InjectedViewModel
-import hogent.be.lunchers.constants.ROL_KLANT
+import hogent.be.lunchers.constants.ROLE_CUSTOMER
 import hogent.be.lunchers.models.BlacklistedItem
 import hogent.be.lunchers.repositories.ReservatieRepository
 import hogent.be.lunchers.networks.responses.TokenResponse
@@ -261,7 +261,7 @@ class AccountViewModel : InjectedViewModel() {
         gebruikersnaam: String,
         wachtwoord: String
     ) {
-        val registreerLoginRequest = RegistreerLoginRequest(gebruikersnaam, wachtwoord, ROL_KLANT)
+        val registreerLoginRequest = RegistreerLoginRequest(gebruikersnaam, wachtwoord, ROLE_CUSTOMER)
         val registreerGebruikerRequest = RegistreerGebruikerRequest(telefoonnummer, voornaam, achternaam, email, registreerLoginRequest)
         registreerSubscription = lunchersApi.registreer(registreerGebruikerRequest)
             //we tell it to fetch the data on background by

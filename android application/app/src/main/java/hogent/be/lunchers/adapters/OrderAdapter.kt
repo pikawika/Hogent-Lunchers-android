@@ -11,7 +11,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
-import hogent.be.lunchers.constants.BASE_URL_BACKEND
+import hogent.be.lunchers.constants.BASE_URL_LUNCHERS
 import hogent.be.lunchers.fragments.OrderDetailFragment
 import hogent.be.lunchers.models.Order
 import hogent.be.lunchers.utils.OrderUtil.convertIntToStatus
@@ -63,7 +63,7 @@ class OrderAdapter(private val parentActivity: MainActivity, private val orders:
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = orders.value!![position]
-        Glide.with(parentActivity).load(BASE_URL_BACKEND + item.lunch.images[0].path).into(holder.orderImageView)
+        Glide.with(parentActivity).load(BASE_URL_LUNCHERS + item.lunch.images[0].path).into(holder.orderImageView)
         holder.orderLunchMerchantView.text = item.lunch.merchant.companyName
         holder.orderLunchNameView.text = item.lunch.name
         holder.orderStatusView.text = String.format("Status: %s", convertIntToStatus(item.status))

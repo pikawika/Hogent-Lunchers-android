@@ -3,7 +3,7 @@
 package hogent.be.lunchers.injection.modules
 
 import android.content.Context
-import hogent.be.lunchers.constants.BASE_URL_BACKEND
+import hogent.be.lunchers.constants.BASE_URL_LUNCHERS
 import hogent.be.lunchers.networks.LunchersApi
 import dagger.Module
 import dagger.Provides
@@ -15,6 +15,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 import com.squareup.moshi.Moshi
+import hogent.be.lunchers.constants.BASE_URL_LUNCHERS_API
 import hogent.be.lunchers.database.OrderDao
 import hogent.be.lunchers.database.OrderDatabase
 import hogent.be.lunchers.extensions.DateParser
@@ -58,7 +59,7 @@ class NetworkModule(private val context: Context) {
                                           converterFactory: retrofit2.Converter.Factory,
                                           callAdapterFactory: retrofit2.CallAdapter.Factory): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL_BACKEND)
+            .baseUrl(BASE_URL_LUNCHERS_API)
             .client(okHttpClient)
             .addConverterFactory(converterFactory)
             .addCallAdapterFactory(callAdapterFactory)

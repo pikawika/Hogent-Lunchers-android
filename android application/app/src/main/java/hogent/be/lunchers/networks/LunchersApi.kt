@@ -17,7 +17,7 @@ interface LunchersApi {
     /**
      * Haal alle lunches op
      */
-    @GET("api/lunch")
+    @GET("lunch")
     fun getAllLunches(): Observable<List<Lunch>>
 
     /**
@@ -25,13 +25,13 @@ interface LunchersApi {
      * Haal alle lunches op dichts bij location
      * https://lunchers.ml/api/lunch?latitude=1&longitude=1
      */
-    @GET("api/lunch")
+    @GET("lunch")
     fun getAllLunchesFromLocation(@Query("latitude") latitude: Double, @Query("longitude") longitude: Double): Observable<List<Lunch>>
 
     /*
      * Haal alle reservations op van de gebruiker
      */
-    @GET("api/reservatie")
+    @GET("reservatie")
     fun getAllOrders(): Observable<List<Order>>
 
     /**
@@ -39,7 +39,7 @@ interface LunchersApi {
      *
      * @param loginRequest een [loginRequest] object van de gebruiker die zich wilt aanmelden
      */
-    @POST("api/gebruiker/login")
+    @POST("gebruiker/login")
     fun login(@Body loginRequest: LoginRequest): Observable<TokenResponse>
 
     /**
@@ -47,7 +47,7 @@ interface LunchersApi {
      *
      * @param registreerGebruikerRequest een [RegistreerGebruikerRequest] object van de gebruiker die zich wilt registreren
      */
-    @POST("api/gebruiker/registreer")
+    @POST("gebruiker/registreer")
     fun registreer(@Body registreerGebruikerRequest: RegistreerGebruikerRequest): Observable<TokenResponse>
 
     /**
@@ -56,7 +56,7 @@ interface LunchersApi {
      * @param wijzigWachtwoordRequest een [WijzigWachtwoordRequest] object met een veld *wachtwoord* voor de gebruiker die
      * zijn wachtwoord wilt wijzigen
      */
-    @POST("api/gebruiker//wijzigWachtwoord")
+    @POST("gebruiker//wijzigWachtwoord")
     fun changePassword(@Body wijzigWachtwoordRequest: WijzigWachtwoordRequest) : Observable<BerichtResponse>
 
     /**
@@ -64,25 +64,25 @@ interface LunchersApi {
      *
      * @param reservatieRequest een [ReservatieRequest] object met de nodige gegevens voor reservatie
      */
-    @POST("api/reservatie")
+    @POST("reservatie")
     fun reserveer(@Body reservatieRequest: ReservatieRequest) : Observable<BerichtResponse>
 
     /**
      * Verkrijgt alle blacklisted items van de aangemelde user
      */
-    @GET("api/allergy")
+    @GET("allergy")
     fun getAllBlacklistedItems() : Observable<List<BlacklistedItem>>
 
     /**
      * Voegt een blacklisted item toe voor aangemelde user
      */
-    @POST("api/allergy")
+    @POST("allergy")
     fun addBlacklistedItem(@Body addBlacklistedItemRequest: AddBlacklistedItemRequest) : Observable<List<BlacklistedItem>>
 
     /**
      * Delete een blacklisted item voor aangemelde user
      */
-    @DELETE("api/allergy/{id}")
+    @DELETE("allergy/{id}")
     fun deleteBlacklistedItem(@Path("id") blacklistedItemId: Int) : Observable<List<BlacklistedItem>>
 
 }
