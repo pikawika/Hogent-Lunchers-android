@@ -39,7 +39,7 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var blacklistAdapter: BlacklistAdapter
 
     /**
-     * De [BlacklistedItem] van de backend.
+     * De lijst [BlacklistedItem] van de backend.
      */
     private lateinit var blacklistedItems: MutableLiveData<List<BlacklistedItem>>
 

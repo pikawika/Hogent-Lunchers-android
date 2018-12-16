@@ -40,7 +40,7 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var lunchAdapter: LunchAdapter
 
     /**
-     * De lunches van de backend.
+     * De lijst [Lunch] van de backend.
      */
     private lateinit var lunches: MutableLiveData<List<Lunch>>
 
