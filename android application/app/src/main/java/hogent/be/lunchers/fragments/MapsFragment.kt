@@ -8,6 +8,8 @@ import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.PermissionChecker.checkSelfPermission
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,11 +23,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import hogent.be.lunchers.R
-import hogent.be.lunchers.models.Lunch
-import android.text.Editable
-import android.text.TextWatcher
 import hogent.be.lunchers.databinding.FragmentMapBinding
 import hogent.be.lunchers.databinding.FragmentProfileBinding
+import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_map.view.*
@@ -37,7 +37,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     /**
      * [LunchViewModel] met de data over account
      */
-    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var lunchViewModel: LunchViewModel
 
     /**
@@ -45,7 +44,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
      */
     private lateinit var binding: FragmentMapBinding
 
-    // Lateinit variabelen zijn standaard null, normaal mag dit niet mag in Kotlin
+    // Lateinit variabelen zijn standaard null, normaal mag dit niet in Kotlin
     // Er wordt echter vanuit gegaan dat ze in OnStart of OnResume of ... geinitialiseerd worden
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -73,6 +72,15 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
             .replace(R.id.map_selected_lunch, PartialLunchCardFragment())
             .commit()
 
+        initListeners(rootView)
+
+        return rootView
+    }
+
+    /**
+     * Instantieer de listeners
+     */
+    private fun initListeners(rootView: View) {
         rootView.map_search.txt_search.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
@@ -83,8 +91,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 lunchViewModel.search(s.toString())
             }
         })
-
-        return rootView
     }
 
     // Functie die wordt opgeroepen nadat de map geladen is
@@ -151,15 +157,18 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
         retrieveAllLunches()
 
         fusedLocationClient.lastLocation.addOnSuccessListener(this.requireActivity()) { location ->
-            if (location != null && lunchViewModel.getSelectedLunch()?.value == null) {
+            if (location != null && lunchViewModel.getSelectedLunch().value == null) {
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
             }
         }
 
-        if (lunchViewModel.getSelectedLunch()?.value != null) {
-            val currentLatLng = LatLng(lunchViewModel.getSelectedLunch().value!!.merchant.location.latitude, lunchViewModel.getSelectedLunch().value!!.merchant.location.longitude)
+        if (lunchViewModel.getSelectedLunch().value != null) {
+            val currentLatLng = LatLng(
+                lunchViewModel.getSelectedLunch().value!!.merchant.location.latitude,
+                lunchViewModel.getSelectedLunch().value!!.merchant.location.longitude
+            )
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
         }
     }
@@ -175,19 +184,18 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     }
 
     private fun putMarkersOnMap(lunches: List<Lunch>) {
-        if (lunches != null) {
-            //alle markers reeds op de kaart wegdoen
-            map.clear()
-            lunches.forEach {
-                placeMarkerOnMap(
-                    it.merchant.location.latitude,
-                    it.merchant.location.longitude,
-                    it.lunchId.toString()
-                )
-            }
+        //alle markers reeds op de kaart wegdoen
+        map.clear()
+        lunches.forEach {
+            placeMarkerOnMap(
+                it.merchant.location.latitude,
+                it.merchant.location.longitude,
+                it.lunchId.toString()
+            )
         }
+
     }
-    
+
     // Een companion object kan je zien als een statische variabele
     // In dit geval is het de request code die we proberen terug te krijgen
     companion object {
