@@ -17,4 +17,5 @@ data class Reservation(
     val lunch: Lunch,
     @field:Json(name = "datum") val date: Date,
     val status: Int,
-    @field:Json(name = "opmerking") val message: String)
+    @field:Json(name = "opmerking") val message: String
+)
