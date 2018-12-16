@@ -1,12 +1,12 @@
 package hogent.be.lunchers.enums
 
 /**
- * Een helpende enum klasse om een lijstdesign toe te kennen.
- * Elk enumitem heeft een *layoutId* (Int) waarde die overeenstemt met de id van de bijhorende xml die een recyclerviewitem voorstelt.
+ * Een helpende enum klasse om een [PageEnum] toe te kennen.
+ * Elk enumitem heeft een [page] (Int) waarde die doorheen de app een startpagina representateerd
  * */
 enum class PageEnum(val page: Int) {
-    LUNCHLIST(0),
+    LUNCH_LIST(0),
     MAP(1),
     PROFILE(2),
-    ORDERSLIST(3)
+    ORDERS_LIST(3)
 }

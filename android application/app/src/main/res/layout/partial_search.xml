@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:hint="@string/hint_shared_search"
+                android:hint="@string/hint_search"
                 android:inputType="text"
                 android:drawablePadding="20dp"
                 android:background="@android:color/transparent"

@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:text="@string/text_settings_blacklist"
+            android:text="@string/text_preferences_blacklist"
             android:textSize="30sp"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"

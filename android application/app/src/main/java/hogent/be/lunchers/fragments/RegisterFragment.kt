@@ -4,19 +4,24 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
+import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
 
-class RegistreerFragment : Fragment() {
+/**
+ * Een [Fragment] waarmee een gebruiker hem kan registreren.
+ *
+ * Gebruiker kan doorklikken naar login.
+ */
+class RegisterFragment : Fragment() {
 
     /**
      * [AccountViewModel] met de data over account
@@ -27,28 +32,24 @@ class RegistreerFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_register, container, false)
 
-        setListeners(rootView)
-
         //viewmodel vullen
         accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
 
-        //aangemeld en parentactivity bijhouden
-        val aangemeld = accountViewModel.getIsAangmeld()
-        val parentActivity = (activity as AppCompatActivity)
-
-        //indien aangemeld naar lijst gaan
-        aangemeld.observe(this, Observer {
-            if (aangemeld.value == true) {
-                //simuleert een button click op lijst om er voor te zorgen dat juiste
-                //item actief is + zet fragment etc automatisch juist
-                parentActivity.bottom_navigation_mainactivity.selectedItemId = R.id.action_list
-            }
-        })
+        setListeners(rootView)
 
         return rootView
     }
 
-    fun setListeners(fragment: View) {
+    private fun setListeners(fragment: View) {
+        //indien aangemeld naar lijst gaan
+        accountViewModel.isLoggedIn.observe(this, Observer {
+            if (accountViewModel.isLoggedIn.value == true) {
+                //simuleert een button click op lijst om er voor te zorgen dat juiste
+                //item actief is + zet fragment etc automatisch juist
+                (requireActivity() as MainActivity).bottom_navigation_mainactivity.selectedItemId = R.id.action_list
+            }
+        })
+
         fragment.btn_register_login.setOnClickListener {
             login()
         }
@@ -58,6 +59,9 @@ class RegistreerFragment : Fragment() {
         }
     }
 
+    /**
+     * Kijkt of velden ingevuld zijn en wachtwoorden overeenkomen en probeert vervolgens te registreren
+     */
     private fun registreer() {
         //er is een veld leeg
         if (text_register_phone_number.text.toString() == ""  ||
@@ -86,6 +90,9 @@ class RegistreerFragment : Fragment() {
         }
     }
 
+    /**
+     * Kijkt of velden ingevuld zijn en probeert aan te melden
+     */
     private fun login() {
         requireActivity().supportFragmentManager
             .beginTransaction()
@@ -94,17 +101,21 @@ class RegistreerFragment : Fragment() {
             .commit()
     }
 
+    /**
+     * Stel de actionbar zijn titel in en enable back knop
+     */
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.text_shared_register)
-        MainActivity.setCanpop(true)
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_register))
+        GuiUtil.setCanPop(requireActivity() as MainActivity)
     }
 
+    /**
+     * Disable backnop
+     */
     override fun onPause() {
         super.onPause()
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        MainActivity.setCanpop(false)
+        GuiUtil.removeCanPop(requireActivity() as MainActivity)
     }
 
 }

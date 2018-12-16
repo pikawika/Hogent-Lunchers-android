@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:text="@string/text_shared_thanks"
+            android:text="@string/text_thanks"
             android:textSize="50sp"
             android:textAlignment="center"
 
@@ -65,7 +65,7 @@
             app:layout_constraintHorizontal_bias="0.5"
     />
 
-    <!-- Go to reservations -->
+    <!-- Go to orders -->
     <Button
             android:id="@+id/btn_thanks_reservations"
             android:layout_width="0dp"

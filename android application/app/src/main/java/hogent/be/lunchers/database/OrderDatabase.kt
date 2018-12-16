@@ -2,13 +2,19 @@ package hogent.be.lunchers.database
 
 import android.arch.persistence.room.*
 import android.content.Context
-import hogent.be.lunchers.models.Reservatie
-import hogent.be.lunchers.utils.RoomConverters
+import hogent.be.lunchers.constants.ROOM_ORDER_DATABASE_NAME
+import hogent.be.lunchers.models.Order
+import hogent.be.lunchers.utils.RoomConvertersUtil
 
-@Database(entities = [Reservatie::class], version = 1)
+/**
+ * De database met als entity [Order] en childs
+ */
+@Database(entities = [Order::class], version = 1)
 // Type Converters worden gebruikt om complexe objecten op te kunnen slaan
-// in ons geval wordt dit gebruikt voor de datum en de lunch van de reservaties
-@TypeConverters(RoomConverters::class)
+// in ons geval wordt dit gebruikt voor de date en de lunch van de orders.
+// Momenteel V1 wegens nog niet online staan van app, app zal bij aanpassen model moeten verwijderd worden
+// of update methodologie voorzien moeten worden.
+@TypeConverters(RoomConvertersUtil::class)
 abstract class OrderDatabase : RoomDatabase() {
 
     abstract fun orderDao() : OrderDao
@@ -22,7 +28,7 @@ abstract class OrderDatabase : RoomDatabase() {
             val newInstance = Room.databaseBuilder(
                 context,
                 OrderDatabase::class.java,
-                "order_database"
+                ROOM_ORDER_DATABASE_NAME
             ).build()
 
             instance = newInstance

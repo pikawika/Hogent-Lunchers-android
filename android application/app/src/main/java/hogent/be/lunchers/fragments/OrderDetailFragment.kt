@@ -15,21 +15,37 @@ import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.databinding.FragmentOrderDetailBinding
+import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.OrderViewModel
 import kotlinx.android.synthetic.main.fragment_order_detail.view.*
 
+/**
+ * Een [Fragment] voor het weergeven van de details van een order.
+ *
+ * Gerbuikt model binding voor de [OrderViewModel._selectedOrder] weer te geven.
+ */
 class OrderDetailFragment : Fragment() {
 
+    /**
+     * [orderViewModel] met de info over de orders.
+     */
     private lateinit var orderViewModel: OrderViewModel
+
+    /**
+     * De [FragmentOrderDetailBinding] dat we gebruiken voor de effeciteve databinding
+     */
     private lateinit var binding: FragmentOrderDetailBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_detail, container, false)
 
-        orderViewModel = ViewModelProviders.of(activity!!).get(OrderViewModel::class.java)
+        //viewmodel vullen
+        orderViewModel = ViewModelProviders.of(requireActivity()).get(OrderViewModel::class.java)
 
         val rootView = binding.root
+
+        //databinding
         binding.orderViewModel = orderViewModel
         binding.setLifecycleOwner(activity)
 
@@ -38,24 +54,27 @@ class OrderDetailFragment : Fragment() {
         return rootView
     }
 
+    /**
+     * Instantieer de listeners
+     */
     private fun initListeners(rootView: View) {
         //call restaurant
         rootView.button_order_detail_call.setOnClickListener {
             val builder = AlertDialog.Builder(activity)
             builder.setCancelable(true)
-            builder.setTitle("Bellen naar " + orderViewModel.selectedOrder.value!!.lunch.handelaar.handelsNaam)
-            builder.setMessage("Wil je nu bellen naar " + orderViewModel.selectedOrder.value!!.lunch.handelaar.telefoonnummer + "?")
+            builder.setTitle(getString(R.string.text_call_to) + ": " + orderViewModel.selectedOrder.value!!.lunch.merchant.companyName)
+            builder.setMessage(getString(R.string.text_want_to_call_to) + ": " + orderViewModel.selectedOrder.value!!.lunch.merchant.phoneNumber + "?")
             builder.setPositiveButton(
-                "Nu bellen"
-            ) { dialog, which ->
+                getString(R.string.text_yes)
+            ) { _, _ ->
                 val phoneIntent = Intent(Intent.ACTION_DIAL)
                 phoneIntent.data =
-                        Uri.parse("tel:" + orderViewModel.selectedOrder.value!!.lunch.handelaar.telefoonnummer)
+                        Uri.parse("tel:" + orderViewModel.selectedOrder.value!!.lunch.merchant.phoneNumber)
                 startActivity(phoneIntent)
             }
             builder.setNegativeButton(
-                "Annuleren"
-            ) { dialog, which -> dialog.cancel() }
+                getString(R.string.text_no)
+            ) { dialog, _ -> dialog.cancel() }
 
             val dialog = builder.create()
             dialog.show()
@@ -65,12 +84,12 @@ class OrderDetailFragment : Fragment() {
         rootView.button_order_detail_navigation.setOnClickListener {
             val mapIntent = Intent(Intent.ACTION_VIEW)
             mapIntent.data = Uri.parse(
-                "geo:" + orderViewModel.selectedOrder.value!!.lunch.handelaar.locatie.latitude + "," +
-                        orderViewModel.selectedOrder.value!!.lunch.handelaar.locatie.longitude + "?q=" +
-                        orderViewModel.selectedOrder.value!!.lunch.handelaar.locatie.straat + "+" +
-                        orderViewModel.selectedOrder.value!!.lunch.handelaar.locatie.huisnummer + "+" +
-                        orderViewModel.selectedOrder.value!!.lunch.handelaar.locatie.postcode + "+" +
-                        orderViewModel.selectedOrder.value!!.lunch.handelaar.locatie.gemeente
+                "geo:" + orderViewModel.selectedOrder.value!!.lunch.merchant.location.latitude + "," +
+                        orderViewModel.selectedOrder.value!!.lunch.merchant.location.longitude + "?q=" +
+                        orderViewModel.selectedOrder.value!!.lunch.merchant.location.street + "+" +
+                        orderViewModel.selectedOrder.value!!.lunch.merchant.location.houseNumber + "+" +
+                        orderViewModel.selectedOrder.value!!.lunch.merchant.location.postalCode + "+" +
+                        orderViewModel.selectedOrder.value!!.lunch.merchant.location.city
             )
             val packageManager = activity!!.packageManager
             if (mapIntent.resolveActivity(packageManager) != null) {
@@ -81,17 +100,21 @@ class OrderDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * Stel de actionbar zijn titel in en enable back knop
+     */
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = orderViewModel.selectedOrder.value!!.lunch.naam
-        MainActivity.setCanpop(true)
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_reservation))
+        GuiUtil.setCanPop(requireActivity() as MainActivity)
     }
 
+    /**
+     * Disable backnop
+     */
     override fun onPause() {
         super.onPause()
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        MainActivity.setCanpop(false)
+        GuiUtil.removeCanPop(requireActivity() as MainActivity)
     }
 
 }

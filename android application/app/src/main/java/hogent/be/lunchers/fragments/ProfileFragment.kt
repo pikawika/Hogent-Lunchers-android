@@ -11,16 +11,18 @@ import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.databinding.FragmentProfileBinding
+import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
-
+/**
+ * Een [Fragment] voor het weergeven van profiel gerelateerde opties
+ */
 class ProfileFragment : Fragment() {
 
     /**
      * [AccountViewModel] met de data over account
      */
-    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var accountViewModel: AccountViewModel
 
     /**
@@ -36,19 +38,24 @@ class ProfileFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
         //viewmodel vullen
-        accountViewModel = ViewModelProviders.of(activity!!).get(AccountViewModel::class.java)
+        accountViewModel = ViewModelProviders.of(requireActivity()).get(AccountViewModel::class.java)
 
         val rootView = binding.root
+
+        //databinding
         binding.accountViewModel = accountViewModel
         binding.setLifecycleOwner(activity)
 
-        //aangemeld bijhouden
-        val aangemeld = accountViewModel.getIsAangmeld()
+        setListeners(rootView)
 
+        return rootView
+    }
+
+    private fun setListeners(rootView: View) {
         //indien aangemeld naar lijst gaan
-        aangemeld.observe(this, Observer {
-            if (!aangemeld.value!!) {
-                activity!!.supportFragmentManager
+        accountViewModel.isLoggedIn.observe(this, Observer {
+            if (!accountViewModel.isLoggedIn.value!!) {
+                requireActivity().supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fragment_container_mainactivity, LoginFragment())
                     .addToBackStack(null)
@@ -56,28 +63,11 @@ class ProfileFragment : Fragment() {
             }
         })
 
-        setListeners(rootView)
-
-        return rootView
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        (activity as MainActivity).supportActionBar?.title = "Profiel"
-    }
-
-
-    private fun afmelden() {
-
-        accountViewModel.afmelden()
-    }
-
-    private fun setListeners(rootView: View) {
         //afmeldknop
         rootView.btn_profile_logout.setOnClickListener {
             afmelden()
         }
+
         //ww wijzigen knop
         rootView.btn_profile_change_password.setOnClickListener {
             activity!!.supportFragmentManager
@@ -86,19 +76,36 @@ class ProfileFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-        rootView.btn_profile_reservations.setOnClickListener {
+
+        //bekijk reservaties
+        rootView.btn_profile_orders.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container_mainactivity, OrderListFragment())
                 .addToBackStack(null)
                 .commit()
         }
+
+        //voorkeuren
         rootView.btn_profile_preferences.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container_mainactivity, SettingsFragment())
+                .replace(R.id.fragment_container_mainactivity, PreferencesFragment())
                 .addToBackStack(null)
                 .commit()
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_profile_title))
+    }
+
+
+    private fun afmelden() {
+
+        accountViewModel.logout()
+    }
+
+
 }

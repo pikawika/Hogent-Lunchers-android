@@ -13,22 +13,25 @@ import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.databinding.FragmentLunchDetailBinding
-import hogent.be.lunchers.databinding.FragmentProfileBinding
+import hogent.be.lunchers.utils.GuiUtil
+import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
 import kotlinx.android.synthetic.main.fragment_lunch_detail.view.*
-import hogent.be.lunchers.utils.MessageUtil
 
-
+/**
+ * Een [Fragment] voor het weergeven van de details van een selectedLunch.
+ *
+ * Gerbuikt model binding voor de [LunchViewModel.selectedLunch] weer te geven.
+ */
 class LunchDetailFragment : Fragment() {
 
     /**
-     * [LunchViewModel] met de data over account
+     * [LunchViewModel] met de info over de lunches.
      */
-    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var lunchViewModel: LunchViewModel
 
     /**
-     * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
+     * De [FragmentLunchDetailBinding] dat we gebruiken voor de effeciteve databinding
      */
     private lateinit var binding: FragmentLunchDetailBinding
 
@@ -36,19 +39,20 @@ class LunchDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_lunch_detail, container, false)
 
         //viewmodel vullen
-        lunchViewModel = ViewModelProviders.of(activity!!).get(LunchViewModel::class.java)
+        lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
 
         val rootView = binding.root
         binding.lunchViewModel = lunchViewModel
         binding.setLifecycleOwner(activity)
-
-        (activity as MainActivity).supportActionBar?.title = lunchViewModel.getSelectedLunch().value?.naam
 
         initListeners(rootView)
 
         return rootView
     }
 
+    /**
+     * Instantieer de listeners
+     */
     private fun initListeners(rootView: View) {
         //reserveren
         rootView.button_lunch_detail_reserve.setOnClickListener {
@@ -62,25 +66,25 @@ class LunchDetailFragment : Fragment() {
         rootView.button_lunch_detail_call.setOnClickListener {
             val builder = AlertDialog.Builder(activity)
             builder.setCancelable(true)
-            builder.setTitle("Bellen naar " + lunchViewModel.getSelectedLunch().value?.handelaar?.handelsNaam)
-            builder.setMessage("Wil je nu bellen naar " + lunchViewModel.getSelectedLunch().value?.handelaar?.telefoonnummer + "?")
+            builder.setTitle(getString(R.string.text_call_to) + ": " + lunchViewModel.selectedLunch.value!!.merchant.companyName)
+            builder.setMessage(getString(R.string.text_want_to_call_to) + ": " + lunchViewModel.selectedLunch.value!!.merchant.phoneNumber + "?")
             builder.setPositiveButton(
-                "Nu bellen"
-            ) { dialog, which ->
+                getString(R.string.text_yes)
+            ) { _, _ ->
                 val phoneIntent = Intent(Intent.ACTION_DIAL)
                 phoneIntent.data =
-                        Uri.parse("tel:" + lunchViewModel.getSelectedLunch().value?.handelaar?.telefoonnummer)
+                        Uri.parse("tel:" + lunchViewModel.selectedLunch.value!!.merchant.phoneNumber)
                 startActivity(phoneIntent)
             }
             builder.setNegativeButton(
-                "Annuleren"
-            ) { dialog, which -> dialog.cancel() }
+                getString(R.string.text_no)
+            ) { dialog, _ -> dialog.cancel() }
 
             val dialog = builder.create()
             dialog.show()
         }
 
-        //locatie clicked
+        //toon op kaart
         rootView.button_lunch_detail_show_on_map.setOnClickListener {
             fragmentManager!!.beginTransaction()
                 .replace(R.id.fragment_container_mainactivity, MapsFragment())
@@ -88,17 +92,19 @@ class LunchDetailFragment : Fragment() {
                 .commit()
         }
 
+        //navigatie
         rootView.button_lunch_detail_navigation.setOnClickListener {
             val mapIntent = Intent(Intent.ACTION_VIEW)
             mapIntent.data = Uri.parse(
-                "geo:" + lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.latitude + "," +
-                        lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.longitude + "?q=" +
-                        lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.straat + "+" +
-                        lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.huisnummer + "+" +
-                        lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.postcode + "+" +
-                        lunchViewModel.getSelectedLunch().value!!.handelaar.locatie.gemeente
+                "geo:" + lunchViewModel.selectedLunch.value!!.merchant.location.latitude + "," +
+                        lunchViewModel.selectedLunch.value!!.merchant.location.longitude + "?q=" +
+                        lunchViewModel.selectedLunch.value!!.merchant.location.street + "+" +
+                        lunchViewModel.selectedLunch.value!!.merchant.location.houseNumber + "+" +
+                        lunchViewModel.selectedLunch.value!!.merchant.location.postalCode + "+" +
+                        lunchViewModel.selectedLunch.value!!.merchant.location.city
             )
-            val packageManager = activity!!.packageManager
+            //kijk of er gps app is op de gsm
+            val packageManager = requireActivity().packageManager
             if (mapIntent.resolveActivity(packageManager) != null) {
                 startActivity(mapIntent)
             } else {
@@ -107,16 +113,20 @@ class LunchDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * Stel de actionbar zijn titel in en enable back knop
+     */
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.title = lunchViewModel.getSelectedLunch().value!!.naam
-        MainActivity.setCanpop(true)
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, lunchViewModel.selectedLunch.value!!.name)
+        GuiUtil.setCanPop(requireActivity() as MainActivity)
     }
 
+    /**
+     * Disable backnop
+     */
     override fun onPause() {
         super.onPause()
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        MainActivity.setCanpop(false)
+        GuiUtil.removeCanPop(requireActivity() as MainActivity)
     }
 }

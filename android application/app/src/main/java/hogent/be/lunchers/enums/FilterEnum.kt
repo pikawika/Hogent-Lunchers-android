@@ -1,12 +1,12 @@
 package hogent.be.lunchers.enums
 
 /**
- * Een helpende enum klasse om een lijstdesign toe te kennen.
- * Elk enumitem heeft een *layoutId* (Int) waarde die overeenstemt met de id van de bijhorende xml die een recyclerviewitem voorstelt.
+ * Een helpende enum klasse om een [FilterEnum] toe te kennen.
+ * Elk enumitem heeft een [filter] (Int) waarde die doorheen de app een filtermethode representateerd
  * */
-enum class FilterEnum(val filterManier: Int) {
+enum class FilterEnum(val filter: Int) {
     RECENT(0),
-    PRICEHIGHEST(1),
-    PRICELOWEST(2),
+    PRICE_HIGHEST(1),
+    PRICE_LOWEST(2),
     DISTANCE(3)
 }

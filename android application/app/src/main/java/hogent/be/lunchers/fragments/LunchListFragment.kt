@@ -1,5 +1,6 @@
 package hogent.be.lunchers.fragments
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -16,41 +17,67 @@ import kotlinx.android.synthetic.main.fragment_lunch_list.*
 import kotlinx.android.synthetic.main.fragment_lunch_list.view.*
 import android.text.Editable
 import android.text.TextWatcher
-import kotlinx.android.synthetic.main.activity_main.*
+import hogent.be.lunchers.models.BlacklistedItem
+import hogent.be.lunchers.models.Lunch
+import hogent.be.lunchers.utils.GuiUtil
 import kotlinx.android.synthetic.main.partial_search.view.*
 
-
+/**
+ * Een [Fragment] voor het weergeven van alle [Lunch] in een lijst, met filtering van een gebruiker zijn [BlacklistedItem].
+ *
+ * User kan zoeken en filteren
+ */
 class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
+    /**
+     * [Boolean] of huidige omgeving al dan niet twopane is.
+     */
     private var twoPane: Boolean = false
 
     /**
-     * [LunchViewModel] met de data van alle lunches
+     * [LunchViewModel] met de data van alle lunches.
      */
-    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var lunchViewModel : LunchViewModel
 
+    /**
+     * [LunchAdapter] die de lijst vult.
+     */
     private lateinit var lunchAdapter: LunchAdapter
+
+    /**
+     * De lijst [Lunch] van de backend.
+     */
+    private lateinit var lunches: MutableLiveData<List<Lunch>>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_lunch_list, container, false)
 
-        if (rootView.fragment_container_lunch_list != null) {
-            twoPane = true
-        }
+        checkSetTwoPane(rootView)
 
         //viewmodel vullen
         lunchViewModel = ViewModelProviders.of(requireActivity()).get(LunchViewModel::class.java)
 
         //lijst vullen met lunches uit viewmodel.
         //We doen niet direct .value maar behouden het als mutueablelivedata mits we hier op willen op observen
-        val lunches = lunchViewModel.getFilteredLunches()
-
+        lunches = lunchViewModel.filteredLunches
 
         //adapter aanmaken
         lunchAdapter = LunchAdapter(this.requireActivity() as MainActivity, lunches, twoPane)
 
-        //indien de meetinglijst veranderd moet de adapter opnieuw zijn cards genereren met nieuwe data
+        rootView.recycler_lunch_list.adapter = lunchAdapter
+
+        rootView.swipe_refresh_lunch_list.setOnRefreshListener(this)
+
+        initListeners(rootView)
+
+        return rootView
+    }
+
+    /**
+     * Instantieer de listeners
+     */
+    private fun initListeners(rootView: View) {
+        //indien de lunchlijst veranderd moet de adapter opnieuw zijn cards genereren met nieuwe data
         lunches.observe(this, Observer {
             lunchAdapter.notifyDataSetChanged()
         })
@@ -65,50 +92,52 @@ class LunchListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 lunchViewModel.search(s.toString())
             }
         })
-
-        rootView.recycler_lunch_list.adapter = lunchAdapter
-
-        rootView.swipe_refresh_lunch_list.setOnRefreshListener(this)
-
-        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
-        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
-        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = true
-        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = true
-
-        return rootView
     }
 
 
-
+    /**
+     * Behandeld wanneer er pull to refresh wordt gedaan.
+     *
+     * Verwijderd zoeken en geselecteerde lunch.
+     *
+     * Haalt de lunches op van de server.
+     */
     override fun onRefresh() {
         searchpartial_lunch_list.txt_search.setText("")
         retrieveAllLunches()
         lunchViewModel.setSelectedLunch(0)
     }
 
+    /**
+     * Haalt de lunches op van de server
+     */
     private fun retrieveAllLunches() {
         lunchViewModel.refreshLunches()
         swipe_refresh_lunch_list?.isRefreshing = false
     }
 
-    //opties menu instellen
-    @Override
-    override fun onStart() {
-        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = true
-        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_afstand)?.isVisible = true
-        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = true
-        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = true
-        super.onStart()
+    /**
+     * Stel de actionbar zijn titel in en toont de filtermethoden.
+     */
+    override fun onResume() {
+        GuiUtil.showFilterMethods(requireActivity() as MainActivity)
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_lunch_list))
+        super.onResume()
     }
 
-    //opties menu verwijderen
-    @Override
+    /**
+     * Verbergt de filtermethoden.
+     */
     override fun onPause() {
-        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_nieuwste)?.isVisible = false
-        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_afstand)?.isVisible = false
-        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_aflopend)?.isVisible = false
-        activity!!.toolbar_mainactivity.menu.findItem(R.id.ab_filter_prijs_oplopend)?.isVisible = false
+        GuiUtil.hideFilterMethods(requireActivity() as MainActivity)
         super.onPause()
+    }
+
+    /**
+     * Kijkt of twopane is en stelt het in
+     */
+    private fun checkSetTwoPane(rootView: View) {
+        twoPane = rootView.fragment_container_lunch_list != null
     }
 
 
