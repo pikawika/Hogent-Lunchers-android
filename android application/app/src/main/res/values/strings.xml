@@ -16,6 +16,9 @@
     <string name="text_shared_yes">Ja</string>
     <string name="text_shared_no">Nee</string>
     <string name="text_shared_cancel">Annuleer</string>
+    <string name="text_shared_add">Toevoegen</string>
+    <string name="text_shared_add_to_blacklist">Voeg een nieuw item toe aan de zwarte lijst</string>
+    <string name="hint_shared_ingredient_tag">Ingrediënt of tag</string>
 
 
     <!-- Errors -->

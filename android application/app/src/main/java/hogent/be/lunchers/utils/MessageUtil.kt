@@ -27,10 +27,10 @@ object MessageUtil {
     }
 
     @JvmStatic
-    fun showMakeSuggestionDialog( context : Context, title: String, message: String, func: (String) -> Unit) {
+    fun showDialogWithTextInput(context : Context, title: String, message: String, hint: String, func: (String) -> Unit) {
         val editText = EditText(context)
         editText.setSingleLine(false)
-        editText.hint = "Ingrediënt of tag"
+        editText.hint = hint
         val container = FrameLayout(context)
         val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         params.marginStart = 100
