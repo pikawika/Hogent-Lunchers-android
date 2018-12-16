@@ -95,17 +95,9 @@ class LoginFragment : Fragment() {
         else accountViewModel.login(text_login_username.text.toString(), text_login_password.text.toString())
     }
 
-    /**
-     * Stel de actionbar zijn titel in
-     */
-    override fun onResume() {
-        super.onResume()
-        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_login))
-    }
-
     override fun onStart() {
         super.onStart()
-
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_login))
         initListeners()
     }
 

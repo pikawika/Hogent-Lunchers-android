@@ -50,17 +50,9 @@ class ThankYouFragment : Fragment() {
         btn_thanks_reservations.setOnClickListener { null }
     }
 
-    /**
-     * Stel de actionbar zijn titel in
-     */
-    override fun onResume() {
-        super.onResume()
-        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_reservation_placed))
-    }
-
     override fun onStart() {
         super.onStart()
-
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_reservation_placed))
         initListeners()
     }
 

@@ -103,8 +103,8 @@ class OrderDetailFragment : Fragment() {
     /**
      * Stel de actionbar zijn titel in en enable back knop
      */
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_reservation))
         GuiUtil.setCanPop(requireActivity() as MainActivity)
     }
@@ -112,8 +112,8 @@ class OrderDetailFragment : Fragment() {
     /**
      * Disable backnop
      */
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
         GuiUtil.removeCanPop(requireActivity() as MainActivity)
     }
 

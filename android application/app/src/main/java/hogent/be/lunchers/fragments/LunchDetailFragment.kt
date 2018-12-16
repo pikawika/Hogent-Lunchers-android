@@ -129,31 +129,16 @@ class LunchDetailFragment : Fragment() {
         button_lunch_detail_navigation.setOnClickListener { null }
     }
 
-    /**
-     * Stel de actionbar zijn titel in en enable back knop
-     */
-    override fun onResume() {
-        super.onResume()
-        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, lunchViewModel.selectedLunch.value!!.name)
-        GuiUtil.setCanPop(requireActivity() as MainActivity)
-    }
-
-    /**
-     * Disable backnop
-     */
-    override fun onPause() {
-        super.onPause()
-        GuiUtil.removeCanPop(requireActivity() as MainActivity)
-    }
-
     override fun onStart() {
         super.onStart()
-
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, lunchViewModel.selectedLunch.value!!.name)
+        GuiUtil.setCanPop(requireActivity() as MainActivity)
         initListeners()
     }
 
     override fun onStop() {
         stopListeners()
+        GuiUtil.removeCanPop(requireActivity() as MainActivity)
         super.onStop()
     }
 }

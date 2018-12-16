@@ -115,12 +115,6 @@ class ProfileFragment : Fragment() {
         btn_profile_preferences.setOnClickListener { null }
     }
 
-    override fun onResume() {
-        super.onResume()
-        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_profile_title))
-    }
-
-
     private fun logOff() {
 
         accountViewModel.logout()
@@ -128,7 +122,7 @@ class ProfileFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_profile_title))
         initListeners()
     }
 

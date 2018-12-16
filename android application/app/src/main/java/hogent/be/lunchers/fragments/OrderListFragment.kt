@@ -60,26 +60,18 @@ class OrderListFragment : Fragment() {
     }
 
     /**
-     * Stel de actionbar zijn titel in en enable back knop
-     */
-    override fun onResume() {
-        super.onResume()
-        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_order_list_title))
-        GuiUtil.setCanPop(requireActivity() as MainActivity)
-        orderViewModel.resetViewModel()
-    }
-
-    /**
      * Disable backnop
      */
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
         GuiUtil.removeCanPop(requireActivity() as MainActivity)
     }
 
     override fun onStart() {
         super.onStart()
-
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_order_list_title))
+        GuiUtil.setCanPop(requireActivity() as MainActivity)
+        orderViewModel.resetViewModel()
         initListeners()
     }
 
