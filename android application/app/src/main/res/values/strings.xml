@@ -118,12 +118,12 @@
     <string name="ab_filter_recent">Sorteren op recentheid</string>
 
     <!-- settings -->
-    <string name="text_settings_title">Voorkeuren</string>
-    <string name="text_settings_default_filter">Standaard filtermethode</string>
-    <string name="text_settings_default_boot">Startscherm instellen</string>
-    <string name="text_settings_blacklist">Zwarte lijst</string>
-    <string name="text_settings_select_default_filter">Kies standaard filtermethode</string>
-    <string name="text_settings_select_default_boot">Kies standaard startscherm</string>
+    <string name="text_preferences_title">Voorkeuren</string>
+    <string name="text_preferences_default_filter">Standaard filtermethode</string>
+    <string name="text_preferences_default_boot">Startscherm instellen</string>
+    <string name="text_preferences_blacklist">Zwarte lijst</string>
+    <string name="text_preferences_select_default_filter">Kies standaard filtermethode</string>
+    <string name="text_preferences_select_default_boot">Kies standaard startscherm</string>
 
     <!-- Fragment_order_list -->
     <string name="text_order_list_title">Reservaties</string>

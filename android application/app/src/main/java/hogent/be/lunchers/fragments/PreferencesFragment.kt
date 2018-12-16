@@ -14,13 +14,13 @@ import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import hogent.be.lunchers.viewmodels.LunchViewModel
-import kotlinx.android.synthetic.main.fragment_settings.view.*
+import kotlinx.android.synthetic.main.fragment_preferences.view.*
 
 
 /**
- * De [SettingsFragment] vooorziet opties voor de gebruiker zijnde zijn blacklist, standaard filtermethode en standaard startscherm.
+ * De [PreferencesFragment] vooorziet opties voor de gebruiker zijnde zijn blacklist, standaard filtermethode en standaard startscherm.
  */
-class SettingsFragment : Fragment() {
+class PreferencesFragment : Fragment() {
 
     /**
      * [AccountViewModel] met de data over het account
@@ -36,7 +36,7 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_settings, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_preferences, container, false)
 
         (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -86,7 +86,7 @@ class SettingsFragment : Fragment() {
             getString(R.string.ab_filter_recent)
         )
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle(getString(R.string.text_settings_select_default_filter))
+        builder.setTitle(getString(R.string.text_preferences_select_default_filter))
         builder.setItems(filters) { _, which ->
             when (filters[which]) {
                 getString(R.string.ab_filter_price_lowest) -> {
@@ -122,7 +122,7 @@ class SettingsFragment : Fragment() {
             getString(R.string.text_order_list_title)
         )
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle(getString(R.string.text_settings_select_default_boot))
+        builder.setTitle(getString(R.string.text_preferences_select_default_boot))
         builder.setItems(pages) { _, which ->
             when (pages[which]) {
                 getString(R.string.text_map_title) -> accountViewModel.setDefaultBootPage(PageEnum.MAP)
@@ -139,7 +139,7 @@ class SettingsFragment : Fragment() {
      */
     override fun onResume() {
         super.onResume()
-        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_settings_title))
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_preferences_title))
         GuiUtil.setCanPop(requireActivity() as MainActivity)
     }
 

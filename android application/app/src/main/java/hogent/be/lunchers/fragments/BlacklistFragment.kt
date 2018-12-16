@@ -122,7 +122,7 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
      */
     override fun onResume() {
         super.onResume()
-        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_settings_blacklist))
+        GuiUtil.setActionBarTitle(requireActivity() as MainActivity, getString(R.string.text_preferences_blacklist))
         GuiUtil.setCanPop(requireActivity() as MainActivity)
     }
 

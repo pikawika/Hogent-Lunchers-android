@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
 
                 android:textColor="#000"
-                android:text="@string/text_settings_title"
+                android:text="@string/text_preferences_title"
                 android:background="@color/lightGrey"
 
                 app:layout_constraintStart_toStartOf="@id/guideline_profile_10percent_vertical"

@@ -90,7 +90,7 @@ class ProfileFragment : Fragment() {
         rootView.btn_profile_preferences.setOnClickListener {
             activity!!.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container_mainactivity, SettingsFragment())
+                .replace(R.id.fragment_container_mainactivity, PreferencesFragment())
                 .addToBackStack(null)
                 .commit()
         }
