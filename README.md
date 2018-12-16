@@ -39,12 +39,12 @@ Team GDPR staat voor “Guys Doing Programming Right”, een fictief bedrijf dat
 > - [Informatie over sprint 6 op Trello](https://trello.com/b/iEgLKsgm/sprint-6)
 
 ## Releases
-> - [Release Sprint 1 - Niet van toepassing](#)
+> - Release Sprint 1 - Niet van toepassing
 > - [Release Sprint 2](https://github.com/HoGent-Projecten3/projecten3-1819-android-aalst-groep-1/releases/tag/Sprint2)
 > - [Release Sprint 3](https://github.com/HoGent-Projecten3/projecten3-1819-android-aalst-groep-1/releases/tag/Sprint3)
 > - [Release Sprint 4](https://github.com/HoGent-Projecten3/projecten3-1819-android-aalst-groep-1/releases/tag/Sprint4)
 > - [Release Sprint 5](https://github.com/HoGent-Projecten3/projecten3-1819-android-aalst-groep-1/releases/tag/Sprint5)
-> - [Release Sprint 6 - coming soon](https://github.com/HoGent-Projecten3/projecten3-1819-android-aalst-groep-1/releases/tag/Sprint6)
+> - [Release Sprint 6](https://github.com/HoGent-Projecten3/projecten3-1819-android-aalst-groep-1/releases/tag/Sprint6)
 
 ## GitHub Repository van de Lunchers website en backend
 De Lunchers website en backend hebben een gezamenlijke Repository:
