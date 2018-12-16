@@ -15,12 +15,11 @@ import android.view.Menu
 import android.view.MenuItem
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import hogent.be.lunchers.enums.FilterEnum
 import hogent.be.lunchers.R
 import hogent.be.lunchers.databinding.ActivityMainBinding
+import hogent.be.lunchers.enums.FilterEnum
 import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.fragments.*
-import hogent.be.lunchers.utils.PreferenceUtil
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.AccountViewModel
 import hogent.be.lunchers.viewmodels.LunchViewModel
@@ -28,25 +27,23 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var sharedPreferences: PreferenceUtil
-
     /**
-     * De [AccountViewModel] dat we gebruiken voord de data voor databinding
+     * De [AccountViewModel] met informatie over de *aangemelde gebruiker*.
      */
     private lateinit var accountViewModel: AccountViewModel
 
     /**
-     * De [LunchViewModel] dat we gebruiken voord de data voor databinding
+     * De [LunchViewModel] met informatie over de *lunches*.
      */
     private lateinit var lunchViewModel: LunchViewModel
 
     /**
-     * De [ActivityMainBinding] dat we gebruiken voor de effeciteve databinding
+     * De [ActivityMainBinding] dat we gebruiken voor de effeciteve databinding met de [MainActivity]
      */
     private lateinit var binding: ActivityMainBinding
 
     /**
-     * Client voor het ophalen van de location van een user
+     * Client voor het ophalen van de locatie van de gebruiker
      */
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -56,22 +53,23 @@ class MainActivity : AppCompatActivity() {
         //context instellen voor globaal gebruik
         instance = this
 
-        //main activity binden
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
+        //viewmodels vullen
         accountViewModel = ViewModelProviders.of(this).get(AccountViewModel::class.java)
         lunchViewModel = ViewModelProviders.of(this).get(LunchViewModel::class.java)
+
+        //main activity binden
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.accountViewModel = accountViewModel
         binding.setLifecycleOwner(this)
 
-        sharedPreferences = PreferenceUtil()
-
+        //locatieclient ophalen
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-
+        //indien defaultfilter op afstand is moet de locatie opgevraagd worden
         if (lunchViewModel.getSelectedFilter() == FilterEnum.DISTANCE)
             lunchesFromLocation()
 
+        //toolbar instellen als actionbar
         setSupportActionBar(toolbar_mainactivity)
     }
 
@@ -79,7 +77,9 @@ class MainActivity : AppCompatActivity() {
         //menu van de toolbar instellen
         menuInflater.inflate(R.menu.menu_toolbar, menu)
 
-        //men moet wachten tot toolbar is ingesteld om hem te kunnen configureren in onze fragments, deze heeft rare lifecycle.
+        //laad de eerste fragment in adhv de door gebruiker ingestelde bootpage.
+        //moeten tot hier wachten aangezien we toolbar zijn tekst instellen en toolbar een aparte (zeer late)
+        //instantiatie heeft
         showBootPage()
 
         return true
@@ -88,12 +88,20 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        //listeners instantiëren
         initListeners()
     }
 
+    /**
+     * Stelt de initieele fragment in adhv de door de gebruiker ingestelde bootPage.
+     *
+     * Indien niet aangemeld zal naar het login scherm gegaan worden.
+     */
     private fun showBootPage() {
+        // indien aangemeld uit vm halen welke bootpagina is en die tonen
+        // en higlight nav item goed instellen
         if (accountViewModel.getIsAangmeld().value!!) {
-            var fragment: Fragment
+            val fragment: Fragment
             when (accountViewModel.getDefaultBootPage()) {
                 PageEnum.MAP -> {
                     fragment = MapsFragment()
@@ -117,7 +125,8 @@ class MainActivity : AppCompatActivity() {
                 .addToBackStack(null)
                 .commit()
         } else {
-            //location toegang vragen bij eerste keer openen app (aanmeld scherm)
+            // location toegang vragen bij eerste keer openen app (aanmeld scherm)
+            // popup enkel indien nog niet goedgekeurd geweest op toestel
             if (PermissionChecker.checkSelfPermission(
                     this,
                     Manifest.permission.ACCESS_FINE_LOCATION
@@ -127,6 +136,7 @@ class MainActivity : AppCompatActivity() {
                     arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
                     1
                 )
+                MessageUtil.showToast(getString(R.string.warning_we_need_location_acces))
             }
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_mainactivity, LoginFragment())
@@ -137,27 +147,31 @@ class MainActivity : AppCompatActivity() {
 
     //fysieke back button ingedruk
     override fun onBackPressed() {
-        //kijk of je mag terug gaan anders poppen
+        //kijk of je mag terug gaan en al dan niet poppen anders app sluiten
         if (canPop)
             supportFragmentManager.popBackStackImmediate()
         else
             finish()
     }
 
+    /**
+     * Instantieer de listeners van de [MainActivity].
+     */
     private fun initListeners() {
+        //pop backstack als op terugknop in toolbar geklikt wordt
         toolbar_mainactivity.setNavigationOnClickListener {
             supportFragmentManager.popBackStack()
-            supportActionBar?.title = getString(R.string.app_name)
-            supportActionBar?.setDisplayHomeAsUpEnabled(false)
         }
 
         bottom_navigation_mainactivity.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
+    /**
+     * Listener voor de bottom navigation view dat er voor zorgt dat juiste fragment getoond wordt on click.
+     */
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.action_map -> {
-                supportActionBar?.title = "Restaurants in de buurt"
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_mainactivity, MapsFragment())
                     .addToBackStack(null)
@@ -166,7 +180,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.action_list -> {
-                supportActionBar?.title = getString(R.string.app_name)
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_mainactivity, LunchListFragment())
                     .addToBackStack(null)
@@ -175,7 +188,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.action_profile -> {
-                supportActionBar?.title = "Profiel"
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_mainactivity, ProfileFragment())
                     .addToBackStack(null)
@@ -186,6 +198,9 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
+    /**
+     * Behandeld het klikken op een item uit de toolbar.
+     */
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         //het item dat gelklikt is uit de toolbar
         //dit id moet in theorie altijd ingevuld zijn want enkel dan weet je wat aangeduid en kan je bijhorende actie uitvoeren
@@ -215,7 +230,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Haalt de lunches op adhv locatie (dichtste eerst), hiervoor is locatietoestemming nodig.
+     */
     private fun lunchesFromLocation() {
+        //check permissie en toon popup indien geen
         if (PermissionChecker.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -225,21 +244,29 @@ class MainActivity : AppCompatActivity() {
                 arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
                 1
             )
-            MessageUtil.showToast("Geef locatietoestemming en probeer opnieuw")
+            //permissie geweigerd
+            MessageUtil.showToast(getString(R.string.warning_we_need_location_acces))
         }
+        //permissie aanwezig
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                if (location?.latitude == null || location?.longitude == null)
-                    MessageUtil.showToast("Location niet beschikbaar, recentste lunches worden getoond.")
-
-                lunchViewModel.setSelectedFilter(
-                    FilterEnum.DISTANCE,
-                    location?.latitude ?: 0.00,
-                    location?.longitude ?: 0.00
-                )
+                if (location?.latitude == null)
+                    //gps staat uit/ geen locatie
+                    MessageUtil.showToast(getString(R.string.error_no_gps_signal))
+                else {
+                    //long en lat gekregen
+                    lunchViewModel.setSelectedFilter(
+                        FilterEnum.DISTANCE,
+                        location.latitude,
+                        location.longitude
+                    )
+                }
             }
     }
 
+    /**
+     * Companian object van de mainactivity om globale communicatie mogelijk te maken.
+     */
     companion object {
         //voor globaal gebruik van context
         //handig om toasts van eender waar te doen en gebruik in andere utils
