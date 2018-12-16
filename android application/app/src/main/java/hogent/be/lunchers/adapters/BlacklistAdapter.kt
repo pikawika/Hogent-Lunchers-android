@@ -43,11 +43,11 @@ class BlacklistAdapter(
                 parentActivity.getString(R.string.question_want_to_delete_following_blacklisted)
                         + ": " + selectedBlacklistedItem.blacklistedItemName + "?"
             )
-            builder.setPositiveButton(parentActivity.getString(R.string.text_shared_yes) ) { _, _ ->
+            builder.setPositiveButton(parentActivity.getString(R.string.text_yes) ) { _, _ ->
                 //op ja geklikt -> verwijderen mag
                 accountViewModel.deleteBlacklistedItem(selectedBlacklistedItem.blacklistedItemId)
             }
-            builder.setNegativeButton(parentActivity.getString(R.string.text_shared_cancel))
+            builder.setNegativeButton(parentActivity.getString(R.string.text_cancel))
             { dialog, _ -> dialog.cancel() }
 
             //maak dialoog met bovenstaande opties en toon hem

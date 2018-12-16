@@ -1,25 +1,28 @@
 <resources>
-    <!-- Shared over multiple -->
-    <string name="text_shared_new_password">Nieuw wachtwoord</string>
-    <string name="text_shared_confirm_password">Bevestig wachtwoord</string>
-    <string name="text_shared_password">Wachtwoord</string>
-    <string name="text_shared_call_restaurant">Bel het restaurant</string>
-    <string name="text_shared_show_restaurant_on_map">Bekijk restaurant op de kaart</string>
-    <string name="text_shared_button_navigation">Routebeschrijving</string>
-    <string name="text_shared_change_password">Wachtwoord Wijzigen</string>
-    <string name="text_shared_hello">Hallo</string>
-    <string name="text_shared_my_reservations">Mijn reservaties</string>
-    <string name="alt_shared_logo">Lunchers logo</string>
-    <string name="text_shared_register">Registreren</string>
-    <string name="text_shared_thanks">Bedankt!</string>
-    <string name="hint_shared_search">Zoeken…</string>
-    <string name="text_shared_yes">Ja</string>
-    <string name="text_shared_no">Nee</string>
-    <string name="text_shared_cancel">Annuleer</string>
-    <string name="text_shared_add">Toevoegen</string>
-    <string name="text_shared_add_to_blacklist">Voeg een nieuw item toe aan de zwarte lijst</string>
-    <string name="hint_shared_ingredient_tag">Ingrediënt of tag</string>
+    <!-- Shared over multiple: text -->
+    <string name="text_new_password">Nieuw wachtwoord</string>
+    <string name="text_confirm_password">Bevestig wachtwoord</string>
+    <string name="text_password">Wachtwoord</string>
+    <string name="text_call_restaurant">Bel het restaurant</string>
+    <string name="text_show_restaurant_on_map">Bekijk restaurant op de kaart</string>
+    <string name="text_button_navigation">Routebeschrijving</string>
+    <string name="text_change_password">Wachtwoord Wijzigen</string>
+    <string name="text_hello">Hallo</string>
+    <string name="text_my_reservations">Mijn reservaties</string>
+    <string name="text_register">Registreren</string>
+    <string name="text_thanks">Bedankt!</string>
+    <string name="text_yes">Ja</string>
+    <string name="text_no">Nee</string>
+    <string name="text_cancel">Annuleer</string>
+    <string name="text_add">Toevoegen</string>
+    <string name="text_add_to_blacklist">Voeg een nieuw item toe aan de zwarte lijst</string>
 
+    <!-- Shared over multiple: alt -->
+    <string name="alt_logo">Lunchers logo</string>
+
+    <!-- Shared over multiple: hint -->
+    <string name="hint_search">Zoeken…</string>
+    <string name="hint_ingredient_tag">Ingrediënt of tag</string>
 
     <!-- Errors -->
     <string name="error_no_navigation_app">U heeft geen navigatie applicatie geïnstalleerd op uw toestel.</string>
@@ -33,6 +36,8 @@
     <string name="warning_we_need_location_acces">De lunchers app heeft uw locatie nodig voor een optimale werking te
         garanderen.
     </string>
+    <string name="warning_passwords_not_equal">Wachtwoorden komen niet overeen</string>
+    <string name="warning_empty_fields">Gelieve alle velden in te vullen</string>
 
     <!-- questions -->
     <string name="question_delete">Verwijderen?</string>

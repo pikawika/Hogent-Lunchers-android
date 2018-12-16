@@ -81,9 +81,9 @@ class BlacklistFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         rootView.fab_blacklist_add.setOnClickListener {
             MessageUtil.showDialogWithTextInput(
                 requireContext(),
-                getString(R.string.text_shared_add),
-                getString(R.string.text_shared_add_to_blacklist),
-                getString(R.string.hint_shared_ingredient_tag),
+                getString(R.string.text_add),
+                getString(R.string.text_add_to_blacklist),
+                getString(R.string.hint_ingredient_tag),
                 addBlacklistItem()
             )
         }
