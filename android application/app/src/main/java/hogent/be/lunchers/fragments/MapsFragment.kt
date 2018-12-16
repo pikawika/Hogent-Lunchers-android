@@ -25,7 +25,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.databinding.FragmentMapBinding
-import hogent.be.lunchers.databinding.FragmentProfileBinding
 import hogent.be.lunchers.models.Lunch
 import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.utils.MessageUtil
@@ -42,7 +41,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     private lateinit var lunchViewModel: LunchViewModel
 
     /**
-     * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
+     * De [FragmentMapBinding] dat we gebruiken voor de effeciteve databinding
      */
     private lateinit var binding: FragmentMapBinding
 

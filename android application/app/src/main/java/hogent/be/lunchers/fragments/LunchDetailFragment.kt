@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import hogent.be.lunchers.R
 import hogent.be.lunchers.activities.MainActivity
 import hogent.be.lunchers.databinding.FragmentLunchDetailBinding
-import hogent.be.lunchers.databinding.FragmentProfileBinding
 import hogent.be.lunchers.utils.GuiUtil
 import hogent.be.lunchers.utils.MessageUtil
 import hogent.be.lunchers.viewmodels.LunchViewModel
@@ -28,7 +27,7 @@ class LunchDetailFragment : Fragment() {
     private lateinit var lunchViewModel: LunchViewModel
 
     /**
-     * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
+     * De [FragmentLunchDetailBinding] dat we gebruiken voor de effeciteve databinding
      */
     private lateinit var binding: FragmentLunchDetailBinding
 

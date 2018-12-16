@@ -28,7 +28,7 @@ class OrderDetailFragment : Fragment() {
     private lateinit var orderViewModel: OrderViewModel
 
     /**
-     * De effectieve binding.
+     * De [FragmentOrderDetailBinding] dat we gebruiken voor de effeciteve databinding
      */
     private lateinit var binding: FragmentOrderDetailBinding
 

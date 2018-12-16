@@ -15,13 +15,12 @@ import hogent.be.lunchers.viewmodels.LunchViewModel
 class PartialLunchCardFragment : Fragment() {
 
     /**
-     * [LunchViewModel] met de data over account
+     * [LunchViewModel] met de data over de lunches
      */
-    //Globaal ter beschikking gesteld aangezien het mogeiljks later nog in andere functie dan onCreateView wenst te worden
     private lateinit var lunchViewModel: LunchViewModel
 
     /**
-     * De [FragmentProfileBinding] dat we gebruiken voor de effeciteve databinding
+     * De [PartialLunchCardBinding] dat we gebruiken voor de effeciteve databinding
      */
     private lateinit var binding: PartialLunchCardBinding
 
