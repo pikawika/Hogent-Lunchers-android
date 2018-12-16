@@ -1,16 +1,9 @@
 package hogent.be.lunchers.utils
 
 import android.content.Context
-import android.os.Build
-import android.support.annotation.RequiresApi
-import android.util.Base64.DEFAULT
-import android.util.Base64.decode
-import android.util.Log
 import hogent.be.lunchers.enums.FilterEnum
 import hogent.be.lunchers.enums.PageEnum
 import hogent.be.lunchers.activities.MainActivity
-import java.io.UnsupportedEncodingException
-import java.nio.charset.Charset
 
 
 class PreferenceUtil() {
@@ -53,7 +46,7 @@ class PreferenceUtil() {
     }
 
     fun setDefaultFilterMethod(filterEnum: FilterEnum) {
-        sharedPreferences.edit().putInt(PREFERENCE_DEFAULTFILTERMETHOD, filterEnum.filterManier).apply()
+        sharedPreferences.edit().putInt(PREFERENCE_DEFAULTFILTERMETHOD, filterEnum.filter).apply()
     }
 
     fun getDefaultBootPage() : PageEnum {

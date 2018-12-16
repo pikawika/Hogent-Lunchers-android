@@ -59,12 +59,12 @@ class SettingsFragment : Fragment() {
             builder.setItems(filters) { dialog, which ->
                 when (filters[which]) {
                     getString(R.string.ab_filter_price_az) -> {
-                        accountViewModel.setDefaultFilterMethod(FilterEnum.PRICELOWEST)
-                        lunchViewModel.setSelectedFilter(FilterEnum.PRICELOWEST)
+                        accountViewModel.setDefaultFilterMethod(FilterEnum.PRICE_LOWEST)
+                        lunchViewModel.setSelectedFilter(FilterEnum.PRICE_LOWEST)
                     }
                     getString(R.string.ab_filter_price_za) -> {
-                        accountViewModel.setDefaultFilterMethod(FilterEnum.PRICEHIGHEST)
-                        lunchViewModel.setSelectedFilter(FilterEnum.PRICEHIGHEST)
+                        accountViewModel.setDefaultFilterMethod(FilterEnum.PRICE_HIGHEST)
+                        lunchViewModel.setSelectedFilter(FilterEnum.PRICE_HIGHEST)
                     }
                     getString(R.string.ab_filter_distance) -> {
                         accountViewModel.setDefaultFilterMethod(FilterEnum.DISTANCE)
@@ -88,9 +88,9 @@ class SettingsFragment : Fragment() {
             builder.setItems(pages) { dialog, which ->
                 when (pages[which]) {
                     getString(R.string.text_map_title) -> accountViewModel.setDefaultBootPage(PageEnum.MAP)
-                    getString(R.string.text_list_title) -> accountViewModel.setDefaultBootPage(PageEnum.LUNCHLIST)
+                    getString(R.string.text_list_title) -> accountViewModel.setDefaultBootPage(PageEnum.LUNCH_LIST)
                     getString(R.string.text_profile_title) -> accountViewModel.setDefaultBootPage(PageEnum.PROFILE)
-                    getString(R.string.text_order_list_title) -> accountViewModel.setDefaultBootPage(PageEnum.ORDERSLIST)
+                    getString(R.string.text_order_list_title) -> accountViewModel.setDefaultBootPage(PageEnum.ORDERS_LIST)
                 }
             }
             builder.show()

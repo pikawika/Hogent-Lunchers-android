@@ -29,10 +29,10 @@ class SearchUtil{
         if (filterEnum == FilterEnum.RECENT)
             filteredlunches = allLunches.sortedWith(compareBy { it.lunchId }).reversed()
 
-        if (filterEnum == FilterEnum.PRICEHIGHEST)
+        if (filterEnum == FilterEnum.PRICE_HIGHEST)
             filteredlunches = allLunches.sortedWith(compareBy { it.price }).reversed()
 
-        if (filterEnum == FilterEnum.PRICELOWEST)
+        if (filterEnum == FilterEnum.PRICE_LOWEST)
             filteredlunches = allLunches.sortedWith(compareBy { it.price })
 
         //filter niet gevonden gewoon houden

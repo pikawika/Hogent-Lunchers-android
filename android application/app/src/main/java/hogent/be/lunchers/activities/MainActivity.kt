@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                     fragment = ProfileFragment()
                     bottom_navigation_mainactivity.selectedItemId = R.id.action_profile
                 }
-                PageEnum.ORDERSLIST -> {
+                PageEnum.ORDERS_LIST -> {
                     fragment = OrderListFragment()
                     bottom_navigation_mainactivity.selectedItemId = R.id.action_profile
                 }
@@ -206,12 +206,12 @@ class MainActivity : AppCompatActivity() {
         //dit id moet in theorie altijd ingevuld zijn want enkel dan weet je wat aangeduid en kan je bijhorende actie uitvoeren
         when (item?.itemId) {
             R.id.ab_filter_prijs_oplopend -> {
-                lunchViewModel.setSelectedFilter(FilterEnum.PRICELOWEST)
+                lunchViewModel.setSelectedFilter(FilterEnum.PRICE_LOWEST)
                 return super.onOptionsItemSelected(item)
             }
 
             R.id.ab_filter_prijs_aflopend -> {
-                lunchViewModel.setSelectedFilter(FilterEnum.PRICEHIGHEST)
+                lunchViewModel.setSelectedFilter(FilterEnum.PRICE_HIGHEST)
                 return super.onOptionsItemSelected(item)
             }
 
