@@ -54,6 +54,9 @@ class RegistreerFragment : Fragment() {
         }
     }
 
+    /**
+     * Kijkt of velden ingevuld zijn en wachtwoorden overeenkomen en probeert vervolgens te registreren
+     */
     private fun registreer() {
         //er is een veld leeg
         if (text_register_phone_number.text.toString() == ""  ||
@@ -82,6 +85,9 @@ class RegistreerFragment : Fragment() {
         }
     }
 
+    /**
+     * Kijkt of velden ingevuld zijn en probeert aan te melden
+     */
     private fun login() {
         requireActivity().supportFragmentManager
             .beginTransaction()
