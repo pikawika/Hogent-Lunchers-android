@@ -33,7 +33,7 @@ Team GDPR staat voor “Guys Doing Programming Right”, een fictief bedrijf dat
 
 | Naam     | GitHub                        | E-mail                               |
 | :---     | :---                          | :---                                |
-| Bontinck Lennert | <https://github.com/pikawika> | [lennert.bontinck.y9785@student.hogent.be](mailto:lennert.bontinck.y9785@student.hogent.be) |
+| Bontinck Lennert | <https://github.com/pikawika> | [info@lennertbontinck.com](mailto:info@lennertbontinck.com) |
 | De Coninck Bram | <https://github.com/BramDC3> | [bram.deconinck.y7538@student.hogent.be](mailto:bram.deconinck.y7538@student.hogent.be) |
 | De Loof Jodi | <https://github.com/jodidl1998> | [jodi.deloof.y0180@student.hogent.be](mailto:jodi.deloof.y0180@student.hogent.be) |
 | Schets Brent | <https://github.com/brentschets> | [brent.schets.y9143@student.hogent.be](mailto:brent.schets.y9143@student.hogent.be) |
